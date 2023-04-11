@@ -4,9 +4,227 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentManagement"
+        xmlns:leftSideBar="clr-namespace:StudentManagement.Component.LeftSideBar"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
+        xmlns:program="clr-namespace:StudentManagement.Component.Program"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        DataContext="{StaticResource GreetingVM}"
+        Background="Transparent" 
+        Height="800" Width="1420">
+    <Border CornerRadius="50">
+        <Border.Background>
+            <SolidColorBrush Color="#E7F2FF"></SolidColorBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="1220"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Background="White" CornerRadius="50 0 0 50" >
+                <Grid Grid.Column="0">
+                    <leftSideBar:LeftSideBar DataContext="{StaticResource GreetingVM}" ></leftSideBar:LeftSideBar>
+                </Grid>
+            </Border>
+            <!--//Tổng quan-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="690"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 20 0">
+                        <Button Command="{Binding HideWindowCommand}" Height="auto" Background="Transparent" BorderThickness="0" Width="30">
+                           
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Ellipse Width="20" Height="20" Fill="{StaticResource GreenPrimary}" Margin="0 0 10 0">
+                                    </Ellipse>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button Command="{Binding CloseWindowCommand}" Height="auto" Width="auto" Background="Transparent" BorderThickness="0">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Ellipse Width="20" Height="20" Fill="{StaticResource RedPrimary}" Margin="0 0 10 0">
+                                    </Ellipse>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="20 0 20 0" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Margin="30 0 0 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="2022 - 2023" 
+                                               FontSize="16"
+                                               HorizontalAlignment="left"
+                                               VerticalAlignment="center"
+                                               FontWeight="SemiBold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="Niên khóa"
+                                               HorizontalAlignment="left"
+                                               FontSize="12"
+                                               ></TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Height="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="/Resource/Images/student.png"></Image>
+                                <Grid Grid.Column="1" Margin="20 0 0 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="Học sinh" 
+                                               FontSize="16"
+                                               HorizontalAlignment="left"
+                                               VerticalAlignment="center"
+                                               FontWeight="SemiBold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="1000"
+                                               HorizontalAlignment="left"
+                                               
+                                               ></TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Height="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="/Resource/Images/student.png"></Image>
+                                <Grid Grid.Column="1" Margin="20 0 0 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="Giáo viên" 
+                                               FontSize="16"
+                                               HorizontalAlignment="left"
+                                               VerticalAlignment="center"
+                                               FontWeight="SemiBold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="1000"
+                                               HorizontalAlignment="left"
+                                               
+                                               ></TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Height="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="Resource/Images/student.png"></Image>
+                                <Grid Grid.Column="1" Margin="20 0 0 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="Lớp học" 
+                                               FontSize="16"
+                                               HorizontalAlignment="left"
+                                               VerticalAlignment="center"
+                                               FontWeight="SemiBold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="1000"
+                                               HorizontalAlignment="left"
+                                               
+                                               ></TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Height="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="/Resource/Images/student.png"></Image>
+                                <Grid Grid.Column="1" Margin="20 0 0 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="Môn học" 
+                                               FontSize="16"
+                                               HorizontalAlignment="left"
+                                               VerticalAlignment="center"
+                                               FontWeight="SemiBold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="1000"
+                                               HorizontalAlignment="left"
+                                               ></TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Image Height="37" Width="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="/Resource/Images/student.png"></Image>
+                                <Grid Grid.Column="1" Margin="20 0 0 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition></RowDefinition>
+                                        <RowDefinition></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="Chương trình" 
+                                               FontSize="16"
+                                               HorizontalAlignment="left"
+                                               VerticalAlignment="center"
+                                               FontWeight="SemiBold"
+                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="1000"
+                                               HorizontalAlignment="left"
+                                               
+                                               ></TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+                <ContentControl Grid.Row="2" Content="{Binding ContentViewModel, UpdateSourceTrigger=PropertyChanged}" Height="690" VerticalAlignment="Top">
+                    <ContentControl.Resources >
+                        <DataTemplate DataType="{x:Type viewModel:ProgramViewModel}">
+                            <program:mainProgram></program:mainProgram>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel }">
+                            <TextBlock Text="Trang chủ"></TextBlock>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
+                            <TextBlock Text="Thông tin"></TextBlock>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </Grid>
+            <!--//Content Binding-->
+            
+        </Grid>
+    </Border>
 </Window>
