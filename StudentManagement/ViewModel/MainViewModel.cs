@@ -26,6 +26,7 @@ public sealed partial class MainViewModel : ObservableObject
     private object _programViewModel;
     private object _studentViewModel;
     private object _teacherViewModel;
+    private object _transcriptViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -51,10 +52,11 @@ public sealed partial class MainViewModel : ObservableObject
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
+        _transcriptViewModel = new TranscriptViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Thông tin", "infomation", _studentViewModel),
+        new Navigation("Thông tin", "infomation", _transcriptViewModel),
         new Navigation("Môn học", "subject", _teacherViewModel),
     };
         leftNavigations[0].IsPress = true;

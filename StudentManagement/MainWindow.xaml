@@ -8,6 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
+        xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -214,8 +215,8 @@
                         <DataTemplate DataType="{x:Type viewModel:ProgramViewModel}">
                             <program:mainProgram></program:mainProgram>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel }">
-                            <TextBlock Text="Trang chủ"></TextBlock>
+                        <DataTemplate DataType="{x:Type viewModel:TranscriptViewModel }">
+                            <transript:Transcript></transript:Transcript>
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
                             <TextBlock Text="Thông tin"></TextBlock>
