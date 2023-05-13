@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManagement.Component.Program
+namespace StudentManagement.Component.ListClass
 {
     /// <summary>
-    /// Interaction logic for mainProgram.xaml
+    /// Interaction logic for StudentCard.xaml
     /// </summary>
-    public partial class mainProgram : UserControl
+    public partial class StudentCard : UserControl
     {
-        public mainProgram()
+        public StudentCard()
         {
             InitializeComponent();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -27,7 +27,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock  Style="{StaticResource textblock_item}" Text="Tên Combobox "></TextBlock>
-                            <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}" BorderBrush="LightGray" Background="white" materialDesign:HintAssist.Hint="Hint Combobox"></ComboBox>
+                            <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}" BorderBrush="LightGray" Background="white" materialDesign:HintAssist.Hint="Hint Combobox" SelectionChanged="ComboBox_SelectionChanged"></ComboBox>
                         </Grid>
                     </Border>
                     <Border Style="{StaticResource BorderBox}" Height="60"  Width="500">

@@ -13,19 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManagement.Component.Program
+namespace StudentManagement.Component.ListClass
 {
     /// <summary>
-    /// Interaction logic for mainProgram.xaml
+    /// Interaction logic for ClassCard.xaml
     /// </summary>
-    public partial class mainProgram : UserControl
+    public partial class ClassCard : UserControl
     {
-        public mainProgram()
+        public ClassCard()
         {
             InitializeComponent();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
         }
