@@ -7,6 +7,7 @@
         xmlns:leftSideBar="clr-namespace:StudentManagement.Component.LeftSideBar"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
+        xmlns:sub="clr-namespace:StudentManagement.Component.Program"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -218,7 +219,7 @@
                             <TextBlock Text="Trang chủ"></TextBlock>
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
-                            <TextBlock Text="Thông tin"></TextBlock>
+                            <program:SubjectProgram />
                         </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>
