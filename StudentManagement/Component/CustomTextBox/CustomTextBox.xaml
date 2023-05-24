@@ -12,8 +12,8 @@
                         BorderThickness="1" CornerRadius="3">
             <Grid Margin="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition  MinWidth="100"></ColumnDefinition>
+                    <ColumnDefinition  MinWidth="100"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock  Grid.Column="0"
                             Margin="15 0 0 0"
@@ -22,7 +22,7 @@
                                         VerticalAlignment="Center"
                                         ></TextBlock>
 
-                <TextBox  Grid.Column="1"
+                <TextBox  Grid.Column="1" MinWidth="100"
                                 Text="{Binding TextInput, ElementName=root}"
                           Margin="0 0 15 0"
                                       VerticalAlignment="Center"

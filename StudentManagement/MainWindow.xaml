@@ -74,8 +74,8 @@
                         <DataTemplate DataType="{x:Type viewModel:StudentViewModel }">
                             <TextBlock Text="Trang chủ"></TextBlock>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:SubjectViewModel}">
-                            <program:SubjectProgram />
+                        <DataTemplate DataType="{x:Type viewModel:RegulationViewModel}">
+                            <program:RegulationtProgram />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
                             <cls:ClassList></cls:ClassList>
