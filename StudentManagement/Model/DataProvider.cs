@@ -5,7 +5,7 @@ namespace StudentManagement.Model;
 public class DataProvider
   
 {
-    private static DataProvider? _ins;
+    private static DataProvider _ins;
     public static DataProvider ins { 
         get {
             if (_ins == null)
