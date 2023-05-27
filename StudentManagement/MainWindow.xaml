@@ -8,6 +8,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
+        xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
+        xmlns:classConfig="clr-namespace:StudentManagement.Component.ClassConfig"
         xmlns:cls="clr-namespace:StudentManagement.Component.ListClass"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
         mc:Ignorable="d"
@@ -70,11 +72,11 @@
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel }">
-                            <TextBlock Text="Trang chủ"></TextBlock>
+                        <DataTemplate DataType="{x:Type viewModel:TranscriptViewModel }">
+                            <transript:Transcript></transript:Transcript>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
-                            <cls:ClassList></cls:ClassList>
+                        <DataTemplate DataType="{x:Type viewModel:ClassConfigViewModel}">
+                            <classConfig:ClassConfig></classConfig:ClassConfig>
                         </DataTemplate>
 
                     </ContentControl.Resources>
