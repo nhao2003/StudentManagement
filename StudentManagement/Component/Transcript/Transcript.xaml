@@ -13,6 +13,11 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
+            <TextBlock Text="Bảng điểm lớp học" 
+                       Grid.Row="0"
+                       Margin="29,25"
+                       FontWeight="Bold"
+                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" >
                 <StackPanel.Resources>
                     <Style x:Key="MyComboBoxStyle" BasedOn="{StaticResource combobox_item}" TargetType="{x:Type ComboBox}">
@@ -32,7 +37,7 @@
                     Style="{StaticResource MyComboBoxStyle}" />
                 <Button
                     Margin="18,18,18,18"
-                    Background="#3ACB86"
+                    Background="{StaticResource GreenPrimary}"
                     Style="{StaticResource primary_button}">
                     <TextBlock Text="Kết quả" />
                 </Button>
@@ -50,7 +55,7 @@
                 HorizontalScrollBarVisibility="Disabled"
                         Margin="10"
                 HeadersVisibility="Column"
-                IsReadOnly="false"
+                IsReadOnly="{Binding IsReadOnly}"
                 ItemsSource="{Binding Transcripts}"
                 >
                 <DataGrid.Resources>
@@ -150,11 +155,7 @@
                         Header="Họ tên" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FifteenMin1,FallbackValue='0'}"
-                        Header="Điểm 15'" />
-                    <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding FifteenMin2,FallbackValue='0'}"
+                        Binding="{Binding FifteenMin,FallbackValue='0'}"
                         Header="Điểm 15'" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
@@ -166,12 +167,33 @@
                         Header="Điểm cuối kỳ" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Row="2" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Bottom" 
-                    Content="Cập nhật điểm" 
-                    Margin="53,39"
-                    Style="{StaticResource primary_button}"></Button>
+            <StackPanel 
+                Grid.Row="2" 
+                Orientation="Horizontal" 
+                Margin="53,39" 
+                Visibility="{Binding BtnVisibility}"
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom">
+                <Button
+                    Content="Trở lại" 
+                    Command="{Binding CancelEdittingCommand}"
+                    Visibility="{Binding CancelBtnVisibility}"
+                    Background="{StaticResource GreenPrimary}"
+                    Style="{StaticResource primary_button}"/>
+                <Button
+                    Visibility="{Binding CancelBtnVisibility}"
+                    Content="Lưu thay đổi" 
+                    Style="{StaticResource primary_button}"/>
+            </StackPanel>
+            <Button
+                Grid.Row="2"
+                Margin="53,43" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom"
+                Content="Cập nhật điểm" 
+                Visibility="{Binding EditBtnVisibility}"
+                Style="{StaticResource primary_button}"
+                Command="{Binding EnableEdittingCommand}"/>
         </Grid>
     </Border>
 </UserControl>

@@ -9,6 +9,7 @@
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
         xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
+        xmlns:classConfig="clr-namespace:StudentManagement.Component.ClassConfig"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -218,8 +219,8 @@
                         <DataTemplate DataType="{x:Type viewModel:TranscriptViewModel }">
                             <transript:Transcript></transript:Transcript>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
-                            <TextBlock Text="Thông tin"></TextBlock>
+                        <DataTemplate DataType="{x:Type viewModel:ClassConfigViewModel}">
+                            <classConfig:ClassConfig></classConfig:ClassConfig>
                         </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>
