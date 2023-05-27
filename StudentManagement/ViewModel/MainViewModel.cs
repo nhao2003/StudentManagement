@@ -15,7 +15,8 @@ namespace StudentManagement.ViewModel;
 public sealed partial class MainViewModel : ObservableObject
 {
 
-    public MainViewModel() {
+    public MainViewModel()
+    {
         Init();
         ContentViewModel = _programViewModel;
         Instance = this;
@@ -28,6 +29,7 @@ public sealed partial class MainViewModel : ObservableObject
     private object _teacherViewModel;
     private object _classListViewModel;
     private object _subjectViewModel;
+    private object _schoolyearViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -55,6 +57,7 @@ public sealed partial class MainViewModel : ObservableObject
         _teacherViewModel = new TeacherViewModel();
         _classListViewModel = new ClassListViewModel();
         _subjectViewModel = new SubjectViewModel();
+        _schoolyearViewModel = new SchoolYearViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
@@ -62,10 +65,11 @@ public sealed partial class MainViewModel : ObservableObject
         new Navigation("Môn học", "subject", _subjectViewModel),
 
         new Navigation("Môn học", "subject", _classListViewModel),
+        new Navigation("Năm học", "subject", _schoolyearViewModel),
     };
         leftNavigations[0].IsPress = true;
     }
-    
+
     public void setViewModel(object viewModel)
     {
         ContentViewModel = viewModel;
@@ -82,5 +86,5 @@ public sealed partial class MainViewModel : ObservableObject
         Window window = Application.Current.MainWindow as Window;
         window.WindowState = WindowState.Minimized;
     }
-   }
+}
 

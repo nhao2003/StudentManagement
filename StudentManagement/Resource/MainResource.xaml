@@ -5,4 +5,5 @@
     <vm:MainViewModel x:Key="GreetingVM"></vm:MainViewModel>
     <vm:ProgramViewModel x:Key="ProgramVM"></vm:ProgramViewModel>
     <vm:ClassListViewModel x:Key="ClassListVM"></vm:ClassListViewModel>
+    <vm:LoginViewModel x:Key="LoginVM"></vm:LoginViewModel>
 </ResourceDictionary>
