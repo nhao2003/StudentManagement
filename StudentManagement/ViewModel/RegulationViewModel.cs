@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagement.ViewModel
 {
-    class SubjectViewModel
+    class RegulationViewModel
     {
     }
 }
