@@ -19,5 +19,4 @@ namespace StudentManagement.ViewModel
         new ProgramConfig("3","Năng khiếu","4","5"),
     };
     }
-    
 }

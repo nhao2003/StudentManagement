@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentManagement.Object
+namespace StudentManagement.Model
 {
     public partial class Class : ObservableObject
     {
