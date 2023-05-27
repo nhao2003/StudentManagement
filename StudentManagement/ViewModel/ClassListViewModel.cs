@@ -6,11 +6,24 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
     public partial class ClassListViewModel : ObservableObject
     {
+        private static ClassListViewModel _instance;
+        public static ClassListViewModel Instance
+        {
+            get => _instance == null ? (_instance = new ClassListViewModel()) : _instance;
+            private set => _instance = value;
+        }
+
+        public ClassListViewModel()
+        {
+            Instance = this;
+        }
+
         [ObservableProperty]
         private ObservableCollection<Class> classes = new ObservableCollection<Class>()
         {
@@ -31,6 +44,20 @@ namespace StudentManagement.ViewModel
             new Student("5", "Nguyễn Trung Kiên", "/Resource/images/student.png"),
         };
 
+        [ObservableProperty]
+        private Class choosenClass;
+
+        [ObservableProperty]
+        private Visibility classStudentsVisibility = Visibility.Hidden;
+        [ObservableProperty]
+        private Visibility newStudentsVisibility = Visibility.Visible;
         
+        public void SetChooseClass(Class mclass)
+        {
+            ChoosenClass = mclass;
+            ClassStudentsVisibility = Visibility.Visible;
+            NewStudentsVisibility = Visibility.Hidden;
+        }
+
     }
 }

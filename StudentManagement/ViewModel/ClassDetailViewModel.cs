@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
@@ -15,14 +16,6 @@ namespace StudentManagement.ViewModel
         public ClassDetailViewModel() 
         {
             Init();
-            Instance = this;
-        }
-
-        private static ClassDetailViewModel _instance;
-        public static ClassDetailViewModel Instance
-        {
-            get => _instance == null ? (_instance = new ClassDetailViewModel()) : _instance;
-            private set => _instance = value;
         }
 
         private object _transcriptViewModel;
@@ -36,6 +29,7 @@ namespace StudentManagement.ViewModel
             _classconfigViewModel = new ClassConfigViewModel();
             ContentViewModel = _transcriptViewModel;
         }
+        
 
         public void setViewModel(object viewModel)
         {
@@ -46,12 +40,16 @@ namespace StudentManagement.ViewModel
         public void NavigateClassConfig()
         {
             setViewModel(_classconfigViewModel);
+            setBangDiemGray();
+            setCauHinhBlue();
         }
 
         [RelayCommand]
         public void NavigateTranscript()
         {
             setViewModel(_transcriptViewModel);
+            setBangDiemBlue();
+            setCauHinhGray();
         }
 
         [ObservableProperty]
@@ -59,7 +57,41 @@ namespace StudentManagement.ViewModel
 
         public void SetCurrentClass(Class mclass)
         {
-            currentClass = mclass;
+            CurrentClass = mclass;
+        }
+
+
+        [ObservableProperty]
+        private object backgroundBangDiem = "#7CA7FF";
+        [ObservableProperty]
+        private object foregroundBangDiem = "White";
+        [ObservableProperty]
+        private object backgroundCauHinh = "White";
+        [ObservableProperty]
+        private object foregroundCauHinh = "Gray";
+
+        void setBangDiemBlue()
+        {
+            BackgroundBangDiem = "#7CA7FF";
+            ForegroundBangDiem = "White";
+        }
+
+        void setBangDiemGray()
+        {
+            BackgroundBangDiem = "White";
+            ForegroundBangDiem = "Gray";
+        }
+
+        void setCauHinhBlue()
+        {
+            BackgroundCauHinh = "#7CA7FF";
+            ForegroundCauHinh = "White";
+        }
+
+        void setCauHinhGray()
+        {
+            BackgroundCauHinh = "White";
+            ForegroundCauHinh = "Gray";
         }
     }
 }

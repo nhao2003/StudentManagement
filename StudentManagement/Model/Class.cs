@@ -38,7 +38,13 @@ namespace StudentManagement.Model
         [RelayCommand]
         public void SetDetailClass()
         {
-            ClassDetailViewModel.Instance.SetCurrentClass(this);
+            ClassManagementViewModel.Instance.NavigateClassDetail(this);
+        }
+
+        [RelayCommand]
+        public void SetChoosenClass()
+        {
+            ClassListViewModel.Instance.SetChooseClass(this);
         }
     }
 }

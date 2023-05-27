@@ -195,7 +195,8 @@
                 VerticalAlignment="Bottom">
                 <Button
                     Content="Trở lại" 
-                    Command="{Binding CancelEdittingCommand}"
+                    Command="{Binding NavigateClassListCommand}"
+                    
                     Visibility="{Binding CancelBtnVisibility}"
                     Background="{StaticResource GreenPrimary}"
                     Style="{StaticResource primary_button}"/>

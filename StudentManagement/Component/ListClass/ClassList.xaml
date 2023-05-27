@@ -81,36 +81,8 @@
                 </Border>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">
-                <Border  CornerRadius="20" Background="white" Margin="20">
-                    <Grid>
-                        <TextBlock 
-                        FontWeight="Bold"
-                        FontSize="20"
-                        Height="30"
-                        VerticalAlignment="Top"
-                        Margin="20"
-                        >
-                            Học sinh mới
-                        </TextBlock>
-                        <StackPanel 
-                            Orientation="Vertical" 
-                            VerticalAlignment="Top" 
-                            Margin="20 60 20 0">
-                            <ItemsControl ItemsSource="{Binding Students}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <local:StudentCard Margin="0, 10, 0, 0"></local:StudentCard>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </Grid>
-                </Border>
+                <local:NewStudentsCard Visibility="{Binding NewStudentsVisibility, UpdateSourceTrigger=PropertyChanged}"></local:NewStudentsCard>
+                <local:ClassStudentsCard Visibility="{Binding ClassStudentsVisibility, UpdateSourceTrigger=PropertyChanged}"></local:ClassStudentsCard>
             </Grid>
         </Grid>
     </Border>

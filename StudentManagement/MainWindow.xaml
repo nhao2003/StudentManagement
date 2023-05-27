@@ -7,11 +7,8 @@
         xmlns:leftSideBar="clr-namespace:StudentManagement.Component.LeftSideBar"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
-        xmlns:classDetail="clr-namespace:StudentManagement.Component.ClassDetail"
+        xmlns:classMana="clr-namespace:StudentManagement.Component.ClassManagement"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
-        xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
-        xmlns:classConfig="clr-namespace:StudentManagement.Component.ClassConfig"
-        xmlns:cls="clr-namespace:StudentManagement.Component.ListClass"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -74,10 +71,10 @@
                             </Grid>
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
-                            <cls:ClassList></cls:ClassList>
+                            
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:ClassDetailViewModel}">
-                            <classDetail:ClassDetail></classDetail:ClassDetail>
+                        <DataTemplate DataType="{x:Type viewModel:ClassManagementViewModel}">
+                            <classMana:ClassManagement></classMana:ClassManagement>
                         </DataTemplate>
 
                     </ContentControl.Resources>

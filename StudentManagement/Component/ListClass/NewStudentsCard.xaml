@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="StudentManagement.Component.ListClass.NewStudentsCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border  CornerRadius="20" Background="white" Margin="20">
+        <Grid>
+            <TextBlock 
+                        FontWeight="Bold"
+                        FontSize="20"
+                        Height="30"
+                        VerticalAlignment="Top"
+                        Margin="20"
+                        >
+                            Học sinh mới
+            </TextBlock>
+            <StackPanel 
+                            Orientation="Vertical" 
+                            VerticalAlignment="Top" 
+                            Margin="20 60 20 0">
+                <ItemsControl ItemsSource="{Binding Students}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:StudentCard Margin="0, 10, 0, 0"></local:StudentCard>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

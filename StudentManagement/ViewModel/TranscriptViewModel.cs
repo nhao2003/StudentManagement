@@ -64,5 +64,11 @@ namespace StudentManagement.ViewModel
             EditBtnVisibility = Visibility.Hidden;
             CancelBtnVisibility = Visibility.Visible;
         }
+
+        [RelayCommand]
+        private void BackToPrevScreen()
+        {
+            ClassManagementViewModel.Instance.NavigateClassList();
+        }
     }
 }

@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="StudentManagement.Component.ClassManagement.ClassManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
+             xmlns:local="clr-namespace:StudentManagement.Component.ClassManagement"
+             xmlns:classDetail="clr-namespace:StudentManagement.Component.ClassDetail"
+             xmlns:cls="clr-namespace:StudentManagement.Component.ListClass"
+             mc:Ignorable="d" 
+             d:DesignHeight="770" d:DesignWidth="1220">
+    <Grid>
+        <ContentControl Content="{Binding ContentViewModel, UpdateSourceTrigger=PropertyChanged}">
+            <ContentControl.Resources >
+                <DataTemplate DataType="{x:Type viewmodel:ClassListViewModel}">
+                    <cls:ClassList></cls:ClassList>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodel:ClassDetailViewModel}">
+                    <classDetail:ClassDetail></classDetail:ClassDetail>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</UserControl>

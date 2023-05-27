@@ -185,11 +185,12 @@
                 VerticalAlignment="Bottom">
                 <Button
                     Content="Trở lại" 
-                    Command="{Binding CancelEdittingCommand}"
+                    Command="{Binding BackToPrevScreenCommand}"
                     Visibility="{Binding CancelBtnVisibility}"
                     Background="{StaticResource GreenPrimary}"
                     Style="{StaticResource primary_button}"/>
                 <Button
+                    Command="{Binding CancelEdittingCommand}"
                     Visibility="{Binding CancelBtnVisibility}"
                     Content="Lưu thay đổi" 
                     Style="{StaticResource primary_button}"/>

@@ -16,27 +16,42 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto">
     <Grid MouseDown="Grid_MouseDown">
-        <materialDesign:Card
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <Button
+            Height="215"
+            Width="240"
+            Padding="0"
+            Background="Transparent"
+            Foreground="Transparent"
+            BorderBrush="Transparent"
+            Command="{Binding SetChoosenClassCommand}"
+        >
+            <materialDesign:Card
                 Height="208"
                 Width="239"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                UniformCornerRadius="20">
-            <StackPanel>
-                <Grid Height="auto">
-                    <TextBlock FontWeight="SemiBold"
+                UniformCornerRadius="20" Grid.ColumnSpan="2">
+                <StackPanel>
+                    <Grid Height="auto">
+                        <TextBlock FontWeight="SemiBold"
                             FontSize="14"
                             Height="auto"
                             Width="auto"
                             Foreground="Black"
                             Margin="20, 20, 0 ,0">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat=" {0}/{1}">
-                                <Binding Path="NumOfPresent"/>
-                                <Binding Path="NumOfStudent"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                    <TextBlock 
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat=" {0}/{1}">
+                                    <Binding Path="NumOfPresent"/>
+                                    <Binding Path="NumOfStudent"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock 
                             Text="{Binding Name}"
                             FontWeight="Bold"
                             FontSize="20"
@@ -46,49 +61,50 @@
                             VerticalAlignment="Bottom"
                             Margin="0, 0, 20 ,0"
                      >
-                    </TextBlock>
-                </Grid>
-                <Grid Margin="20">
-                    <ProgressBar Minimum="0" Maximum="100" Background="#D9D9D9" Foreground="#3ACB86" Value="{Binding Ratio}" />
-                </Grid>
-                <Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Image Height="37" VerticalAlignment="Center" Margin="0 0 5 0" Source="/Resource/images/student.png"/>
-                        <Image Height="37" VerticalAlignment="Center" Margin="0 0 20 0" Source="/Resource/images/student1.png"/>
-                    </StackPanel>
-                </Grid>
-                <Grid>
-                    <TextBlock FontWeight="SemiBold"
+                        </TextBlock>
+                    </Grid>
+                    <Grid Margin="20">
+                        <ProgressBar Minimum="0" Maximum="100" Background="#D9D9D9" Foreground="#3ACB86" Value="{Binding Ratio}" />
+                    </Grid>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Image Height="37" VerticalAlignment="Center" Margin="0 0 5 0" Source="/Resource/images/student.png"/>
+                            <Image Height="37" VerticalAlignment="Center" Margin="0 0 20 0" Source="/Resource/images/student1.png"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid>
+                        <TextBlock FontWeight="SemiBold"
                             FontSize="16"
                             Height="auto"
                             Width="auto"
                             Foreground="Black"
                             Margin="20"
                             HorizontalAlignment="Center">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="GVCN: {0}">
-                                <Binding Path="TeacherName"/>
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                </Grid>
-                <Grid>
-                    <Button
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="GVCN: {0}">
+                                    <Binding Path="TeacherName"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </Grid>
+                    <Grid>
+                        <Button
                     Background="White"
                     Margin="0"
                     Command="{Binding SetDetailClassCommand}"
                     Style="{StaticResource primary_button}">
-                        <TextBlock FontWeight="SemiBold"
+                            <TextBlock FontWeight="SemiBold"
                             FontSize="16"
                             Height="auto"
                             Width="auto"
                             Foreground="#2D8AE1"
                             HorizontalAlignment="Center">
                             Vào lớp
-                        </TextBlock>
-                    </Button>
-                </Grid>
-            </StackPanel>
-        </materialDesign:Card>
+                            </TextBlock>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </materialDesign:Card>
+        </Button>
     </Grid>
 </UserControl>

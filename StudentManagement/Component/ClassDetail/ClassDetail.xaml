@@ -7,8 +7,7 @@
              xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ClassDetail"
-             mc:Ignorable="d" 
-             DataContext="{StaticResource ClassDetailVM}"
+             mc:Ignorable="d"
             d:DesignHeight="770" d:DesignWidth="1220">
     <Border  Background="{StaticResource BlueLight}" Margin="20">
         <Grid>
@@ -43,14 +42,15 @@
                     <Button
                     Content="Bảng điểm" 
                     Width="130"
-                    Background="{StaticResource BluePrimary}"
+                    Background="{Binding BackgroundBangDiem}"
+                    Foreground="{Binding ForegroundBangDiem}"
                     Command="{Binding NavigateTranscriptCommand}"
                     Style="{StaticResource primary_button}"/>
                     <Button
                     Content="Cấu hình" 
                     Width="130"
-                    Foreground="Gray"
-                    Background="White"
+                    Background="{Binding BackgroundCauHinh}"
+                    Foreground="{Binding ForegroundCauHinh}"
                     Command="{Binding NavigateClassConfigCommand}"
                     Style="{StaticResource primary_button}"
                     />
