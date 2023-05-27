@@ -33,6 +33,7 @@ public sealed partial class MainViewModel : ObservableObject
     private object _classDetailViewModel;
     private object _classManaViewModel;
 
+    private object _subjectViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -55,14 +56,21 @@ public sealed partial class MainViewModel : ObservableObject
     #endregion
     private void Init()
     {
+        DataProvider.ins.context.Hocsinhs.ToList();
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
+        _classListViewModel = new ClassListViewModel();
+        _subjectViewModel = new SubjectViewModel();
         _classManaViewModel = new ClassManagementViewModel();
 
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
+        new Navigation("Thông tin", "infomation", _studentViewModel),
+        new Navigation("Môn học", "subject", _subjectViewModel),
+
+        new Navigation("Môn học", "subject", _classListViewModel),
         new Navigation("Thông tin", "infomation", _classListViewModel),
         new Navigation("Môn học", "subject", _classManaViewModel),
     };

@@ -7,6 +7,7 @@
         xmlns:leftSideBar="clr-namespace:StudentManagement.Component.LeftSideBar"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
+        xmlns:sub="clr-namespace:StudentManagement.Component.Program"
         xmlns:classMana="clr-namespace:StudentManagement.Component.ClassManagement"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
@@ -70,13 +71,19 @@
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel }">
+                            <TextBlock Text="Trang chủ"></TextBlock>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:SubjectViewModel}">
+                            <program:SubjectProgram />
+                        </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
                             
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassManagementViewModel}">
                             <classMana:ClassManagement></classMana:ClassManagement>
                         </DataTemplate>
-
+                        
                     </ContentControl.Resources>
                 </ContentControl>
             </Grid>
