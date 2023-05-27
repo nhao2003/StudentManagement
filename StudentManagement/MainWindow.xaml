@@ -7,6 +7,7 @@
         xmlns:leftSideBar="clr-namespace:StudentManagement.Component.LeftSideBar"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
+        xmlns:classDetail="clr-namespace:StudentManagement.Component.ClassDetail"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
         xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
         xmlns:classConfig="clr-namespace:StudentManagement.Component.ClassConfig"
@@ -72,11 +73,11 @@
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:TranscriptViewModel }">
-                            <transript:Transcript></transript:Transcript>
+                        <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
+                            <cls:ClassList></cls:ClassList>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:ClassConfigViewModel}">
-                            <classConfig:ClassConfig></classConfig:ClassConfig>
+                        <DataTemplate DataType="{x:Type viewModel:ClassDetailViewModel}">
+                            <classDetail:ClassDetail></classDetail:ClassDetail>
                         </DataTemplate>
 
                     </ContentControl.Resources>

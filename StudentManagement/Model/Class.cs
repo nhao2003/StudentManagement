@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using StudentManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,12 @@ namespace StudentManagement.Model
             this.numOfPresent = numOfPresent;
 
             ratio = Convert.ToInt32((numOfPresent / Convert.ToDouble(numOfStudent)) * 100);
+        }
+
+        [RelayCommand]
+        public void SetDetailClass()
+        {
+            ClassDetailViewModel.Instance.SetCurrentClass(this);
         }
     }
 }

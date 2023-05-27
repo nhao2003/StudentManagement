@@ -73,14 +73,20 @@
                     </TextBlock>
                 </Grid>
                 <Grid>
-                    <TextBlock FontWeight="SemiBold"
+                    <Button
+                    Background="White"
+                    Margin="0"
+                    Command="{Binding SetDetailClassCommand}"
+                    Style="{StaticResource primary_button}">
+                        <TextBlock FontWeight="SemiBold"
                             FontSize="16"
                             Height="auto"
                             Width="auto"
                             Foreground="#2D8AE1"
                             HorizontalAlignment="Center">
-                        Vào lớp
-                    </TextBlock>
+                            Vào lớp
+                        </TextBlock>
+                    </Button>
                 </Grid>
             </StackPanel>
         </materialDesign:Card>

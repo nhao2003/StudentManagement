@@ -13,6 +13,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
+            <!-- Titile -->
             <TextBlock Text="Bảng điểm lớp học" 
                        Grid.Row="0"
                        Margin="29,25"
@@ -42,6 +43,8 @@
                     <TextBlock Text="Kết quả" />
                 </Button>
             </StackPanel>
+            
+            <!-- Data -->
             <DataGrid
                 AutoGenerateColumns="False"
                 Grid.Row="1"
@@ -155,6 +158,10 @@
                         Header="Họ tên" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
+                        Binding="{Binding Speaking,FallbackValue='0'}"
+                        Header="Điểm Miệng" />
+                    <materialDesign:DataGridTextColumn
+                        Width="*"
                         Binding="{Binding FifteenMin,FallbackValue='0'}"
                         Header="Điểm 15'" />
                     <materialDesign:DataGridTextColumn
@@ -167,6 +174,8 @@
                         Header="Điểm cuối kỳ" />
                 </DataGrid.Columns>
             </DataGrid>
+            
+            <!-- Hai nut duoi -->
             <StackPanel 
                 Grid.Row="2" 
                 Orientation="Horizontal" 

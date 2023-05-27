@@ -29,20 +29,20 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         ObservableCollection<TranscriptConfig> transcripts = new ObservableCollection<TranscriptConfig>
         {
-            new TranscriptConfig("001", "John Doe", "7", "8", "10"),
-            new TranscriptConfig("002", "Jane Smith", "4", "6",  "8"),
-            new TranscriptConfig("003", "Bob Johnson", "9", "10", "9"),
-            new TranscriptConfig("004", "Samantha Lee", "3", "5", "6"),
-            new TranscriptConfig("005", "James Smith", "5", "2", "7"),
-            new TranscriptConfig("006", "Emily Nguyen", "9", "8", "3"),
-            new TranscriptConfig("007", "Michael Brown",  "8", "7", "9"),
-            new TranscriptConfig("008", "Avery Martinez",  "4", "1", "6"),
-            new TranscriptConfig("009", "Ella Davis", "9", "10", "10"),
-            new TranscriptConfig("010", "William Johnson", "3","4", "7"),
-            new TranscriptConfig("011", "Olivia Jones", "5", "7", "8"),
-            new TranscriptConfig("012", "Benjamin Lee", "8", "7", "10"),
-            new TranscriptConfig("013", "Sophia Wilson", "9", "10", "8"),
-            new TranscriptConfig("014", "Ethan Kim", "6", "4", "9")
+            new TranscriptConfig("001", "John Doe", "7", "7", "8", "10"),
+            new TranscriptConfig("002", "Jane Smith", "7", "4", "6",  "8"),
+            new TranscriptConfig("003", "Bob Johnson", "7", "9", "10", "9"),
+            new TranscriptConfig("004", "Samantha Lee", "7", "3", "5", "6"),
+            new TranscriptConfig("005", "James Smith", "7", "5", "2", "7"),
+            new TranscriptConfig("006", "Emily Nguyen", "7", "9", "8", "3"),
+            new TranscriptConfig("007", "Michael Brown",  "7", "8", "7", "9"),
+            new TranscriptConfig("008", "Avery Martinez",  "7", "4", "1", "6"),
+            new TranscriptConfig("009", "Ella Davis", "7", "9", "10", "10"),
+            new TranscriptConfig("010", "William Johnson", "7", "3","4", "7"),
+            new TranscriptConfig("011", "Olivia Jones", "7", "5", "7", "8"),
+            new TranscriptConfig("012", "Benjamin Lee", "7", "8", "7", "10"),
+            new TranscriptConfig("013", "Sophia Wilson", "7", "9", "10", "8"),
+            new TranscriptConfig("014", "Ethan Kim", "7", "6", "4", "9")
         };
         [ObservableProperty]
         private Visibility editBtnVisibility = Visibility.Visible;

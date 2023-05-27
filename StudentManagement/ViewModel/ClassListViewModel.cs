@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,5 +30,7 @@ namespace StudentManagement.ViewModel
             new Student("4", "Lê Phan Hiển", "/Resource/images/student1.png"),
             new Student("5", "Nguyễn Trung Kiên", "/Resource/images/student.png"),
         };
+
+        
     }
 }

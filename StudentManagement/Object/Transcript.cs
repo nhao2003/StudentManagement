@@ -15,19 +15,22 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private string name;
         [ObservableProperty]
+        private string speaking;
+        [ObservableProperty]
         private string fifteenMin;
         [ObservableProperty]
         private string fortyMin;
         [ObservableProperty]
         private string finalExam;
 
-        public TranscriptConfig(string Id, string Name, string FifteenMin, string FortyMin, string FinalExam)
+        public TranscriptConfig(string Id, string Name, string Speaking, string FifteenMin, string FortyMin, string FinalExam)
         {
             this.Id = Id;
             this.Name = Name;
+            this.Speaking = Speaking;
             this.FifteenMin = FifteenMin;
             this.FortyMin = FortyMin;
-            this.FinalExam = FinalExam;
+            this.finalExam = FinalExam;
         }
     }
 }
