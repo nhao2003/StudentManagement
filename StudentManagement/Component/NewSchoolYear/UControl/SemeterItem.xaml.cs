@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManagement.Component.Program
+namespace StudentManagement.Component.NewSchoolYear.UControl
 {
     /// <summary>
-    /// Interaction logic for mainProgram.xaml
+    /// Interaction logic for SemeterItem.xaml
     /// </summary>
-    public partial class mainProgram : UserControl
+    public partial class SemeterItem : UserControl
     {
-        public mainProgram()
+        public SemeterItem()
         {
             InitializeComponent();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

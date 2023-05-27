@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="StudentManagement.Component.Login.LoginUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:StudentManagement.Component.Login"
+             mc:Ignorable="d" 
+             DataContext="{StaticResource LoginVM}"
+             >
+    <Border Grid.Column="1" Background="White" CornerRadius="20" Margin="30 60">
+        <Grid>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Đăng nhập" 
+                           Margin="0 100 0 10 "
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           FontSize="40"
+                           FontWeight="Bold"
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           ></TextBlock>
+                <TextBlock Text="Tên đăng nhập" 
+                           Margin="80 30 0 10 "
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           ></TextBlock>
+
+                <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="2" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon  Kind="User" Width="25" Height="25" Margin="0 5 0 0"/>
+                    <TextBox
+                                        Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        x:Name="txtser"
+                                        Margin="10 0"
+                                        Width="250"
+                                        materialDesign:HintAssist.Hint="Tên đăng nhập"
+                                        BorderBrush="#35a0fe"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                </StackPanel>
+                <TextBlock Text="Nhập mật khẩu" 
+                           Margin="80 10 0 10 "
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           ></TextBlock>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon  Kind="Lock" Width="25" Height="25" Margin="0 5 0 0"/>
+                    <PasswordBox
+                                        local:PasswordHelper.Attach="True"
+                                        local:PasswordHelper.Password="{Binding Password,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+
+                                        x:Name="txtPassword"
+                                        Margin="10 0"
+                                        Width="250"
+                                        materialDesign:HintAssist.Hint="Mật khẩu"
+                                        materialDesign:HintAssist.Foreground="#35a0fe"
+                                        materialDesign:TextFieldAssist.UnderlineBrush="#35a0fe"
+                                        BorderBrush="#35a0fe"
+                                        Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="28,8">
+                    <CheckBox
+                    VerticalContentAlignment="Center"
+                    Content="Ghi nhớ"
+                    Cursor="Hand"
+                    DockPanel.Dock="Left"
+                    FontWeight="SemiBold"
+                    IsChecked="{Binding IsToRemember, Mode=OneWayToSource}" />
+                    <!--<TextBlock
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Right"
+                    FontWeight="SemiBold"
+                    Text="Quên mật khẩu?">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{StaticResource ErrorMain}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="Foreground" Value="{StaticResource ErrorLight}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding OpenForgotPasswordForm}" CommandParameter="{Binding ElementName= loginWindow}" MouseAction="LeftClick" />
+                        -->
+                    <!--Command="{Binding OpenForgotPasswordForm}"
+                                        CommandParameter="{Binding ElementName= loginWindow}"-->
+                    <!--
+                    </TextBlock.InputBindings>
+                </TextBlock>-->
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Button 
+                                        Command="{Binding SwichView}"
+                                        x:Name="btnForgetPassword" 
+                                        Content="Quên mật khẩu?" 
+                                        HorizontalAlignment="Left" 
+                                        Height="24"
+                                        Width="120" 
+                                        VerticalAlignment="Top" 
+                                        Padding="0" 
+                                        HorizontalContentAlignment="center" 
+                                        VerticalContentAlignment="Center" 
+                                        FontSize="13" 
+                                        Margin="100,0,0,0" 
+                                        FontWeight="Medium" 
+                                        Foreground="{StaticResource RedPrimary}"
+                                        Cursor="Hand" 
+                                        FocusVisualStyle="{x:Null}"
+                                        Background="{x:Null}" 
+                                        BorderBrush="{x:Null}" 
+                                        IsTabStop="False">
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <Button
+                Grid.Row="5"
+                Width="200"
+                Height="50"
+                Margin="28,16"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Content="Đăng nhập"
+                Command="{Binding goToMainWindowCM}"
+                FontSize="16"
+                Background="{StaticResource BluePrimary}"
+                Style="{StaticResource primary_button}">
+               
+                </Button>
+
+            </StackPanel>
+        </Grid>
+    </Border>
+
+</UserControl>

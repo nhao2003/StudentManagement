@@ -16,16 +16,16 @@ using System.Windows.Shapes;
 namespace StudentManagement.Component.Program
 {
     /// <summary>
-    /// Interaction logic for mainProgram.xaml
+    /// Interaction logic for SubjectProgram.xaml
     /// </summary>
-    public partial class mainProgram : UserControl
+    public partial class SubjectProgram : UserControl
     {
-        public mainProgram()
+        public SubjectProgram()
         {
             InitializeComponent();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

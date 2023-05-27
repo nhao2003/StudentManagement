@@ -5,7 +5,8 @@ namespace StudentManagement.Model;
 public class DataProvider
   
 {
-    private static DataProvider? _ins;
+    public QUANLYHOCSINHContext Context;
+    private static DataProvider _ins;
     public static DataProvider ins { 
         get {
             if (_ins == null)
@@ -17,5 +18,6 @@ public class DataProvider
     }
     private DataProvider() {
         //call DB
+        Context = new QUANLYHOCSINHContext();
     }
 }

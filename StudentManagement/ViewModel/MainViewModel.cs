@@ -15,7 +15,8 @@ namespace StudentManagement.ViewModel;
 public sealed partial class MainViewModel : ObservableObject
 {
 
-    public MainViewModel() {
+    public MainViewModel()
+    {
         Init();
         ContentViewModel = _programViewModel;
         Instance = this;
@@ -26,8 +27,9 @@ public sealed partial class MainViewModel : ObservableObject
     private object _programViewModel;
     private object _studentViewModel;
     private object _teacherViewModel;
-    private object _transcriptViewModel;
-    private object _classconfigViewModel;
+    private object _classListViewModel;
+    private object _subjectViewModel;
+    private object _schoolyearViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -53,17 +55,21 @@ public sealed partial class MainViewModel : ObservableObject
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
-        _transcriptViewModel = new TranscriptViewModel();
-        _classconfigViewModel = new ClassConfigViewModel();
+        _classListViewModel = new ClassListViewModel();
+        _subjectViewModel = new SubjectViewModel();
+        _schoolyearViewModel = new SchoolYearViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Thông tin", "infomation", _transcriptViewModel),
-        new Navigation("Môn học", "subject", _classconfigViewModel),
+        new Navigation("Thông tin", "infomation", _studentViewModel),
+        new Navigation("Môn học", "subject", _subjectViewModel),
+
+        new Navigation("Môn học", "subject", _classListViewModel),
+        new Navigation("Năm học", "subject", _schoolyearViewModel),
     };
         leftNavigations[0].IsPress = true;
     }
-    
+
     public void setViewModel(object viewModel)
     {
         ContentViewModel = viewModel;
@@ -80,5 +86,5 @@ public sealed partial class MainViewModel : ObservableObject
         Window window = Application.Current.MainWindow as Window;
         window.WindowState = WindowState.Minimized;
     }
-   }
+}
 

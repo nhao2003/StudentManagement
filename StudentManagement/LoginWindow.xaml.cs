@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManagement.Component.Program
+namespace StudentManagement
 {
     /// <summary>
-    /// Interaction logic for mainProgram.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class mainProgram : UserControl
+    public partial class LoginWindow : Window
     {
-        public mainProgram()
+        public LoginWindow()
         {
             InitializeComponent();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
