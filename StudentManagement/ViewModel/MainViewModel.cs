@@ -50,6 +50,7 @@ public sealed partial class MainViewModel : ObservableObject
     #endregion
     private void Init()
     {
+        DataProvider.ins.context.Hocsinhs.ToList();
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
