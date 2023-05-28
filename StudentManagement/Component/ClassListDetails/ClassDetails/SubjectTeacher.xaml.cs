@@ -13,26 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManagement.Component.Program
+namespace StudentManagement.Component.ClassListDetails.ClassDetails
 {
     /// <summary>
-    /// Interaction logic for RegulationtProgram.xaml
+    /// Interaction logic for SubjectTeacher.xaml
     /// </summary>
-    public partial class RegulationtProgram : UserControl
+    public partial class SubjectTeacher : UserControl
     {
-        public RegulationtProgram()
+        public SubjectTeacher()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void CustomTextBox_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

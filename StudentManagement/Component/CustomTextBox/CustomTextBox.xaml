@@ -23,7 +23,7 @@
                                         ></TextBlock>
 
                 <TextBox  Grid.Column="1" MinWidth="100"
-                                Text="{Binding TextInput, ElementName=root}"
+                                Text="{Binding TextInput, ElementName=root, Mode=TwoWay}"
                           Margin="0 0 15 0"
                                       VerticalAlignment="Center"
                                         HorizontalAlignment="Right"></TextBox>

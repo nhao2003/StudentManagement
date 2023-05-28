@@ -48,19 +48,19 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-
-                        <uc:CustomTextBox Margin="10" Grid.Column="0" Grid.Row="0" CustomTitle="Tuổi tối thiểu học sinh:" TextInput="15" />
-                        <uc:CustomTextBox Margin="10" Grid.Column="1" Grid.Row="0" CustomTitle="Tuổi tối đa học sinh:" TextInput="15" />
-                        <uc:CustomTextBox Margin="10" Grid.Column="0" Grid.Row="1" CustomTitle="Điểm số tối thiểu:" TextInput="15" Loaded="CustomTextBox_Loaded" />
-                        <uc:CustomTextBox Margin="10" Grid.Column="1" Grid.Row="1" CustomTitle="Điểm số tối đa:" TextInput="15" />
-                        <uc:CustomTextBox Margin="10" Grid.Column="0" Grid.Row="2" CustomTitle="Sỉ số tối đa của lớp:" TextInput="15" />
-                        <uc:CustomTextBox Margin="10" Grid.Column="1" Grid.Row="2" CustomTitle="Điểm số đạt tối thiểu:" TextInput="15" />
+                        <uc:CustomTextBox Margin="10" Grid.Column="0" Grid.Row="0" CustomTitle="{Binding Path=Thamsos[0].Tents,  Mode=OneWay}" TextInput="{Binding Path=Thamsos[0].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                        <uc:CustomTextBox Margin="10" Grid.Column="1" Grid.Row="0" CustomTitle="{Binding Path=Thamsos[1].Tents,  Mode=OneWay}" TextInput="{Binding Path=Thamsos[1].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                        <uc:CustomTextBox Margin="10" Grid.Column="0" Grid.Row="1" CustomTitle="{Binding Path=Thamsos[2].Tents,  Mode=OneWay}" TextInput="{Binding Path=Thamsos[2].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                        <uc:CustomTextBox Margin="10" Grid.Column="1" Grid.Row="1" CustomTitle="{Binding Path=Thamsos[3].Tents,  Mode=OneWay}" TextInput="{Binding Path=Thamsos[3].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                        <uc:CustomTextBox Margin="10" Grid.Column="0" Grid.Row="2" CustomTitle="{Binding Path=Thamsos[4].Tents,  Mode=OneWay}" TextInput="{Binding Path=Thamsos[4].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                        <uc:CustomTextBox Margin="10" Grid.Column="1" Grid.Row="2" CustomTitle="{Binding Path=Thamsos[5].Tents,  Mode=OneWay}" TextInput="{Binding Path=Thamsos[5].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
                         <Button
+                            Command="{Binding ShowDiaLogCommand}"
                             Grid.Column="1" Grid.Row="3"
                             Background="{StaticResource BluePrimary}" BorderBrush="{StaticResource BluePrimary}" Content="Cập nhật" Margin="10" HorizontalAlignment="Right" />
 
                     </Grid>
-                    <TextBlock Grid.Row="1" Text="Danh sách môn học" FontWeight="Bold" 
+                    <TextBlock Grid.Row="1" Text="{Binding temp, Mode=TwoWay}" FontWeight="Bold" 
             FontSize="14"
             Margin="10" />
                     <Border Grid.Row="2">
@@ -69,7 +69,10 @@
                                 <RowDefinition Height="*"  />
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
-                            <DataGrid Grid.Row="0" Margin="10" VerticalAlignment="Stretch">
+                            <DataGrid Grid.Row="0" Margin="10" VerticalAlignment="Stretch"
+                                     IsReadOnly="True"
+                                      ItemsSource="{Binding Monhocs}" AutoGenerateColumns="False"
+                                      >
                                 <DataGrid.Columns>
                                     <DataGridCheckBoxColumn Header="">
                                         <DataGridCheckBoxColumn.ElementStyle>
@@ -79,8 +82,8 @@
                                         </DataGridCheckBoxColumn.ElementStyle>
                                     </DataGridCheckBoxColumn>
                                     <DataGridTextColumn Header="STT" Binding="{Binding STT}" />
-                                    <DataGridTextColumn Header="Mã môn" Binding="{Binding MaMH}" />
-                                    <DataGridTextColumn Header="Tên môn học" Binding="{Binding TenMH}" />
+                                    <DataGridTextColumn Header="Mã môn" Binding="{Binding Mamh}" />
+                                    <DataGridTextColumn Header="Tên môn học" Binding="{Binding Tenmh}" />
                                 </DataGrid.Columns>
                             </DataGrid>
                             <StackPanel
@@ -104,9 +107,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Padding="10" FontWeight="Bold" FontSize="20" Text="Thêm môn học" />
-                    <uc:CustomTextBox Grid.Row="1"  Padding="10 0 10 10" CustomTitle="Mã môn học: " TextInput="Vật lý 11" />
-                    <uc:CustomTextBox Grid.Row="2"  Padding="10 0 10 10" CustomTitle="Tên môn học: " TextInput="6.4" />
-                    <Button  VerticalAlignment="Bottom" Grid.Row="3"  Background="{StaticResource BluePrimary}" BorderBrush="{StaticResource BluePrimary}" Content="Lưu thay đổi" Margin="10" HorizontalAlignment="Right" />
+                    <uc:CustomTextBox Grid.Row="1"  Padding="10 0 10 10" CustomTitle="Mã môn học: " TextInput="{Binding MaMonHoc,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                    <uc:CustomTextBox Grid.Row="2"  Padding="10 0 10 10" CustomTitle="Tên môn học: " TextInput="{Binding TenMonHoc,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                    <Button Command="{Binding ThemMonHocCommand}"  VerticalAlignment="Bottom" Grid.Row="3"  Background="{StaticResource BluePrimary}" BorderBrush="{StaticResource BluePrimary}" Content="Lưu thay đổi" Margin="10" HorizontalAlignment="Right" />
                 </Grid>
             </Border>
         </Grid>
