@@ -1,14 +1,14 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace StudentManagement.Model;
+﻿namespace StudentManagement.Model;
 
 public class DataProvider
-  
+
 {
     public QUANLYHOCSINH2Context context;
     private static DataProvider? _ins;
-    public static DataProvider ins { 
-        get {
+    public static DataProvider ins
+    {
+        get
+        {
             if (_ins == null)
             {
                 _ins = new DataProvider();
@@ -16,7 +16,8 @@ public class DataProvider
             return _ins;
         }
     }
-    private DataProvider() {
+    private DataProvider()
+    {
         //call DB
         context = new QUANLYHOCSINH2Context();
     }

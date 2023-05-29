@@ -1,12 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Castle.Core.Internal;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StudentManagement.Object;
+using StudentManagement.Component.Regulation;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,17 +13,9 @@ namespace StudentManagement.ViewModel
     public partial class RegulationViewModel : ObservableObject
     {
         [ObservableProperty]
-        private String tuoiToiThieu = "";
+        private String titleAddSubject = "";
         [ObservableProperty]
-        private String tuoiToiDa = "";
-        [ObservableProperty]
-        private String diemToiThieu = "";
-        [ObservableProperty]
-        private String diemToiDa = "";
-        [ObservableProperty]
-        private String siSoCuaLop = "";
-        [ObservableProperty]
-        private String diemSoDatToiThieu = "";
+        private bool isAddSubject = true;
         [ObservableProperty]
         private String maMonHoc = "";
         [ObservableProperty]
@@ -33,19 +23,25 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private ObservableCollection<Monhoc> monhocs;
         [ObservableProperty]
-        Thamso[] thamsos = new Thamso[] {
-          
-        };
-        public RegulationViewModel() {
+        private Thamso[] thamsos = Array.Empty<Thamso>();
+        [ObservableProperty]
+        ContentControl contentControl = new();
+
+        [ObservableProperty]
+        private Monhoc selectedMonHoc = new Monhoc();
+
+        public RegulationViewModel()
+        {
+            contentControl.Content = new EmptyView();
             thamsos = DataProvider.ins.context.Thamsos.ToArray();
-            monhocs = new ObservableCollection<Monhoc>(DataProvider.ins.context.Monhocs.Where(e => e.Isdeleted != null && !e.Isdeleted.Value));
-         }
+            Monhocs = new ObservableCollection<Monhoc>(DataProvider.ins.context.Monhocs.Where(e => e.Isdeleted != null && !e.Isdeleted.Value));
+        }
         [RelayCommand]
         public void ShowDiaLog()
         {
             try
             {
-                foreach(Thamso ts in thamsos)
+                foreach (Thamso ts in thamsos)
                 {
                     if (!ValidDataType(ts.Giatri, ts.Typets))
                     {
@@ -55,10 +51,12 @@ namespace StudentManagement.ViewModel
                 DataProvider.ins.context.UpdateRange(thamsos);
                 DataProvider.ins.context.SaveChanges();
                 MessageBox.Show("Cập nhật tham số thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-            } catch (FormatException ex)
+            }
+            catch (FormatException ex)
             {
                 MessageBox.Show($"{ex.Message}", "Đinh dạng không hợp lệ", MessageBoxButton.OK, MessageBoxImage.Error);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -66,16 +64,37 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         public void ThemMonHoc()
         {
+
             try
             {
-                Monhoc monhoc = new Monhoc();
-                monhoc.Mamh = MaMonHoc;
-                monhoc.Tenmh = TenMonHoc;
-                DataProvider.ins.context.Monhocs.Add(monhoc);
-                DataProvider.ins.context.SaveChanges();
-                monhocs.Add(monhoc);
-                MessageBox.Show("Đã thêm thành công");
-            } catch (Exception ex)
+
+                if (MaMonHoc.IsNullOrEmpty() || TenMonHoc.IsNullOrEmpty())
+                {
+                    throw new Exception("Tên môn học hoặc mã môn học rỗng");
+                }
+                if (IsAddSubject)
+                {
+                    Monhoc monhoc = new Monhoc
+                    {
+                        Mamh = MaMonHoc,
+                        Tenmh = TenMonHoc
+                    };
+                    DataProvider.ins.context.Monhocs.Add(monhoc);
+                    DataProvider.ins.context.SaveChanges();
+                    MessageBox.Show("Đã thêm thành công");
+                    MaMonHoc = "";
+                    TenMonHoc = "";
+                }
+                else
+                {
+                    SelectedMonHoc.Tenmh = TenMonHoc;
+                    DataProvider.ins.context.Monhocs.Update(SelectedMonHoc);
+                    DataProvider.ins.context.SaveChanges();
+                    MessageBox.Show("Chỉnh sửa thành công");
+                }
+                Monhocs = new ObservableCollection<Monhoc>(DataProvider.ins.context.Monhocs.Where(e => e.Isdeleted != null && !e.Isdeleted.Value));
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}");
             }
@@ -104,6 +123,24 @@ namespace StudentManagement.ViewModel
                 default:
                     return false; // Kiểu dữ liệu không hợp lệ.
             }
+        }
+        [RelayCommand]
+        private void showModifySubjectView()
+        {
+            ContentControl.Content = new AddSubject();
+            IsAddSubject = false;
+            TitleAddSubject = "Chỉnh sửa môn học";
+            MaMonHoc = SelectedMonHoc.Mamh;
+            TenMonHoc = SelectedMonHoc.Tenmh;
+        }
+        [RelayCommand]
+        private void showAddSubjectView()
+        {
+            ContentControl.Content = new AddSubject();
+            IsAddSubject = true;
+            TitleAddSubject = "Thêm môn học";
+            MaMonHoc = "";
+            TenMonHoc = "";
         }
 
     }

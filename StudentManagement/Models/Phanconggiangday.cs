@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace StudentManagement.Models
+﻿namespace StudentManagement.Models
 {
     public partial class Phanconggiangday
     {

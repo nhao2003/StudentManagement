@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace StudentManagement.ViewModel
@@ -38,12 +36,12 @@ namespace StudentManagement.ViewModel
             GiaoVien = DataProvider.ins.context.Giaoviens.Where(x => x.Magv == lophocthucte.Magvcn).FirstOrDefault().UsernameNavigation.Hoten;
             NienKhoa = lophocthucte.ManhNavigation.Tennamhoc;
             List<Phanconggiangday> phanconggiangdays = lophocthucte.Phanconggiangdays.ToList();
-            foreach(var phancong in phanconggiangdays)
+            foreach (var phancong in phanconggiangdays)
             {
                 String subject = $"{phancong.MamhNavigation.Tenmh}: ";
                 String teacher = phancong.MagvNavigation.UsernameNavigation.Hoten;
-                SubjectTeachers.Add(new SubjectTeacher(subject,teacher));
-            }    
+                SubjectTeachers.Add(new SubjectTeacher(subject, teacher));
+            }
         }
     }
 }

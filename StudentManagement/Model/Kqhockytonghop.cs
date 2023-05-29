@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace StudentManagement.Model
+﻿namespace StudentManagement.Model
 {
     public partial class Kqhockytonghop
     {
