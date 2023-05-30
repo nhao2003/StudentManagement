@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,21 +14,36 @@ namespace StudentManagement.ViewModel
     public partial class TermSummaryViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<string> yearList;
+        private ObservableCollection<Namhoc> yearList;
         [ObservableProperty]
-        private string test;
+        private ObservableCollection<Hocky> termList;
+        [ObservableProperty]
+        private ObservableCollection<Monhoc> subjectList;
+        [ObservableProperty]
+        private Namhoc selectedYear;
+        [ObservableProperty]
+        private Hocky selectedTerm;
+        [ObservableProperty]
+        private Monhoc selectedSubject;
+        [ObservableProperty]
+        private string selectedString;
+
         public TermSummaryViewModel()
         {
-            var lophtt = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == "NH001").ToList();
-            List<List<Hocsinh>> resultList = lophtt.Select(x => x.Mahs.ToList()).ToList();
-            Hocsinh hocsinh;
-            foreach(var result in resultList)
+            QUANLYHOCSINHContext data = DataProvider.ins.context;
+            TermList = new ObservableCollection<Hocky>(data.Hockies);
+            YearList = new ObservableCollection<Namhoc>(data.Namhocs);
+            SubjectList = new ObservableCollection<Monhoc>(data.Monhocs);
+        }
+
+        [RelayCommand]
+        private void Summary()
+        {
+            if(SelectedTerm != null && SelectedSubject != null && SelectedYear != null)
             {
-                int kqdat = result.Select(x => x.Kqhockymonhocs.Where(x => (x.Mamh == "MH001" && x.Mahk == "HK001")).First().DtbmonHocKy > 5).ToList().Count();
-                MessageBox.Show(lophtt[resultList.IndexOf(result)].MalopNavigation.Tenlop + " " + kqdat.ToString());
+                MessageBox.Show(SelectedTerm.Tenhk + " " + SelectedYear.Tennamhoc + " " + SelectedSubject.Tenmh);
+                SelectedString = $"{SelectedTerm.Tenhk} - Môn học: {SelectedSubject.Tenmh}";
             }
-            List<Namhoc> namhocList = DataProvider.ins.context.Namhocs.ToList();
-            YearList = new ObservableCollection<string>(namhocList.Select(n => n.Tennamhoc));
         }
     }
 }
