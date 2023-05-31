@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="770" d:DesignWidth="1220">
-    <Border  Background="#E7F2FF" Margin="20">
+    <Border  Background="#E7F2FF">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -35,18 +35,32 @@
                             Width="Auto"
                             Height="30"
                             Padding="5"
-                            materialDesign:HintAssist.Hint="Học kỳ">
-                        <ComboBoxItem Content="Học kỳ I" />
-                        <ComboBoxItem Content="HỌc kỳ II" />
-                    </ComboBox>
+                              SelectedItem="{Binding SelectedTerm, Mode=TwoWay}"
+                             ItemsSource="{Binding TermList}"
+                              DisplayMemberPath="Tenhk"
+                            materialDesign:HintAssist.Hint="Học kỳ"/>
+
                     <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}"
                             BorderBrush="LightGray" 
                             Width="Auto"
                             Height="30"
                             Padding="5"
-                             ItemsSource="{Binding YearList}"
-                            materialDesign:HintAssist.Hint="Năm học">
-                    </ComboBox>
+                            ItemsSource="{Binding YearList}"
+                            SelectedItem="{Binding SelectedYear, Mode=TwoWay}"
+                            DisplayMemberPath="Tennamhoc"
+                            materialDesign:HintAssist.Hint="Năm học"/>
+                    <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}"
+                            BorderBrush="LightGray" 
+                            Width="Auto"
+                            Height="30"
+                            Padding="5"
+                            ItemsSource="{Binding SubjectList}"                              
+                              SelectedItem="{Binding SelectedSubject, Mode=TwoWay}"
+                            DisplayMemberPath="Tenmh"
+                            materialDesign:HintAssist.Hint="Môn học"/>
+                    <Button Style="{StaticResource primary_button}"
+                            Command="{Binding SummaryCommand}"
+                            Content="Tổng kết"></Button>
 
                 </StackPanel>
             </Grid>
@@ -67,7 +81,7 @@
                             Margin="15,15,0,0"
                             FontWeight="Bold"
                             Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-                        <TextBlock Text="Học kỳ: II - Môn: Toán" 
+                        <TextBlock Text="{Binding SelectedString}" 
                                    Grid.Row="0"
                             HorizontalAlignment="Right"
                             Margin="0,15,15,0"

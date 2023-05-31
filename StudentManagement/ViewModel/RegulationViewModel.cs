@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StudentManagement.Component.Regulation;
+using StudentManagement.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;

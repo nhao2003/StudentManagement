@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using StudentManagement.Models;
 using System;
 
 namespace StudentManagement.Object
