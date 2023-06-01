@@ -106,7 +106,7 @@
                             CustomTitle="{Binding Path=Thamsos[5].Tents,  Mode=OneWay}"
                             TextInput="{Binding Path=Thamsos[5].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
                         <Button
-                            Command="{Binding ShowDiaLogCommand}"
+                            Command="{Binding CapNhatThamSoCommand}"
                             Grid.Column="1"
                             Grid.Row="3"
                             Background="{StaticResource BluePrimary}"
@@ -142,19 +142,18 @@
                                 Background="{StaticResource GreyLight}"
                                 CanUserAddRows="False"
                                 CanUserDeleteRows="False"
-                                IsReadOnly="True"
                                 SelectionUnit="FullRow"
+                                HorizontalScrollBarVisibility="Disabled"
                                 SelectedItem="{Binding SelectedMonHoc, Mode=TwoWay}"
-                                ItemsSource="{Binding Monhocs}"
+                                ItemsSource="{Binding MonHocItems}"
                                 SelectionMode="Single">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger
-                                        EventName="MouseLeftButtonDown"
-                                        >
+                                        EventName="SelectionChanged">
                                         <i:InvokeCommandAction
                                             Command="{Binding showModifySubjectViewCommand}"
-                                            CommandParameter="{Binding SelectedMonHoc}"/>
-                                        
+                                            CommandParameter="{Binding SelectedMonHoc}" />
+
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
 
@@ -204,13 +203,28 @@
                                 </DataGrid.CellStyle>
                                 <DataGrid.Columns>
                                     <DataGridCheckBoxColumn
+                                        Binding="{Binding IsCheckedMonHoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
                                         ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
+                                        
                                         <DataGridCheckBoxColumn.Header>
                                             <Border
                                                 Background="Transparent">
                                                 <CheckBox
-                                                    IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=IsAllItemsSelected}" />
+                                                    IsChecked="{Binding IsCheckAllItem,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger
+                                                            EventName="Checked">
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding isCheckedAllChangedCommand}" />
+                                                        </i:EventTrigger>
+                                                        <i:EventTrigger
+                                                            EventName="Unchecked">
+                                                            <i:InvokeCommandAction
+                                                                Command="{Binding isCheckedAllChangedCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </CheckBox>
                                             </Border>
                                         </DataGridCheckBoxColumn.Header>
                                         <DataGridCheckBoxColumn.HeaderStyle>
@@ -224,11 +238,15 @@
                                         </DataGridCheckBoxColumn.HeaderStyle>
                                     </DataGridCheckBoxColumn>
                                     <materialDesign:DataGridTextColumn
+                                        IsReadOnly="true"
+                                        Width="Auto"
                                         Header="Mã môn"
-                                        Binding="{Binding Mamh}" />
+                                        Binding="{Binding MaMonHoc}" />
                                     <materialDesign:DataGridTextColumn
+                                        IsReadOnly="true"
+                                        Width="*"
                                         Header="Tên môn học"
-                                        Binding="{Binding Tenmh}" />
+                                        Binding="{Binding TenMonHoc}" />
                                 </DataGrid.Columns>
 
                             </DataGrid>
@@ -243,6 +261,7 @@
                                     BorderBrush="{StaticResource BluePrimary}"
                                     Content="Thêm" />
                                 <Button
+                                    Command="{Binding XoaMonHocCommand}"
                                     Background="{StaticResource RedPrimary}"
                                     BorderBrush="{StaticResource RedPrimary}"
                                     Content="Xoá"
