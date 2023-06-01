@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentManagement.Object;
+using System;
 using System.Collections.Generic;
 
 namespace StudentManagement.Models
@@ -34,5 +35,34 @@ namespace StudentManagement.Models
         public virtual ICollection<Phh> Phhs { get; set; }
 
         public virtual ICollection<Lophocthucte> Malhtts { get; set; }
+
+        public TranscriptConfig toTranscript()
+        {
+            double diemMieng = 0.0;
+            double diem15 = 0.0;
+            double diem45 = 0.0;
+            double diemCK = 0.0;
+
+            foreach (Diemmonhoc diem in Diemmonhocs)
+            {
+                if (diem.Malkt == "LKT001")
+                {
+                    diemMieng = diem.Diem;
+                }
+                else if (diem.Malkt == "LKT002")
+                {
+                    diem15 = diem.Diem;
+                }
+                else if (diem.Malkt == "LKT003")
+                {
+                    diem45 = diem.Diem;
+                }
+                else if (diem.Malkt == "LKT004")
+                {
+                    diemCK = diem.Diem;
+                }
+            }
+            return new TranscriptConfig(Mahs, Hotenhs, diemMieng.ToString(), diem15.ToString(), diem45.ToString(), diemCK.ToString());
+        }
     }
 }

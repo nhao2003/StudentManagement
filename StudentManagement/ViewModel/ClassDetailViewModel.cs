@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace StudentManagement.ViewModel
             Init();
         }
 
-        private object _transcriptViewModel;
+        private TranscriptViewModel _transcriptViewModel;
         private object _classconfigViewModel;
 
         [ObservableProperty]
@@ -58,6 +59,7 @@ namespace StudentManagement.ViewModel
         public void SetCurrentClass(Lophocthucte mclass)
         {
             lophocthucte = mclass;
+            _transcriptViewModel.SetCurrentClass(lophocthucte);
         }
 
 

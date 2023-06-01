@@ -15,12 +15,12 @@ namespace StudentManagement.ViewModel
     {
         [ObservableProperty]
         ObservableCollection<SubjectTeacher> subjectTeacherList = new ObservableCollection<SubjectTeacher> {
-             new SubjectTeacher("Toán", new List<String> { "Teacher A", "Teacher B", "Teacher C" }),
-             new SubjectTeacher("Lý", new List<String> { "Teacher A", "Teacher B", "Teacher C" }),
-             new SubjectTeacher("Hóa", new List<String> { "Teacher A", "Teacher B", "Teacher C" }),
-             new SubjectTeacher("Tin", new List<String> { "Teacher A", "Teacher B", "Teacher C" }),
-             new SubjectTeacher("Sinh", new List<String> { "Teacher A", "Teacher B", "Teacher C" }),
-             new SubjectTeacher("Anh", new List<String> { "Teacher A", "Teacher B", "Teacher C" })
+             new SubjectTeacher("Toán", "Teacher A"),
+             new SubjectTeacher("Lý", "Teacher B"),
+             new SubjectTeacher("Hóa", "Teacher C"),
+             new SubjectTeacher("Tin", "Teacher D"),
+             new SubjectTeacher("Sinh", "Teacher E"),
+             new SubjectTeacher("Anh", "Teacher F")
         };
 
     }

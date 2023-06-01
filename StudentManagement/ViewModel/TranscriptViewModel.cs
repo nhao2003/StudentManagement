@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
 using System.Collections.Generic;
@@ -13,37 +14,29 @@ namespace StudentManagement.ViewModel
 {
     public partial class TranscriptViewModel : ObservableObject
     {
+        public TranscriptViewModel()
+        {
+            InitMonHocs();
+            InitHocKis();
+        }
+
         [ObservableProperty]
         private bool isReadOnly = true;
         [ObservableProperty]
         private ObservableCollection<string> subjectList = new ObservableCollection<string>()
         {
-            "Toán", "Lý", "Hóa", "Sinh", "Sử"
+            
         };
         [ObservableProperty]
         private ObservableCollection<string> termList = new ObservableCollection<string>()
         {
-            "Học kỳ 1", "Học kỳ 2"
         };
 
         [ObservableProperty]
-        ObservableCollection<TranscriptConfig> transcripts = new ObservableCollection<TranscriptConfig>
+        ObservableCollection<TranscriptConfig> transcripts = new ObservableCollection<TranscriptConfig>()
         {
-            new TranscriptConfig("001", "John Doe", "7", "7", "8", "10"),
-            new TranscriptConfig("002", "Jane Smith", "7", "4", "6",  "8"),
-            new TranscriptConfig("003", "Bob Johnson", "7", "9", "10", "9"),
-            new TranscriptConfig("004", "Samantha Lee", "7", "3", "5", "6"),
-            new TranscriptConfig("005", "James Smith", "7", "5", "2", "7"),
-            new TranscriptConfig("006", "Emily Nguyen", "7", "9", "8", "3"),
-            new TranscriptConfig("007", "Michael Brown",  "7", "8", "7", "9"),
-            new TranscriptConfig("008", "Avery Martinez",  "7", "4", "1", "6"),
-            new TranscriptConfig("009", "Ella Davis", "7", "9", "10", "10"),
-            new TranscriptConfig("010", "William Johnson", "7", "3","4", "7"),
-            new TranscriptConfig("011", "Olivia Jones", "7", "5", "7", "8"),
-            new TranscriptConfig("012", "Benjamin Lee", "7", "8", "7", "10"),
-            new TranscriptConfig("013", "Sophia Wilson", "7", "9", "10", "8"),
-            new TranscriptConfig("014", "Ethan Kim", "7", "6", "4", "9")
         };
+
         [ObservableProperty]
         private Visibility editBtnVisibility = Visibility.Visible;
         [ObservableProperty]
@@ -70,6 +63,45 @@ namespace StudentManagement.ViewModel
         private void BackToPrevScreen()
         {
             ClassManagementViewModel.Instance.NavigateClassList();
+        }
+
+        // lay hoc sinh
+        private Lophocthucte lophocthucte;
+
+        public void SetCurrentClass(Lophocthucte mclass)
+        {
+            lophocthucte = null;
+            lophocthucte = mclass;
+            InitStudents();
+        }
+
+        List<Hocsinh> hocsinhs = new List<Hocsinh>();
+
+        private void InitStudents()
+        {
+            hocsinhs.Clear();
+            transcripts.Clear();
+            hocsinhs = lophocthucte.Mahs.ToList();
+            foreach(var hocsinh in hocsinhs)
+            {
+                transcripts.Add(hocsinh.toTranscript());
+            }
+        }
+
+        private void InitMonHocs()
+        {
+            foreach (var mh in DataProvider.ins.context.Monhocs)
+            {
+                subjectList.Add(mh.Tenmh);
+            }
+        }
+
+        private void InitHocKis()
+        {
+            foreach (var hk in DataProvider.ins.context.Hockies)
+            {
+                termList.Add(hk.Tenhk);
+            }
         }
     }
 }

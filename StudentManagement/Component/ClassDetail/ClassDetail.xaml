@@ -27,7 +27,8 @@
                 Margin="20, 10, 0 ,0"
             >
                 <TextBlock.Text>
-                    <MultiBinding StringFormat="Lớp: {0}">
+                    <MultiBinding StringFormat="Lớp: {0}{1}">
+                        <Binding Path="Lophocthucte.MalopNavigation.Khoi"/>
                         <Binding Path="Lophocthucte.MalopNavigation.Tenlop"/>
                     </MultiBinding>
                 </TextBlock.Text>

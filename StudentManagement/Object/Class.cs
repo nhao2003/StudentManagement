@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Models;
 using StudentManagement.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace StudentManagement.Model
         public Class(Lophocthucte lopth)
         {
             id = lopth.Malop;
-            name = lopth.MalopNavigation.Tenlop;
+            name = lopth.MalopNavigation.Khoi + lopth.MalopNavigation.Tenlop;
             teacherName = lopth.MagvcnNavigation.Username;
 
             hocsinhs = lopth.Mahs.ToList();

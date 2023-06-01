@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,7 @@ public sealed partial class MainViewModel : ObservableObject
         _teacherViewModel = new TeacherViewModel();
         _classListViewModel = new ClassListViewModel();
         _subjectViewModel = new SubjectViewModel();
+        _classManaViewModel = new ClassManagementViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
