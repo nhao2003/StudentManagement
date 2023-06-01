@@ -28,7 +28,7 @@
             >
                 <TextBlock.Text>
                     <MultiBinding StringFormat="Lớp: {0}">
-                        <Binding Path="CurrentClass.Name"/>
+                        <Binding Path="Lophocthucte.MalopNavigation.Tenlop"/>
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>

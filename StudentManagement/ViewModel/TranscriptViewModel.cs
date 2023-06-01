@@ -54,6 +54,7 @@ namespace StudentManagement.ViewModel
         {
             IsReadOnly = true;
             EditBtnVisibility = Visibility.Visible;
+
             CancelBtnVisibility = Visibility.Hidden;
         }
 

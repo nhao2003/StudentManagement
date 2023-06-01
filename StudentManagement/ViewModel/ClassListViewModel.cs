@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,26 +23,35 @@ namespace StudentManagement.ViewModel
         public ClassListViewModel()
         {
             Instance = this;
+            lops = DataProvider.ins.context.Lophocthuctes.ToList();
+            hocsinhs = DataProvider.ins.context.Hocsinhs.ToList();
+
+            foreach (var lop in lops)
+            {
+                classes.Add(new Class(lop));
+            }
+            foreach (var hs in hocsinhs)
+            {
+                newStudents.Add(new Student(hs));
+            }
         }
 
+        List<Lophocthucte> lops = new List<Lophocthucte>();
+
+        List<Hocsinh> hocsinhs = new List<Hocsinh>();
         [ObservableProperty]
         private ObservableCollection<Class> classes = new ObservableCollection<Class>()
         {
-            new Class("1","10A1", "Phan Văn Minh", 30, 40),
-            new Class("2","10A2", "Nguyễn Nhật Hào", 40, 45),
-            new Class("3","10A3", "Nguyễn Tiến Anh", 35, 40),
-            new Class("4","10A4", "Lê Phan Hiển", 35, 45),
-            new Class("5","10A5", "Nguyễn Trung Kiên", 45, 45),
-            new Class("6","10A6", "Phan Văn Minh", 35, 40),
         };
+
         [ObservableProperty]
         private ObservableCollection<Student> students = new ObservableCollection<Student>()
         {
-            new Student("1", "Phan Văn Minh", "/Resource/images/student.png"),
-            new Student("2", "Nguyễn Nhật Hào", "/Resource/images/student1.png"),
-            new Student("3", "Nguyễn Tiến Anh", "/Resource/images/student.png"),
-            new Student("4", "Lê Phan Hiển", "/Resource/images/student1.png"),
-            new Student("5", "Nguyễn Trung Kiên", "/Resource/images/student.png"),
+        };
+
+        [ObservableProperty]
+        private ObservableCollection<Student> newStudents = new ObservableCollection<Student>()
+        {
         };
 
         [ObservableProperty]
@@ -57,6 +67,19 @@ namespace StudentManagement.ViewModel
             ChoosenClass = mclass;
             ClassStudentsVisibility = Visibility.Visible;
             NewStudentsVisibility = Visibility.Hidden;
+
+            students.Clear();
+            foreach(var hs in mclass.GetHocSinhs())
+            {
+                students.Add(new Student(hs));
+            }
+        }
+
+        [RelayCommand]
+        public void ShowNewStudents()
+        {
+            ClassStudentsVisibility = Visibility.Hidden;
+            NewStudentsVisibility = Visibility.Visible;
         }
 
     }

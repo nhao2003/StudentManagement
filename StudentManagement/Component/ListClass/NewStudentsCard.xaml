@@ -21,7 +21,7 @@
                             Orientation="Vertical" 
                             VerticalAlignment="Top" 
                             Margin="20 60 20 0">
-                <ItemsControl ItemsSource="{Binding Students}">
+                <ItemsControl ItemsSource="{Binding NewStudents}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel x:Name="Container" HorizontalAlignment="Center" />

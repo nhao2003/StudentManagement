@@ -52,7 +52,6 @@
                             </TextBlock.Text>
                         </TextBlock>
                         <TextBlock 
-                            Text="{Binding Name}"
                             FontWeight="Bold"
                             FontSize="20"
                             Height="auto"
@@ -60,7 +59,12 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Margin="0, 0, 20 ,0"
-                     >
+                         >
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="Lớp {0}">
+                                    <Binding Path="Name"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
                         </TextBlock>
                     </Grid>
                     <Grid Margin="20">

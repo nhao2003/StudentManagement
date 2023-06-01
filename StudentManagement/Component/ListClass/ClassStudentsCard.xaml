@@ -38,6 +38,16 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
+            <Button
+                    Margin="20 20"
+                    Height="40"
+                    Command="{Binding ShowNewStudentsCommand}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Background="{StaticResource GreenPrimary}"
+                    Style="{StaticResource primary_button}">
+                <TextBlock Text="Học sinh mới" />
+            </Button>
         </Grid>
     </Border>
 </UserControl>

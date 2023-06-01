@@ -48,13 +48,13 @@ namespace StudentManagement.ViewModel
         }
 
         [RelayCommand]
-        public void NavigateClassDetail(Class mclass)
+        public void NavigateClassDetail(Lophocthucte mclass)
         {
             SetDetailClass(mclass);
             setViewModel(_classDetailViewModel);
         }
 
-        public void SetDetailClass(Class mclass)
+        public void SetDetailClass(Lophocthucte mclass)
         {
             _classDetailViewModel.SetCurrentClass(mclass);
         }

@@ -64,7 +64,7 @@
                         Background="#7CA7FF"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        Margin="20 30"
+                        Margin="20 20"
                         >
                             <TextBlock 
                                 FontWeight="SemiBold"

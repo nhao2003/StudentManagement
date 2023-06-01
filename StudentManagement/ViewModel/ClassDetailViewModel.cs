@@ -53,11 +53,11 @@ namespace StudentManagement.ViewModel
         }
 
         [ObservableProperty]
-        private Class currentClass;
+        private Lophocthucte lophocthucte;
 
-        public void SetCurrentClass(Class mclass)
+        public void SetCurrentClass(Lophocthucte mclass)
         {
-            CurrentClass = mclass;
+            lophocthucte = mclass;
         }
 
 

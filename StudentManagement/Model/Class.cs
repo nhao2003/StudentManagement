@@ -24,21 +24,34 @@ namespace StudentManagement.Model
         [ObservableProperty]
         private int ratio;
 
-        public Class(string id, string name, string teacherName, int numOfPresent, int numOfStudent)
+        private Lophocthucte lophtt;
+        private List<Hocsinh> hocsinhs;
+        public Class(Lophocthucte lopth)
         {
-            this.id = id;
-            this.name = name;
-            this.teacherName = teacherName;
-            this.numOfStudent = numOfStudent;
-            this.numOfPresent = numOfPresent;
+            id = lopth.Malop;
+            name = lopth.MalopNavigation.Tenlop;
+            teacherName = lopth.MagvcnNavigation.Username;
+
+            hocsinhs = lopth.Mahs.ToList();
+
+            numOfStudent = int.Parse(DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri);
+            numOfPresent = hocsinhs.Count;
+
+            lophtt = lopth;
 
             ratio = Convert.ToInt32((numOfPresent / Convert.ToDouble(numOfStudent)) * 100);
+        }
+
+
+        public List<Hocsinh> GetHocSinhs()
+        {
+            return hocsinhs;
         }
 
         [RelayCommand]
         public void SetDetailClass()
         {
-            ClassManagementViewModel.Instance.NavigateClassDetail(this);
+            ClassManagementViewModel.Instance.NavigateClassDetail(lophtt);
         }
 
         [RelayCommand]
