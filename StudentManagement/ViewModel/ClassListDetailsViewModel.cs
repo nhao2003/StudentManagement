@@ -40,7 +40,7 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void ShowClassDetails()
         {
-            ClassDetails = new ClassDetailsViewModel(selectedItem.lophocthucte);
+            ClassDetails = new ClassDetailsViewModel(selectedItem.Lophtt);
         }
         [RelayCommand]
         private void ChangeVisi()

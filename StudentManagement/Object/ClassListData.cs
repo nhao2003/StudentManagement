@@ -20,11 +20,18 @@ namespace StudentManagement.Object
         private String giaoVien;
         [ObservableProperty]
         private int siSo;
-        public Lophocthucte lophocthucte;
+        private Lophocthucte lophocthucte;
+
+        public Lophocthucte Lophtt
+        {
+            get { return lophocthucte; }
+            set { lophocthucte = value; }
+        }
+
 
         public ClassListData(int STT, int Khoi, String TenLop, String GiaoVien, int SiSo, Lophocthucte lophocthucte)
         {
-            this.lophocthucte = lophocthucte;
+            this.Lophtt = lophocthucte;
             this.Stt = STT;
             this.Khoi = Khoi;
             this.TenLop = TenLop;

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="770" d:DesignWidth="1220">
     <Border  Background="#E7F2FF">
@@ -81,7 +81,7 @@
                             Margin="15,15,0,0"
                             FontWeight="Bold"
                             Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-                        <TextBlock Text="{Binding SelectedString}" 
+                        <TextBlock Text="{Binding SummaryString}" 
                                    Grid.Row="0"
                             HorizontalAlignment="Right"
                             Margin="0,15,15,0"
@@ -95,13 +95,19 @@
                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
                             CanUserAddRows="False"
                             CanUserDeleteRows="False"
+                            SelectedItem="{Binding SelectedClass, Mode=TwoWay}"
                             CanUserReorderColumns="False"   
                             HorizontalScrollBarVisibility="Disabled"
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
-                            IsReadOnly="{Binding IsReadOnly}"
-                            ItemsSource="{Binding Transcripts}" Grid.ColumnSpan="2"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding TermSubjectSummaryDatas}" Grid.ColumnSpan="2"
                             >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding ShowClassDetailsCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <DataGrid.Resources>
                                 <!--<Style
                         x:Key="test"
@@ -191,23 +197,23 @@
                                 </DataGridCheckBoxColumn>
                                 <materialDesign:DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding Id}"
+                        Binding="{Binding Stt}"
                         Header="STT" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Name}"
+                        Binding="{Binding TenLop}"
                         Header="Lớp" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FifteenMin,FallbackValue='0'}"
+                        Binding="{Binding SiSo,FallbackValue='0'}"
                         Header="Sỉ số" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FortyMin,FallbackValue='0'}"
+                        Binding="{Binding SoLuongDat,FallbackValue='0'}"
                         Header="Số lượng đạt" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FinalExam,FallbackValue='0'}"
+                        Binding="{Binding TiLe,FallbackValue='0'}"
                         Header="Tỉ lệ" />
                             </DataGrid.Columns>
                         </DataGrid>
@@ -225,7 +231,7 @@
                             Margin="15,15,0,0"
                             FontWeight="Bold"
                             Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-                        <TextBlock Text="Học kỳ: II - Môn: Toán" 
+                        <TextBlock Text="{Binding ClassString}" 
                                    Grid.Row="0"
                             HorizontalAlignment="Right"
                             Margin="0,15,15,0"
@@ -244,6 +250,7 @@
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
                             Grid.ColumnSpan="2"
+                            ItemsSource="{Binding ClassSubjectSummaries}"
                             >
                             <DataGrid.Resources>
                                 <!--<Style
@@ -334,27 +341,23 @@
                                 </DataGridCheckBoxColumn>
                                 <materialDesign:DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding Id}"
+                        Binding="{Binding Stt}"
                         Header="STT" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Name}"
+                        Binding="{Binding HoTen}"
                         Header="Họ tên" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FifteenMin,FallbackValue='0'}"
-                        Header="Lớp" />
-                                <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding FortyMin,FallbackValue='0'}"
+                        Binding="{Binding DiemTB,FallbackValue='0'}"
                         Header="Điểm TB" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FinalExam,FallbackValue='0'}"
+                        Binding="{Binding Dat}"
                         Header="Đạt" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FinalExam,FallbackValue='0'}"
+                        Binding="{Binding Hang,FallbackValue='0'}"
                         Header="Hạng" />
                             </DataGrid.Columns>
                             
