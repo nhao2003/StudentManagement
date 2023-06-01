@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +12,12 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private String subject;
         [ObservableProperty]
-        private ObservableCollection<String> teachers;
+        private String teacher;
 
-        public SubjectTeacher(String Subject, List<String> Teachers)
+        public SubjectTeacher(String Subject, String Teacher)
         {
             this.Subject = Subject;
-            this.Teachers = new ObservableCollection<String>(Teachers);
+            this.Teacher = Teacher;
         }
     }
 }
