@@ -74,7 +74,7 @@
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding ShowClassDetailsCommand}" 
-                                   CommandParameter="{Binding SelectedItem}" />
+                                   CommandParameter="{Binding SelectedItem}" /> 
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <DataGrid.Resources>

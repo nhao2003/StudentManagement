@@ -28,9 +28,13 @@
                                 ></TextBlock>
                         <ComboBox Grid.Row="1" Style="{StaticResource combobox_item}"
                             BorderBrush="LightGray" 
+                            BorderThickness="0"
                             Width="Auto"
                             Height="30"
                             Padding="5"
+                                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                  ItemsSource="{Binding NamHocs}"
+                                  DisplayMemberPath="Tennamhoc"
                             materialDesign:HintAssist.Hint="Chọn niên khóa" Margin="0,0,0,0"/>
                     </Grid>
                 </Grid>

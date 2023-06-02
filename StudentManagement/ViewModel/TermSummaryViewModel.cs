@@ -17,6 +17,8 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private ObservableCollection<Namhoc> yearList;
         [ObservableProperty]
+        private OverviewListViewModel overview;
+        [ObservableProperty]
         private ObservableCollection<Hocky> termList;
         [ObservableProperty]
         private ObservableCollection<Monhoc> subjectList;
@@ -42,6 +44,7 @@ namespace StudentManagement.ViewModel
             TermList = new ObservableCollection<Hocky>(data.Hockies);
             YearList = new ObservableCollection<Namhoc>(data.Namhocs);
             SubjectList = new ObservableCollection<Monhoc>(data.Monhocs);
+            Overview = new OverviewListViewModel();
         }
         [RelayCommand]
         private void ShowClassDetails()

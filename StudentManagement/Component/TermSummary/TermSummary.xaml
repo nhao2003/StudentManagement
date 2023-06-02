@@ -15,7 +15,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Global:OverviewList Grid.Row="0"/>
+            <Global:OverviewList Grid.Row="0" DataContext="{Binding Overview}"/>
             <TextBlock 
                 Grid.Row="1"
                 FontWeight="Bold"
