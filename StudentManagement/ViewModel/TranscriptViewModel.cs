@@ -21,8 +21,6 @@ namespace StudentManagement.ViewModel
         }
 
         [ObservableProperty]
-        private bool isReadOnly = true;
-        [ObservableProperty]
         private ObservableCollection<string> subjectList = new ObservableCollection<string>()
         {
             
@@ -36,28 +34,6 @@ namespace StudentManagement.ViewModel
         ObservableCollection<TranscriptConfig> transcripts = new ObservableCollection<TranscriptConfig>()
         {
         };
-
-        [ObservableProperty]
-        private Visibility editBtnVisibility = Visibility.Visible;
-        [ObservableProperty]
-        private Visibility cancelBtnVisibility = Visibility.Hidden;
-
-        [RelayCommand]
-        private void CancelEditting()
-        {
-            IsReadOnly = true;
-            EditBtnVisibility = Visibility.Visible;
-
-            CancelBtnVisibility = Visibility.Hidden;
-        }
-
-        [RelayCommand]
-        private void EnableEditting()
-        {
-            IsReadOnly = false;
-            EditBtnVisibility = Visibility.Hidden;
-            CancelBtnVisibility = Visibility.Visible;
-        }
 
         [RelayCommand]
         private void BackToPrevScreen()

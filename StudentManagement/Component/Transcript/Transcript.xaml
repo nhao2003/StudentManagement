@@ -58,7 +58,6 @@
                 HorizontalScrollBarVisibility="Disabled"
                         Margin="10"
                 HeadersVisibility="Column"
-                IsReadOnly="{Binding IsReadOnly}"
                 ItemsSource="{Binding Transcripts}"
                 >
                 <DataGrid.Resources>
@@ -180,30 +179,18 @@
                 Grid.Row="2" 
                 Orientation="Horizontal" 
                 Margin="53,39" 
-                Visibility="{Binding BtnVisibility}"
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom">
                 <Button
                     Content="Trở lại" 
                     Command="{Binding BackToPrevScreenCommand}"
-                    Visibility="{Binding CancelBtnVisibility}"
                     Background="{StaticResource GreenPrimary}"
                     Style="{StaticResource primary_button}"/>
                 <Button
                     Command="{Binding CancelEdittingCommand}"
-                    Visibility="{Binding CancelBtnVisibility}"
                     Content="Lưu thay đổi" 
                     Style="{StaticResource primary_button}"/>
             </StackPanel>
-            <Button
-                Grid.Row="2"
-                Margin="53,43" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom"
-                Content="Cập nhật điểm" 
-                Visibility="{Binding EditBtnVisibility}"
-                Style="{StaticResource primary_button}"
-                Command="{Binding EnableEdittingCommand}"/>
         </Grid>
     </Border>
 </UserControl>

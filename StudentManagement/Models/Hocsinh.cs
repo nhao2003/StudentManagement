@@ -38,10 +38,10 @@ namespace StudentManagement.Models
 
         public TranscriptConfig toTranscript()
         {
-            double diemMieng = 0.0;
-            double diem15 = 0.0;
-            double diem45 = 0.0;
-            double diemCK = 0.0;
+            double diemMieng = -1;
+            double diem15 = -1;
+            double diem45 = -1;
+            double diemCK = -1;
 
             foreach (Diemmonhoc diem in Diemmonhocs)
             {
