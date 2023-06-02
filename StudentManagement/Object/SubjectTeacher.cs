@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,9 +16,11 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private String teacher;
         [ObservableProperty]
-        private ObservableCollection<String> teachers = new ObservableCollection<String>()
+        private ObservableCollection<Giaovien> teachers = new ObservableCollection<Giaovien>()
         {
         };
+        [ObservableProperty]
+        private Giaovien sgiaovien;
         public SubjectTeacher(String Subject, String Teacher)
         {
             this.Subject = Subject;
@@ -29,9 +32,14 @@ namespace StudentManagement.Object
             this.Subject = Subject;
         }
 
-        public void AddTeacher(String teacher)
+        public void AddTeacher(Giaovien teacher)
         {
             teachers.Add(teacher);
+        }
+
+        public void SetGiaoVienPhanCong(Giaovien gv)
+        {
+            Sgiaovien = gv;
         }
     }
 }

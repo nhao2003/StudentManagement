@@ -46,8 +46,8 @@
                                       Padding="5"
                                       Background="White" 
                                       ItemsSource="{Binding Khois}"
+                                      SelectedItem="{Binding Skhoi}"  
                                       materialDesign:HintAssist.Hint="Chọn khối"
-                                      Text="{Binding Lophocthucte.MalopNavigation.Khoi}"
                                       />
                         </Grid>
                     </Border>
@@ -64,7 +64,7 @@
                                      Margin="90,0,50,0"
                                      Padding="5"
                                      BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Tên lớp" 
-                                     Text="{Binding Lophocthucte.MalopNavigation.Tenlop}"
+                                     Text="{Binding TenLop}"
                                      ></TextBox>
                         </Grid>
                     </Border>
@@ -84,7 +84,8 @@
                                       Padding="5"
                                       Background="White" 
                                       ItemsSource="{Binding Giaoviens}"
-                                      Text="{Binding Lophocthucte.MagvcnNavigation.UsernameNavigation.Hoten}"
+                                      SelectedItem="{Binding Sgiaovien}"  
+                                      DisplayMemberPath="UsernameNavigation.Hoten"
                                       materialDesign:HintAssist.Hint="Chọn giáo viên"/>
                         </Grid>
                     </Border>
@@ -111,7 +112,8 @@
                                       Padding="5"
                                       Background="White" 
                                       ItemsSource="{Binding NienKhoas}"
-                                      Text="{Binding Lophocthucte.ManhNavigation.Tennamhoc}"
+                                      SelectedItem="{Binding Snamhoc}"  
+                                      DisplayMemberPath="Tennamhoc" 
                                       materialDesign:HintAssist.Hint="Chọn niên khóa"/>
                         </Grid>
                     </Border>
@@ -187,6 +189,8 @@
                                                 Padding="5"
                                                 Style="{StaticResource combobox_item}"
                                                 ItemsSource="{Binding Teachers}"
+                                                SelectedItem="{Binding Sgiaovien}"  
+                                                DisplayMemberPath="UsernameNavigation.Hoten"
                                                 />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -201,30 +205,18 @@
                 Grid.Row="3" 
                 Orientation="Horizontal" 
                 Margin="53,39" 
-                Visibility="{Binding BtnVisibility}"
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom">
                 <Button
                     Content="Trở lại" 
-                    Command="{Binding NavigateClassListCommand}"
-                    
-                    Visibility="{Binding CancelBtnVisibility}"
+                    Command="{Binding BackToPrevScreenCommand}"
                     Background="{StaticResource GreenPrimary}"
                     Style="{StaticResource primary_button}"/>
                 <Button
-                    Visibility="{Binding CancelBtnVisibility}"
                     Content="Lưu thay đổi" 
+                    Command="{Binding SaveChangeCommand}"
                     Style="{StaticResource primary_button}"/>
             </StackPanel>
-            <Button
-                Grid.Row="3"
-                Margin="53,43" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom"
-                Content="Sửa cấu hình" 
-                Visibility="{Binding EditBtnVisibility}"
-                Style="{StaticResource primary_button}"
-                Command="{Binding EnableEdittingCommand}"/>
         </Grid>
     </Border>
 </UserControl>

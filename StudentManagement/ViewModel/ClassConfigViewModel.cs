@@ -18,7 +18,6 @@ namespace StudentManagement.ViewModel
         {
             InitNienKhoas();
             InitGiaoVien();
-            InitDanhSachMonHoc();
         }
         [ObservableProperty]
         private Lophocthucte lophocthucte;
@@ -26,7 +25,12 @@ namespace StudentManagement.ViewModel
         public void SetCurrentClass(Lophocthucte mclass)
         {
             Lophocthucte = mclass;
-            SoHocSinh = lophocthucte.Mahs.ToList().Count().ToString();
+            SoHocSinh = Lophocthucte.Mahs.ToList().Count().ToString();
+            Skhoi = (int)Lophocthucte.MalopNavigation.Khoi;
+            Snamhoc = (Namhoc)Lophocthucte.ManhNavigation;
+            TenLop = Lophocthucte.MalopNavigation.Tenlop;
+            Sgiaovien = Lophocthucte.MagvcnNavigation;
+            InitDanhSachMonHoc();
         }
 
         [ObservableProperty]
@@ -35,22 +39,27 @@ namespace StudentManagement.ViewModel
 
         private void InitDanhSachMonHoc()
         {
-            ObservableCollection<string> gvs = new ObservableCollection<string>(){ };
-            List<Khananggiangday> kngds = new List<Khananggiangday>();
-            foreach (var kngd in DataProvider.ins.context.Khananggiangdays)
-            {
-                kngds.Add(kngd);
-            }
-            foreach (var mh in DataProvider.ins.context.Monhocs)
+            List<Khananggiangday> kngds = DataProvider.ins.context.Khananggiangdays.ToList();
+            List<Monhoc> monhs = DataProvider.ins.context.Monhocs.ToList();
+            List<Phanconggiangday> pcgds = DataProvider.ins.context.Phanconggiangdays.ToList();
+            subjectTeacherList.Clear();
+            foreach (var mh in monhs)
             {
                 SubjectTeacher subjectTeacher = new SubjectTeacher(mh.Tenmh);
                 foreach(var kn in kngds)
                 {
                     if (kn.Mamh == mh.Mamh)
                     {
-                        //gvs.Add(kn.MagvNavigation.UsernameNavigation.Hoten);
-                        subjectTeacher.AddTeacher(kn.MagvNavigation.UsernameNavigation.Hoten);
-                        //MessageBox.Show(kn.MagvNavigation.UsernameNavigation.Hoten);
+                        subjectTeacher.AddTeacher(kn.MagvNavigation);
+                    }
+                }
+
+                foreach(var pc in pcgds)
+                {
+                    if(pc.ManhNavigation == Snamhoc && pc.Mamh == mh.Mamh && pc.MalhttNavigation == lophocthucte)
+                    {
+                        subjectTeacher.SetGiaoVienPhanCong(pc.MagvNavigation);
+                        break;
                     }
                 }
                 subjectTeacherList.Add(subjectTeacher);
@@ -62,19 +71,22 @@ namespace StudentManagement.ViewModel
         {
             10,11,12
         };
+        [ObservableProperty]
+        private int skhoi;
         // nien khoa
         [ObservableProperty]
-        private ObservableCollection<string> nienKhoas = new ObservableCollection<string>()
+        private ObservableCollection<Namhoc> nienKhoas = new ObservableCollection<Namhoc>()
         {
         };
-
+        [ObservableProperty]
+        private Namhoc snamhoc;
         private void InitNienKhoas()
         {
             List<Namhoc> namhocs = DataProvider.ins.context.Namhocs.ToList();
             nienKhoas.Clear();
             foreach(var namhoc in namhocs)
             {
-                nienKhoas.Add(namhoc.Tennamhoc);
+                nienKhoas.Add(namhoc);
             }
         }
         // ten lop
@@ -85,20 +97,37 @@ namespace StudentManagement.ViewModel
         private string soHocSinh;
         // giao vien chu nhiem
         [ObservableProperty]
-        private ObservableCollection<string> giaoviens = new ObservableCollection<string>()
+        private ObservableCollection<Giaovien> giaoviens = new ObservableCollection<Giaovien>()
         {
         };
-        private List<String> danhSachGiaoViens = new List<String>();
+        [ObservableProperty]
+        private Giaovien sgiaovien;
         private void InitGiaoVien()
         {
             List<Giaovien> gvs = DataProvider.ins.context.Giaoviens.ToList();
             giaoviens.Clear();
-            danhSachGiaoViens.Clear();
             foreach (Giaovien g in gvs)
             {
-                giaoviens.Add(g.UsernameNavigation.Hoten);
-                danhSachGiaoViens.Add(g.UsernameNavigation.Hoten);
+                giaoviens.Add(g);
             }
+        }
+
+        // luu
+        [RelayCommand]
+        private void SaveChange()
+        {
+            Lophocthucte.MalopNavigation.Khoi = Skhoi;
+            Lophocthucte.ManhNavigation = Snamhoc;
+            Lophocthucte.MalopNavigation.Tenlop = TenLop;
+            Lophocthucte.MagvcnNavigation = Sgiaovien;
+            DataProvider.ins.context.Lophocthuctes.Update(Lophocthucte);
+            DataProvider.ins.context.SaveChanges();
+        }
+
+        [RelayCommand]
+        private void BackToPrevScreen()
+        {
+            ClassManagementViewModel.Instance.NavigateClassList();
         }
     }
 }
