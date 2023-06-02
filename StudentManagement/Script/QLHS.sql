@@ -38,7 +38,7 @@ CREATE TABLE HOCSINH (
     MAHS nvarchar(7) NOT NULL PRIMARY key,
     CCCD nvarchar(12),
     HOTENHS nvarchar(100),
-    NGSINH SMALLDATETIME,
+    NGSINH DATE,
     EMAIL nvarchar(250),
     SDT nvarchar(11),
     DCHI nvarchar(250),

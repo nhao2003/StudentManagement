@@ -163,7 +163,7 @@ namespace StudentManagement.ViewModel
         public RegulationViewModel()
         {
             ContentControl.Content = new EmptyView();
-            //thamsos = DataProvider.ins.context.Thamsos.ToArray();
+            thamsos = DataProvider.ins.context.Thamsos.ToArray();
             MonHocItems = new();
             lopHocItemDataGrids = new();
             customTextBoxVis = Visibility.Visible;
@@ -175,7 +175,6 @@ namespace StudentManagement.ViewModel
             {
                 LopHocItemDataGrids.Add(new LopHocItemDataGrid(lop));
             }
-            IsCheckAllLopHoc = true;
 
         }
         [RelayCommand]
