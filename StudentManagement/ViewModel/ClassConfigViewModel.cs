@@ -19,7 +19,6 @@ namespace StudentManagement.ViewModel
             InitNienKhoas();
             InitGiaoVien();
             InitDanhSachMonHoc();
-            SoHocSinh = DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri;
         }
         [ObservableProperty]
         private Lophocthucte lophocthucte;
@@ -27,6 +26,7 @@ namespace StudentManagement.ViewModel
         public void SetCurrentClass(Lophocthucte mclass)
         {
             Lophocthucte = mclass;
+            SoHocSinh = lophocthucte.Mahs.ToList().Count().ToString();
         }
 
         [ObservableProperty]
@@ -35,9 +35,25 @@ namespace StudentManagement.ViewModel
 
         private void InitDanhSachMonHoc()
         {
-            foreach(var mh in DataProvider.ins.context.Monhocs)
+            ObservableCollection<string> gvs = new ObservableCollection<string>(){ };
+            List<Khananggiangday> kngds = new List<Khananggiangday>();
+            foreach (var kngd in DataProvider.ins.context.Khananggiangdays)
             {
-                subjectTeacherList.Add(new SubjectTeacher(mh.Tenmh, danhSachGiaoViens));
+                kngds.Add(kngd);
+            }
+            foreach (var mh in DataProvider.ins.context.Monhocs)
+            {
+                SubjectTeacher subjectTeacher = new SubjectTeacher(mh.Tenmh);
+                foreach(var kn in kngds)
+                {
+                    if (kn.Mamh == mh.Mamh)
+                    {
+                        //gvs.Add(kn.MagvNavigation.UsernameNavigation.Hoten);
+                        subjectTeacher.AddTeacher(kn.MagvNavigation.UsernameNavigation.Hoten);
+                        //MessageBox.Show(kn.MagvNavigation.UsernameNavigation.Hoten);
+                    }
+                }
+                subjectTeacherList.Add(subjectTeacher);
             }
         }
         // khoi

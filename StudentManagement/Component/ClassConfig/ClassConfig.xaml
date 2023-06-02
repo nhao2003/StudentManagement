@@ -128,6 +128,7 @@
                                      Margin="90,0,50,0"
                                      Padding="5"
                                      Text="{Binding SoHocSinh}"
+                                     IsReadOnly="True"
                                      BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Số học sinh" ></TextBox>
 
                         </Grid>

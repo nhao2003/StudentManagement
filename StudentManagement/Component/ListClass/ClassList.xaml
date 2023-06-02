@@ -39,7 +39,8 @@
                 Background="White"
                 materialDesign:HintAssist.Hint="2022-2023"
                 ItemsSource="{Binding NienKhoas}"
-                Text="{Binding Lops[0].ManhNavigation.Tennamhoc}"
+                SelectedItem="{Binding Path=SNamhoc}"  
+                DisplayMemberPath="Tennamhoc"
             >
             </ComboBox>
 

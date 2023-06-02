@@ -24,30 +24,32 @@ namespace StudentManagement.ViewModel
         public ClassListViewModel()
         {
             Instance = this;
-            lops = DataProvider.ins.context.Lophocthuctes.ToList();
-            hocsinhs = DataProvider.ins.context.Hocsinhs.ToList();
-
-            foreach (var lop in lops)
-            {
-                classes.Add(new Class(lop));
-            }
-            foreach (var hs in hocsinhs)
-            {
-                newStudents.Add(new Student(hs));
-            }
-
             InitNienKhoas();
+            InitClasses();
+            InitStudents();
         }
 
+        // lop
         [ObservableProperty]
         List<Lophocthucte> lops = new List<Lophocthucte>();
 
-        List<Hocsinh> hocsinhs = new List<Hocsinh>();
         [ObservableProperty]
         private ObservableCollection<Class> classes = new ObservableCollection<Class>()
         {
         };
 
+        public void InitClasses()
+        {
+            lops = DataProvider.ins.context.Lophocthuctes.ToList();
+            classes.Clear();
+            foreach (var lop in lops)
+            {
+                if(lop.ManhNavigation == sNamhoc)
+                    classes.Add(new Class(lop));
+            }
+        }
+        // hoc sinh
+        List<Hocsinh> hocsinhs = new List<Hocsinh>();
         [ObservableProperty]
         private ObservableCollection<Student> students = new ObservableCollection<Student>()
         {
@@ -58,6 +60,14 @@ namespace StudentManagement.ViewModel
         {
         };
 
+        public void InitStudents()
+        {
+            hocsinhs = DataProvider.ins.context.Hocsinhs.ToList();
+            foreach (var hs in hocsinhs)
+            {
+                newStudents.Add(new Student(hs));
+            }
+        }
         [ObservableProperty]
         private Class choosenClass;
 
@@ -88,18 +98,30 @@ namespace StudentManagement.ViewModel
 
         // nien khoa
         [ObservableProperty]
-        private ObservableCollection<string> nienKhoas = new ObservableCollection<string>()
+        private ObservableCollection<Namhoc> nienKhoas = new ObservableCollection<Namhoc>()
         {
         };
 
+        private Namhoc sNamhoc;
+
+        public Namhoc SNamhoc
+        {
+            get { return sNamhoc; }
+            set 
+            { 
+                sNamhoc = value;
+                InitClasses();
+                OnPropertyChanged();
+            }
+        }
+
         private void InitNienKhoas()
         {
-            List<Namhoc> namhocs = DataProvider.ins.context.Namhocs.ToList();
-            nienKhoas.Clear();
-            foreach (var namhoc in namhocs)
+            foreach(var nh in DataProvider.ins.context.Namhocs.ToList())
             {
-                nienKhoas.Add(namhoc.Tennamhoc);
+                nienKhoas.Add(nh);
             }
+            SNamhoc = nienKhoas[0];
         }
     }
 }
