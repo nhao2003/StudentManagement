@@ -1,10 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentManagement.Object
 {
@@ -20,6 +23,13 @@ namespace StudentManagement.Object
         private int soLuongDat;
         [ObservableProperty]
         private String tiLe;
+        [ObservableProperty]
+        private bool selected;
+
+        partial void OnSelectedChanged(bool oldValue, bool newValue)
+        {
+            WeakReferenceMessenger.Default.Send(new PropertyChangedMessage<bool>(this,"Selected",oldValue,newValue));
+        }
 
         private Lophocthucte lophocthucte;
 

@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
@@ -12,7 +14,7 @@ using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
-    public partial class TermSummaryViewModel : ObservableObject
+    public partial class TermSummaryViewModel : ObservableRecipient, IRecipient<PropertyChangedMessage<bool>>
     {
         [ObservableProperty]
         private ObservableCollection<Namhoc> yearList;
@@ -39,8 +41,21 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private ObservableCollection<ClassSubjectSummaryData> classSubjectSummaries = new ObservableCollection<ClassSubjectSummaryData>();
         QUANLYHOCSINHContext data = DataProvider.ins.context;
+        [ObservableProperty]
+        private bool isAllItemsSelected;
+
+        [RelayCommand]
+        private void AllItemsSelected()
+        {
+            foreach(var item in TermSubjectSummaryDatas)
+            {
+                item.Selected = IsAllItemsSelected;
+            }
+        }
+
         public TermSummaryViewModel()
         {
+            WeakReferenceMessenger.Default.Register<PropertyChangedMessage<bool>>(this);
             TermList = new ObservableCollection<Hocky>(data.Hockies);
             YearList = new ObservableCollection<Namhoc>(data.Namhocs);
             SubjectList = new ObservableCollection<Monhoc>(data.Monhocs);
@@ -91,6 +106,22 @@ namespace StudentManagement.ViewModel
                 {   
                     TermSubjectSummaryDatas.Add(new TermSubjectSummaryData(i, lophoc,SelectedYear.Manh,selectedTerm.Mahk,selectedSubject.Mamh));
                     i++;
+                }
+            }
+        }
+
+        public void Receive(PropertyChangedMessage<bool> message)
+        {
+            if(message.NewValue == false)
+            {
+                IsAllItemsSelected = false;
+            }
+            else
+            {
+                var items = TermSubjectSummaryDatas.Where(x => x.Selected == true);
+                if(items.Count() == TermSubjectSummaryDatas.Count())
+                {
+                    IsAllItemsSelected=true;
                 }
             }
         }

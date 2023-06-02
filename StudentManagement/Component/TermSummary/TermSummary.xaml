@@ -100,7 +100,6 @@
                             HorizontalScrollBarVisibility="Disabled"
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
-                            IsReadOnly="True"
                             ItemsSource="{Binding TermSubjectSummaryDatas}" Grid.ColumnSpan="2"
                             >
                             <i:Interaction.Triggers>
@@ -186,7 +185,8 @@
                     </i:Interaction.Triggers>-->
                                     <DataGridCheckBoxColumn.Header>
                                         <Border Background="Transparent">
-                                            <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=IsAllItemsSelected}" />
+                                            <CheckBox Command="{Binding DataContext.AllItemsSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                IsChecked="{Binding DataContext.IsAllItemsSelected, RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
                                         </Border>
                                     </DataGridCheckBoxColumn.Header>
                                     <DataGridCheckBoxColumn.HeaderStyle>
