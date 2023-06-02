@@ -45,7 +45,10 @@
                                       Height="30"
                                       Padding="5"
                                       Background="White" 
-                                      materialDesign:HintAssist.Hint="Chọn khối"/>
+                                      ItemsSource="{Binding Khois}"
+                                      materialDesign:HintAssist.Hint="Chọn khối"
+                                      Text="{Binding Lophocthucte.MalopNavigation.Khoi}"
+                                      />
                         </Grid>
                     </Border>
                     <Border Grid.Row="1" Style="{StaticResource BorderBox}" Width="Auto" Margin="10">
@@ -60,7 +63,9 @@
                                      Height="30"
                                      Margin="90,0,50,0"
                                      Padding="5"
-                                     BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Tên lớp" ></TextBox>
+                                     BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Tên lớp" 
+                                     Text="{Binding Lophocthucte.MalopNavigation.Tenlop}"
+                                     ></TextBox>
                         </Grid>
                     </Border>
                     <Border Grid.Row="2" Style="{StaticResource BorderBox}" Width="Auto" Margin="10">
@@ -78,6 +83,8 @@
                                       Height="30"
                                       Padding="5"
                                       Background="White" 
+                                      ItemsSource="{Binding Giaoviens}"
+                                      Text="{Binding Lophocthucte.MagvcnNavigation.UsernameNavigation.Hoten}"
                                       materialDesign:HintAssist.Hint="Chọn giáo viên"/>
                         </Grid>
                     </Border>
@@ -103,6 +110,8 @@
                                       Height="30"
                                       Padding="5"
                                       Background="White" 
+                                      ItemsSource="{Binding NienKhoas}"
+                                      Text="{Binding Lophocthucte.ManhNavigation.Tennamhoc}"
                                       materialDesign:HintAssist.Hint="Chọn niên khóa"/>
                         </Grid>
                     </Border>
@@ -118,6 +127,7 @@
                                      Height="30"
                                      Margin="90,0,50,0"
                                      Padding="5"
+                                     Text="{Binding SoHocSinh}"
                                      BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Số học sinh" ></TextBox>
 
                         </Grid>

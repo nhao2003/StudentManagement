@@ -20,7 +20,7 @@ namespace StudentManagement.ViewModel
         }
 
         private TranscriptViewModel _transcriptViewModel;
-        private object _classconfigViewModel;
+        private ClassConfigViewModel _classconfigViewModel;
 
         [ObservableProperty]
         private object contentViewModel;
@@ -60,6 +60,7 @@ namespace StudentManagement.ViewModel
         {
             lophocthucte = mclass;
             _transcriptViewModel.SetCurrentClass(lophocthucte);
+            _classconfigViewModel.SetCurrentClass(lophocthucte);
         }
 
 

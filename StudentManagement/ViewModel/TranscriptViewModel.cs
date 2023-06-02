@@ -70,7 +70,6 @@ namespace StudentManagement.ViewModel
 
         public void SetCurrentClass(Lophocthucte mclass)
         {
-            lophocthucte = null;
             lophocthucte = mclass;
             InitStudents();
         }

@@ -35,8 +35,11 @@ namespace StudentManagement.ViewModel
             {
                 newStudents.Add(new Student(hs));
             }
+
+            InitNienKhoas();
         }
 
+        [ObservableProperty]
         List<Lophocthucte> lops = new List<Lophocthucte>();
 
         List<Hocsinh> hocsinhs = new List<Hocsinh>();
@@ -83,5 +86,20 @@ namespace StudentManagement.ViewModel
             NewStudentsVisibility = Visibility.Visible;
         }
 
+        // nien khoa
+        [ObservableProperty]
+        private ObservableCollection<string> nienKhoas = new ObservableCollection<string>()
+        {
+        };
+
+        private void InitNienKhoas()
+        {
+            List<Namhoc> namhocs = DataProvider.ins.context.Namhocs.ToList();
+            nienKhoas.Clear();
+            foreach (var namhoc in namhocs)
+            {
+                nienKhoas.Add(namhoc.Tennamhoc);
+            }
+        }
     }
 }

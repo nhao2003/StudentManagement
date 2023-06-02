@@ -13,11 +13,19 @@ namespace StudentManagement.Object
         private String subject;
         [ObservableProperty]
         private String teacher;
+        [ObservableProperty]
+        private List<String> teachers;
 
         public SubjectTeacher(String Subject, String Teacher)
         {
             this.Subject = Subject;
             this.Teacher = Teacher;
+        }
+
+        public SubjectTeacher(String Subject, List<String> teachers)
+        {
+            this.Subject = Subject;
+            this.Teachers = teachers;
         }
     }
 }

@@ -38,13 +38,19 @@
                 BorderBrush="LightGray"
                 Background="White"
                 materialDesign:HintAssist.Hint="2022-2023"
+                ItemsSource="{Binding NienKhoas}"
+                Text="{Binding Lops[0].ManhNavigation.Tennamhoc}"
             >
             </ComboBox>
-            
+
             <Grid Grid.Column="0" Grid.Row="1">
                 <Border  CornerRadius="20" Background="white" Margin="20">
                     <Grid>
-                        <ItemsControl ItemsSource="{Binding Classes}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="779*"/>
+                            <ColumnDefinition Width="66*"/>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl ItemsSource="{Binding Classes}" Grid.ColumnSpan="2">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
@@ -64,7 +70,7 @@
                         Background="#7CA7FF"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        Margin="20 20"
+                        Margin="0,0,20,20" Grid.ColumnSpan="2"
                         >
                             <TextBlock 
                                 FontWeight="SemiBold"
