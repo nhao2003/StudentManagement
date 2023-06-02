@@ -163,7 +163,7 @@ namespace StudentManagement.ViewModel
         public RegulationViewModel()
         {
             ContentControl.Content = new EmptyView();
-            thamsos = DataProvider.ins.context.Thamsos.ToArray();
+            //thamsos = DataProvider.ins.context.Thamsos.ToArray();
             MonHocItems = new();
             lopHocItemDataGrids = new();
             customTextBoxVis = Visibility.Visible;

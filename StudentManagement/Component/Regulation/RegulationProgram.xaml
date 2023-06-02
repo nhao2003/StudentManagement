@@ -8,8 +8,10 @@
     xmlns:local="clr-namespace:StudentManagement.Component.Program"
     xmlns:uc="clr-namespace:StudentManagement.Component.CustomTextBox"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:proxy="clr-namespace:StudentManagement.Object"
     mc:Ignorable="d"
     d:DesignHeight="690"
+     x:Name="MyControl"
     d:DesignWidth="1220">
     <Grid
         Background="{StaticResource BlueLight}">
@@ -140,7 +142,7 @@
                                         <RowDefinition
                                             Height="auto" />
                                     </Grid.RowDefinitions>
-                                    <DataGrid
+                                    <DataGrid 
                                         Grid.Row="0"
                                         Margin="10"
                                         AutoGenerateColumns="False"
@@ -275,7 +277,7 @@
                             <Border
                                 Grid.Row="2"
                                 Height="auto">
-                                <Grid>
+                                <Grid >
                                     <Grid.RowDefinitions>
                                         <RowDefinition
                                             Height="*" />
@@ -307,7 +309,9 @@
 
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-
+                                        <DataGrid.Resources>
+                                            <proxy:BindingProxy x:Key="proxy" Data="{Binding}" />
+                                        </DataGrid.Resources>
                                         <DataGrid.RowStyle>
                                             <Style
                                                 BasedOn="{StaticResource MaterialDesignDataGridRow}"
@@ -329,7 +333,6 @@
                                                     Value="True" />
 
                                             </Style>
-
                                         </DataGrid.RowStyle>
                                         <DataGrid.CellStyle>
                                             <Style
@@ -363,9 +366,8 @@
                                                     <Border
                                                         Background="Transparent">
                                                         <CheckBox
-                                                            IsChecked="{Binding DataContext.IsCheckAllLopHoc, 
-                                                            RelativeSource={RelativeSource AncestorType=TabControl, AncestorLevel=2}, 
-                                                            UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                                            IsChecked="{Binding Path=Data.IsCheckAllLopHoc, 
+                                                            Source={StaticResource proxy}}">
 
                                                         </CheckBox>
                                                     </Border>
