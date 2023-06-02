@@ -19,7 +19,7 @@
             <RowDefinition
                 Height="*" />
         </Grid.RowDefinitions>
-
+        <!--Title chỉnh sửa quy định-->
         <TextBlock
             Text="Chỉnh sửa quy định"
             Grid.Row="0"
@@ -31,12 +31,15 @@
         <Grid
             Grid.Row="1">
             <Grid.ColumnDefinitions>
+                <!--Bảng data-->
                 <ColumnDefinition
-                    Width="1.5*" />
+                    Width="0.7*" />
+                <!--Cột chỉnh sửa-->
                 <ColumnDefinition
-                    Width="0.5*" />
+                    Width="0.3*" />
             </Grid.ColumnDefinitions>
 
+            <!--Bảng data-->
             <Border
                 Grid.Column="0"
                 Margin="15 20 20 30"
@@ -45,15 +48,15 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition
-                            Height="Auto" />
-                        <RowDefinition
-                            Height="Auto" />
+                            Height="auto" />
                         <RowDefinition
                             Height="*" />
 
                     </Grid.RowDefinitions>
+                    <!--Bảng chỉnh sửa tham số-->
                     <Grid
-                        Grid.Row="0">
+                        Grid.Row="0"
+                        Height="auto">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -116,159 +119,306 @@
                             HorizontalAlignment="Right" />
 
                     </Grid>
-                    <TextBlock
-                        Grid.Row="1"
-                        Text="{Binding temp, Mode=TwoWay}"
-                        FontWeight="Bold"
-                        FontSize="14"
-                        Margin="10" />
-                    <Border
-                        Grid.Row="2">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition
-                                    Height="*" />
-                                <RowDefinition
-                                    Height="auto" />
-                            </Grid.RowDefinitions>
-                            <DataGrid
-                                Grid.Row="0"
-                                Margin="10"
-                                AutoGenerateColumns="False"
-                                EnableColumnVirtualization="True"
-                                EnableRowVirtualization="True"
-                                GridLinesVisibility="Horizontal"
-                                VerticalAlignment="Stretch"
-                                Background="{StaticResource GreyLight}"
-                                CanUserAddRows="False"
-                                CanUserDeleteRows="False"
-                                SelectionUnit="FullRow"
-                                HorizontalScrollBarVisibility="Disabled"
-                                SelectedItem="{Binding SelectedMonHoc, Mode=TwoWay}"
-                                ItemsSource="{Binding MonHocItems}"
-                                SelectionMode="Single">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger
-                                        EventName="SelectionChanged">
-                                        <i:InvokeCommandAction
-                                            Command="{Binding showModifySubjectViewCommand}"
-                                            CommandParameter="{Binding SelectedMonHoc}" />
 
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
 
-                                <DataGrid.RowStyle>
-                                    <Style
-                                        BasedOn="{StaticResource MaterialDesignDataGridRow}"
-                                        TargetType="{x:Type DataGridRow}">
-                                        <Setter
-                                            Property="Margin"
-                                            Value="0 10 0 0"></Setter>
-                                        <Setter
-                                            Property="Background"
-                                            Value="{StaticResource GreyLight}"></Setter>
-                                        <Setter
-                                            Property="BorderThickness"
-                                            Value="1"></Setter>
-                                        <Setter
-                                            Property="BorderBrush"
-                                            Value="{StaticResource GreyPrimary}" />
-                                        <Setter
-                                            Property="AllowDrop"
-                                            Value="True" />
+                    <TabControl
+                        x:Name="myTabControl"
+                        SelectedIndex="{Binding TabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Height="auto"
+                        Grid.Row="1">
+           
 
-                                    </Style>
+                        <TabItem
+                            Header="Môn học">
+                            <!-- Content for Tab 1 -->
+                            <Border>
+                                <Grid
+                                    Height="auto">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="*" />
+                                        <RowDefinition
+                                            Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <DataGrid
+                                        Grid.Row="0"
+                                        Margin="10"
+                                        AutoGenerateColumns="False"
+                                        EnableColumnVirtualization="True"
+                                        EnableRowVirtualization="True"
+                                        GridLinesVisibility="Horizontal"
+                                        VerticalAlignment="Stretch"
+                                        Background="{StaticResource GreyLight}"
+                                        CanUserAddRows="False"
+                                        CanUserDeleteRows="False"
+                                        SelectionUnit="FullRow"
+                                        HorizontalScrollBarVisibility="Disabled"
+                                        SelectedItem="{Binding SelectedMonHoc, Mode=TwoWay}"
+                                        ItemsSource="{Binding MonHocItems}"
+                                        SelectionMode="Single">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger
+                                                EventName="SelectionChanged">
+                                                <i:InvokeCommandAction
+                                                    Command="{Binding HienThiChinhSuaThongTinMonHocCommand}"
+                                                    CommandParameter="{Binding SelectedMonHoc}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
 
-                                </DataGrid.RowStyle>
-                                <DataGrid.CellStyle>
-                                    <Style
-                                        BasedOn="{StaticResource MaterialDesignDataGridCell}"
-                                        TargetType="{x:Type DataGridCell}">
-                                        <Setter
-                                            Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate
-                                                    TargetType="{x:Type DataGridCell}">
-                                                    <Grid
-                                                        Margin="16"
-                                                        Background="{TemplateBinding Background}">
-
-                                                        <ContentPresenter
-                                                            VerticalAlignment="Center" />
-                                                    </Grid>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </DataGrid.CellStyle>
-                                <DataGrid.Columns>
-                                    <DataGridCheckBoxColumn
-                                        Binding="{Binding IsCheckedMonHoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                        EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                        ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
-                                        
-                                        <DataGridCheckBoxColumn.Header>
-                                            <Border
-                                                Background="Transparent">
-                                                <CheckBox
-                                                    IsChecked="{Binding IsCheckAllItem,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger
-                                                            EventName="Checked">
-                                                            <i:InvokeCommandAction
-                                                                Command="{Binding isCheckedAllChangedCommand}" />
-                                                        </i:EventTrigger>
-                                                        <i:EventTrigger
-                                                            EventName="Unchecked">
-                                                            <i:InvokeCommandAction
-                                                                Command="{Binding isCheckedAllChangedCommand}" />
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </CheckBox>
-                                            </Border>
-                                        </DataGridCheckBoxColumn.Header>
-                                        <DataGridCheckBoxColumn.HeaderStyle>
+                                        <DataGrid.RowStyle>
                                             <Style
-                                                BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}"
-                                                TargetType="{x:Type DataGridColumnHeader}">
+                                                BasedOn="{StaticResource MaterialDesignDataGridRow}"
+                                                TargetType="{x:Type DataGridRow}">
                                                 <Setter
-                                                    Property="HorizontalContentAlignment"
-                                                    Value="Center" />
-                                            </Style>
-                                        </DataGridCheckBoxColumn.HeaderStyle>
-                                    </DataGridCheckBoxColumn>
-                                    <materialDesign:DataGridTextColumn
-                                        IsReadOnly="true"
-                                        Width="Auto"
-                                        Header="Mã môn"
-                                        Binding="{Binding MaMonHoc}" />
-                                    <materialDesign:DataGridTextColumn
-                                        IsReadOnly="true"
-                                        Width="*"
-                                        Header="Tên môn học"
-                                        Binding="{Binding TenMonHoc}" />
-                                </DataGrid.Columns>
+                                                    Property="Margin"
+                                                    Value="0 10 0 0"></Setter>
+                                                <Setter
+                                                    Property="Background"
+                                                    Value="{StaticResource GreyLight}"></Setter>
+                                                <Setter
+                                                    Property="BorderThickness"
+                                                    Value="1"></Setter>
+                                                <Setter
+                                                    Property="BorderBrush"
+                                                    Value="{StaticResource GreyPrimary}" />
+                                                <Setter
+                                                    Property="AllowDrop"
+                                                    Value="True" />
 
-                            </DataGrid>
-                            <StackPanel
-                                Grid.Row="1"
-                                Margin="10"
-                                Orientation="Horizontal"
-                                HorizontalAlignment="Right">
-                                <Button
-                                    Command="{Binding showAddSubjectViewCommand}"
-                                    Background="{StaticResource BluePrimary}"
-                                    BorderBrush="{StaticResource BluePrimary}"
-                                    Content="Thêm" />
-                                <Button
-                                    Command="{Binding XoaMonHocCommand}"
-                                    Background="{StaticResource RedPrimary}"
-                                    BorderBrush="{StaticResource RedPrimary}"
-                                    Content="Xoá"
-                                    Margin="15,0,0,0" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
+                                            </Style>
+
+                                        </DataGrid.RowStyle>
+                                        <DataGrid.CellStyle>
+                                            <Style
+                                                BasedOn="{StaticResource MaterialDesignDataGridCell}"
+                                                TargetType="{x:Type DataGridCell}">
+                                                <Setter
+                                                    Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate
+                                                            TargetType="{x:Type DataGridCell}">
+                                                            <Grid
+                                                                Margin="16"
+                                                                Background="{TemplateBinding Background}">
+
+                                                                <ContentPresenter
+                                                                    VerticalAlignment="Center" />
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </DataGrid.CellStyle>
+                                        <DataGrid.Columns>
+                                            <DataGridCheckBoxColumn
+                                                Binding="{Binding IsCheckedMonHoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
+
+                                                <DataGridCheckBoxColumn.Header>
+                                                    <Border
+                                                        Background="Transparent">
+                                                        <CheckBox
+                                                            IsChecked="{Binding DataContext.IsCheckAllMonHoc
+                                                            , RelativeSource={RelativeSource AncestorType=DataGrid}}">
+
+                                                        </CheckBox>
+                                                    </Border>
+                                                </DataGridCheckBoxColumn.Header>
+                                                <DataGridCheckBoxColumn.HeaderStyle>
+                                                    <Style
+                                                        BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}"
+                                                        TargetType="{x:Type DataGridColumnHeader}">
+                                                        <Setter
+                                                            Property="HorizontalContentAlignment"
+                                                            Value="Center" />
+                                                    </Style>
+                                                </DataGridCheckBoxColumn.HeaderStyle>
+                                            </DataGridCheckBoxColumn>
+                                            <materialDesign:DataGridTextColumn
+                                                IsReadOnly="true"
+                                                Width="Auto"
+                                                Header="Mã môn"
+                                                Binding="{Binding MaMonHoc}" />
+                                            <materialDesign:DataGridTextColumn
+                                                IsReadOnly="true"
+                                                Width="*"
+                                                Header="Tên môn học"
+                                                Binding="{Binding TenMonHoc}" />
+                                        </DataGrid.Columns>
+
+                                    </DataGrid>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Margin="10"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                        <Button
+                                            Command="{Binding HienThiThemThongTinMonHocCommand}"
+                                            Background="{StaticResource BluePrimary}"
+                                            BorderBrush="{StaticResource BluePrimary}"
+                                            Content="Thêm môn học" />
+                                        <Button
+                                            Command="{Binding XoaMonHocCommand}"
+                                            Background="{StaticResource RedPrimary}"
+                                            BorderBrush="{StaticResource RedPrimary}"
+                                            Content="Xoá môn học"
+                                            Margin="15,0,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+
+                        </TabItem>
+                        <TabItem
+                            Header="Lớp học">
+                            <!--Lớp học-->
+                            <Border
+                                Grid.Row="2"
+                                Height="auto">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                            Height="*" />
+                                        <RowDefinition
+                                            Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <DataGrid
+                                        Grid.Row="0"
+                                        Margin="10"
+                                        AutoGenerateColumns="False"
+                                        EnableColumnVirtualization="True"
+                                        EnableRowVirtualization="True"
+                                        GridLinesVisibility="Horizontal"
+                                        VerticalAlignment="Stretch"
+                                        Background="{StaticResource GreyLight}"
+                                        CanUserAddRows="False"
+                                        CanUserDeleteRows="False"
+                                        SelectionUnit="FullRow"
+                                        HorizontalScrollBarVisibility="Disabled"
+                                        ItemsSource="{Binding LopHocItemDataGrids}"
+                                        SelectedItem="{Binding SelectedLopHoc, Mode=TwoWay}"
+                                        SelectionMode="Single">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger
+                                                EventName="SelectionChanged">
+                                                <i:InvokeCommandAction
+                                                    Command="{Binding HienThiChinhSuaThongTinLopHocCommand}"
+                                                    CommandParameter="{Binding SelectedLopHoc}" />
+
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+
+                                        <DataGrid.RowStyle>
+                                            <Style
+                                                BasedOn="{StaticResource MaterialDesignDataGridRow}"
+                                                TargetType="{x:Type DataGridRow}">
+                                                <Setter
+                                                    Property="Margin"
+                                                    Value="0 10 0 0"></Setter>
+                                                <Setter
+                                                    Property="Background"
+                                                    Value="{StaticResource GreyLight}"></Setter>
+                                                <Setter
+                                                    Property="BorderThickness"
+                                                    Value="1"></Setter>
+                                                <Setter
+                                                    Property="BorderBrush"
+                                                    Value="{StaticResource GreyPrimary}" />
+                                                <Setter
+                                                    Property="AllowDrop"
+                                                    Value="True" />
+
+                                            </Style>
+
+                                        </DataGrid.RowStyle>
+                                        <DataGrid.CellStyle>
+                                            <Style
+                                                BasedOn="{StaticResource MaterialDesignDataGridCell}"
+                                                TargetType="{x:Type DataGridCell}">
+                                                <Setter
+                                                    Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate
+                                                            TargetType="{x:Type DataGridCell}">
+                                                            <Grid
+                                                                Margin="16"
+                                                                Background="{TemplateBinding Background}">
+
+                                                                <ContentPresenter
+                                                                    VerticalAlignment="Center" />
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </DataGrid.CellStyle>
+                                        <DataGrid.Columns>
+                                            <DataGridCheckBoxColumn
+                                                Binding="{Binding IsSelectedLopHoc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
+
+
+                                                <DataGridCheckBoxColumn.Header>
+                                                    <Border
+                                                        Background="Transparent">
+                                                        <CheckBox
+                                                            IsChecked="{Binding DataContext.IsCheckAllLopHoc, 
+                                                            RelativeSource={RelativeSource AncestorType=TabControl, AncestorLevel=2}, 
+                                                            UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+
+                                                        </CheckBox>
+                                                    </Border>
+                                                </DataGridCheckBoxColumn.Header>
+                                                <DataGridCheckBoxColumn.HeaderStyle>
+                                                    <Style
+                                                        BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}"
+                                                        TargetType="{x:Type DataGridColumnHeader}">
+                                                        <Setter
+                                                            Property="HorizontalContentAlignment"
+                                                            Value="Center" />
+                                                    </Style>
+                                                </DataGridCheckBoxColumn.HeaderStyle>
+                                            </DataGridCheckBoxColumn>
+                                            <materialDesign:DataGridTextColumn
+                                                IsReadOnly="true"
+                                                Width="Auto"
+                                                Header="Mã lớp"
+                                                Binding="{Binding MaLopHoc}" />
+                                            <materialDesign:DataGridTextColumn
+                                                IsReadOnly="true"
+                                                Width="*"
+                                                Header="Khối"
+                                                Binding="{Binding Khoi}" />
+                                            <materialDesign:DataGridTextColumn
+                                                IsReadOnly="true"
+                                                Width="*"
+                                                Header="Tên lớp học"
+                                                Binding="{Binding TenLopHoc}" />
+                                        </DataGrid.Columns>
+
+                                    </DataGrid>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Margin="10"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right">
+                                        <Button
+                                            Command="{Binding HienThiThemThongTinLopHocCommand}"
+                                            Background="{StaticResource BluePrimary}"
+                                            BorderBrush="{StaticResource BluePrimary}"
+                                            Content="Thêm lớp học" />
+                                        <Button
+                                            Command="{Binding XoaLopHocCommand}"
+                                            Background="{StaticResource RedPrimary}"
+                                            BorderBrush="{StaticResource RedPrimary}"
+                                            Content="Xoá lớp học"
+                                            Margin="15,0,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </TabItem>
+                    </TabControl>
 
                 </Grid>
             </Border>
@@ -277,8 +427,6 @@
                 Margin="0 20 30 30"
                 Content="{Binding Path=ContentControl.Content}"
                 Grid.Column="1" />
-
-
         </Grid>
     </Grid>
 </UserControl>
