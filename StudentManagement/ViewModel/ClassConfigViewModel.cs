@@ -155,6 +155,8 @@ namespace StudentManagement.ViewModel
             }
             DataProvider.ins.context.Lophocthuctes.Update(Lophocthucte);
             DataProvider.ins.context.SaveChanges();
+
+            ClassManagementViewModel.Instance.Refresh(Lophocthucte);
             MessageBox.Show("Cập nhập thành công");
         }
 

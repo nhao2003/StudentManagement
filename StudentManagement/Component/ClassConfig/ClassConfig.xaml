@@ -60,8 +60,10 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}"  Width="100" Text="Tên lớp: "/>
-                            <TextBox Grid.Column="1"  Style="{StaticResource textbox_item}" 
-                                     Height="30"
+                            <TextBox 
+                                x:Name="tb_name"    
+                                Grid.Column="1"  Style="{StaticResource textbox_item}" 
+                                    Height="30"
                                      Margin="90,0,50,0"
                                      Padding="5"
                                      BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Tên lớp" >
@@ -222,7 +224,32 @@
                 <Button
                     Content="Lưu thay đổi" 
                     Command="{Binding SaveChangeCommand}"
-                    Style="{StaticResource primary_button}"/>
+                    Background="{StaticResource BluePrimary}"
+                    Margin="4"
+                    Foreground="White"
+                    BorderBrush ="Transparent"
+                    FontSize="16"
+                    materialDesign:ButtonAssist.CornerRadius="8"
+                    VerticalAlignment ="Center"
+                    HorizontalAlignment="Center"
+                    >
+                    <Button.Style>
+                        <Style
+                                TargetType="{x:Type Button}"
+                                BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}"
+                            >
+                            <Style.Triggers>
+                                <DataTrigger
+                                            Binding="{Binding ElementName=tb_name, Path=(Validation.HasError)}"
+                                            Value="True">
+                                    <Setter
+                                                Property="IsEnabled"
+                                                Value="False"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </StackPanel>
         </Grid>
     </Border>

@@ -28,8 +28,8 @@
             >
                 <TextBlock.Text>
                     <MultiBinding StringFormat="Lớp: {0}{1}">
-                        <Binding Path="Lophocthucte.MalopNavigation.Khoi"/>
-                        <Binding Path="Lophocthucte.MalopNavigation.Tenlop"/>
+                        <Binding Path="Lophocthucte.MalopNavigation.Khoi" UpdateSourceTrigger="PropertyChanged"/>
+                        <Binding Path="Lophocthucte.MalopNavigation.Tenlop" UpdateSourceTrigger="PropertyChanged"/>
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>

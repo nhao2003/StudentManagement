@@ -123,5 +123,15 @@ namespace StudentManagement.ViewModel
             }
             SNamhoc = nienKhoas[0];
         }
+
+        public void Refresh()
+        {
+            InitClasses();
+            InitStudents();
+
+            ClassManagementViewModel.Instance.SetDetailClass(choosenClass.GetLopHocThuTe());
+            ClassStudentsVisibility = Visibility.Visible;
+            NewStudentsVisibility = Visibility.Hidden;
+        }
     }
 }

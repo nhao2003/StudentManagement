@@ -31,7 +31,7 @@ namespace StudentManagement.Model
         {
             id = lopth.Malop;
             name = lopth.MalopNavigation.Khoi + lopth.MalopNavigation.Tenlop;
-            teacherName = lopth.MagvcnNavigation.Username;
+            teacherName = lopth.MagvcnNavigation.UsernameNavigation.Hoten;
 
             hocsinhs = lopth.Mahs.ToList();
 
@@ -52,6 +52,7 @@ namespace StudentManagement.Model
         [RelayCommand]
         public void SetDetailClass()
         {
+            ClassListViewModel.Instance.SetChooseClass(this);
             ClassManagementViewModel.Instance.NavigateClassDetail(lophtt);
         }
 
@@ -59,6 +60,11 @@ namespace StudentManagement.Model
         public void SetChoosenClass()
         {
             ClassListViewModel.Instance.SetChooseClass(this);
+        }
+
+        public Lophocthucte GetLopHocThuTe()
+        {
+            return lophtt;
         }
     }
 }

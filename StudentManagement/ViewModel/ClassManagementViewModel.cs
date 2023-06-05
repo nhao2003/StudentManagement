@@ -24,7 +24,7 @@ namespace StudentManagement.ViewModel
             private set => _instance = value;
         }
 
-        private object _classListViewModel;
+        private ClassListViewModel _classListViewModel;
         private ClassDetailViewModel _classDetailViewModel;
 
         [ObservableProperty]
@@ -57,7 +57,15 @@ namespace StudentManagement.ViewModel
 
         public void SetDetailClass(Lophocthucte mclass)
         {
+            _classDetailViewModel = new ClassDetailViewModel();
             _classDetailViewModel.SetCurrentClass(mclass);
+        }
+
+        public void Refresh(Lophocthucte lhtt)
+        {
+            // lay data mới từ config rồi truyền vào lại
+            _classListViewModel.Refresh();
+            _classDetailViewModel.Refresh(lhtt);
         }
     }
 }

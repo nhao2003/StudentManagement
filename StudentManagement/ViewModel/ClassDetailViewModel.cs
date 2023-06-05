@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Model;
 using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
@@ -58,12 +59,19 @@ namespace StudentManagement.ViewModel
 
         public void SetCurrentClass(Lophocthucte mclass)
         {
-            lophocthucte = mclass;
+            Lophocthucte = mclass;
+            //MessageBox.Show(Lophocthucte.MalopNavigation.Tenlop);
+            OnPropertyChanged();
             _transcriptViewModel.SetCurrentClass(lophocthucte);
             _classconfigViewModel.SetCurrentClass(lophocthucte);
         }
 
+        public void Refresh(Lophocthucte lhtt)
+        {
+            SetCurrentClass(lhtt);
+        }
 
+        // set button
         [ObservableProperty]
         private object backgroundBangDiem = "#7CA7FF";
         [ObservableProperty]
