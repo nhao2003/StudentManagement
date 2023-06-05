@@ -37,17 +37,21 @@ namespace StudentManagement.ViewModel
         ObservableCollection<SubjectTeacher> subjectTeacherList = new ObservableCollection<SubjectTeacher> {
         };
 
+        List<Khananggiangday> kngds = DataProvider.ins.context.Khananggiangdays.ToList();
+        List<Monhoc> monhs = DataProvider.ins.context.Monhocs.ToList();
+        List<Phanconggiangday> pcgds = DataProvider.ins.context.Phanconggiangdays.ToList();
         private void InitDanhSachMonHoc()
         {
-            List<Khananggiangday> kngds = DataProvider.ins.context.Khananggiangdays.ToList();
-            List<Monhoc> monhs = DataProvider.ins.context.Monhocs.ToList();
-            List<Phanconggiangday> pcgds = DataProvider.ins.context.Phanconggiangdays.ToList();
+            kngds = DataProvider.ins.context.Khananggiangdays.ToList();
+            monhs = DataProvider.ins.context.Monhocs.ToList();
+            pcgds = DataProvider.ins.context.Phanconggiangdays.ToList();
             subjectTeacherList.Clear();
             foreach (var mh in monhs)
             {
-                SubjectTeacher subjectTeacher = new SubjectTeacher(mh.Tenmh);
+                SubjectTeacher subjectTeacher = new SubjectTeacher(mh);
                 foreach(var kn in kngds)
                 {
+                    // them giao vien tu kha nang giang day
                     if (kn.Mamh == mh.Mamh)
                     {
                         subjectTeacher.AddTeacher(kn.MagvNavigation);
@@ -58,7 +62,9 @@ namespace StudentManagement.ViewModel
                 {
                     if(pc.ManhNavigation == Snamhoc && pc.Mamh == mh.Mamh && pc.MalhttNavigation == lophocthucte)
                     {
-                        subjectTeacher.SetGiaoVienPhanCong(pc.MagvNavigation);
+                        // neu co san trong phan cong giang day
+                        subjectTeacher.SetSGiaoVien(pc.MagvNavigation);
+                        subjectTeacher.Phanconggiangday = pc;
                         break;
                     }
                 }
@@ -120,8 +126,36 @@ namespace StudentManagement.ViewModel
             Lophocthucte.ManhNavigation = Snamhoc;
             Lophocthucte.MalopNavigation.Tenlop = TenLop;
             Lophocthucte.MagvcnNavigation = Sgiaovien;
+
+            // luu phan cong giang day
+            // neu co roi thi update
+            // neu chua thi tao moi
+            foreach(var subjectTeacher in subjectTeacherList)
+            {
+                // check da chon
+                if(subjectTeacher.Sgiaovien != null)
+                {
+                    // check da co trong bang chua
+                    if(subjectTeacher.Phanconggiangday != null)
+                    {
+                        // trong bang co roi => update
+                        DataProvider.ins.context.Phanconggiangdays.Update(subjectTeacher.Phanconggiangday);
+                    }
+                    else
+                    {
+                        // chua co trong bang => tao moi va them vao
+                        Phanconggiangday phanconggiangday = new Phanconggiangday();
+                        phanconggiangday.Manh = Snamhoc.Manh;
+                        phanconggiangday.Malhtt = lophocthucte.Malhtt;
+                        phanconggiangday.Magv = subjectTeacher.Sgiaovien.Magv;
+                        phanconggiangday.Mamh = subjectTeacher.Monhoc.Mamh;
+                        DataProvider.ins.context.Phanconggiangdays.Add(phanconggiangday);
+                    }
+                }
+            }
             DataProvider.ins.context.Lophocthuctes.Update(Lophocthucte);
             DataProvider.ins.context.SaveChanges();
+            MessageBox.Show("Cập nhập thành công");
         }
 
         [RelayCommand]

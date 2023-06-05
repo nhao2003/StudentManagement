@@ -16,20 +16,44 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private String teacher;
         [ObservableProperty]
+        private Monhoc monhoc;
+        [ObservableProperty]
         private ObservableCollection<Giaovien> teachers = new ObservableCollection<Giaovien>()
         {
         };
-        [ObservableProperty]
+
         private Giaovien sgiaovien;
+
+        public Giaovien Sgiaovien
+        {
+            set 
+            { 
+                this.sgiaovien = value;
+                OnPropertyChanged();
+            }
+            get { return this.sgiaovien; }
+        }
+
+        public void SetSGiaoVien(Giaovien sgiaovien)
+        {
+            this.sgiaovien = sgiaovien;
+        }
+        private Phanconggiangday phanconggiangday;
+        public Phanconggiangday Phanconggiangday
+        {
+            set { phanconggiangday = value; }
+            get { return phanconggiangday; }
+        }
+
         public SubjectTeacher(String Subject, String Teacher)
         {
             this.Subject = Subject;
             this.Teacher = Teacher;
         }
 
-        public SubjectTeacher(String Subject)
+        public SubjectTeacher(Monhoc monhoc)
         {
-            this.Subject = Subject;
+            this.Monhoc = monhoc;
         }
 
         public void AddTeacher(Giaovien teacher)
@@ -37,9 +61,6 @@ namespace StudentManagement.Object
             teachers.Add(teacher);
         }
 
-        public void SetGiaoVienPhanCong(Giaovien gv)
-        {
-            Sgiaovien = gv;
-        }
+
     }
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:validationrules="clr-namespace:StudentManagement.ValidationRules"
              mc:Ignorable="d" 
              d:DesignHeight="690" d:DesignWidth="1220">
     <Border  CornerRadius="20" Background="white" Margin="20">
@@ -63,9 +64,15 @@
                                      Height="30"
                                      Margin="90,0,50,0"
                                      Padding="5"
-                                     BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Tên lớp" 
-                                     Text="{Binding TenLop}"
-                                     ></TextBox>
+                                     BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Tên lớp" >
+                                <TextBox.Text>
+                                    <Binding Path="TenLop" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <validationrules:ClassNameValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Border>
                     <Border Grid.Row="2" Style="{StaticResource BorderBox}" Width="Auto" Margin="10">
@@ -176,7 +183,7 @@
                             <GridView>
                                 <GridViewColumn
                                     Width="300"
-                                    DisplayMemberBinding="{Binding Subject}"
+                                    DisplayMemberBinding="{Binding Monhoc.Tenmh}"
                                     Header="Code" />
                                 <GridViewColumn
                                     Width="auto"
