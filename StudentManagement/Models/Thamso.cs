@@ -1,4 +1,7 @@
-﻿namespace StudentManagement.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace StudentManagement.Models
 {
     public partial class Thamso
     {
