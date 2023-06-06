@@ -9,8 +9,8 @@
              DataContext="{StaticResource GreetingVM}"
              Background="Transparent"
              
-             d:DesignHeight="800" d:DesignWidth="230">
-    <Border CornerRadius="50 0 0 50">
+             d:DesignHeight="800" d:DesignWidth="250">
+    <Border CornerRadius="20 0 0 20">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />

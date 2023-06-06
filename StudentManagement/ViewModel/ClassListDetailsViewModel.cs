@@ -12,6 +12,9 @@ namespace StudentManagement.ViewModel
     public partial class ClassListDetailsViewModel : ObservableObject
     {
         [ObservableProperty]
+        private OverviewListViewModel overview;
+
+        [ObservableProperty]
         private ObservableCollection<ClassListData> classListDatas = new ObservableCollection<ClassListData>();
 
         [ObservableProperty]
@@ -23,6 +26,7 @@ namespace StudentManagement.ViewModel
 
         public ClassListDetailsViewModel()
         {
+            Overview = new OverviewListViewModel();
             DataProvider data = DataProvider.ins;
             int stt = 1;
             List<Lophocthucte> lophocthuctes = data.context.Lophocthuctes.ToList();

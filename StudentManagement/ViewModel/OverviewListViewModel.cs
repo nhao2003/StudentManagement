@@ -15,11 +15,43 @@ namespace StudentManagement.ViewModel
         private Namhoc selectedItem;
         [ObservableProperty]
         private ObservableCollection<Namhoc> namHocs;
+        [ObservableProperty]
+        private String numHocSinh;
+        [ObservableProperty]
+        private ObservableCollection<Hocsinh> hocsinhs;
+        [ObservableProperty]
+        private String numGiaoVien;
+        [ObservableProperty]
+        private ObservableCollection<Giaovien> giaoviens;
+        [ObservableProperty]
+        private String numLopHoc;
+        [ObservableProperty]
+        private ObservableCollection<Lophocthucte> lophocthuctes;
+        [ObservableProperty]
+        private String numMonHoc;
+        [ObservableProperty]
+        private ObservableCollection<Monhoc> monhocs;
+        [ObservableProperty]
+        private String nameChuongTrinh;
 
         public OverviewListViewModel()
         {
-            SelectedItem = GetNamhoc; 
+            SelectedItem = GetNamhoc;
             namHocs = new ObservableCollection<Namhoc>(DataProvider.ins.context.Namhocs);
+
+            hocsinhs = new ObservableCollection<Hocsinh>(DataProvider.ins.context.Hocsinhs);
+            NumHocSinh = hocsinhs.Count().ToString();
+
+            giaoviens = new ObservableCollection<Giaovien>(DataProvider.ins.context.Giaoviens);
+            NumGiaoVien = giaoviens.Count().ToString();
+
+            lophocthuctes = new ObservableCollection<Lophocthucte>(DataProvider.ins.context.Lophocthuctes);
+            NumLopHoc = lophocthuctes.Count().ToString();
+
+            monhocs = new ObservableCollection<Monhoc>(DataProvider.ins.context.Monhocs);
+            NumMonHoc = monhocs.Count().ToString();
+
+            NameChuongTrinh = "Trung học phổ thông";
         }
 
         partial void OnSelectedItemChanged(Namhoc value)
@@ -28,5 +60,6 @@ namespace StudentManagement.ViewModel
         }
 
         public static Namhoc GetNamhoc;
+
     }
 }

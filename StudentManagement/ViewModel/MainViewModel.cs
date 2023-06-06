@@ -18,19 +18,11 @@ public sealed partial class MainViewModel : ObservableObject
     }
 
     #region property
-
     private object _programViewModel;
-    private object _studentViewModel;
-    private object _teacherViewModel;
-    private object _classListViewModel;
-    private object _transcriptViewModel;
-    private object _classconfigViewModel;
-    private object _classDetailViewModel;
-    private object _classManaViewModel;
-
-    private object _subjectViewModel;
-    private object _schoolyearViewModel;
+    private object _regulationViewModel;
+    private object _termSummaryViewModel;
     private object _classListDetailsViewModel;
+    private object _classManaViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -53,19 +45,18 @@ public sealed partial class MainViewModel : ObservableObject
     #endregion
     private void Init()
     {
-
         _programViewModel = new ProgramViewModel();
-        _studentViewModel = new StudentViewModel();
-        _teacherViewModel = new TeacherViewModel();
-        _classListViewModel = new ClassListViewModel();
+        _regulationViewModel = new RegulationViewModel();
+        _termSummaryViewModel = new TermSummaryViewModel();
+        _classListDetailsViewModel = new ClassListDetailsViewModel();
         _classManaViewModel = new ClassManagementViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Thông tin", "infomation", _classListDetailsViewModel),
-        new Navigation("Môn học", "subject", _classListViewModel),
-        new Navigation("Thông tin", "infomation", _classListViewModel),
-        new Navigation("Môn học", "subject", _classManaViewModel),
+        new Navigation("Thông tin", "AccountOutline", _classListDetailsViewModel),
+        new Navigation("Môn học", "BookMultipleOutline", _termSummaryViewModel),
+        new Navigation("Lớp học", "BallotOutline", _classManaViewModel),
+        new Navigation("Thay đổi quy định", "CogSyncOutline", _regulationViewModel),
     };
         leftNavigations[0].IsPress = true;
     }

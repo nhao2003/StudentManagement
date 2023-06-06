@@ -30,8 +30,8 @@
                             BorderBrush="LightGray" 
                             BorderThickness="0"
                             Width="Auto"
-                            Height="30"
-                            Padding="5"
+                            Height="25"
+                            Padding="5 0 5 5"
                                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                                   ItemsSource="{Binding NamHocs}"
                                   DisplayMemberPath="Tennamhoc"
@@ -46,7 +46,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image Height="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="/Resource/images/student.png"></Image>
-                    <Grid Grid.Column="1" Margin="20 0 0 0">
+                    <Grid Grid.Column="1" Margin="10 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -57,9 +57,11 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumHocSinh}"
                                                HorizontalAlignment="left"
-                                               
+                                               Foreground="#959595"
+                                               FontWeight="Medium"
+                                                FontSize="12"
                                                ></TextBlock>
                     </Grid>
                 </Grid>
@@ -71,7 +73,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image Height="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="/Resource/Images/teacher.png"></Image>
-                    <Grid Grid.Column="1" Margin="20 0 0 0">
+                    <Grid Grid.Column="1" Margin="10 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -82,9 +84,11 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumGiaoVien}"
                                                HorizontalAlignment="left"
-                                               
+                                               Foreground="#959595"
+                                               FontWeight="Medium"
+                                                FontSize="12"
                                                ></TextBlock>
                     </Grid>
                 </Grid>
@@ -96,7 +100,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image Height="36" VerticalAlignment="Center" Margin="15,0,0,0"  Source="/Resource/Images/class.png" HorizontalAlignment="Left" Width="37"></Image>
-                    <Grid Grid.Column="1" Margin="20 0 0 0">
+                    <Grid Grid.Column="1" Margin="10 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -107,9 +111,11 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumLopHoc}"
                                                HorizontalAlignment="left"
-                                               
+                                               Foreground="#959595"
+                                               FontWeight="Medium"
+                                                FontSize="12"
                                                ></TextBlock>
                     </Grid>
                 </Grid>
@@ -121,7 +127,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image Height="37" VerticalAlignment="Center" Margin="15 0 0 0"  Source="/Resource/Images/subject.png"></Image>
-                    <Grid Grid.Column="1" Margin="20 0 0 0">
+                    <Grid Grid.Column="1" Margin="10 0 0 0">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -132,13 +138,16 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
-                                               HorizontalAlignment="left"
+                        <TextBlock Grid.Row="1" Text="{Binding NumMonHoc}"
+                                                HorizontalAlignment="left"
+                                                Foreground="#959595"
+                                                FontWeight="Medium"
+                                                FontSize="12"
                                                ></TextBlock>
                     </Grid>
                 </Grid>
             </Border>
-            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+            <Border Background="white" Height="64" Width="190" CornerRadius="20" Margin="0 0 20 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -146,7 +155,7 @@
                         <ColumnDefinition Width="9*"/>
                     </Grid.ColumnDefinitions>
                     <Image Height="36" Width="37" VerticalAlignment="Center" Margin="15,0,0,0"  Source="/Resource/Images/program.png"></Image>
-                    <Grid Grid.Column="1" Margin="20,0,0,0" Grid.ColumnSpan="2">
+                    <Grid Grid.Column="1" Margin="10,0,0,0" Grid.ColumnSpan="2">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
@@ -157,9 +166,11 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
-                                               HorizontalAlignment="left"
-                                               
+                        <TextBlock Grid.Row="1" Text="{Binding NameChuongTrinh}"
+                                                HorizontalAlignment="left"
+                                                Foreground="#959595"
+                                                FontWeight="Medium"
+                                                FontSize="12"
                                                ></TextBlock>
                     </Grid>
                 </Grid>
