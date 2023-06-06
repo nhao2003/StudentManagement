@@ -8,8 +8,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
         xmlns:sub="clr-namespace:StudentManagement.Component.Program"
+        xmlns:classMana="clr-namespace:StudentManagement.Component.ClassManagement"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
-        xmlns:cls="clr-namespace:StudentManagement.Component.ListClass"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -78,7 +78,10 @@
                             <TermSummary:TermSummary />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
-                            <cls:ClassList></cls:ClassList>
+                            
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:ClassManagementViewModel}">
+                            <classMana:ClassManagement></classMana:ClassManagement>
                         </DataTemplate>
                         
                     </ContentControl.Resources>

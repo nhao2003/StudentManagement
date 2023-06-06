@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,14 @@ namespace StudentManagement.Model
         [ObservableProperty]
         private String urlAvatar;
 
-        public Student(String id, String name, String urlAvatar)
+        private Hocsinh hocsinh;
+
+        public Student(Hocsinh hs)
         {
-            this.id = id;
-            this.name = name;
-            this.urlAvatar = urlAvatar;
+            this.id = hs.Mahs;
+            this.name = hs.Hotenhs;
+            this.urlAvatar = "/Resource/images/student.png";
+            hocsinh = hs;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace StudentManagement.ViewModel;
 public sealed partial class MainViewModel : ObservableObject
 {
 
-    public MainViewModel() {
+    public MainViewModel()
+    {
         Init();
         ContentViewModel = _programViewModel;
         Instance = this;
@@ -27,6 +29,11 @@ public sealed partial class MainViewModel : ObservableObject
     private object _studentViewModel;
     private object _teacherViewModel;
     private object _classListViewModel;
+    private object _transcriptViewModel;
+    private object _classconfigViewModel;
+    private object _classDetailViewModel;
+    private object _classManaViewModel;
+
     private object _subjectViewModel;
     private object _schoolyearViewModel;
     private object _classListDetailsViewModel;
@@ -53,13 +60,14 @@ public sealed partial class MainViewModel : ObservableObject
     #endregion
     private void Init()
     {
+
+        DataProvider.ins.context.Hocsinhs.ToList();
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
         _classListViewModel = new ClassListViewModel();
         _subjectViewModel = new SubjectViewModel();
-        _termSummaryViewModel = new TermSummaryViewModel();
-        _classListDetailsViewModel = new ClassListDetailsViewModel();
+        _classManaViewModel = new ClassManagementViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
@@ -67,10 +75,12 @@ public sealed partial class MainViewModel : ObservableObject
         new Navigation("Môn học", "subject", _termSummaryViewModel),
 
         new Navigation("Môn học", "subject", _classListViewModel),
+        new Navigation("Thông tin", "infomation", _classListViewModel),
+        new Navigation("Môn học", "subject", _classManaViewModel),
     };
         leftNavigations[0].IsPress = true;
     }
-    
+
     public void setViewModel(object viewModel)
     {
         ContentViewModel = viewModel;
@@ -87,5 +97,5 @@ public sealed partial class MainViewModel : ObservableObject
         Window window = Application.Current.MainWindow as Window;
         window.WindowState = WindowState.Minimized;
     }
-   }
+}
 

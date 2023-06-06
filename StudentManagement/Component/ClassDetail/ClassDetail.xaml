@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="StudentManagement.Component.ClassDetail.ClassDetail"
+             xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
+             xmlns:classConfig="clr-namespace:StudentManagement.Component.ClassConfig"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentManagement.Component.ClassDetail"
+             mc:Ignorable="d"
+            d:DesignHeight="770" d:DesignWidth="1220">
+    <Border  Background="{StaticResource BlueLight}" Margin="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition ></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock 
+                FontWeight="Bold"
+                FontSize="24"
+                Height="30"
+                Margin="20, 10, 0 ,0"
+            >
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Lớp: {0}{1}">
+                        <Binding Path="Lophocthucte.MalopNavigation.Khoi" UpdateSourceTrigger="PropertyChanged"/>
+                        <Binding Path="Lophocthucte.MalopNavigation.Tenlop" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+
+            <Grid Grid.Column="1" Grid.Row="0">
+                <StackPanel 
+                Margin="0, 10, 0 ,0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center">
+                    <Button
+                    Content="Bảng điểm" 
+                    Width="130"
+                    Background="{Binding BackgroundBangDiem}"
+                    Foreground="{Binding ForegroundBangDiem}"
+                    Command="{Binding NavigateTranscriptCommand}"
+                    Style="{StaticResource primary_button}"/>
+                    <Button
+                    Content="Cấu hình" 
+                    Width="130"
+                    Background="{Binding BackgroundCauHinh}"
+                    Foreground="{Binding ForegroundCauHinh}"
+                    Command="{Binding NavigateClassConfigCommand}"
+                    Style="{StaticResource primary_button}"
+                    />
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="1">
+                <ContentControl Grid.Row="2" Content="{Binding ContentViewModel, UpdateSourceTrigger=PropertyChanged}">
+                    <ContentControl.Resources >
+                        <DataTemplate DataType="{x:Type viewmodel:TranscriptViewModel}">
+                            <transript:Transcript ></transript:Transcript>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodel:ClassConfigViewModel}">
+                            <classConfig:ClassConfig></classConfig:ClassConfig>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Border  CornerRadius="20" Background="white" Margin="20">
+                    <Grid>
+                        <TextBlock 
+                        FontWeight="Normal"
+                        FontSize="20"
+                        Height="30"
+                        Margin="20"
+                        Foreground="Gray"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        >
+                            Trống
+                        </TextBlock>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
