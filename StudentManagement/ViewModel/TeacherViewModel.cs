@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MaterialDesignThemes.Wpf;
+using StudentManagement.Models;
 using StudentManagement.Object;
 using StudentManagement.Utils;
 using System;

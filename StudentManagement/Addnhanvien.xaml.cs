@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using StudentManagement.Models;
 using StudentManagement.ViewModel;
 using System;
 using System.Collections.Generic;

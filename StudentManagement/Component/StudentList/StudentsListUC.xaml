@@ -182,7 +182,7 @@
                         Binding="{Binding Dchi}"
                         Header="Địa chỉ" />
                             <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="auto"
                         Header="Giới tính" 
                         Binding="{Binding GioitinhDisplay}"/>
                             <materialDesign:DataGridTextColumn
@@ -190,11 +190,11 @@
                         Binding="{Binding //LOP}"
                         Header="Lớp" />
                             <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="auto"
                         Binding="{Binding Dantoc}"
                         Header="Dân tộc" />
                             <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="auto"
                         Binding="{Binding Tongiao}"
                         Header="Tôn giáo" />
                             <materialDesign:DataGridTextColumn
