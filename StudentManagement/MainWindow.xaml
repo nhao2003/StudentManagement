@@ -11,6 +11,8 @@
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
         xmlns:cls="clr-namespace:StudentManagement.Component.ListClass"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
+        xmlns:student="clr-namespace:StudentManagement.Component.StudentList"
+        xmlns:nhanvien="clr-namespace:StudentManagement.Component.NhanVienList"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -71,16 +73,19 @@
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel }">
-                            <TextBlock Text="Trang chủ"></TextBlock>
-                        </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:SubjectViewModel}">
                             <program:SubjectProgram />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
                             <cls:ClassList></cls:ClassList>
                         </DataTemplate>
-                        
+                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
+                            <student:StudentsListUC></student:StudentsListUC>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
+                            <nhanvien:NhanViensListUC></nhanvien:NhanViensListUC>
+                        </DataTemplate>
+
                     </ContentControl.Resources>
                 </ContentControl>
             </Grid>

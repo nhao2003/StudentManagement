@@ -25,14 +25,14 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid>
-                <Border Background="#A5D3FF" Grid.Row="0" CornerRadius="20,20,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown" >
+                <Border Background="#A5D3FF" Grid.Row="0" CornerRadius="20,20,0,0"  >
                     <TextBlock Text="Chỉnh sửa thông tin nhân viên" 
                            Grid.Row="0"
                            Margin="15,15,0,14"
                            FontWeight="Bold"
                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
                 </Border>
-                <Button Click="CloseButton_Click" Height="auto" Width="auto" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right">
+                <Button  Height="auto" Width="auto" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right">
                     <Button.Template>
                         <ControlTemplate>
                             <Ellipse Width="20" Height="20" Fill="{StaticResource RedPrimary}" Margin="0 0 10 0">

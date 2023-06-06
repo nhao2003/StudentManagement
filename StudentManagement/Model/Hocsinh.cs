@@ -22,7 +22,11 @@ namespace StudentManagement.Model
         public string? Email { get; set; }
         public string? Sdt { get; set; }
         public string? Dchi { get; set; }
-        public bool? Gioitinh { get; set; }
+        public bool Gioitinh { get; set; }
+        public string? GioitinhDisplay
+        {
+            get { return Gioitinh ? "Nam" : "Nữ"; }
+        }
         public string? Tongiao { get; set; }
         public string? Dantoc { get; set; }
         public bool? Isdeleted { get; set; }

@@ -1,5 +1,5 @@
-﻿<UserControl x:Class="StudentManagement.Component.NhanVienList.NhanviensList"
-         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl x:Class="StudentManagement.Component.StudentList.StudentsListUC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -7,6 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="770" d:DesignWidth="1220">
+    
     <Border  Background="#E7F2FF" Margin="20">
         <Grid>
             <Grid.RowDefinitions>
@@ -20,28 +21,28 @@
                 FontSize="24"
                 Height="30"
                 Margin="20, 10, 0 ,0"
-            ><Run Text="Danh sách nhân viên"/><LineBreak/><Run/></TextBlock>
+            ><Run Text="Danh sách học sinh"/><LineBreak/><Run/></TextBlock>
             <Grid Grid.Row="1" Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="150,0,-110,0" Grid.Column="1" Orientation="Horizontal">
-                    <TextBox Grid.Column="1"  Style="{StaticResource textbox_item}" 
-                            Width="237"
-                            Height="30"
-                            Padding="5"
-                            BorderBrush="LightGray" materialDesign:HintAssist.Hint="Tìm kiếm" >
-                    </TextBox>
                     <ComboBox Style="{StaticResource combobox_item}"
                             BorderBrush="LightGray" 
                             Width="Auto"
                             Height="30"
                             Padding="5"
-                            materialDesign:HintAssist.Hint="Tìm kiếm theo" SelectionChanged="ComboBox_SelectionChanged">
-                        <ComboBoxItem Content="Lớp" />
-                        <ComboBoxItem Content="Giáo viên chủ nhiệm" />
+                            materialDesign:HintAssist.Hint="Tìm kiếm theo" >
+                        <ComboBoxItem Content="Họ tên" />
+                        <ComboBoxItem Content="Xếp loại" />
                     </ComboBox>
+
+                    <TextBox Grid.Column="1"  Style="{StaticResource textbox_item}" 
+                            Width="237"
+                            Height="30"
+                            Padding="5"
+                            BorderBrush="LightGray" materialDesign:HintAssist.Hint="Tìm kiếm" />
 
                 </StackPanel>
             </Grid>
@@ -70,7 +71,7 @@
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
                             IsReadOnly="{Binding IsReadOnly}"
-                            ItemsSource="{Binding Transcripts}" Grid.ColumnSpan="2" SelectionChanged="DataGrid_SelectionChanged"
+                            ItemsSource="{Binding StudentList}" Grid.ColumnSpan="2" 
                             >
                         <DataGrid.Resources>
                             <!--<Style
@@ -85,7 +86,7 @@
                                     <Setter.Value>
                                         <DataTemplate>
                                             <TextBlock
-                                        Text="{Binding}"
+                                        Text="{Binding DeleteCommand}"
                                         TextAlignment="Right"
                                         TextWrapping="Wrap" />
                                         </DataTemplate>
@@ -159,45 +160,46 @@
                                     </Style>
                                 </DataGridCheckBoxColumn.HeaderStyle>
                             </DataGridCheckBoxColumn>
-                            <materialDesign:DataGridTextColumn
-                        Width="auto"
-                        Binding="{Binding Id}"
-                        Header="STT" />
+                            
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Cccd}"
                         Header="CMND" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Hotenhs}"
                         Header="Họ tên" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Ngsinh}"
                         Header="Ngày sinh" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Email}"
                         Header="Email" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Dchi}"
                         Header="Địa chỉ" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
-                        Header="Giới tính" />
+                        Header="Giới tính" 
+                        Binding="{Binding GioitinhDisplay}"/>
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
-                        Header="Tài khoản" />
+                        Binding="{Binding //LOP}"
+                        Header="Lớp" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
-                        Header="Vai trò" />
+                        Binding="{Binding Dantoc}"
+                        Header="Dân tộc" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding }"
+                        Binding="{Binding Tongiao}"
+                        Header="Tôn giáo" />
+                            <materialDesign:DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding //}"
                         Header="" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -208,8 +210,8 @@
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Grid.Column="1">
                         <Button
-                                Content="Thêm giáo viên" 
-                                Command="{Binding AddClassCommand}"
+                                Content="Thêm học sinh" 
+                                Command="{Binding AddStudentCommand}"
                                 Style="{StaticResource primary_button}"/>
                         <Button
                                 Content="Xóa" 
@@ -220,4 +222,4 @@
             </Border>
         </Grid>
     </Border>
-    </UserControl>
+</UserControl>

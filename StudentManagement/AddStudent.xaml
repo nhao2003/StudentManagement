@@ -11,16 +11,18 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"        
-        Title="AddNewClass" Height="608" Width="430">
-    <Border CornerRadius="20" Background="#F0F9FF" Margin="0,0,0,-102">
-        <Grid Height="564" VerticalAlignment="Top" Margin="-2,32,2,0">
+        Title="AddNewClass" Height="850" Width="430">
+    <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="20" Background="#F0F9FF">
+        <Grid Height="600" VerticalAlignment="Top" Margin="-2,32,2,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="49*"/>
+                <RowDefinition Height="94*"/>
+                <RowDefinition Height="0*"/>
             </Grid.RowDefinitions>
             <Grid>
                 <Border Background="#A5D3FF" Grid.Row="0" CornerRadius="20,20,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown" Margin="0,-28,0,10" >
@@ -45,6 +47,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <TextBox Name ="cmnd" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" />
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="CMND " Height="NaN" Margin="10,18,349,8" Grid.ColumnSpan="2"/>
                 </Grid>
             </Border>
@@ -54,7 +57,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
+                    <TextBox Name ="hoten" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" />
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Họ và tên: "/>
                 </Grid>
             </Border>
@@ -66,7 +69,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Ngày sinh: "/>
-                    <DatePicker Grid.Column="1" Margin="147,15,33,0" VerticalAlignment="Top" >
+                    <DatePicker Name ="ngsinh" Grid.Column="1" Margin="147,15,33,0" VerticalAlignment="Top" >
                     </DatePicker>
                 </Grid>
             </Border>
@@ -76,42 +79,43 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
+                    <TextBox Name ="email" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" />
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Email: "/>
                 </Grid>
 
             </Border>
-            <Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,10,10,188">
+            <Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,15,10,31">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
+                    <TextBox Name ="dchi" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" />
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Địa chỉ "/>
                 </Grid>
             </Border>
-            <Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,147,10,51">
+            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,42,10,94">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
+                    <TextBox Name="nameParent" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" />
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Họ tên cha/mẹ "/>
                 </Grid>
             </Border>
-            <Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,216,10,-18">
+            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,99,10,37">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="37*"/>
+                        <ColumnDefinition Width="166*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Số điện thoại cha/mẹ " Grid.ColumnSpan="2" Margin="10,18,255,8"/>
+                    <TextBox Name="sdtParent" Margin="82,0,10,0" BorderBrush="#00000000" Grid.Column="2" />
+                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Số điện thoại cha/mẹ " Grid.ColumnSpan="3" Margin="10,18,255,7"/>
                 </Grid>
             </Border>
-            <Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,73,10,125">
+            <Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,80,10,154" Grid.RowSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -119,10 +123,49 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100"><Run Text="Giới tính"/><LineBreak/><Run/></TextBlock>
-                    <ComboBox Grid.Column="1" Margin="147,16,33,0" VerticalAlignment="Top"/>
+                    <ComboBox Name ="gt" Grid.Column="1"
+                              Margin="147,16,33,0" 
+                              VerticalAlignment="Top"
+                               materialDesign:HintAssist.Hint="Chọn giới tính" >
+                        <ComboBoxItem Content="Nam"/>
+                        <ComboBoxItem Content="N"/>
+                    </ComboBox>
+
                 </Grid>
             </Border>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="5" Style="{StaticResource primary_button}" Content="Hoàn tất" Margin="0,0,38,-72" Width="auto"></Button>
+            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,162,10,-26" Grid.RowSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="mahs" Grid.ColumnSpan="2" Margin="156,0,10,0" BorderBrush="#00000000" />
+                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Mã học sinh" Grid.ColumnSpan="2" Margin="10,18,255,8"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="8" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,31,10,-83">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="dantoc" Grid.ColumnSpan="2" Margin="156,0,10,0" BorderBrush="#00000000" />
+                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Dân tộc" Grid.ColumnSpan="2" Margin="10,18,255,8"/>
+                </Grid>
+            </Border>
+            <Border Grid.Row="9" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,88,10,-140">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="tongiao" Grid.ColumnSpan="2" Margin="156,0,10,0" BorderBrush="#00000000" />
+                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Tôn giáo" Grid.ColumnSpan="2" Margin="10,18,255,8"/>
+                </Grid>
+            </Border>
+            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="7" 
+                    Style="{StaticResource primary_button}"
+                    Content="Hoàn tất" Margin="0,0,33,-201" Width="95" Height="32" Click="Finish_Button_Click"></Button>
         </Grid>
     </Border>
 </Window>
