@@ -221,6 +221,8 @@
                                                     <Border
                                                         Background="Transparent">
                                                         <CheckBox
+                                                            Command="{Binding DataContext.AllMonHocsSelectedCommand
+                                                            , RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                             IsChecked="{Binding DataContext.IsCheckAllMonHoc
                                                             , RelativeSource={RelativeSource AncestorType=DataGrid}}">
 
@@ -366,6 +368,8 @@
                                                     <Border
                                                         Background="Transparent">
                                                         <CheckBox
+                                                            Command="{Binding Data.AllLopHocsSelectedCommand
+                                                            ,Source={StaticResource proxy}}"
                                                             IsChecked="{Binding Path=Data.IsCheckAllLopHoc, 
                                                             Source={StaticResource proxy}}">
 

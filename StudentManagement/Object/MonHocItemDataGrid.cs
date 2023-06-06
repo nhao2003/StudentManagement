@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,11 @@ namespace StudentManagement.Object
         private string tenMonHoc;
 
         private Monhoc monhoc;
+
+        partial void OnIsCheckedMonHocChanged(bool oldValue, bool newValue)
+        {
+            WeakReferenceMessenger.Default.Send(new PropertyChangedMessage<bool>(this, "IsCheckedMonHoc", oldValue, newValue));
+        }
 
         [NotNull]
         public Monhoc Monhoc

@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,11 @@ namespace StudentManagement.Object
         private int khoi;
         [ObservableProperty]
         private String tenLopHoc;
+
+        partial void OnIsSelectedLopHocChanged(bool oldValue, bool newValue)
+        {
+            WeakReferenceMessenger.Default.Send(new PropertyChangedMessage<bool>(this, "IsSelectedLopHoc", oldValue, newValue));
+        }
 
         private Lop lopHoc;
         public Lop LopHoc { set { lopHoc = value; } get { return lopHoc; } }

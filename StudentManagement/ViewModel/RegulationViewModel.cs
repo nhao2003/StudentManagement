@@ -1,6 +1,8 @@
 ﻿using Castle.Core.Internal;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using StudentManagement.Component.Regulation;
 using StudentManagement.Models;
 using StudentManagement.Object;
@@ -20,7 +22,7 @@ namespace StudentManagement.ViewModel
         AddingLopHoc,
         ModifyLopHoc,
     }
-    public partial class RegulationViewModel : ObservableObject
+    public partial class RegulationViewModel : ObservableRecipient, IRecipient<PropertyChangedMessage<bool>>
     {
         [ObservableProperty]
         private String titleAddSubject = "";
@@ -75,18 +77,20 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private bool isCheckAllLopHoc = false;
 
-        partial void OnIsCheckAllMonHocChanged(bool value)
+        [RelayCommand]
+        private void AllMonHocsSelected()
         {
             foreach (MonHocItemDataGrid monHocItemDataGrid in MonHocItems)
             {
-                monHocItemDataGrid.IsCheckedMonHoc = value;
+                monHocItemDataGrid.IsCheckedMonHoc = IsCheckAllMonHoc;
             }
         }
-        partial void OnIsCheckAllLopHocChanged(bool value)
+        [RelayCommand]
+        private void AllLopHocsSelected()
         {
             foreach (LopHocItemDataGrid lopHocItemDataGrid in LopHocItemDataGrids)
             {
-                lopHocItemDataGrid.IsSelectedLopHoc = value;
+                lopHocItemDataGrid.IsSelectedLopHoc = IsCheckAllLopHoc;
             }
         }
 
@@ -162,6 +166,7 @@ namespace StudentManagement.ViewModel
 
         public RegulationViewModel()
         {
+            WeakReferenceMessenger.Default.Register<PropertyChangedMessage<bool>>(this);
             ContentControl.Content = new EmptyView();
             thamsos = DataProvider.ins.context.Thamsos.ToArray();
             MonHocItems = new();
@@ -429,6 +434,41 @@ namespace StudentManagement.ViewModel
                     throw new Exception("Vui lòng chọn khối");
                 }
 
+            }
+        }
+
+        public void Receive(PropertyChangedMessage<bool> message)
+        {
+            if(message.PropertyName == "IsCheckedMonHoc")
+            {
+                if (message.NewValue == false)
+                {
+                    IsCheckAllMonHoc = false;
+                }
+                else
+                {
+                    var items = MonHocItems.Where(x => x.IsCheckedMonHoc == true);
+                    if (items.Count() == MonHocItems.Count())
+                    {
+                        IsCheckAllMonHoc = true;
+                    }
+                }
+
+            }
+            else if (message.PropertyName == "IsSelectedLopHoc")
+            {
+                if (message.NewValue == false)
+                {
+                    IsCheckAllLopHoc = false;
+                }
+                else
+                {
+                    var items = LopHocItemDataGrids.Where(x => x.IsSelectedLopHoc == true);
+                    if (items.Count() == LopHocItemDataGrids.Count())
+                    {
+                        IsCheckAllLopHoc = true;
+                    }
+                }
             }
         }
     }
