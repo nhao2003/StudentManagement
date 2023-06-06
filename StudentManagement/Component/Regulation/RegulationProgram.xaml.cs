@@ -11,6 +11,7 @@ namespace StudentManagement.Component.Program
         public RegulationtProgram()
         {
             InitializeComponent();
+            
         }
 
     }

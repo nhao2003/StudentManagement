@@ -4,8 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:StudentManagement.Component.Regulation"
-    xmlns:uc="clr-namespace:StudentManagement.Component.CustomTextBox"
+    xmlns:validationrules="clr-namespace:StudentManagement.Component.Regulation.ValidationRules"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:converter="clr-namespace:StudentManagement.Component.Regulation.Converter"
     mc:Ignorable="d"
     Height="auto"
     Width="auto"
@@ -33,19 +34,95 @@
                     FontWeight="Bold"
                     FontSize="20"
                     Text="{Binding TitleAddSubject}" />
-                <uc:CustomTextBox
-                    IsEnabled="{Binding Input1Enabled}"
+                <!--Input1-->
+                <Border
+                    Margin="10"
                     Grid.Row="1"
-                    Padding="10 0 10 10"
-                    CustomTitle="{Binding Title1, Mode=OneWay}"
-                    TextInput="{Binding Input1,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }">
-                  
-                </uc:CustomTextBox>
-                <uc:CustomTextBox
+                    Grid.Column="1"
+                    BorderBrush="{StaticResource GreyPrimary}"
+                    BorderThickness="1"
+                    CornerRadius="3">
+                    <Grid
+                        Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                MinWidth="100"></ColumnDefinition>
+                            <ColumnDefinition
+                                MinWidth="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="15 0 0 0"
+                            Text="{Binding Title1, Mode=OneWay}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"></TextBlock>
+                        <TextBox
+                            x:Name="tb_input1"
+                            IsEnabled="{Binding Input1Enabled, UpdateSourceTrigger=PropertyChanged}"
+                            Grid.Column="1"
+                            MinWidth="100"
+                            Margin="0 0 15 0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            AcceptsReturn="True">
+                            <TextBox.Text>
+                                <Binding
+                                    Path="Input1"
+                                    Mode="TwoWay"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validationrules:MaValidation />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <!--Input2-->
+                <Border
+                    Margin="10"
                     Grid.Row="2"
-                    Padding="10 0 10 10"
-                    CustomTitle="{Binding Title2, Mode=OneWay}"
-                    TextInput="{Binding Input2,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                    Grid.Column="1"
+                    BorderBrush="{StaticResource GreyPrimary}"
+                    BorderThickness="1"
+                    CornerRadius="3">
+                    <Grid
+                        Margin="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                MinWidth="100"></ColumnDefinition>
+                            <ColumnDefinition
+                                MinWidth="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="15 0 0 0"
+                            Text="{Binding Title2, Mode=OneWay}"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"></TextBlock>
+                        <TextBox
+                            x:Name="tb_input2"
+                            Grid.Column="1"
+                            MinWidth="100"
+                            Margin="0 0 15 0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            AcceptsReturn="True">
+                            <TextBox.Text>
+                                <Binding
+                                    x:Name="Input2Valid"
+                                    Path="Input2"
+                                    Mode="TwoWay"
+                                    UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validationrules:TenValidation />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <!--Input3-->
                 <Border
                     Visibility="{Binding KhoiVisible}"
                     Margin="10 0 10 10"
@@ -69,6 +146,7 @@
                             VerticalAlignment="Center"></TextBlock>
 
                         <ComboBox
+                            Name="cb_khoi"
                             Grid.Column="1"
                             MinWidth="100"
                             Margin="0 0 15 0"
@@ -99,7 +177,44 @@
                     BorderBrush="{StaticResource BluePrimary}"
                     Content="Lưu thay đổi"
                     Margin="10"
-                    HorizontalAlignment="Right" />
+                    HorizontalAlignment="Right">
+                    <Button.Style>
+
+                        <Style
+                            TargetType="{x:Type Button}"
+                            BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                            <Style.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding ElementName=tb_input1, Path=(Validation.HasError)}"
+                                    Value="True">
+                                    <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding ElementName=tb_input2, Path=(Validation.HasError)}"
+                                    Value="True">
+                                    <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition
+                                            Binding="{Binding ElementName=cb_khoi, Path=SelectedIndex}"
+                                            Value="0" />
+                                        <Condition
+                                            Binding="{Binding ElementName=cb_khoi, Path=Visibility}"
+                                            Value="Hidden" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter
+                                        Property="IsEnabled"
+                                        Value="False" />
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
         </Border>
     </Grid>

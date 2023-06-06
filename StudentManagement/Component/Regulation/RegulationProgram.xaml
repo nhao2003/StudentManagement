@@ -5,16 +5,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:local="clr-namespace:StudentManagement.Component.Program"
     xmlns:uc="clr-namespace:StudentManagement.Component.CustomTextBox"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:proxy="clr-namespace:StudentManagement.Object"
+    xmlns:validationrules="clr-namespace:StudentManagement.Component.Regulation.ValidationRules"
+    xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
+    d:DataContext="{d:DesignInstance Type=viewmodel:RegulationViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="690"
-     x:Name="MyControl"
+    x:Name="MyControl"
     d:DesignWidth="1220">
     <Grid
         Background="{StaticResource BlueLight}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="241*" />
+            <ColumnDefinition
+                Width="369*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition
                 Height="Auto" />
@@ -27,11 +35,13 @@
             Grid.Row="0"
             FontWeight="Bold"
             FontSize="24"
-            Margin="25 10 10 10" />
+            Margin="25,10,10,10"
+            Grid.ColumnSpan="2" />
 
 
         <Grid
-            Grid.Row="1">
+            Grid.Row="1"
+            Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <!--Bảng data-->
                 <ColumnDefinition
@@ -74,42 +84,264 @@
                             <RowDefinition
                                 Height="Auto" />
                         </Grid.RowDefinitions>
-                        <uc:CustomTextBox
+                        <!--Tham số 0-->
+                        <Border
                             Margin="10"
-                            Grid.Column="0"
                             Grid.Row="0"
-                            CustomTitle="{Binding Path=Thamsos[0].Tents,  Mode=OneWay}"
-                            TextInput="{Binding Path=Thamsos[0].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
-                        <uc:CustomTextBox
+                            Grid.Column="0"
+                            BorderBrush="{StaticResource GreyPrimary}"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <Grid
+                                Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Margin="15 0 0 0"
+                                    Text="{Binding Path=Thamsos[0].Tents, Mode=OneTime}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"></TextBlock>
+                                <TextBox
+                                    x:Name="tbInput0"
+                                    Grid.Column="1"
+                                    MinWidth="100"
+                                    Margin="0 0 15 0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    AcceptsReturn="True">
+                                    <TextBox.Text>
+                                        <Binding
+                                            Path="Thamsos[0].Giatri"
+                                            Mode="TwoWay"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationrules:TuoiValidation />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                        </Border>
+                        <!--Tham số 1-->
+                        <Border
                             Margin="10"
-                            Grid.Column="1"
                             Grid.Row="0"
-                            CustomTitle="{Binding Path=Thamsos[1].Tents,  Mode=OneWay}"
-                            TextInput="{Binding Path=Thamsos[1].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
-                        <uc:CustomTextBox
-                            Margin="10"
-                            Grid.Column="0"
-                            Grid.Row="1"
-                            CustomTitle="{Binding Path=Thamsos[2].Tents,  Mode=OneWay}"
-                            TextInput="{Binding Path=Thamsos[2].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
-                        <uc:CustomTextBox
-                            Margin="10"
                             Grid.Column="1"
+                            BorderBrush="{StaticResource GreyPrimary}"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <Grid
+                                Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Margin="15 0 0 0"
+                                    Text="{Binding Path=Thamsos[1].Tents, Mode=OneTime}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"></TextBlock>
+                                <TextBox
+                                    x:Name="tbInput1"
+                                    Grid.Column="1"
+                                    MinWidth="100"
+                                    Margin="0 0 15 0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    AcceptsReturn="True">
+                                    <TextBox.Text>
+                                        <Binding
+                                            Path="Thamsos[1].Giatri"
+                                            Mode="TwoWay"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationrules:TuoiValidation />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                        </Border>
+                        <!--Tham số 2-->
+                        <Border
+                            Margin="10"
                             Grid.Row="1"
-                            CustomTitle="{Binding Path=Thamsos[3].Tents,  Mode=OneWay}"
-                            TextInput="{Binding Path=Thamsos[3].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
-                        <uc:CustomTextBox
-                            Margin="10"
                             Grid.Column="0"
-                            Grid.Row="2"
-                            CustomTitle="{Binding Path=Thamsos[4].Tents,  Mode=OneWay}"
-                            TextInput="{Binding Path=Thamsos[4].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
-                        <uc:CustomTextBox
+                            BorderBrush="{StaticResource GreyPrimary}"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <Grid
+                                Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Margin="15 0 0 0"
+                                    Text="{Binding Path=Thamsos[2].Tents, Mode=OneTime}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"></TextBlock>
+                                <TextBox
+                                    x:Name="tbInput2"
+                                    Grid.Column="1"
+                                    MinWidth="100"
+                                    Margin="0 0 15 0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    AcceptsReturn="True">
+                                    <TextBox.Text>
+                                        <Binding
+                                            Path="Thamsos[2].Giatri"
+                                            Mode="TwoWay"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationrules:DiemValidation />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                        </Border>
+                        <!--Tham số 3-->
+                        <Border
                             Margin="10"
+                            Grid.Row="1"
                             Grid.Column="1"
+                            BorderBrush="{StaticResource GreyPrimary}"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <Grid
+                                Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Margin="15 0 0 0"
+                                    Text="{Binding Path=Thamsos[3].Tents, Mode=OneTime}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"></TextBlock>
+                                <TextBox
+                                    x:Name="tbInput3"
+                                    Grid.Column="1"
+                                    MinWidth="100"
+                                    Margin="0 0 15 0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    AcceptsReturn="True">
+                                    <TextBox.Text>
+                                        <Binding
+                                            Path="Thamsos[3].Giatri"
+                                            Mode="TwoWay"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationrules:DiemValidation />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                        </Border>
+                        <!--Tham số 4-->
+                        <Border
+                            Margin="10"
                             Grid.Row="2"
-                            CustomTitle="{Binding Path=Thamsos[5].Tents,  Mode=OneWay}"
-                            TextInput="{Binding Path=Thamsos[5].Giatri,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" />
+                            Grid.Column="0"
+                            BorderBrush="{StaticResource GreyPrimary}"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <Grid
+                                Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Margin="15 0 0 0"
+                                    Text="{Binding Path=Thamsos[4].Tents, Mode=OneTime}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"></TextBlock>
+                                <TextBox
+                                    x:Name="tbInput4"
+                                    Grid.Column="1"
+                                    MinWidth="100"
+                                    Margin="0 0 15 0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    AcceptsReturn="True">
+                                    <TextBox.Text>
+                                        <Binding
+                                            Path="Thamsos[4].Giatri"
+                                            Mode="TwoWay"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationrules:SiSoValidation />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                        </Border>
+                        <!--Tham số 5-->
+                        <Border
+                            Margin="10"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            BorderBrush="{StaticResource GreyPrimary}"
+                            BorderThickness="1"
+                            CornerRadius="3">
+                            <Grid
+                                Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                    <ColumnDefinition
+                                        MinWidth="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Margin="15 0 0 0"
+                                    Text="{Binding Path=Thamsos[5].Tents, Mode=OneTime}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"></TextBlock>
+                                <TextBox
+                                    x:Name="tbInput5"
+                                    Grid.Column="1"
+                                    MinWidth="100"
+                                    Margin="0 0 15 0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right"
+                                    AcceptsReturn="True">
+                                    <TextBox.Text>
+                                        <Binding
+                                            Path="Thamsos[5].Giatri"
+                                            Mode="TwoWay"
+                                            UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <validationrules:DiemValidation />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                        </Border>
                         <Button
                             Command="{Binding CapNhatThamSoCommand}"
                             Grid.Column="1"
@@ -117,8 +349,62 @@
                             Background="{StaticResource BluePrimary}"
                             BorderBrush="{StaticResource BluePrimary}"
                             Content="Cập nhật"
-                            Margin="10"
-                            HorizontalAlignment="Right" />
+                            Margin="310,10,0,0"
+                            HorizontalAlignment="Left"
+                            Height="32"
+                            VerticalAlignment="Top">
+                            <Button.Style>
+                                
+                                <Style
+                                    TargetType="{x:Type Button}"
+                                    BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=tbInput0, Path=(Validation.HasError)}"
+                                            Value="True">
+                                            <Setter
+                                                Property="IsEnabled"
+                                                Value="False"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=tbInput1, Path=(Validation.HasError)}"
+                                            Value="True">
+                                            <Setter
+                                                Property="IsEnabled"
+                                                Value="False"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=tbInput2, Path=(Validation.HasError)}"
+                                            Value="True">
+                                            <Setter
+                                                Property="IsEnabled"
+                                                Value="False"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=tbInput3, Path=(Validation.HasError)}"
+                                            Value="True">
+                                            <Setter
+                                                Property="IsEnabled"
+                                                Value="False"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=tbInput4, Path=(Validation.HasError)}"
+                                            Value="True">
+                                            <Setter
+                                                Property="IsEnabled"
+                                                Value="False"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=tbInput5, Path=(Validation.HasError)}"
+                                            Value="True">
+                                            <Setter
+                                                Property="IsEnabled"
+                                                Value="False"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
 
                     </Grid>
 
@@ -128,7 +414,7 @@
                         SelectedIndex="{Binding TabIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Height="auto"
                         Grid.Row="1">
-           
+
 
                         <TabItem
                             Header="Môn học">
@@ -142,7 +428,7 @@
                                         <RowDefinition
                                             Height="auto" />
                                     </Grid.RowDefinitions>
-                                    <DataGrid 
+                                    <DataGrid
                                         Grid.Row="0"
                                         Margin="10"
                                         AutoGenerateColumns="False"
@@ -279,7 +565,7 @@
                             <Border
                                 Grid.Row="2"
                                 Height="auto">
-                                <Grid >
+                                <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition
                                             Height="*" />
@@ -312,7 +598,9 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                         <DataGrid.Resources>
-                                            <proxy:BindingProxy x:Key="proxy" Data="{Binding}" />
+                                            <proxy:BindingProxy
+                                                x:Key="proxy"
+                                                Data="{Binding}" />
                                         </DataGrid.Resources>
                                         <DataGrid.RowStyle>
                                             <Style

@@ -3,7 +3,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Messaging.Messages;
+using StudentManagement.Component.CustomTextBox;
 using StudentManagement.Component.Regulation;
+using StudentManagement.Component.Regulation.ValidationRules;
 using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
@@ -12,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace StudentManagement.ViewModel
 {
@@ -29,7 +32,7 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private bool isAddSubject = true;
         [ObservableProperty]
-        private String title1 = "";
+        private String title1 = "123";
         [ObservableProperty]
         private String title2 = "";
         [ObservableProperty]
@@ -58,7 +61,7 @@ namespace StudentManagement.ViewModel
         private LopHocItemDataGrid? selectedLopHoc = null;
         
         [ObservableProperty]
-        Visibility customTextBoxVis;
+        Visibility customTextBoxVis = Visibility.Visible;
         [ObservableProperty]
         private Visibility khoiVisible = Visibility.Visible;
         private int tabIndex = 0;
@@ -72,6 +75,10 @@ namespace StudentManagement.ViewModel
             }
             get { return tabIndex; }
         }
+
+        [ObservableProperty]
+        CustomTextBox[] regInputs = new CustomTextBox[6];
+
         [ObservableProperty]
         private bool isCheckAllMonHoc = false;
         [ObservableProperty]
@@ -92,6 +99,7 @@ namespace StudentManagement.ViewModel
             {
                 lopHocItemDataGrid.IsSelectedLopHoc = IsCheckAllLopHoc;
             }
+            
         }
 
         private RegulationInputState state;
@@ -180,21 +188,15 @@ namespace StudentManagement.ViewModel
             {
                 LopHocItemDataGrids.Add(new LopHocItemDataGrid(lop));
             }
-
+            
         }
+
         [RelayCommand]
         public void CapNhatThamSo()
         {
             try
             {
-                foreach (Thamso ts in Thamsos)
-                {
-                    if (!ValidDataType(ts.Giatri, ts.Typets))
-                    {
-                        throw new FormatException($"{ts.Tents} có kiểu dữ liệu là {ts.Typets}. Vui lòng nhập giá trị hợp lệ");
-                    }
-                }
-                DataProvider.ins.context.UpdateRange(thamsos);
+                DataProvider.ins.context.UpdateRange(Thamsos);
                 DataProvider.ins.context.SaveChanges();
                 MessageBox.Show("Cập nhật tham số thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -405,6 +407,7 @@ namespace StudentManagement.ViewModel
                 State = RegulationInputState.ModifyLopHoc;
             }
         }
+        
         private void ValidInput()
         {
             if (State == RegulationInputState.AddingMonHoc || State == RegulationInputState.ModifyMonHoc)
