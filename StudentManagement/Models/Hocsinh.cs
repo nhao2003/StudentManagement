@@ -36,33 +36,32 @@ namespace StudentManagement.Models
 
         public virtual ICollection<Lophocthucte> Malhtts { get; set; }
 
-        public TranscriptConfig toTranscript()
-        {
-            double diemMieng = -1;
-            double diem15 = -1;
-            double diem45 = -1;
-            double diemCK = -1;
+        //public TranscriptConfig toTranscript()
+        //{
+        //    double diemMieng = -1;
+        //    double diem15 = -1;
+        //    double diem45 = -1;
+        //    double diemCK = -1;
 
-            foreach (Diemmonhoc diem in Diemmonhocs)
-            {
-                if (diem.Malkt == "LKT001")
-                {
-                    diemMieng = diem.Diem;
-                }
-                else if (diem.Malkt == "LKT002")
-                {
-                    diem15 = diem.Diem;
-                }
-                else if (diem.Malkt == "LKT003")
-                {
-                    diem45 = diem.Diem;
-                }
-                else if (diem.Malkt == "LKT004")
-                {
-                    diemCK = diem.Diem;
-                }
-            }
-            return new TranscriptConfig(Mahs, Hotenhs, diemMieng.ToString(), diem15.ToString(), diem45.ToString(), diemCK.ToString());
-        }
+        //    foreach (Diemmonhoc diem in Diemmonhocs)
+        //    {
+        //        if (diem.Malkt == "LKT001")
+        //        {
+        //            diemMieng = diem.Diem;
+        //        }
+        //        else if (diem.Malkt == "LKT002")
+        //        {
+        //            diem15 = diem.Diem;
+        //        }
+        //        else if (diem.Malkt == "LKT003")
+        //        {
+        //            diem45 = diem.Diem;
+        //        }
+        //        else if (diem.Malkt == "LKT004")
+        //        {
+        //            diemCK = diem.Diem;
+        //        }
+        //    }
+        //}
     }
 }

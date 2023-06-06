@@ -18,15 +18,25 @@ namespace StudentManagement.ViewModel
         {
             InitMonHocs();
             InitHocKis();
+            selectedSubject = subjectList[0];
+            selectedSemeter = termList[0];
         }
+        private TranscriptConfig selectedConfig;
+        public TranscriptConfig SelectedConfig { get { return selectedConfig; } 
+            set { selectedConfig = value;
+                ClassDetailViewModel.Instance.setRightViewModel(new TranscriptRightViewModel(selectedConfig));
+                OnPropertyChanged(); } }
 
         [ObservableProperty]
-        private ObservableCollection<string> subjectList = new ObservableCollection<string>()
+        private Monhoc selectedSubject;
+        [ObservableProperty]
+        private Hocky selectedSemeter;
+        [ObservableProperty]
+        private ObservableCollection<Monhoc> subjectList = new ObservableCollection<Monhoc>()
         {
-            
         };
         [ObservableProperty]
-        private ObservableCollection<string> termList = new ObservableCollection<string>()
+        private ObservableCollection<Hocky> termList = new ObservableCollection<Hocky>()
         {
         };
 
@@ -57,9 +67,9 @@ namespace StudentManagement.ViewModel
             hocsinhs.Clear();
             transcripts.Clear();
             hocsinhs = lophocthucte.Mahs.ToList();
-            foreach(var hocsinh in hocsinhs)
+            foreach (var hocsinh in hocsinhs)
             {
-                transcripts.Add(hocsinh.toTranscript());
+                transcripts.Add(new TranscriptConfig(hocsinh, selectedSemeter, selectedSubject));
             }
         }
 
@@ -67,7 +77,7 @@ namespace StudentManagement.ViewModel
         {
             foreach (var mh in DataProvider.ins.context.Monhocs)
             {
-                subjectList.Add(mh.Tenmh);
+                subjectList.Add(mh);
             }
         }
 
@@ -75,7 +85,7 @@ namespace StudentManagement.ViewModel
         {
             foreach (var hk in DataProvider.ins.context.Hockies)
             {
-                termList.Add(hk.Tenhk);
+                termList.Add(hk);
             }
         }
     }

@@ -73,7 +73,7 @@
 
             <Grid Grid.Column="1" Grid.Row="1">
                 <Border  CornerRadius="20" Background="white" Margin="20">
-                    <Grid>
+                    <!--<Grid>
                         <TextBlock 
                         FontWeight="Normal"
                         FontSize="20"
@@ -85,7 +85,18 @@
                         >
                             Trống
                         </TextBlock>
-                    </Grid>
+                    </Grid>-->
+                    <ContentControl Grid.Row="2" Content="{Binding RightViewModel, UpdateSourceTrigger=PropertyChanged}">
+                        <ContentControl.Resources >
+                            <DataTemplate DataType="{x:Type viewmodel:EmptyRightViewModel}">
+                                <transript:EmptyRight ></transript:EmptyRight>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewmodel:TranscriptRightViewModel}">
+                                <transript:ConfigRight></transript:ConfigRight>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+
                 </Border>
             </Grid>
         </Grid>

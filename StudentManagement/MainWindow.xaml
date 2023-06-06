@@ -11,6 +11,7 @@
         xmlns:classMana="clr-namespace:StudentManagement.Component.ClassManagement"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
+        xmlns:schoolyear="clr-namespace:StudentManagement.Component.NewSchoolYear"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -83,7 +84,10 @@
                         <DataTemplate DataType="{x:Type viewModel:ClassManagementViewModel}">
                             <classMana:ClassManagement></classMana:ClassManagement>
                         </DataTemplate>
-                        
+                        <DataTemplate DataType="{x:Type viewModel:SchoolYearViewModel}" >
+                            <schoolyear:NewSchoolYear></schoolyear:NewSchoolYear>
+                        </DataTemplate>
+
                     </ContentControl.Resources>
                 </ContentControl>
             </Grid>

@@ -31,10 +31,14 @@
                 <ComboBox
                     materialDesign:HintAssist.Hint="Học kỳ"
                     ItemsSource="{Binding TermList}"
+                    SelectedItem="{Binding SelectedSemeter}"
+                    DisplayMemberPath="Tenhk"
                     Style="{StaticResource MyComboBoxStyle}" />
                 <ComboBox
                     materialDesign:HintAssist.Hint="Môn học"
                     ItemsSource="{Binding SubjectList}"
+                    SelectedItem="{Binding SelectedSubject}"
+                    DisplayMemberPath="Tenmh"
                     Style="{StaticResource MyComboBoxStyle}" />
                 <Button
                     Margin="18,18,18,18"
@@ -58,6 +62,7 @@
                 HorizontalScrollBarVisibility="Disabled"
                         Margin="10"
                 HeadersVisibility="Column"
+                SelectedItem="{Binding SelectedConfig ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                 ItemsSource="{Binding Transcripts}"
                 >
                 <DataGrid.Resources>
@@ -148,14 +153,20 @@
                         </DataGridCheckBoxColumn.HeaderStyle>
                     </DataGridCheckBoxColumn>
                     <materialDesign:DataGridTextColumn
-                        Width="auto"
-                        Binding="{Binding Id}"
+                        Width="1*"
+                        Binding="{Binding Student.Cccd}"
                         Header="STT" />
                     <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Name}"
+                        Width="2*"
+                        Binding="{Binding Student.Hotenhs}"
                         Header="Họ tên" />
                     <materialDesign:DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding DiemTB,FallbackValue='0', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Header="Điểm cuối kỳ" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--<materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Speaking,FallbackValue='0'}"
                         Header="Điểm Miệng" />
@@ -166,14 +177,8 @@
                     <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding FortyMin,FallbackValue='0'}"
-                        Header="Điểm 1 tiết" />
-                    <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding FinalExam,FallbackValue='0'}"
-                        Header="Điểm cuối kỳ" />
-                </DataGrid.Columns>
-            </DataGrid>
-            
+                        Header="Điểm 1 tiết" />-->
+
             <!-- Hai nut duoi -->
             <StackPanel 
                 Grid.Row="2" 
