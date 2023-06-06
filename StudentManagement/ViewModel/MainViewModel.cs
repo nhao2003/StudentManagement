@@ -2,14 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using StudentManagement.Models;
 using StudentManagement.Object;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace StudentManagement.ViewModel;
 
@@ -37,7 +31,6 @@ public sealed partial class MainViewModel : ObservableObject
     private object _subjectViewModel;
     private object _schoolyearViewModel;
     private object _classListDetailsViewModel;
-    private object _termSummaryViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -61,19 +54,15 @@ public sealed partial class MainViewModel : ObservableObject
     private void Init()
     {
 
-        DataProvider.ins.context.Hocsinhs.ToList();
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
         _classListViewModel = new ClassListViewModel();
-        _subjectViewModel = new SubjectViewModel();
         _classManaViewModel = new ClassManagementViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
         new Navigation("Thông tin", "infomation", _classListDetailsViewModel),
-        new Navigation("Môn học", "subject", _termSummaryViewModel),
-
         new Navigation("Môn học", "subject", _classListViewModel),
         new Navigation("Thông tin", "infomation", _classListViewModel),
         new Navigation("Môn học", "subject", _classManaViewModel),

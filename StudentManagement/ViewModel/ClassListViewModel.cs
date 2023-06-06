@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StudentManagement.Model;
+using StudentManagement.Object;
 using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
