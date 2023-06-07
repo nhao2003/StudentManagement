@@ -62,7 +62,8 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
                 var lhtt = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.Malop == lop.Malop).FirstOrDefault();
                 if(lhtt != null)
                 {
-                    var hocsinh = lhtt.Mahs. Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ002");
+
+                    var hocsinh = lhtt.Mahs. Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).FirstOrDefault() != null && x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ002");
                     foreach (var hs in hocsinh)
                     {
                         studentInClass.Add(new StudentWithClassItem(hs, currentNamhoc, false));

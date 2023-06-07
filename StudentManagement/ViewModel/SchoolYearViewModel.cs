@@ -27,7 +27,8 @@ public partial class SchoolYearViewModel : ObservableObject
     }
     private int soKhoi = 3;
     private int minKhoi = 10;
-
+    [ObservableProperty]
+    private String tenNamHoc;
     private static SchoolYearViewModel _ins;
     public static SchoolYearViewModel Ins
     {
@@ -65,20 +66,21 @@ public partial class SchoolYearViewModel : ObservableObject
         if (i == soKhoi - 1)
         {
             Namhoc namhoc = new Namhoc();
-            namhoc.Manh = Guid.NewGuid().ToString();
-            namhoc.Tennamhoc = "Năm học 2023";
+            namhoc.Manh = "N" + TenNamHoc.Substring(0,4);
+            namhoc.Tennamhoc = TenNamHoc;
+            namhoc.Isdeleted = false;
             var listClass = new List<Lophocthucte>();
             foreach (var studentwithclass in _addStudentToClassViewModel)
             {
                 studentwithclass.ClassCardList.ForEach(x =>
                 {
-                    x.getLopHocThucTe().Manh = namhoc.Manh;
-                    listClass.Add(x.getLopHocThucTe());
+                    listClass.Add(x.getLopHocThucTe(namhoc));
                 });
             }
+            namhoc.Lophocthuctes = listClass;
+            DataProvider.ins.context.Namhocs.Add(namhoc);
 
-            //DataProvider.ins.context.Namhocs.Add(namhoc);
-            //DataProvider.ins.context.SaveChanges();
+            DataProvider.ins.context.SaveChanges();
         }
         else
         {

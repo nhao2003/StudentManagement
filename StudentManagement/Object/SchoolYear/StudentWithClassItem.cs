@@ -22,10 +22,13 @@ namespace StudentManagement.Object.SchoolYear
                 if (currentClass != null)
                 {
                     className = currentClass.MalopNavigation.Khoi + currentClass.MalopNavigation.Tenlop;
-                    var kqNamhoc = student.Kqnamhocs.Where(x => x.Manh == namhoc.Manh).First();
-                    hocLuc = kqNamhoc.MaHocLucNavigation.TenHocLuc;
-                    hanhKiem = kqNamhoc.MaHanhKiemNavigation.TenHanhKiem;
-                    ketQua = kqNamhoc.MaKetQuaNavigation.TenKetQua;
+                    var kqNamhoc = student.Kqnamhocs.Where(x => x.Manh == namhoc.Manh).FirstOrDefault();
+                    if (kqNamhoc != null)
+                    {
+                        hocLuc = kqNamhoc.MaHocLucNavigation.TenHocLuc;
+                        hanhKiem = kqNamhoc.MaHanhKiemNavigation.TenHanhKiem;
+                        ketQua = kqNamhoc.MaKetQuaNavigation.TenKetQua;
+                    }
                     this.isSelected = isSelected;
                     lophoc = currentClass.MalopNavigation;
                 }

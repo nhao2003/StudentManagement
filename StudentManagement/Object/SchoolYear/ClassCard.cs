@@ -54,16 +54,21 @@ namespace StudentManagement.Object.SchoolYear
             StudentInClassDisplay = new ObservableCollection<StudentWithClassItem>(studentInClassDisplayTemp);
             OnPropertyChanged($"{nameof(StudentInClassDisplay)}");
         }
-        public Lophocthucte getLopHocThucTe()
+        // lh212211a1
+        Random ran = new Random(10000000);
+      
+        public Lophocthucte getLopHocThucTe(Namhoc namhoc)
         {
             Lophocthucte lophocthucte = new Lophocthucte();
             lophocthucte.Malop = lop.Malop;
-            lophocthucte.Malhtt = new Guid().ToString();
             List<Hocsinh> hocsinh = new List<Hocsinh>();
             foreach (var student in StudentInClassDisplay)
             {
                 hocsinh.Add(student.GetHocsinh());
             }
+            lophocthucte.Manh = namhoc.Manh;
+            lophocthucte.Isdeleted = false;
+            lophocthucte.Malhtt = namhoc.Manh + lop.Malop;
             lophocthucte.Mahs = hocsinh;
             return lophocthucte;
         }
