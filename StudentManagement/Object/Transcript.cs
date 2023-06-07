@@ -29,7 +29,7 @@ namespace StudentManagement.Object
             var loaidiem = DataProvider.ins.context.Loaikiemtras.ToList();
             foreach (var ld in loaidiem)
             {
-                Diemmonhoc diem = DataProvider.ins.context.Diemmonhocs.Where(x => x.Mahs == student.Mahs && x.Manh == namhoc.Manh && x.Mahk == semeter.Mahk && x.Malkt == ld.Malkt).FirstOrDefault();
+                Diemmonhoc diem = DataProvider.ins.context.Diemmonhocs.Where(x => x.Mahs == student.Mahs && x.Mamh == monhoc.Mamh && x.Manh == namhoc.Manh && x.Mahk == semeter.Mahk && x.Malkt == ld.Malkt).FirstOrDefault();
                 if (diem == null)
                 {
                     diem = new Diemmonhoc();
@@ -51,16 +51,16 @@ namespace StudentManagement.Object
                 {
                     diemmonhocs.Add(diem);
                 }
-                //DiemTB += diem.Diem * diem.MalktNavigation.Tile;
+                DiemTB += diem.Diem * diem.MalktNavigation.Tile;
             }
 
         }
         public void saveData()
         {
-           // DiemTB = 0;
+            DiemTB = 0;
             foreach (var d in diemmonhocs)
             {
-              //  DiemTB += d.Diem*d.MalktNavigation.Tile; 
+                DiemTB += d.Diem*d.MalktNavigation.Tile; 
             }
             DataProvider.ins.context.Diemmonhocs.UpdateRange(diemmonhocs);
             DataProvider.ins.context.SaveChanges();

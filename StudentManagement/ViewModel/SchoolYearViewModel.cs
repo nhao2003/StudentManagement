@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace StudentManagement.ViewModel;
@@ -65,6 +66,11 @@ public partial class SchoolYearViewModel : ObservableObject
     {
         if (i == soKhoi - 1)
         {
+            if(tenNamHoc == null  || tenNamHoc.Trim().Length == 0)
+            {
+                MessageBox.Show("Chưa nhập tên năm học");
+                return;
+            }
             Namhoc namhoc = new Namhoc();
             namhoc.Manh = "N" + TenNamHoc.Substring(0,4);
             namhoc.Tennamhoc = TenNamHoc;
@@ -81,6 +87,7 @@ public partial class SchoolYearViewModel : ObservableObject
             DataProvider.ins.context.Namhocs.Add(namhoc);
 
             DataProvider.ins.context.SaveChanges();
+            ContentViewModel = new AddSchoolYearInfomationViewModel();
         }
         else
         {

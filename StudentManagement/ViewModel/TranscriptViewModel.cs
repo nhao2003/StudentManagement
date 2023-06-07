@@ -24,13 +24,30 @@ namespace StudentManagement.ViewModel
         private TranscriptConfig selectedConfig;
         public TranscriptConfig SelectedConfig { get { return selectedConfig; } 
             set { selectedConfig = value;
-                ClassDetailViewModel.Instance.setRightViewModel(new TranscriptRightViewModel(selectedConfig));
+                if(selectedConfig != null) {
+                    ClassDetailViewModel.Instance.setRightViewModel(new TranscriptRightViewModel(selectedConfig));
+
+                }
                 OnPropertyChanged(); } }
 
-        [ObservableProperty]
+        private void Refresh()
+        {
+            InitStudents();
+            SelectedConfig = null;
+            ClassDetailViewModel.Instance.setRightViewModel(new EmptyRightViewModel());
+
+        }
         private Monhoc selectedSubject;
-        [ObservableProperty]
+        public Monhoc SelectedSubject { get { return selectedSubject; } set {  selectedSubject = value;
+                OnPropertyChanged();
+                Refresh();
+            }
+        }
         private Hocky selectedSemeter;
+        public Hocky SelectedSemeter { get {  return selectedSemeter; } set { selectedSemeter = value;
+                OnPropertyChanged();
+                Refresh();
+            } }
         [ObservableProperty]
         private ObservableCollection<Monhoc> subjectList = new ObservableCollection<Monhoc>()
         {
@@ -69,7 +86,7 @@ namespace StudentManagement.ViewModel
             hocsinhs = lophocthucte.Mahs.ToList();
             foreach (var hocsinh in hocsinhs)
             {
-                transcripts.Add(new TranscriptConfig(hocsinh, selectedSemeter, selectedSubject));
+                transcripts.Add(new TranscriptConfig(hocsinh, SelectedSemeter, SelectedSubject)) ;
             }
         }
 

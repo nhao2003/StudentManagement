@@ -39,6 +39,10 @@
                 </Grid.ColumnDefinitions>
                 <ContentControl Content="{Binding ContentViewModel, UpdateSourceTrigger=PropertyChanged}">
                     <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type viewmodel:AddSchoolYearInfomationViewModel}">
+                            <uc:AddSuccess></uc:AddSuccess>
+                        </DataTemplate>
+
                         <DataTemplate DataType="{x:Type viewmodel:AddStudentToClassViewModel}">
                             <uc:AddStudentToClass></uc:AddStudentToClass>
                         </DataTemplate>
