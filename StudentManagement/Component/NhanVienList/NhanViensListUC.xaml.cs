@@ -24,8 +24,7 @@ namespace StudentManagement.Component.NhanVienList
     /// </summary>
     public partial class NhanViensListUC : UserControl
     {
-        public ObservableCollection<Taikhoan> TaikhoanList { get; set; }
-        public Taikhoan Taikhoan { get; set; }
+
         public NhanViensListUC()
         {
             InitializeComponent();

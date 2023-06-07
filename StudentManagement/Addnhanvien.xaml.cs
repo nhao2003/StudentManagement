@@ -65,7 +65,6 @@ namespace StudentManagement
             Taikhoan = taikhoan;
             DialogResult = true;
             Close();
-
         }
     }
 }

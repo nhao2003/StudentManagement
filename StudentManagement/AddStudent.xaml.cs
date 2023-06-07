@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentManagement.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,14 +47,16 @@ namespace StudentManagement
             hocsinh.Email = email.Text;
             hocsinh.Dchi = dchi.Text;
             bool GT;
-            if(gt.Text == "Nam") GT = true;
+            if (gt.Text == "Nam") GT = true;
             else GT = false;
             hocsinh.Gioitinh = GT;
             hocsinh.Mahs = mahs.Text;
             hocsinh.Dantoc = dantoc.Text;
             hocsinh.Mahs = mahs.Text;
             hocsinh.Tongiao = tongiao.Text;
-            // Close the window
+            Hocsinh = hocsinh;
+            DialogResult = true;
+            //MessageBox.Show("okela");
             Close();
         }
     }
