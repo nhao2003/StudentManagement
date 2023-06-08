@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -36,8 +38,8 @@ namespace StudentManagement.Object
             .FirstOrDefault(kq => kq.Manh == Manh && kq.Mahk == Mahk && kq.Mamh == Mamh);
 
             this.DiemTB = kq?.DtbmonHocKy ?? 0.0;
-
-            this.Dat = (DiemTB > 5);
+            var diemDat = DataProvider.ins.context.Thamsos.Where(t => t.Id == "TS006").Select(t => t.Giatri).FirstOrDefault();
+            this.Dat = (DiemTB >= double.Parse(diemDat));
         }
     }
 }

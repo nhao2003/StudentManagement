@@ -39,16 +39,6 @@
                              ItemsSource="{Binding TermList}"
                               DisplayMemberPath="Tenhk"
                             materialDesign:HintAssist.Hint="Học kỳ"/>
-
-                    <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}"
-                            BorderBrush="LightGray" 
-                            Width="Auto"
-                            Height="30"
-                            Padding="5"
-                            ItemsSource="{Binding YearList}"
-                            SelectedItem="{Binding SelectedYear, Mode=TwoWay}"
-                            DisplayMemberPath="Tennamhoc"
-                            materialDesign:HintAssist.Hint="Năm học"/>
                     <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}"
                             BorderBrush="LightGray" 
                             Width="Auto"
@@ -172,29 +162,6 @@
                                 </Style>
                             </DataGrid.CellStyle>
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn
-                                    Binding="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
-                                    <!--<i:Interaction.Triggers>
-                        <i:DataTrigger
-                            Binding="IsSelected" Value="True">
-                            <i:InvokeCommandAction
-                                Command="{Binding Source={StaticResource StudentCourseRegistryVM}, Path=CourseUncheckedCommand}" CommandParameter="{ItemContainerTemplateKey}" />
-                        </i:DataTrigger>
-                    </i:Interaction.Triggers>-->
-                                    <DataGridCheckBoxColumn.Header>
-                                        <Border Background="Transparent">
-                                            <CheckBox Command="{Binding DataContext.AllItemsSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                IsChecked="{Binding DataContext.IsAllItemsSelected, RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
-                                        </Border>
-                                    </DataGridCheckBoxColumn.Header>
-                                    <DataGridCheckBoxColumn.HeaderStyle>
-                                        <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
-                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        </Style>
-                                    </DataGridCheckBoxColumn.HeaderStyle>
-                                </DataGridCheckBoxColumn>
                                 <materialDesign:DataGridTextColumn
                         Width="auto"
                         Binding="{Binding Stt}"
@@ -317,28 +284,7 @@
                                 </Style>
                             </DataGrid.CellStyle>
                             <DataGrid.Columns>
-                                <DataGridCheckBoxColumn
-                                    Binding="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
-                                    <!--<i:Interaction.Triggers>
-                        <i:DataTrigger
-                            Binding="IsSelected" Value="True">
-                            <i:InvokeCommandAction
-                                Command="{Binding Source={StaticResource StudentCourseRegistryVM}, Path=CourseUncheckedCommand}" CommandParameter="{ItemContainerTemplateKey}" />
-                        </i:DataTrigger>
-                    </i:Interaction.Triggers>-->
-                                    <DataGridCheckBoxColumn.Header>
-                                        <Border Background="Transparent">
-                                            <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=IsAllItemsSelected}" />
-                                        </Border>
-                                    </DataGridCheckBoxColumn.Header>
-                                    <DataGridCheckBoxColumn.HeaderStyle>
-                                        <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
-                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        </Style>
-                                    </DataGridCheckBoxColumn.HeaderStyle>
-                                </DataGridCheckBoxColumn>
+                                
                                 <materialDesign:DataGridTextColumn
                         Width="auto"
                         Binding="{Binding Stt}"

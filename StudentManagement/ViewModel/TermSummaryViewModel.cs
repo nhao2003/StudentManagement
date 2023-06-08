@@ -1,20 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.Messaging.Messages;
 using StudentManagement.Models;
 using StudentManagement.Object;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
-    public partial class TermSummaryViewModel : ObservableRecipient, IRecipient<PropertyChangedMessage<bool>>
+    public partial class TermSummaryViewModel : ObservableObject
     {
         [ObservableProperty]
         private ObservableCollection<Namhoc> yearList;
@@ -24,8 +20,7 @@ namespace StudentManagement.ViewModel
         private ObservableCollection<Hocky> termList;
         [ObservableProperty]
         private ObservableCollection<Monhoc> subjectList;
-        [ObservableProperty]
-        private Namhoc selectedYear;
+        private Namhoc SelectedYear;
         [ObservableProperty]
         private Hocky selectedTerm;
         [ObservableProperty]
@@ -41,21 +36,9 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private ObservableCollection<ClassSubjectSummaryData> classSubjectSummaries = new ObservableCollection<ClassSubjectSummaryData>();
         QUANLYHOCSINHContext data = DataProvider.ins.context;
-        [ObservableProperty]
-        private bool isAllItemsSelected;
-
-        [RelayCommand]
-        private void AllItemsSelected()
-        {
-            foreach(var item in TermSubjectSummaryDatas)
-            {
-                item.Selected = IsAllItemsSelected;
-            }
-        }
 
         public TermSummaryViewModel()
         {
-            WeakReferenceMessenger.Default.Register<PropertyChangedMessage<bool>>(this);
             TermList = new ObservableCollection<Hocky>(data.Hockies);
             YearList = new ObservableCollection<Namhoc>(data.Namhocs);
             SubjectList = new ObservableCollection<Monhoc>(data.Monhocs);
@@ -95,34 +78,32 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void Summary()
         {
-            if(SelectedTerm != null && SelectedSubject != null && SelectedYear != null)
+            SelectedYear = OverviewListViewModel.GetNamhoc;
+            if (SelectedYear == null)
             {
-                TermSubjectSummaryDatas.Clear();
-                MessageBox.Show(SelectedTerm.Tenhk + " " + SelectedYear.Tennamhoc + " " + SelectedSubject.Tenmh);
-                SummaryString = $"{SelectedTerm.Tenhk} - Môn học: {SelectedSubject.Tenmh}";
-                List<Lophocthucte> lophocthuctes = data.Lophocthuctes.Where(x => x.Manh == SelectedYear.Manh).ToList();
-                int i = 1;
-                foreach(var lophoc in lophocthuctes)
-                {   
-                    TermSubjectSummaryDatas.Add(new TermSubjectSummaryData(i, lophoc,SelectedYear.Manh,selectedTerm.Mahk,selectedSubject.Mamh));
-                    i++;
-                }
+                MessageBox.Show("Vui lòng chọn năm học");
+                return;
             }
-        }
+            if (SelectedTerm == null)
+            {
+                MessageBox.Show("Vui lòng chọn kỳ học");
+                return;
+            }
+            if (SelectedSubject == null)
+            {
+                MessageBox.Show("Vui lòng chọn môn học");
+                return;
+            }
 
-        public void Receive(PropertyChangedMessage<bool> message)
-        {
-            if(message.NewValue == false)
-            {
-                IsAllItemsSelected = false;
-            }
-            else
-            {
-                var items = TermSubjectSummaryDatas.Where(x => x.Selected == true);
-                if(items.Count() == TermSubjectSummaryDatas.Count())
-                {
-                    IsAllItemsSelected=true;
-                }
+            TermSubjectSummaryDatas.Clear();
+            MessageBox.Show(SelectedTerm.Tenhk + " " + SelectedYear.Tennamhoc + " " + SelectedSubject.Tenmh);
+            SummaryString = $"{SelectedTerm.Tenhk} - Môn học: {SelectedSubject.Tenmh}";
+            List<Lophocthucte> lophocthuctes = data.Lophocthuctes.Where(x => x.Manh == SelectedYear.Manh).ToList();
+            int i = 1;
+            foreach(var lophoc in lophocthuctes)
+            {   
+                TermSubjectSummaryDatas.Add(new TermSubjectSummaryData(i, lophoc,SelectedYear.Manh,selectedTerm.Mahk,selectedSubject.Mamh));
+                i++;
             }
         }
     }

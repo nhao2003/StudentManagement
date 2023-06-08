@@ -23,13 +23,6 @@ namespace StudentManagement.Object
         private int soLuongDat;
         [ObservableProperty]
         private String tiLe;
-        [ObservableProperty]
-        private bool selected;
-
-        partial void OnSelectedChanged(bool oldValue, bool newValue)
-        {
-            WeakReferenceMessenger.Default.Send(new PropertyChangedMessage<bool>(this,"Selected",oldValue,newValue));
-        }
 
         private Lophocthucte lophocthucte;
 
@@ -63,7 +56,8 @@ namespace StudentManagement.Object
                             && kq.Mamh == Mamh)
                 .Count();
             this.SoLuongDat = soluongdat;
-            this.TiLe = (soluongdat * 100 / SiSo).ToString("0.##") + "%";
+            if(SiSo != 0)
+                this.TiLe = (soluongdat * 100 / SiSo).ToString("0.##") + "%";
         }
     }
 }
