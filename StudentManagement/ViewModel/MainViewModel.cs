@@ -18,7 +18,6 @@ public sealed partial class MainViewModel : ObservableObject
     }
 
     #region property
-
     private object _programViewModel;
     private object _studentViewModel;
     private object _teacherViewModel;
@@ -31,6 +30,7 @@ public sealed partial class MainViewModel : ObservableObject
     private object _subjectViewModel;
     private object _schoolyearViewModel;
     private object _classListDetailsViewModel;
+    private object _classManaViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -53,11 +53,10 @@ public sealed partial class MainViewModel : ObservableObject
     #endregion
     private void Init()
     {
-
         _programViewModel = new ProgramViewModel();
-        _studentViewModel = new StudentViewModel();
-        _teacherViewModel = new TeacherViewModel();
-        _classListViewModel = new ClassListViewModel();
+        _regulationViewModel = new RegulationViewModel();
+        _termSummaryViewModel = new TermSummaryViewModel();
+        _classListDetailsViewModel = new ClassListDetailsViewModel();
         _classManaViewModel = new ClassManagementViewModel();
         _classListDetailsViewModel = new ClassListDetailsViewModel();
         _termSummaryViewModel = new TermSummaryViewModel();

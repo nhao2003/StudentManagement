@@ -4,25 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
+             xmlns:Global="clr-namespace:StudentManagement.Component.Global"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="770" d:DesignWidth="1220">
     <Border  Background="#E7F2FF">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.16*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <Global:OverviewList Grid.Row="0" DataContext="{Binding Overview}"/>
             <TextBlock 
-                Grid.Row="0"
+                Grid.Row="1"
                 FontWeight="Bold"
                 FontSize="24"
                 Height="30"
                 Margin="20, 10, 0 ,0"
                 Text="Danh sách lớp học"
             />
-            <Grid Grid.Row="1" Margin="0,10,0,0">
+            <Grid Grid.Row="2" Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -47,7 +50,7 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width="430"></ColumnDefinition>
