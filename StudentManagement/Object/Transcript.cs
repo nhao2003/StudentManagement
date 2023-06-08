@@ -21,12 +21,12 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private ObservableCollection<Diemmonhoc> diemmonhocs = new ObservableCollection<Diemmonhoc>();
         private Kqhockymonhoc kqhockymonh;
-        public TranscriptConfig(Hocsinh hocsinh, Hocky hocky, Monhoc monhoc)
+        public TranscriptConfig(Hocsinh hocsinh, Hocky hocky, Monhoc monhoc, Namhoc namhoc)
         {
             this.student = hocsinh;
             this.semeter = hocky;
             this.subject = monhoc;
-            this.namhoc = DataProvider.ins.context.Namhocs.First();
+            this.namhoc = namhoc;
             var loaidiem = DataProvider.ins.context.Loaikiemtras.ToList();
             foreach (var ld in loaidiem)
             {

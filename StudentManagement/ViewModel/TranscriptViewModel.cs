@@ -84,9 +84,10 @@ namespace StudentManagement.ViewModel
             hocsinhs.Clear();
             transcripts.Clear();
             hocsinhs = lophocthucte.Mahs.ToList();
+            Namhoc namhoc = lophocthucte.ManhNavigation;
             foreach (var hocsinh in hocsinhs)
             {
-                transcripts.Add(new TranscriptConfig(hocsinh, SelectedSemeter, SelectedSubject)) ;
+                transcripts.Add(new TranscriptConfig(hocsinh, SelectedSemeter, SelectedSubject,namhoc)) ;
             }
         }
 
