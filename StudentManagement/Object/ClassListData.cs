@@ -13,7 +13,7 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private String tenLop;
         [ObservableProperty]
-        private String giaoVien;
+        private String? giaoVien;
         [ObservableProperty]
         private int siSo;
         private Lophocthucte lophocthucte;
@@ -25,7 +25,7 @@ namespace StudentManagement.Object
         }
 
 
-        public ClassListData(int STT, int Khoi, String TenLop, String GiaoVien, int SiSo, Lophocthucte lophocthucte)
+        public ClassListData(int STT, int Khoi, String TenLop, String? GiaoVien, int SiSo, Lophocthucte lophocthucte)
         {
             this.Lophtt = lophocthucte;
             this.Stt = STT;
