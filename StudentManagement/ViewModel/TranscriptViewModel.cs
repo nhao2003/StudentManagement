@@ -6,9 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace StudentManagement.ViewModel
 {
@@ -18,8 +21,22 @@ namespace StudentManagement.ViewModel
         {
             InitMonHocs();
             InitHocKis();
+            
             selectedSubject = subjectList[0];
             selectedSemeter = termList[0];
+            DataGridColumns = new ObservableCollection<DataGridColumn>();
+            //GenerateColumns(DataObjects);
+
+        }
+        private ObservableCollection<DataGridColumn> _dataGridColumns;
+        public ObservableCollection<DataGridColumn> DataGridColumns
+        {
+            get => _dataGridColumns;
+            set
+            {
+                _dataGridColumns = value;
+                OnPropertyChanged();
+            }
         }
         private TranscriptConfig selectedConfig;
         public TranscriptConfig SelectedConfig { get { return selectedConfig; } 
@@ -89,8 +106,21 @@ namespace StudentManagement.ViewModel
             {
                 transcripts.Add(new TranscriptConfig(hocsinh, SelectedSemeter, SelectedSubject,namhoc)) ;
             }
-        }
+            DataGridColumns.Clear();
+                var diems = transcripts.First().Diemmonhocs;
+            DataGridTextColumn nameColumn = new DataGridTextColumn();
+            nameColumn.Header = "Tên học sinh";
+            nameColumn.Binding = new Binding("Student.Hotenhs");
+            DataGridColumns.Add(nameColumn);
 
+            foreach (var diem in diems)
+            {
+                DataGridTextColumn column = new DataGridTextColumn();
+                column.Header = diem.MalktNavigation.Tenloaikiemtra;
+                column.Binding = new Binding(string.Format("Diemmonhocs[{0}].Diem", diems.IndexOf(diem)));
+                DataGridColumns.Add(column);
+            }
+        }
         private void InitMonHocs()
         {
             foreach (var mh in DataProvider.ins.context.Monhocs)
@@ -107,4 +137,6 @@ namespace StudentManagement.ViewModel
             }
         }
     }
+
+
 }
