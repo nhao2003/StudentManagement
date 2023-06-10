@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace StudentManagement.Object.SchoolYear
@@ -21,9 +22,14 @@ namespace StudentManagement.Object.SchoolYear
             this.lop = lop;
             this.StudentInClassDisplay = studentWithClassItems;
             this.parent = parent;
+            String giatri = DataProvider.ins.context.Thamsos.Where(x => x.Tents.Equals("Sỉ số tối đa của lớp")).FirstOrDefault().Giatri;
+            maxStudent = int.Parse(giatri) != null ? int.Parse(giatri) : 0;
+            ratio = 0;
         }
-
-
+        [ObservableProperty]
+        private int maxStudent;
+        [ObservableProperty]
+        private int ratio;
         private AddStudentToClassViewModel parent;
         [ObservableProperty]
         private Lop lop;
@@ -36,6 +42,7 @@ namespace StudentManagement.Object.SchoolYear
         public void AddStudent(StudentWithClassItem student)
         {
             StudentInClassDisplay.Add(student);
+            Ratio =(int) ((float)StudentInClassDisplay.Count *100 / MaxStudent);
             OnPropertyChanged(nameof(StudentInClassDisplay));
         }
         [RelayCommand]
@@ -54,8 +61,6 @@ namespace StudentManagement.Object.SchoolYear
             StudentInClassDisplay = new ObservableCollection<StudentWithClassItem>(studentInClassDisplayTemp);
             OnPropertyChanged($"{nameof(StudentInClassDisplay)}");
         }
-        // lh212211a1
-        Random ran = new Random(10000000);
       
         public Lophocthucte getLopHocThucTe(Namhoc namhoc)
         {

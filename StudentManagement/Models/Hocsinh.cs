@@ -1,10 +1,13 @@
-﻿using StudentManagement.Object;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Object;
+using StudentManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 
 namespace StudentManagement.Models
 {
-    public partial class Hocsinh
+    public partial class Hocsinh:ObservableObject
     {
         public Hocsinh()
         {
@@ -63,5 +66,10 @@ namespace StudentManagement.Models
         //        }
         //    }
         //}
+        [RelayCommand]
+        private void removeStudentFromClass()
+        {
+            ClassListViewModel.Instance.removeStudent(this);
+        }
     }
 }

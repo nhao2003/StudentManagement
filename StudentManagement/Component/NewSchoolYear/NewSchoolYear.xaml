@@ -28,7 +28,7 @@
                        VerticalAlignment="Center"
                         Margin="400 0 0 0"
                        ></TextBlock>
-                    <TextBox Text="{Binding TenNamHoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource textbox_item}" Margin="30 5 5 5" materialDesign:HintAssist.Hint="Nhập tên năm học"></TextBox>
+                    <TextBlock Text="{Binding TenNamHoc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource textblock_item}" Margin="30 10 5 5" materialDesign:HintAssist.Hint="Nhập tên năm học"></TextBlock>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="1">

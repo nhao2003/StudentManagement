@@ -5,23 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="640" d:DesignWidth="255">
     <Border  CornerRadius="20" Background="white" Margin="20">
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="500" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
             <TextBlock 
+                Grid.Row="0"
                         FontWeight="Bold"
                         FontSize="20"
                         Height="30"
                         VerticalAlignment="Top"
-                        Margin="20"
                         >
                             Học sinh mới
             </TextBlock>
-            <StackPanel 
-                            Orientation="Vertical" 
-                            VerticalAlignment="Top" 
-                            Margin="20 60 20 0">
-                <ItemsControl ItemsSource="{Binding NewStudents}">
+
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" >
+                <ItemsControl ItemsSource="{Binding Parent.NewStudents}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
@@ -33,7 +37,25 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </StackPanel>
+            </ScrollViewer>
+            <Button
+                Grid.Row="2"
+                    Margin="0 4 0 0"
+                    Height="40"
+                    Command="{Binding Parent.addStudentToClassCommand}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Background="{StaticResource GreenPrimary}"
+                    Style="{StaticResource primary_button}">
+                <TextBlock >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="Thêm vào lớp: {0}">
+                            <Binding Path="Parent.ChoosenClass.Name"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Button>
+
         </Grid>
     </Border>
 </UserControl>

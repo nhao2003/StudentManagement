@@ -9,4 +9,5 @@
     <vm:ClassConfigViewModel x:Key="ClassConfigVM"></vm:ClassConfigViewModel>
     <vm:TranscriptViewModel x:Key="TranscriptVM"></vm:TranscriptViewModel>
     <vm:ClassManagementViewModel x:Key="ClassManagementVM"></vm:ClassManagementViewModel>
+    
 </ResourceDictionary>

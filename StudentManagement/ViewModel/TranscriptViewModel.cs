@@ -106,19 +106,22 @@ namespace StudentManagement.ViewModel
             {
                 transcripts.Add(new TranscriptConfig(hocsinh, SelectedSemeter, SelectedSubject,namhoc)) ;
             }
-            DataGridColumns.Clear();
-                var diems = transcripts.First().Diemmonhocs;
-            DataGridTextColumn nameColumn = new DataGridTextColumn();
-            nameColumn.Header = "Tên học sinh";
-            nameColumn.Binding = new Binding("Student.Hotenhs");
-            DataGridColumns.Add(nameColumn);
-
-            foreach (var diem in diems)
+            DataGridColumns = new ObservableCollection<DataGridColumn>();
+            if(transcripts.FirstOrDefault() != null)
             {
-                DataGridTextColumn column = new DataGridTextColumn();
-                column.Header = diem.MalktNavigation.Tenloaikiemtra;
-                column.Binding = new Binding(string.Format("Diemmonhocs[{0}].Diem", diems.IndexOf(diem)));
-                DataGridColumns.Add(column);
+                var diems = transcripts.First().Diemmonhocs;
+                DataGridTextColumn nameColumn = new DataGridTextColumn();
+                nameColumn.Header = "Tên học sinh";
+                nameColumn.Binding = new Binding("Student.Hotenhs");
+                DataGridColumns.Add(nameColumn);
+
+                foreach (var diem in diems)
+                {
+                    DataGridTextColumn column = new DataGridTextColumn();
+                    column.Header = diem.MalktNavigation.Tenloaikiemtra;
+                    column.Binding = new Binding(string.Format("Diemmonhocs[{0}].Diem", diems.IndexOf(diem)));
+                    DataGridColumns.Add(column);
+                }
             }
         }
         private void InitMonHocs()
@@ -137,6 +140,4 @@ namespace StudentManagement.ViewModel
             }
         }
     }
-
-
 }

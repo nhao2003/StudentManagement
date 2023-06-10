@@ -65,9 +65,8 @@ public sealed partial class MainViewModel : ObservableObject
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
-        _classListViewModel = new ClassListViewModel();
+        //_classListViewModel = new ClassListViewModel();
         _subjectViewModel = new SubjectViewModel();
-        _classManaViewModel = new ClassManagementViewModel();
         _schoolyearViewModel = new SchoolYearViewModel();
 
         leftNavigations = new ObservableCollection<Navigation>()
@@ -76,10 +75,10 @@ public sealed partial class MainViewModel : ObservableObject
         new Navigation("Thông tin", "infomation", _classListDetailsViewModel),
         new Navigation("Môn học", "subject", _termSummaryViewModel),
 
-        new Navigation("Môn học", "subject", _classListViewModel),
-        new Navigation("Thông tin", "infomation", _classListViewModel),
-        new Navigation("Môn học", "subject", _classManaViewModel),
-        new Navigation("Năm học", "subject", _schoolyearViewModel),
+        //new Navigation("Môn học", "subject", new ClassListViewModel()),
+        //new Navigation("Thông tin", "infomation", ),
+        new Navigation("Lớp học", "subject", new ClassManagementViewModel()),
+        new Navigation("Thêm năm học", "subject", _schoolyearViewModel),
     };
         leftNavigations[0].IsPress = true;
     }

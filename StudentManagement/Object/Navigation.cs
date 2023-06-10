@@ -14,7 +14,8 @@ namespace StudentManagement.Object;
 public partial class Navigation : ObservableObject
 {
     public string NavigationHeader { get; set; }
-    public string Icon { get; set; }    private object NavigationItemViewModel { get; set; }
+    public string Icon { get; set; }    
+    private object NavigationItemViewModel { get; set; }
     public MainViewModel MainViewModel { get; set; }
     private bool isPress;
     public bool IsPress
@@ -37,6 +38,17 @@ public Navigation(string navigationheader, string icon, object navigationItemVie
             item.IsPress = false;
         }
         IsPress = true;
-        MainViewModel.Instance.setViewModel(NavigationItemViewModel);
+        if (NavigationHeader.Equals("Lớp học"))
+        {
+            MainViewModel.Instance.setViewModel(new ClassManagementViewModel());
+        }
+        else if (NavigationHeader.Equals("Thêm năm học"))
+        {
+            MainViewModel.Instance.setViewModel(new SchoolYearViewModel());
+        }
+        else
+        {
+            MainViewModel.Instance.setViewModel(NavigationItemViewModel);
+        }
     }
 }
