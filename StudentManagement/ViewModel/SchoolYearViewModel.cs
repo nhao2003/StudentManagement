@@ -24,6 +24,13 @@ public partial class SchoolYearViewModel : ObservableObject
             khoiList.Add((i + minKhoi));
             _addStudentToClassViewModel.Add(new AddStudentToClassViewModel(3, 10, i));
         }
+        var maxYear = DataProvider.ins.context.Namhocs.OrderByDescending(x => x.Manh).FirstOrDefault();
+        if(maxYear != null)
+        {
+            String year = maxYear.Manh.ToString().Substring(1, maxYear.Manh.Length - 1);
+            int yearInt = int.Parse(year);
+            TenNamHoc = (yearInt + 1).ToString() + "-"+(yearInt + 2).ToString();
+        }
         Init();
     }
     private int soKhoi = 3;
@@ -66,9 +73,9 @@ public partial class SchoolYearViewModel : ObservableObject
     {
         if (i == soKhoi - 1)
         {
-            if(tenNamHoc == null  || tenNamHoc.Trim().Length == 0)
+
+            if(TenNamHoc == null  || TenNamHoc.Trim().Length == 0)
             {
-                MessageBox.Show("Chưa nhập tên năm học");
                 return;
             }
             Namhoc namhoc = new Namhoc();

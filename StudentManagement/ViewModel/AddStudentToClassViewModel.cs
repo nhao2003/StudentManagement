@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using StudentManagement.Models;
 using StudentManagement.Object.SchoolYear;
 using System;
@@ -17,7 +18,7 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
     {
         this.minKhoi = minKhoi;
         this.currentIndex = currentIndex;
-        this.currentNamhoc = DataProvider.ins.context.Namhocs.ToList().First();
+        this.currentNamhoc = DataProvider.ins.context.Namhocs.ToList().OrderByDescending(x=>x.Manh).FirstOrDefault();
         this.StudentEmptyDisplay = new ObservableCollection<StudentWithClassItem>();
         ClassCardList = new List<ClassCard>();
         for (int i = 0; i < soKhoi; i++)
@@ -28,7 +29,11 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
         InitClass();
         CurrentClass = ClassCardList[0];
         selectedIndexTab = 1;
+        String giatri = DataProvider.ins.context.Thamsos.Where(x => x.Tents.Equals ("Sỉ số tối đa của lớp")).FirstOrDefault().Giatri;
+        maxStudentInClass = int.Parse(giatri) != null ? int.Parse(giatri) : 0;
     }
+    [ObservableProperty]
+    private int maxStudentInClass;
     private ClassCard currentClass;
     public ClassCard CurrentClass
     {
@@ -46,62 +51,97 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
     private ObservableCollection<int> khoiList = new ObservableCollection<int>();
     private void InitClass()
     {
-        if (selectedKhoi == minKhoi)
+        try
         {
-            //lay hoc sinh trong
-            var emptyStudent = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count == 0).ToList();
-            foreach (var hs in emptyStudent)
-            {
-                StudentEmptyDisplay.Add(new StudentWithClassItem(hs, currentNamhoc));
-            }
-            var lopList = DataProvider.ins.context.Lops.Where(x => x.Khoi == selectedKhoi).ToList();
-            foreach (var lop in lopList)
-            {
-                ObservableCollection<StudentWithClassItem> studentInClass = new ObservableCollection<StudentWithClassItem>();
-                //lay hoc sinh o lai lop
-                var lhtt = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.Malop == lop.Malop).FirstOrDefault();
-                if(lhtt != null)
+                StudentEmptyDisplay.Clear();
+                if (selectedKhoi == minKhoi)
                 {
+                    //lay hoc sinh moi
+                    var emptyStudent = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count == 0).ToList();
+                    foreach (var hs in emptyStudent)
+                    {
+                        StudentEmptyDisplay.Add(new StudentWithClassItem(hs, currentNamhoc));
+                    }
+                    var lopList = DataProvider.ins.context.Lops.Where(x => x.Khoi == selectedKhoi).ToList();
+                    foreach (var lop in lopList)
+                    {
+                        ObservableCollection<StudentWithClassItem> studentInClass = new ObservableCollection<StudentWithClassItem>();
+                        //lay hoc sinh o lai lop
+                        var lhtt = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.Malop == lop.Malop).FirstOrDefault();
+                        if (lhtt != null)
+                        {
+                            var hocsinh = lhtt.Mahs.Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).FirstOrDefault() != null && x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ002");
+                            foreach (var hs in hocsinh)
+                            {
+                                studentInClass.Add(new StudentWithClassItem(hs, currentNamhoc, false));
+                            }
+                        }
+                        ClassCard classCard = new ClassCard(lop, studentInClass, this);
+                        ClassCardList.Add(classCard);
+                    }
+                }
+                else
+                {
+                    // hoc sinh o lop da xoa va len lop
+                    var lhtt3 = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.MalopNavigation.Isdeleted == true && x.MalopNavigation.Khoi == selectedKhoi - 1).ToList();
+                    if (lhtt3 != null)
+                    {
+                        foreach (var lop in lhtt3)
+                        {
+                            var hss = lop.Mahs.Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).FirstOrDefault() != null && x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ001");
+                            foreach (var hs in hss)
+                            {
+                                StudentEmptyDisplay.Add(new StudentWithClassItem(hs, currentNamhoc, false));
+                            }
+                        }
+                    }
+                    //hoc sinh o lop da xoa va o lai lop
+                    var lhtt4 = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.MalopNavigation.Isdeleted == true && x.MalopNavigation.Khoi == selectedKhoi).ToList();
+                    if (lhtt4 != null)
+                    {
+                        foreach (var lop in lhtt4)
+                        {
+                            var hss = lop.Mahs.Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).FirstOrDefault() != null && x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ002");
+                            foreach (var hs in hss)
+                            {
+                                StudentEmptyDisplay.Add(new StudentWithClassItem(hs, currentNamhoc, false));
+                            }
+                        }
+                    }
+                    // hoc sinh o lop chua xoa
+                    var lopList = DataProvider.ins.context.Lops.Where(x => x.Khoi == selectedKhoi && x.Isdeleted == false).ToList();
+                    foreach (var lop in lopList)
+                    {
+                        ObservableCollection<StudentWithClassItem> studentInClass = new ObservableCollection<StudentWithClassItem>();
+                        //lay hoc sinh cu
+                        var lhtt = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.MalopNavigation.Khoi == selectedKhoi - 1 && x.MalopNavigation.Tenlop == lop.Tenlop).FirstOrDefault();
+                        if (lhtt != null)
+                        {
+                            var hss = lhtt.Mahs.Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).FirstOrDefault() != null && x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ001");
+                            foreach (var hs in hss)
+                            {
+                                studentInClass.Add(new StudentWithClassItem(hs, currentNamhoc, false));
+                            }
+                        }
+                        //lay hoc sinh o lai lop
+                        var lhtt2 = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.Malop == lop.Malop).FirstOrDefault();
+                        if (lhtt2 != null)
+                        {
+                            var hocsinh2 = lhtt2.Mahs.Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ002");
+                            foreach (var hs in hocsinh2)
+                            {
+                                studentInClass.Add(new StudentWithClassItem(hs, currentNamhoc, false));
+                            }
+                        }
 
-                    var hocsinh = lhtt.Mahs. Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).FirstOrDefault() != null && x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ002");
-                    foreach (var hs in hocsinh)
-                    {
-                        studentInClass.Add(new StudentWithClassItem(hs, currentNamhoc, false));
+                        ClassCard classCard = new ClassCard(lop, studentInClass, this);
+                        ClassCardList.Add(classCard);
                     }
                 }
-                ClassCard classCard = new ClassCard(lop, studentInClass, this);
-                ClassCardList.Add(classCard);
-            }
         }
-        else
+        catch (Exception ex)
         {
-            var lopList = DataProvider.ins.context.Lops.Where(x => x.Khoi == selectedKhoi).ToList();
-            foreach (var lop in lopList)
-            {
-                ObservableCollection<StudentWithClassItem> studentInClass = new ObservableCollection<StudentWithClassItem>();
-                //lay hoc sinh cu
-                var lhtt = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.MalopNavigation.Khoi == selectedKhoi - 1 && x.MalopNavigation.Tenlop == lop.Tenlop).FirstOrDefault();
-                if(lhtt != null)
-                {
-                    var hss = lhtt.Mahs.Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).FirstOrDefault() != null && x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ001");
-                    foreach (var hs in hss)
-                    {
-                        studentInClass.Add(new StudentWithClassItem(hs, currentNamhoc, false));
-                    }
-                }
-                //lay hoc sinh o lai lop
-                var lhtt2 = DataProvider.ins.context.Lophocthuctes.Where(x => x.Manh == currentNamhoc.Manh && x.Malop == lop.Malop).FirstOrDefault();
-                if(lhtt2 != null)
-                {
-                    var hocsinh2 = lhtt2.Mahs.Where(x => x.Kqnamhocs.Where(x => x.Manh == currentNamhoc.Manh).First().MaKetQua == "KQ002");
-                    foreach (var hs in hocsinh2)
-                    {
-                        studentInClass.Add(new StudentWithClassItem(hs, currentNamhoc, false));
-                    }
-                }
-                ClassCard classCard = new ClassCard(lop, studentInClass, this);
-                ClassCardList.Add(classCard);
-            }
+            return;
         }
     }
     [RelayCommand]
@@ -115,14 +155,22 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
     [RelayCommand]
     private void addStudentToCurrentClass()
     {
+        
         ObservableCollection<StudentWithClassItem> studentInClassDisplayTemp = new ObservableCollection<StudentWithClassItem>(StudentEmptyDisplay);
         foreach (var student in StudentEmptyDisplay)
         {
             if (student.getSelected() == true)
             {
-                student.setSelected();
-                currentClass.AddStudent(student);
-                studentInClassDisplayTemp.Remove(student);
+                if(CurrentClass.StudentInClassDisplay.Count < maxStudentInClass)
+                {
+                    student.setSelected();
+                    CurrentClass.AddStudent(student);
+                    studentInClassDisplayTemp.Remove(student);
+                }
+                else
+                {
+                    student.setSelected();
+                }
             }
         }
         //StudentEmptyDisplay = new ObservableCollection<StudentWithClassItem>();

@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
+             xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
              d:DesignHeight="770" d:DesignWidth="1220">
     <Border  Background="{StaticResource BlueLight}" Margin="20">
         <Grid>
@@ -91,8 +93,22 @@
                 </Border>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">
-                <local:NewStudentsCard Visibility="{Binding NewStudentsVisibility, UpdateSourceTrigger=PropertyChanged}"></local:NewStudentsCard>
-                <local:ClassStudentsCard Visibility="{Binding ClassStudentsVisibility, UpdateSourceTrigger=PropertyChanged}"></local:ClassStudentsCard>
+                <Border  CornerRadius="20" Background="white" Margin="0 20 0 20">
+
+                    <ContentControl Grid.Row="2" Content="{Binding RightViewModel, UpdateSourceTrigger=PropertyChanged}">
+                        <ContentControl.Resources >
+                            <DataTemplate DataType="{x:Type viewmodel:EmptyRightViewModel}">
+                                <transript:EmptyRight ></transript:EmptyRight>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewmodel:ClassListNewStudentRightViewModel}">
+                                <local:NewStudentsCard></local:NewStudentsCard>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewmodel:ClassListRightViewModel}">
+                                <local:ClassStudentsCard></local:ClassStudentsCard>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </Border>
             </Grid>
         </Grid>
     </Border>

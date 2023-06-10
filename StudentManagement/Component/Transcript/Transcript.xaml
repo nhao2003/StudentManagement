@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
              mc:Ignorable="d" 
              d:DesignHeight="690" d:DesignWidth="1220">
     <Border  CornerRadius="20" Background="white" Margin="20">
@@ -47,10 +48,19 @@
                     <TextBlock Text="Kết quả" />
                 </Button>
             </StackPanel>
-            
+            <Grid>
+                
+            </Grid>
             <!-- Data -->
             <DataGrid
+                Grid.Row="1"
+                local:DataGridColumnsBehavior.BindableColumns="{Binding DataGridColumns }"
                 AutoGenerateColumns="False"
+                ItemsSource="{Binding Transcripts}"
+                >
+            </DataGrid>
+            <!--<DataGrid
+                Visibility="Hidden"
                 Grid.Row="1"
                 Background="{StaticResource GreyLight}"
                 ScrollViewer.CanContentScroll="True" 
@@ -64,14 +74,11 @@
                 HeadersVisibility="Column"
                 SelectedItem="{Binding SelectedConfig ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                 ItemsSource="{Binding Transcripts}"
+                AutoGenerateColumns="False"
+                local:DataGridColumnsBehavior.BindableColumns="{Binding DataGridColumns }"
+
                 >
-                <DataGrid.Resources>
-                    <!--<Style
-                        x:Key="test"
-                        BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}"
-                        TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment" Value="Center" />
-                        </Style>-->
+                                <DataGrid.Resources>
                     <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                         <Setter Property="ContentTemplate">
@@ -114,12 +121,12 @@
                                         </Grid.ToolTip>
                                         <Grid.ContextMenu>
                                             <ContextMenu>
-                                                <!--<MenuItem
+                                                --><!--<MenuItem
                                                     Command="{Binding Source={StaticResource BindingProxy}, Path=Data.DataContext.DeleteFile}"
                                                     CommandParameter="{Binding Source={StaticResource BindingProxy}, Path=Data.SelectedItems}"
                                                     Foreground="{StaticResource ErrorMain}"
                                                     Header="Xóa tài liệu"
-                                                    Icon="{materialDesign:PackIcon Kind=DeleteOutline}" />-->
+                                                    Icon="{materialDesign:PackIcon Kind=DeleteOutline}" />--><!--
                                             </ContextMenu>
                                         </Grid.ContextMenu>
                                         <ContentPresenter VerticalAlignment="Center" />
@@ -129,18 +136,18 @@
                         </Setter>
                     </Style>
                 </DataGrid.CellStyle>
-                <DataGrid.Columns>
+                --><!--<DataGrid.Columns>
                     <DataGridCheckBoxColumn
                     Binding="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                     EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
                     ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
-                        <!--<i:Interaction.Triggers>
+                        --><!--<i:Interaction.Triggers>
                         <i:DataTrigger
                             Binding="IsSelected" Value="True">
                             <i:InvokeCommandAction
                                 Command="{Binding Source={StaticResource StudentCourseRegistryVM}, Path=CourseUncheckedCommand}" CommandParameter="{ItemContainerTemplateKey}" />
                         </i:DataTrigger>
-                    </i:Interaction.Triggers>-->
+                    </i:Interaction.Triggers>--><!--
                         <DataGridCheckBoxColumn.Header>
                             <Border Background="Transparent">
                                 <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=IsAllItemsSelected}" />
@@ -164,8 +171,29 @@
                         Width="*"
                         Binding="{Binding DiemTB,FallbackValue='0', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         Header="Điểm cuối kỳ" />
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGridTemplateColumn Header="Điểm môn học" Width="auto">
+                        
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Diemmonhocs}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"> 
+                                                <TextBlock Text="{Binding Diem}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>--><!--
+            </DataGrid>-->
             <!--<materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Speaking,FallbackValue='0'}"

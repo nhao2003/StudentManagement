@@ -12,12 +12,16 @@
         BorderBrush="Gray" 
         BorderThickness="1"
         Padding="10"
-        Width="210">
+        Width="240">
         <Grid>
-            <StackPanel Orientation="Horizontal">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
                 <Image Height="37" HorizontalAlignment="Left" Margin="0" Source="{Binding UrlAvatar}"/>
                 <TextBlock 
-                    Text="{Binding Name}"
+                    Text="{Binding Hocsinh.Hotenhs}"
                     FontWeight="SemiBold"
                     FontSize="14"
                     Height="auto"
@@ -27,6 +31,7 @@
                     Margin="10">
                 </TextBlock>
             </StackPanel>
+            <CheckBox Grid.Column="1" IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></CheckBox>
         </Grid>
     </Border>
 </UserControl>

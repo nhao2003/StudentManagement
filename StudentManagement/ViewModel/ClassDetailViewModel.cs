@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.VisualBasic;
 using StudentManagement.Model;
 using StudentManagement.Models;
 using StudentManagement.Object;
@@ -37,12 +38,14 @@ namespace StudentManagement.ViewModel
         private object rightViewModel;
         private void Init()
         {
+            
             _transcriptViewModel = new TranscriptViewModel();
             _classconfigViewModel = new ClassConfigViewModel();
             _emptyRightViewModel = new EmptyRightViewModel();
             //_transcriptRightViewModel = new TranscriptRightViewModel();
             ContentViewModel = _transcriptViewModel;
             rightViewModel = _emptyRightViewModel;
+
         }
         public void setRightViewModel(object viewmodel)
         {
