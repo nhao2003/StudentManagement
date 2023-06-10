@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagement.Object
 {
-    public partial class ClassSubjectSummaryData : ObservableObject
+    public partial class ClassDetailsSummaryItem : ObservableObject
     {
         [ObservableProperty]
         private int stt;
@@ -19,10 +19,10 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private double diemTB;
         [ObservableProperty]
-        private bool dat;
+        private string dat;
         [ObservableProperty]
         private int hang;
-        public ClassSubjectSummaryData(int Stt, String HoTen, double DiemTB, bool Dat, int Hang)
+        public ClassDetailsSummaryItem(int Stt, String HoTen, double DiemTB, string Dat, int Hang)
         {
             this.Stt = Stt;
             this.HoTen = HoTen;
@@ -30,7 +30,10 @@ namespace StudentManagement.Object
             this.Dat = Dat;
             this.Hang = Hang;
         }
-        public ClassSubjectSummaryData(int Stt,Hocsinh hocsinh, String Manh, String Mahk, String Mamh)
+        public ClassDetailsSummaryItem()
+        {
+        }
+        public ClassDetailsSummaryItem(int Stt,Hocsinh hocsinh, String Manh, String Mahk, String Mamh)
         {
             this.Stt= Stt;
             this.HoTen = hocsinh.Hotenhs; 
@@ -39,7 +42,18 @@ namespace StudentManagement.Object
 
             this.DiemTB = kq?.DtbmonHocKy ?? 0.0;
             var diemDat = DataProvider.ins.context.Thamsos.Where(t => t.Id == "TS006").Select(t => t.Giatri).FirstOrDefault();
-            this.Dat = (DiemTB >= double.Parse(diemDat));
+            this.Dat = (DiemTB >= double.Parse(diemDat)) ? "Đạt" : "Không đạt";
+        }
+        public ClassDetailsSummaryItem(int Stt, Hocsinh hocsinh, String Manh, String Mahk)
+        {
+            this.Stt = Stt;
+            this.HoTen = hocsinh.Hotenhs;
+            var kq = hocsinh.Kqhockytonghops
+            .FirstOrDefault(kq => kq.Manh == Manh && kq.Mahk == Mahk);
+
+            this.DiemTB = kq?.DtbtatCaMonHocKy ?? 0.0;
+            var diemDat = DataProvider.ins.context.Thamsos.Where(t => t.Id == "TS006").Select(t => t.Giatri).FirstOrDefault();
+            this.Dat = (DiemTB >= double.Parse(diemDat)) ? "Đạt" : "Không đạt";
         }
     }
 }

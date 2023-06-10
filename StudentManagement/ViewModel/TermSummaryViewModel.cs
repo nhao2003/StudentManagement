@@ -13,6 +13,14 @@ namespace StudentManagement.ViewModel
     public partial class TermSummaryViewModel : ObservableObject
     {
         [ObservableProperty]
+        private Visibility termVisibility = Visibility.Visible;
+        [ObservableProperty]
+        private Visibility subjectVisibility = Visibility.Visible;
+        [ObservableProperty]
+        private ObservableCollection<SummaryTypeItem> summaryTypeItems;
+        [ObservableProperty]
+        private SummaryTypeItem selectedType;
+        [ObservableProperty]
         private ObservableCollection<Namhoc> yearList;
         [ObservableProperty]
         private OverviewListViewModel overview;
@@ -30,11 +38,11 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private string classString;
         [ObservableProperty]
-        private TermSubjectSummaryData selectedClass;
+        private TermSummaryItem selectedClass;
         [ObservableProperty]
-        private ObservableCollection<TermSubjectSummaryData> termSubjectSummaryDatas = new ObservableCollection<TermSubjectSummaryData>();
+        private ObservableCollection<TermSummaryItem> termSummaryItems = new ObservableCollection<TermSummaryItem>();
         [ObservableProperty]
-        private ObservableCollection<ClassSubjectSummaryData> classSubjectSummaries = new ObservableCollection<ClassSubjectSummaryData>();
+        private ObservableCollection<ClassDetailsSummaryItem> classDetailsSummaryItems = new ObservableCollection<ClassDetailsSummaryItem>();
         QUANLYHOCSINHContext data = DataProvider.ins.context;
 
         public TermSummaryViewModel()
@@ -43,11 +51,36 @@ namespace StudentManagement.ViewModel
             YearList = new ObservableCollection<Namhoc>(data.Namhocs);
             SubjectList = new ObservableCollection<Monhoc>(data.Monhocs);
             Overview = new OverviewListViewModel();
+            SummaryTypeItems = new ObservableCollection<SummaryTypeItem>()
+            {
+                new SummaryTypeItem(SummaryType.SubjectSummary, "Báo cáo tổng kết môn"),
+                new SummaryTypeItem(SummaryType.TermSummary, "Báo cáo tổng kết học kỳ"),
+                new SummaryTypeItem(SummaryType.YearSummary, "Tổng kết năm học"),
+            };
+        }
+        [RelayCommand]
+        private void SelectedTypeChanged()
+        {
+            switch(SelectedType.Type)
+            {
+                case SummaryType.SubjectSummary:
+                    TermVisibility = Visibility.Visible;
+                    SubjectVisibility = Visibility.Visible;
+                    break;
+                case SummaryType.TermSummary:
+                    TermVisibility = Visibility.Visible;
+                    SubjectVisibility = Visibility.Collapsed;
+                    break;
+                case SummaryType.YearSummary:
+                    SubjectVisibility= Visibility.Collapsed;
+                    TermVisibility = Visibility.Collapsed;
+                    break ;
+            }
         }
         [RelayCommand]
         private void ShowClassDetails()
         {
-            ClassSubjectSummaries.Clear();
+            ClassDetailsSummaryItems.Clear();
             if (SelectedClass != null)
             {
                 ClassString = $"Lớp: {SelectedClass.TenLop} - {SummaryString}";
@@ -55,18 +88,27 @@ namespace StudentManagement.ViewModel
                 int stt = 1;
                 foreach(var hocsinh in hocsinhs)
                 {
-                    ClassSubjectSummaries.Add(new ClassSubjectSummaryData(stt,hocsinh,SelectedYear.Manh,selectedTerm.Mahk,SelectedSubject.Mamh));
+                    ClassDetailsSummaryItem item = new ClassDetailsSummaryItem();
+                    if (SelectedType.Type == SummaryType.SubjectSummary)
+                    {
+                        item = new ClassDetailsSummaryItem(stt, hocsinh, SelectedYear.Manh, selectedTerm.Mahk, SelectedSubject.Mamh);
+                    }    
+                    else if (SelectedType.Type == SummaryType.TermSummary)
+                    {
+                        item = new ClassDetailsSummaryItem(stt, hocsinh, SelectedYear.Manh, selectedTerm.Mahk);
+                    }
+                    ClassDetailsSummaryItems.Add(item);
                     stt++;
                 }
 
-                var sortedList = ClassSubjectSummaries.OrderByDescending(s => s.DiemTB).ToList();
+                var sortedList = ClassDetailsSummaryItems.OrderByDescending(s => s.DiemTB).ToList();
 
                 for (int i = 0; i < sortedList.Count; i++)
                 {
                     sortedList[i].Hang = i + 1;
                 }
 
-                ClassSubjectSummaries = new ObservableCollection<ClassSubjectSummaryData>(sortedList.OrderBy(s => s.Stt));
+                ClassDetailsSummaryItems = new ObservableCollection<ClassDetailsSummaryItem>(sortedList.OrderBy(s => s.Stt));
 
             }
             else
@@ -79,6 +121,49 @@ namespace StudentManagement.ViewModel
         private void Summary()
         {
             SelectedYear = OverviewListViewModel.GetNamhoc;
+            if(SelectedType == null)
+            {
+                MessageBox.Show("Vui lòng chọn loại tổng kết");
+            }
+            else
+            {
+                switch(SelectedType.Type)
+                {
+                    case SummaryType.SubjectSummary:
+                        SubjectSummary();
+                        break;
+                    case SummaryType.TermSummary:
+                        TermSummary();
+                        break;
+                }
+            }    
+        }
+        private void TermSummary()
+        {
+            if (SelectedYear == null)
+            {
+                MessageBox.Show("Vui lòng chọn năm học");
+                return;
+            }
+            if (SelectedTerm == null)
+            {
+                MessageBox.Show("Vui lòng chọn kỳ học");
+                return;
+            }
+
+            TermSummaryItems.Clear();
+            MessageBox.Show(SelectedTerm.Tenhk + " " + SelectedYear.Tennamhoc);
+            SummaryString = $"{SelectedTerm.Tenhk}";
+            List<Lophocthucte> lophocthuctes = data.Lophocthuctes.Where(x => x.Manh == SelectedYear.Manh).ToList();
+            int i = 1;
+            foreach (var lophoc in lophocthuctes)
+            {
+                TermSummaryItems.Add(new TermSummaryItem(i, lophoc, SelectedYear.Manh, selectedTerm.Mahk));
+                i++;
+            }
+        }
+        private void SubjectSummary()
+        {
             if (SelectedYear == null)
             {
                 MessageBox.Show("Vui lòng chọn năm học");
@@ -95,14 +180,14 @@ namespace StudentManagement.ViewModel
                 return;
             }
 
-            TermSubjectSummaryDatas.Clear();
+            TermSummaryItems.Clear();
             MessageBox.Show(SelectedTerm.Tenhk + " " + SelectedYear.Tennamhoc + " " + SelectedSubject.Tenmh);
             SummaryString = $"{SelectedTerm.Tenhk} - Môn học: {SelectedSubject.Tenmh}";
             List<Lophocthucte> lophocthuctes = data.Lophocthuctes.Where(x => x.Manh == SelectedYear.Manh).ToList();
             int i = 1;
-            foreach(var lophoc in lophocthuctes)
-            {   
-                TermSubjectSummaryDatas.Add(new TermSubjectSummaryData(i, lophoc,SelectedYear.Manh,selectedTerm.Mahk,selectedSubject.Mamh));
+            foreach (var lophoc in lophocthuctes)
+            {
+                TermSummaryItems.Add(new TermSummaryItem(i, lophoc, SelectedYear.Manh, selectedTerm.Mahk, selectedSubject.Mamh));
                 i++;
             }
         }
