@@ -1,4 +1,5 @@
-﻿<UserControl xmlns:StudentClassification="clr-namespace:StudentManagement.Component.TermSummary.StudentClassification"  xmlns:Global="clr-namespace:StudentManagement.Component.Global"  x:Class="StudentManagement.Component.TermSummary.TermSummary"
+﻿<UserControl xmlns:StudentClassification="clr-namespace:StudentManagement.Component.TermSummary.StudentClassification"
+             xmlns:Global="clr-namespace:StudentManagement.Component.Global"  x:Class="StudentManagement.Component.TermSummary.TermSummary"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -68,8 +69,20 @@
                               Visibility="{Binding ClassVisibility}"
                             ItemsSource="{Binding ClassList}"                              
                               SelectedItem="{Binding SelectedLhtt, Mode=TwoWay}"
-                              DisplayMemberPath="MalopNavigation.Tenlop"
-                            materialDesign:HintAssist.Hint="Lớp học"/>
+                            materialDesign:HintAssist.Hint="Lớp học">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}{1}">
+                                            <Binding Path="MalopNavigation.Khoi"/>
+                                            <Binding Path="MalopNavigation.Tenlop"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <Button Style="{StaticResource primary_button}"
                             Command="{Binding SummaryCommand}"
                             Content="Tổng kết"></Button>

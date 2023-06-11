@@ -32,5 +32,16 @@ namespace StudentManagement.Object
                 this.Dtb = kq.DtbmonHocKy;
             }
         }
+        public AvgSubject(Hocsinh hs, string Manh, string Mamh)
+        {
+            Diemtrungbinhmonhocnamhoc kq = DataProvider.ins.context.Diemtrungbinhmonhocnamhocs.Where(x => x.Mahs == hs.Mahs
+                        && x.Manh == Manh
+                        && x.Mamh == Mamh).FirstOrDefault();
+            if (kq != null)
+            {
+                this.Subject = kq.MamhNavigation.Tenmh;
+                this.Dtb = kq.DtbmonHocNamHoc;
+            }
+        }
     }
 }

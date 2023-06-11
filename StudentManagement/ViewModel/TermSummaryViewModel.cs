@@ -65,6 +65,7 @@ namespace StudentManagement.ViewModel
                 new SummaryTypeItem(SummaryType.SubjectSummary, "Báo cáo tổng kết môn"),
                 new SummaryTypeItem(SummaryType.TermSummary, "Báo cáo tổng kết học kỳ"),
                 new SummaryTypeItem(SummaryType.TermClassification, "Báo cáo xếp loại học sinh học kỳ"),
+                new SummaryTypeItem(SummaryType.YearClassification, "Báo cáo xếp loại học sinh năm học"),
             };
             Content = this;
         }
@@ -90,6 +91,7 @@ namespace StudentManagement.ViewModel
                     if (SelectedYear == null)
                     {
                         MessageBox.Show("Vui lòng chọn năm học");
+                        SelectedType = SummaryTypeItems[0];
                         return;
                     }
                     else
@@ -99,6 +101,22 @@ namespace StudentManagement.ViewModel
                     SubjectVisibility = Visibility.Collapsed;
                     ClassVisibility = Visibility.Visible;
                     TermVisibility = Visibility.Visible;
+                    break;
+                case SummaryType.YearClassification:
+                    SelectedYear = OverviewListViewModel.GetNamhoc;
+                    if (SelectedYear == null)
+                    {
+                        MessageBox.Show("Vui lòng chọn năm học");
+                        SelectedType = SummaryTypeItems[0];
+                        return;
+                    }
+                    else
+                    {
+                        ClassList = new ObservableCollection<Lophocthucte>(DataProvider.ins.context.Lophocthuctes.ToList());
+                    }
+                    SubjectVisibility = Visibility.Collapsed;
+                    ClassVisibility = Visibility.Visible;
+                    TermVisibility = Visibility.Collapsed;
                     break;
 
             }
@@ -164,6 +182,9 @@ namespace StudentManagement.ViewModel
                     case SummaryType.TermClassification:
                         TermClassification();
                         break;
+                    case SummaryType.YearClassification:
+                        YearClassification();
+                        break;
                 }
             }    
         }
@@ -179,8 +200,28 @@ namespace StudentManagement.ViewModel
                 MessageBox.Show("Vui lòng chọn kỳ học");
                 return;
             }
+            if (SelectedLhtt == null)
+            {
+                MessageBox.Show("Vui lòng chọn lớp");
+                return;
+            }
+            Content = new StudentClassificationViewModel(SelectedType,SelectedYear, SelectedTerm, SelectedLhtt);
 
-            Content = new StudentClassificationViewModel(SelectedType,SelectedYear.Manh, SelectedTerm.Mahk, "N2023L10A1");
+        }
+        private void YearClassification()
+        {
+            if (SelectedYear == null)
+            {
+                MessageBox.Show("Vui lòng chọn năm học");
+                return;
+            }
+
+            if (SelectedLhtt == null)
+            {
+                MessageBox.Show("Vui lòng chọn lớp");
+                return;
+            }
+            Content = new StudentClassificationViewModel(SelectedType, SelectedYear, SelectedLhtt);
 
         }
         private void TermSummary()

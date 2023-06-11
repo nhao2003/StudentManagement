@@ -41,5 +41,19 @@ namespace StudentManagement.Object
                 this.HanhKiem = kq.MaHanhKiemNavigation.TenHanhKiem;
             }
         }
+        public StudentClassificationItem(int stt, Hocsinh hocsinh, string Manh)
+        {
+            this.Hs = hocsinh;
+            Kqnamhoc kq = DataProvider.ins.context.Kqnamhocs.Where(x => x.Mahs == hocsinh.Mahs && x.Manh == Manh).FirstOrDefault();
+            if (kq != null)
+            {
+                this.HoTen = hocsinh.Hotenhs;
+                this.Stt = stt;
+                this.DiemTB = kq.DtbnamHoc;
+                if (kq.MaHocLucNavigation != null)
+                    this.HocLuc = kq.MaHocLucNavigation.TenHocLuc;
+                this.HanhKiem = kq.MaHanhKiemNavigation.TenHanhKiem;
+            }
+        }
     }
 }

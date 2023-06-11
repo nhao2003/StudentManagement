@@ -21,23 +21,43 @@ namespace StudentManagement.ViewModel
         private ObservableCollection<StudentClassificationItem> classificationItems = new ObservableCollection<StudentClassificationItem>();
         [ObservableProperty]
         private ObservableCollection<AvgSubject> avgSubjects = new ObservableCollection<AvgSubject>();
+        [ObservableProperty]
+        private string summaryString;
 
         private string Manh;
         private string Mahk;
+        private string Malhtt;
         public StudentClassificationViewModel()
         {
 
         }
-        public StudentClassificationViewModel(SummaryTypeItem type, String Manh, String Mahk, String Malhtt)
+        public StudentClassificationViewModel(SummaryTypeItem type, Namhoc nh, Hocky hk, Lophocthucte lhtt)
         {
-            this.Manh = Manh;
-            this.Mahk = Mahk;
+            this.Manh = nh.Manh;
+            this.Mahk = hk.Mahk;
+            this.Malhtt = lhtt.Malhtt;
             SelectedType = type;
             List<Hocsinh> hocsinhs = DataProvider.ins.context.Lophocthuctes.Where(x => x.Malhtt == Malhtt).FirstOrDefault().Mahs.ToList();
             int stt = 1;
+            SummaryString = $"{nh.Tennamhoc} - {hk.Tenhk} - {lhtt.MalopNavigation.Khoi}{lhtt.MalopNavigation.Tenlop}";
             foreach(Hocsinh hocsinh in hocsinhs)
             {
                 ClassificationItems.Add(new StudentClassificationItem(stt,hocsinh,Manh,Mahk));
+                stt++;
+            }
+        }
+        public StudentClassificationViewModel(SummaryTypeItem type, Namhoc nh, Lophocthucte lhtt)
+        {
+            this.Manh = nh.Manh;
+            this.Malhtt = lhtt.Malhtt;
+            SelectedType = type;
+            List<Hocsinh> hocsinhs = DataProvider.ins.context.Lophocthuctes.Where(x => x.Malhtt == Malhtt).FirstOrDefault().Mahs.ToList();
+            int stt = 1;
+            SummaryString = $"{nh.Tennamhoc} - {lhtt.MalopNavigation.Khoi}{lhtt.MalopNavigation.Tenlop}";
+
+            foreach (Hocsinh hocsinh in hocsinhs)
+            {
+                ClassificationItems.Add(new StudentClassificationItem(stt, hocsinh, Manh));
                 stt++;
             }
         }
@@ -50,7 +70,11 @@ namespace StudentManagement.ViewModel
                 List<Monhoc> monhocs = DataProvider.ins.context.Monhocs.ToList();
                 foreach(Monhoc monhoc in monhocs)
                 {
-                    AvgSubjects.Add(new AvgSubject(SelectedStudent.Hs, Manh, Mahk, monhoc.Mamh));
+                    if(SelectedType.Type == SummaryType.TermClassification)
+                        AvgSubjects.Add(new AvgSubject(SelectedStudent.Hs, Manh, Mahk, monhoc.Mamh));
+                    else
+                        AvgSubjects.Add(new AvgSubject(SelectedStudent.Hs, Manh, monhoc.Mamh));
+
                 }
             }
         }
