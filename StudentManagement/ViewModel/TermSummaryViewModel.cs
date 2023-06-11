@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace StudentManagement.ViewModel
 {
@@ -17,7 +18,13 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private Visibility subjectVisibility = Visibility.Visible;
         [ObservableProperty]
+        private Visibility classVisibility = Visibility.Visible;
+        [ObservableProperty]
         private ObservableCollection<SummaryTypeItem> summaryTypeItems;
+        [ObservableProperty]
+        private Lophocthucte selectedLhtt;
+        [ObservableProperty]
+        private ObservableCollection<Lophocthucte> classList;
         [ObservableProperty]
         private SummaryTypeItem selectedType;
         [ObservableProperty]
@@ -44,6 +51,8 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private ObservableCollection<ClassDetailsSummaryItem> classDetailsSummaryItems = new ObservableCollection<ClassDetailsSummaryItem>();
         QUANLYHOCSINHContext data = DataProvider.ins.context;
+        [ObservableProperty]
+        object content;
 
         public TermSummaryViewModel()
         {
@@ -55,8 +64,9 @@ namespace StudentManagement.ViewModel
             {
                 new SummaryTypeItem(SummaryType.SubjectSummary, "Báo cáo tổng kết môn"),
                 new SummaryTypeItem(SummaryType.TermSummary, "Báo cáo tổng kết học kỳ"),
-                new SummaryTypeItem(SummaryType.YearSummary, "Tổng kết năm học"),
+                new SummaryTypeItem(SummaryType.TermClassification, "Báo cáo xếp loại học sinh học kỳ"),
             };
+            Content = this;
         }
         [RelayCommand]
         private void SelectedTypeChanged()
@@ -64,17 +74,33 @@ namespace StudentManagement.ViewModel
             switch(SelectedType.Type)
             {
                 case SummaryType.SubjectSummary:
+                    Content = this;
                     TermVisibility = Visibility.Visible;
                     SubjectVisibility = Visibility.Visible;
+                    ClassVisibility = Visibility.Collapsed;
                     break;
                 case SummaryType.TermSummary:
+                    Content = this;
                     TermVisibility = Visibility.Visible;
+                    ClassVisibility = Visibility.Collapsed;
                     SubjectVisibility = Visibility.Collapsed;
                     break;
-                case SummaryType.YearSummary:
-                    SubjectVisibility= Visibility.Collapsed;
-                    TermVisibility = Visibility.Collapsed;
-                    break ;
+                case SummaryType.TermClassification:
+                    SelectedYear = OverviewListViewModel.GetNamhoc;
+                    if (SelectedYear == null)
+                    {
+                        MessageBox.Show("Vui lòng chọn năm học");
+                        return;
+                    }
+                    else
+                    {
+                        ClassList = new ObservableCollection<Lophocthucte>(DataProvider.ins.context.Lophocthuctes.ToList());
+                    }
+                    SubjectVisibility = Visibility.Collapsed;
+                    ClassVisibility = Visibility.Visible;
+                    TermVisibility = Visibility.Visible;
+                    break;
+
             }
         }
         [RelayCommand]
@@ -135,8 +161,27 @@ namespace StudentManagement.ViewModel
                     case SummaryType.TermSummary:
                         TermSummary();
                         break;
+                    case SummaryType.TermClassification:
+                        TermClassification();
+                        break;
                 }
             }    
+        }
+        private void TermClassification()
+        {
+            if (SelectedYear == null)
+            {
+                MessageBox.Show("Vui lòng chọn năm học");
+                return;
+            }
+            if (SelectedTerm == null)
+            {
+                MessageBox.Show("Vui lòng chọn kỳ học");
+                return;
+            }
+
+            Content = new StudentClassificationViewModel(SelectedType,SelectedYear.Manh, SelectedTerm.Mahk, "N2023L10A1");
+
         }
         private void TermSummary()
         {

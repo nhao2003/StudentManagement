@@ -11,7 +11,8 @@ namespace StudentManagement.Object
     {
         SubjectSummary,
         TermSummary,
-        YearSummary
+        TermClassification,
+        YearClassification
     }
 
     public partial class SummaryTypeItem : ObservableObject

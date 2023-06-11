@@ -31,8 +31,13 @@ namespace StudentManagement.Object
         {
             id = lopth.Malop;
             name = lopth.MalopNavigation.Khoi + lopth.MalopNavigation.Tenlop;
+            Giaovien giaovien = lopth.MagvcnNavigation;
             //teacherName = lopth.MagvcnNavigation.UsernameNavigation.Hoten;
-            teacherName = "dmlt";
+            if(giaovien != null)
+            {
+                teacherName = giaovien.UsernameNavigation.Hoten;
+            }
+            teacherName = "";
             hocsinhs = lopth.Mahs.ToList();
 
             numOfStudent = int.Parse(DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri);
