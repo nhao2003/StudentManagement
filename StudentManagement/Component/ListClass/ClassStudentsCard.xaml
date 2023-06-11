@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
+                          xmlns:service="clr-namespace:StudentManagement.Service"
              mc:Ignorable="d" 
              >
     <Border Height="640" Width="255" CornerRadius="20" Background="white" Margin="20">
@@ -45,6 +46,9 @@
 
                 <Button
                 Grid.Row="2"
+                                          Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
                     Margin="100 4 0 0"
                     Height="40"
                     Command="{Binding Parent.ShowNewStudentsCommand}"

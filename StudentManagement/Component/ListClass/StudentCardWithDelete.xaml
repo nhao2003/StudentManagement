@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
+             xmlns:service="clr-namespace:StudentManagement.Service"
              mc:Ignorable="d" 
              Name="studentInClass"
             d:DesignHeight="60" d:DesignWidth="258" >
@@ -34,6 +35,9 @@
 
             </StackPanel>
             <Button
+                Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
                 BorderThickness="0"
                 Height="25"
                 Command="{Binding removeStudentFromClassCommand}"

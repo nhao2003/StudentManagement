@@ -78,7 +78,7 @@ namespace StudentManagement.ViewModel
 
         public void SetCurrentClass(Lophocthucte mclass)
         {
-            Lophocthucte = mclass;
+            lophocthucte = mclass;
             //MessageBox.Show(Lophocthucte.MalopNavigation.Tenlop);
             OnPropertyChanged();
             _transcriptViewModel.SetCurrentClass(lophocthucte);

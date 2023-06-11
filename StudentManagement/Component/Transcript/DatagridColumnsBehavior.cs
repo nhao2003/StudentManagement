@@ -12,6 +12,7 @@ public class DataGridColumnsBehavior
                                             new UIPropertyMetadata(null, BindableColumnsPropertyChanged));
     private static void BindableColumnsPropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
     {
+
         DataGrid dataGrid = source as DataGrid;
         ObservableCollection<DataGridColumn> columns = e.NewValue as ObservableCollection<DataGridColumn>;
         dataGrid.Columns.Clear();

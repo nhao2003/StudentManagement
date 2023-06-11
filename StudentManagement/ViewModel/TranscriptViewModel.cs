@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using StudentManagement.Models;
 using StudentManagement.Object;
+using StudentManagement.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,13 +20,10 @@ namespace StudentManagement.ViewModel
     {
         public TranscriptViewModel()
         {
-            InitMonHocs();
+            //InitMonHocs();
             InitHocKis();
-            
-            selectedSubject = subjectList[0];
             selectedSemeter = termList[0];
             DataGridColumns = new ObservableCollection<DataGridColumn>();
-            //GenerateColumns(DataObjects);
 
         }
         private ObservableCollection<DataGridColumn> _dataGridColumns;
@@ -49,10 +47,12 @@ namespace StudentManagement.ViewModel
 
         private void Refresh()
         {
-            InitStudents();
-            SelectedConfig = null;
-            ClassDetailViewModel.Instance.setRightViewModel(new EmptyRightViewModel());
-
+            if (selectedSubject != null && selectedSemeter != null)
+            {
+                InitStudents();
+                SelectedConfig = null;
+                ClassDetailViewModel.Instance.setRightViewModel(new EmptyRightViewModel());
+            }
         }
         private Monhoc selectedSubject;
         public Monhoc SelectedSubject { get { return selectedSubject; } set {  selectedSubject = value;
@@ -84,6 +84,14 @@ namespace StudentManagement.ViewModel
         {
             ClassManagementViewModel.Instance.NavigateClassList();
         }
+        [RelayCommand]
+        private void saveChange()
+        {
+            foreach(var tran in transcripts)
+            {
+                tran.saveData();
+            }
+        }
 
         // lay hoc sinh
         private Lophocthucte lophocthucte;
@@ -91,7 +99,9 @@ namespace StudentManagement.ViewModel
         public void SetCurrentClass(Lophocthucte mclass)
         {
             lophocthucte = mclass;
-            InitStudents();
+            InitMonHocs();
+            
+
         }
 
         List<Hocsinh> hocsinhs = new List<Hocsinh>();
@@ -106,29 +116,48 @@ namespace StudentManagement.ViewModel
             {
                 transcripts.Add(new TranscriptConfig(hocsinh, SelectedSemeter, SelectedSubject,namhoc)) ;
             }
-            DataGridColumns = new ObservableCollection<DataGridColumn>();
-            if(transcripts.FirstOrDefault() != null)
-            {
-                var diems = transcripts.First().Diemmonhocs;
-                DataGridTextColumn nameColumn = new DataGridTextColumn();
-                nameColumn.Header = "Tên học sinh";
-                nameColumn.Binding = new Binding("Student.Hotenhs");
-                DataGridColumns.Add(nameColumn);
+            //DataGridColumns = new ObservableCollection<DataGridColumn>();
+            //if(transcripts.FirstOrDefault() != null)
+            //{
+            //    var diems = transcripts.First().DiemDisplays;
+            //    DataGridTextColumn nameColumn = new DataGridTextColumn();
+            //    nameColumn.Header = "Tên học sinh";
+            //    nameColumn.Binding = new Binding("Student.Hotenhs");
+            //    nameColumn.IsReadOnly = true;
+            //    DataGridColumns.Add(nameColumn);
 
-                foreach (var diem in diems)
-                {
-                    DataGridTextColumn column = new DataGridTextColumn();
-                    column.Header = diem.MalktNavigation.Tenloaikiemtra;
-                    column.Binding = new Binding(string.Format("Diemmonhocs[{0}].Diem", diems.IndexOf(diem)));
-                    DataGridColumns.Add(column);
-                }
-            }
+            //    foreach (var diem in diems)
+            //    {
+            //        DataGridTextColumn column = new DataGridTextColumn();
+            //        column.Header = diem.Diem.MalktNavigation.Tenloaikiemtra;
+            //        column.Binding = new Binding(string.Format("DiemDisplays[{0}].Diemdisplay", diems.IndexOf(diem)));
+            //        DataGridColumns.Add(column);
+            //    }
+            //}
         }
         private void InitMonHocs()
         {
-            foreach (var mh in DataProvider.ins.context.Monhocs)
+            if (LoginServices.Instance.IsAdmin == true)
             {
-                subjectList.Add(mh);
+                foreach (var mh in DataProvider.ins.context.Monhocs)
+                {
+                    SubjectList.Add(mh);
+                }
+            }
+            else
+            {
+                var giaovien = DataProvider.ins.context.Giaoviens.Where(x => x.Username == LoginServices.CurrentUser.Username).FirstOrDefault();
+                if (giaovien != null && lophocthucte != null)
+                {
+                    var phanconglist = DataProvider.ins.context.Phanconggiangdays.Where(x => x.Malhtt == lophocthucte.Malhtt && x.Magv == giaovien.Magv).ToList();
+                    foreach (var ph in phanconglist)
+                    {
+                        SubjectList.Add(ph.MamhNavigation);
+                    }
+                }
+            }
+            if(SubjectList!=null && subjectList.Count > 0) {
+                SelectedSubject = SubjectList[0];
             }
         }
 

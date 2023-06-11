@@ -19,7 +19,6 @@ public sealed partial class MainViewModel : ObservableObject
     public MainViewModel()
     {
         Init();
-        ContentViewModel = _programViewModel;
         Instance = this;
     }
 
@@ -58,7 +57,7 @@ public sealed partial class MainViewModel : ObservableObject
         }
     }
     #endregion
-    private void Init()
+    public void Init()
     {
 
         DataProvider.ins.context.Hocsinhs.ToList();
@@ -81,6 +80,16 @@ public sealed partial class MainViewModel : ObservableObject
         new Navigation("Thêm năm học", "subject", _schoolyearViewModel),
     };
         leftNavigations[0].IsPress = true;
+        ContentViewModel = _programViewModel;
+    }
+    public void Refresh()
+    {
+        foreach(var item in leftNavigations)
+        {
+            item.IsPress = false;
+        }
+        leftNavigations[0].IsPress = true;
+        ContentViewModel = _programViewModel;
     }
 
     public void setViewModel(object viewModel)
@@ -98,6 +107,16 @@ public sealed partial class MainViewModel : ObservableObject
     {
         Window window = Application.Current.MainWindow as Window;
         window.WindowState = WindowState.Minimized;
+    }
+    [RelayCommand]
+    private void SignOut()
+    {
+        LoginWindow window = new LoginWindow();
+        MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+        
+        Application.Current.MainWindow = window;
+        window.Show();
+        mainWindow.Close();
     }
 }
 

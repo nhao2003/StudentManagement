@@ -9,5 +9,6 @@
     <vm:ClassConfigViewModel x:Key="ClassConfigVM"></vm:ClassConfigViewModel>
     <vm:TranscriptViewModel x:Key="TranscriptVM"></vm:TranscriptViewModel>
     <vm:ClassManagementViewModel x:Key="ClassManagementVM"></vm:ClassManagementViewModel>
-    
+    <vm:LoginViewModel x:Key="LoginVM"></vm:LoginViewModel>
+
 </ResourceDictionary>
