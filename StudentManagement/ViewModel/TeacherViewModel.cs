@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Data.SqlClient;
+using StudentManagement.Models;
 using StudentManagement.Object;
 using StudentManagement.Utils;
 using System;
