@@ -25,17 +25,24 @@ namespace StudentManagement.Object
         private string username;
         [ObservableProperty]
         private string vaitro;
-        Taikhoan taikhoan;
+        [ObservableProperty]
+        private string password;
+        public Taikhoan taikhoan;
         public TaiKhoanDataGridItem(Taikhoan taikhoan)
+        {
+            update(taikhoan);
+        }
+        public void update(Taikhoan taikhoan)
         {
             this.taikhoan = taikhoan;
             hoten = taikhoan.Hoten;
             ngsinh = taikhoan.Ngsinh.ToString();
             email = taikhoan.Email;
             dchi = taikhoan.Dchi;
-            gioitinhDisplay = (taikhoan.Gioitinh?"Nam":"Nữ");
+            gioitinhDisplay = (taikhoan.Gioitinh ? "Nam" : "Nữ");
             username = taikhoan.Username;
             vaitro = taikhoan.Vaitro;
+            password = taikhoan.Passwrd;
         }
     }
 }

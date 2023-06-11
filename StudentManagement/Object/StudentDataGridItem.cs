@@ -13,6 +13,8 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private bool isSelected = false;
         [ObservableProperty]
+        private string mahs;
+        [ObservableProperty]
         private string cccd;
         [ObservableProperty]
         private string hotenhs;
@@ -30,8 +32,12 @@ namespace StudentManagement.Object
         private string tongiao;
         [ObservableProperty]
         private string dantoc;
-        Hocsinh hocsinh;
+        public Hocsinh hocsinh;
         public StudentDataGridItem(Hocsinh hocsinh)
+        {
+            update(hocsinh);
+        }
+        public void update(Hocsinh hocsinh)
         {
             this.hocsinh = hocsinh;
             cccd = hocsinh.Cccd;
@@ -43,6 +49,7 @@ namespace StudentManagement.Object
             gioitinhDisplay = (hocsinh.Gioitinh ? "Nam" : "Nữ");
             tongiao = hocsinh.Tongiao;
             dantoc = hocsinh.Dantoc;
+            mahs = hocsinh.Mahs;
         }
     }
 }

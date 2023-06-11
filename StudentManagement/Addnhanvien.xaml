@@ -24,7 +24,7 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Border Background="#A5D3FF" Grid.Row="0" CornerRadius="20,20,0,0">
-                    <TextBlock Text="Thêm nhân viên" 
+                    <TextBlock Text="Thêm nhân viên" Name="Title" 
                            Grid.Row="0"
                            Margin="15,15,0,14"
                            FontWeight="Bold"

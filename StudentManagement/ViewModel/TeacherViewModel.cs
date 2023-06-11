@@ -1,11 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MaterialDesignThemes.Wpf;
+using Microsoft.Data.SqlClient;
 using StudentManagement.Object;
 using StudentManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +28,11 @@ namespace StudentManagement.ViewModel
                 TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
             }
         }
+        [ObservableProperty]
+        TaiKhoanDataGridItem taiKhoanDataGridItemSelected;
         public ObservableCollection<TaiKhoanDataGridItem> TaikhoanList { get; set; }
         [ObservableProperty]
-        private string searchValue = "";
+        private string searchNhanVienValue = "";
         [ObservableProperty]
         private string choosing = "";
         [RelayCommand]
@@ -44,22 +48,16 @@ namespace StudentManagement.ViewModel
             }
         }
         [RelayCommand]
-        public void ChoosingValue()
-        {
-            choosing = Choosing;
-        }
-        [RelayCommand]
         public void SearchingValue()
         {           
-            string sortBy ="";
             var teacherList = DataProvider.ins.context.Taikhoans.ToList();
-            if (SearchValue.Trim() != "")
+            if (SearchNhanVienValue.Trim() != "")
             {
                 TaikhoanList.Clear();
                 if (choosing == "Họ tên")
                     foreach (var teacher in teacherList)
                     {            
-                        string temp1 = Diacritics.RemoveDiacritics(teacher.Hoten), temp2 = Diacritics.RemoveDiacritics(searchValue);
+                        string temp1 = Diacritics.RemoveDiacritics(teacher.Hoten), temp2 = Diacritics.RemoveDiacritics(searchNhanVienValue);
                         if (temp1.Contains(temp2))
                         {
                             TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
@@ -69,7 +67,7 @@ namespace StudentManagement.ViewModel
                 {
                     foreach (var teacher in teacherList)
                     {
-                        string temp1 = Diacritics.RemoveDiacritics(teacher.Username), temp2 = Diacritics.RemoveDiacritics(searchValue);
+                        string temp1 = Diacritics.RemoveDiacritics(teacher.Username), temp2 = Diacritics.RemoveDiacritics(searchNhanVienValue);
                         if (temp1.Contains(temp2))
                         {
                             TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
@@ -89,7 +87,34 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         public void UpdateNhanVien()
         {
-            MessageBox.Show("Bruh");
+            if (taiKhoanDataGridItemSelected == null)
+                return;
+            else
+            {
+                Addnhanvien changeNVInfo = new Addnhanvien(taiKhoanDataGridItemSelected.taikhoan);
+                changeNVInfo.ShowDialog();
+                if(changeNVInfo.DialogResult == true)
+                {
+                    if(changeNVInfo.isEdited)
+                    {
+                        DataProvider.ins.context.Taikhoans.Update(changeNVInfo.Taikhoan);
+                        DataProvider.ins.context.SaveChanges();
+                        TaikhoanList.Clear();
+                        foreach (var teacher in DataProvider.ins.context.Taikhoans.ToList())
+                        {
+                            TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
+                        }
+                        MessageBox.Show("Cập nhật thành công!");
+                    }
+                    else
+                    {
+                        DataProvider.ins.context.Taikhoans.Add(changeNVInfo.Taikhoan);
+                        DataProvider.ins.context.SaveChanges();
+                        TaikhoanList.Add(new TaiKhoanDataGridItem(changeNVInfo.Taikhoan));
+                        MessageBox.Show("Thêm thành công");
+                    }
+                }
+            }
         }
     }
 }

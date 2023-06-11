@@ -51,7 +51,7 @@
                             BorderBrush="LightGray" 
                             
                             materialDesign:HintAssist.Hint="Tìm kiếm" 
-                            Text="{Binding SearchValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding SearchStudentValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              
                              >
                         <i:Interaction.Triggers>
@@ -88,6 +88,7 @@
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
                             IsReadOnly="{Binding IsReadOnly}"
+                            SelectedItem="{Binding StudentDataGridItemSelected, Mode=TwoWay}"
                             ItemsSource="{Binding StudentList}" Grid.ColumnSpan="2" 
                             >
                         <DataGrid.Resources>
@@ -179,44 +180,51 @@
                             </DataGridCheckBoxColumn>
                             <materialDesign:DataGridTextColumn
                         Width="*"
+                        IsReadOnly="True"
                         Binding="{Binding Cccd}"
                         Header="CMND" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
+                        IsReadOnly="True"
                         Binding="{Binding Hotenhs}"
                         Header="Họ tên" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
+                        IsReadOnly="True"
                         Binding="{Binding Ngsinh}"
                         Header="Ngày sinh" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Email}"
+                                IsReadOnly="True"
                         Header="Email" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Dchi}"
+                                IsReadOnly="True"
                         Header="Địa chỉ" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Header="Giới tính" 
+                                IsReadOnly="True"
                         Binding="{Binding GioitinhDisplay}"/>
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding //LOP}"
-                        Header="Lớp" />
-                            <materialDesign:DataGridTextColumn
-                        Width="*"
                         Binding="{Binding Dantoc}"
+                                IsReadOnly="True"
                         Header="Dân tộc" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Tongiao}"
+                                IsReadOnly="True"
                         Header="Tôn giáo" />
-                            <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding //}"
-                        Header="" />
+                            <DataGridTemplateColumn Width ="*" Header="Chỉnh sửa">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Chỉnh sửa" Command="{Binding DataContext.ChangeTTHocSinhCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel 

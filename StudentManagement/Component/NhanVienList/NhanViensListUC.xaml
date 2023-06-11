@@ -52,7 +52,7 @@
                             
                             materialDesign:HintAssist.Hint="Tìm kiếm" 
                             PreviewKeyDown="SearchValue_TextChanged" 
-                            Text="{Binding SearchValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding SearchNhanVienValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              
                              >
                         <i:Interaction.Triggers>
@@ -89,6 +89,7 @@
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
                             IsReadOnly="{Binding IsReadOnly}"
+                            SelectedItem="{Binding TaiKhoanDataGridItemSelected, Mode=TwoWay}"
                             ItemsSource="{Binding TaikhoanList}" Grid.ColumnSpan="2" 
                             >
                         <DataGrid.Resources>
@@ -181,35 +182,42 @@
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Hoten}"
+                                IsReadOnly="True"
                         Header="Họ tên" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Ngsinh}"
+                                IsReadOnly="True"
                         Header="Ngày sinh" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Email}"
+                                IsReadOnly="True"
                         Header="Email" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Dchi}"
+                                IsReadOnly="True"
                         Header="Địa chỉ" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding GioitinhDisplay}"
+                                IsReadOnly="True"
                         Header="Giới tính" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Username}"
+                                IsReadOnly="True"
                         Header="Tài khoản" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Vaitro}"
+                                IsReadOnly="True"
                         Header="Vai trò" />
                             <DataGridTemplateColumn Width ="*" Header="Chỉnh sửa">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Update" Command="{Binding UpdateNhanVienCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                        <Button Content="Chỉnh sửa" Command="{Binding DataContext.UpdateNhanVienCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
