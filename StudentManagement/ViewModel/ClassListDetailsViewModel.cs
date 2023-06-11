@@ -28,7 +28,7 @@ namespace StudentManagement.ViewModel
             List<Lophocthucte> lophocthuctes = data.context.Lophocthuctes.ToList();
             foreach (var lophoctt in lophocthuctes)
             {
-                String gvcn = data.context.Giaoviens.Where(x => x.Magv == lophoctt.Magvcn).FirstOrDefault().UsernameNavigation.Hoten;
+                String gvcn = "";
                 ClassListData classListData = new ClassListData(stt, lophoctt.MalopNavigation.Khoi.Value, lophoctt.MalopNavigation.Tenlop, gvcn, lophoctt.Mahs.Count(), lophoctt);
                 classListDatas.Add(classListData);
                 stt++;

@@ -31,12 +31,14 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         public void AddStudent()
         {
-            AddStudent addStudent = new AddStudent();
+            //Không truyền vào AddNewStudentViewModel thì thêm học sinh
+            AddStudent addStudent = new AddStudent(new AddNewStudentViewModel());
             addStudent.ShowDialog();
-            if(addStudent.DialogResult == true)
+            AddNewStudentViewModel result = (AddNewStudentViewModel)addStudent.DataContext;
+            if (result.Result == true)
             {
-                StudentList.Add(new StudentDataGridItem(addStudent.Hocsinh));
-                DataProvider.ins.context.Hocsinhs.Add(addStudent.Hocsinh);
+                StudentList.Add(new StudentDataGridItem(result.hocsinh));
+                DataProvider.ins.context.Hocsinhs.Add(result.hocsinh);
                 DataProvider.ins.context.SaveChanges();
 
             }
@@ -83,16 +85,18 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         public void ChangeTTHocSinh()
         {
-            if (studentDataGridItemSelected == null)
+            if (StudentDataGridItemSelected == null)
                 return;
             else
             {
-                AddStudent changeTTHocSinh = new AddStudent(studentDataGridItemSelected.hocsinh);
+                //Truyền HocSinh vào AddNewStudentViewModel nếu cập nh
+                AddStudent changeTTHocSinh = new AddStudent(new AddNewStudentViewModel(StudentDataGridItemSelected.hocsinh));
                 changeTTHocSinh.ShowDialog();
-                if(changeTTHocSinh.DialogResult == true)
+                AddNewStudentViewModel result = (AddNewStudentViewModel)changeTTHocSinh.DataContext;
+                if (result.Result == true)
                 {
-                    if(changeTTHocSinh.isEdited) {
-                        DataProvider.ins.context.Hocsinhs.Update(changeTTHocSinh.Hocsinh);
+                    if(result.isEdit) {
+                        DataProvider.ins.context.Hocsinhs.Update(result.hocsinh);
                         DataProvider.ins.context.SaveChanges();
                         StudentList.Clear();
                         foreach (var student in DataProvider.ins.context.Hocsinhs.ToList())
@@ -103,9 +107,9 @@ namespace StudentManagement.ViewModel
                     }
                     else
                     {
-                        DataProvider.ins.context.Hocsinhs.Add(changeTTHocSinh.Hocsinh);
+                        DataProvider.ins.context.Hocsinhs.Add(result.hocsinh);
                         DataProvider.ins.context.SaveChanges();
-                        StudentList.Add(new StudentDataGridItem(changeTTHocSinh.Hocsinh));
+                        StudentList.Add(new StudentDataGridItem(result.hocsinh));
                         MessageBox.Show("Thêm thành công");
                     }
                 }
