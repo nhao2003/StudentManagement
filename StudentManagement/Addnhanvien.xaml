@@ -99,7 +99,7 @@
                     Grid.Row="5" 
                     Style="{StaticResource primary_button}" 
                     Content="Hoàn tất" 
-                    Command="{Binding FiniCommand}"
+                    Command="{Binding FinishCommand}"
                     Margin="0,0,36,-25"
                     Width="auto" Click="Finish_Button_Click"></Button>
             <!--<Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,140,10,269">

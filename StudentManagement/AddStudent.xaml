@@ -128,7 +128,7 @@
                               VerticalAlignment="Top"
                                materialDesign:HintAssist.Hint="Chọn giới tính" >
                         <ComboBoxItem Content="Nam"/>
-                        <ComboBoxItem Content="N"/>
+                        <ComboBoxItem Content="Nữ"/>
                     </ComboBox>
 
                 </Grid>
@@ -163,9 +163,24 @@
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Tôn giáo" Grid.ColumnSpan="2" Margin="10,18,255,8"/>
                 </Grid>
             </Border>
-            <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="7" 
+            <Button HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom" Grid.Row="7" 
                     Style="{StaticResource primary_button}"
-                    Content="Hoàn tất" Margin="0,0,33,-201" Width="95" Height="32" Click="Finish_Button_Click"></Button>
+                    Content="Hoàn tất" 
+                    Margin="0,0,26,-193" 
+                    Width="95" Height="32" 
+                    Command="{Binding FinishCommand}"
+                    Click="Finish_Button_Click"></Button>
+            <Border Grid.Row="9" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,151,146,-203">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="lop" Grid.ColumnSpan="2" Margin="90,0,40,0" BorderBrush="#00000000" />
+                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Lớp" Grid.ColumnSpan="2" Margin="10,14,236,11"/>
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 </Window>

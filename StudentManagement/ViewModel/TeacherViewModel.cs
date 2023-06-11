@@ -30,6 +30,8 @@ namespace StudentManagement.ViewModel
         public ObservableCollection<TaiKhoanDataGridItem> TaikhoanList { get; set; }
         [ObservableProperty]
         private string searchValue = "";
+        [ObservableProperty]
+        private string choosing = "";
         [RelayCommand]
         public void AddNhanvien()
         {
@@ -43,23 +45,39 @@ namespace StudentManagement.ViewModel
             }
         }
         [RelayCommand]
-        public void SearchingValue()
+        public void ChoosingValue()
         {
+            choosing = Choosing;
+        }
+        [RelayCommand]
+        public void SearchingValue()
+        {           
             string sortBy ="";
             var teacherList = DataProvider.ins.context.Taikhoans.ToList();
             if (SearchValue.Trim() != "")
             {
                 TaikhoanList.Clear();
-                
-                foreach (var teacher in teacherList)
+                if (choosing == "Họ tên")
+                    foreach (var teacher in teacherList)
+                    {            
+                        string temp1 = Diacritics.RemoveDiacritics(teacher.Hoten), temp2 = Diacritics.RemoveDiacritics(searchValue);
+                        if (temp1.Contains(temp2))
+                        {
+                            TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
+                        }
+                    }
+                else
                 {
-                    string temp1 = Diacritics.RemoveDiacritics(teacher.Hoten), temp2 = Diacritics.RemoveDiacritics(searchValue);
-                    if (temp1.Contains(temp2))
+                    foreach (var teacher in teacherList)
                     {
-                        TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
+                        string temp1 = Diacritics.RemoveDiacritics(teacher.Username), temp2 = Diacritics.RemoveDiacritics(searchValue);
+                        if (temp1.Contains(temp2))
+                        {
+                            TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
+                        }
                     }
                 }
-            }
+            }                
             else
             {
                 TaikhoanList.Clear();
@@ -70,9 +88,9 @@ namespace StudentManagement.ViewModel
             }    
         }
         [RelayCommand]
-        public void DeleteNhanVien() 
+        public void UpdateNhanVien()
         {
-            
+            MessageBox.Show("Bruh");
         }
     }
 }

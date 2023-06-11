@@ -26,14 +26,22 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="150,0,-110,0" Grid.Column="1" Orientation="Horizontal">
-                    <ComboBox Name="Choosing"  Style="{StaticResource combobox_item}"
+                    <ComboBox Name="Choosing"
+                              Style="{StaticResource combobox_item}"
                             BorderBrush="LightGray" 
                             Width="Auto"
                             Height="30"
                             Padding="5"
+                            Text="{Binding Choosing, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             materialDesign:HintAssist.Hint="Tìm kiếm theo" >
+                            
                         <ComboBoxItem Content="Họ tên" />
                         <ComboBoxItem Content="Tên tài khoản" />
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding ChoosingValueCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
 
                     <TextBox Name ="SearchValue"  Grid.Column="1"  Style="{StaticResource textbox_item}" 
@@ -169,7 +177,7 @@
                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
                                     </Style>
                                 </DataGridCheckBoxColumn.HeaderStyle>
-                            </DataGridCheckBoxColumn>                    
+                            </DataGridCheckBoxColumn>
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Hoten}"
@@ -198,10 +206,13 @@
                         Width="*"
                         Binding="{Binding Vaitro}"
                         Header="Vai trò" />
-                            <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding }"
-                        Header="" />
+                            <DataGridTemplateColumn Width ="*" Header="Chỉnh sửa">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Update" Command="{Binding UpdateNhanVienCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel 
