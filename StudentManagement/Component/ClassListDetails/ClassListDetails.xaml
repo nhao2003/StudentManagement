@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="770" d:DesignWidth="1220">
-    <Border  Background="#E7F2FF" Margin="20">
+    <Border  Background="#E7F2FF">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -50,22 +50,15 @@
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="430"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" CornerRadius="20" Background="white" Margin="20">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="67*"/>
-                            <ColumnDefinition Width="208*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="auto"></RowDefinition>
-                        </Grid.RowDefinitions>
                         <DataGrid
                             AutoGenerateColumns="False"
                             Grid.Row="0"
                             Background="{StaticResource GreyLight}"
+                            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                             ScrollViewer.CanContentScroll="True" 
                             ScrollViewer.VerticalScrollBarVisibility="Auto" 
                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -73,11 +66,17 @@
                             CanUserDeleteRows="False"
                             CanUserReorderColumns="False"   
                             HorizontalScrollBarVisibility="Disabled"
-                                    Margin="10,10,10,10"
+                            IsReadOnly="True"
+                            Margin="10,10,10,10"
                             HeadersVisibility="Column"
-                            IsReadOnly="{Binding IsReadOnly}"
-                            ItemsSource="{Binding Transcripts}" Grid.ColumnSpan="2"
+                            ItemsSource="{Binding ClassListDatas}" Grid.ColumnSpan="2"
                             >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding ShowClassDetailsCommand}" 
+                                   CommandParameter="{Binding SelectedItem}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <DataGrid.Resources>
                                 <!--<Style
                         x:Key="test"
@@ -167,23 +166,23 @@
                                 </DataGridCheckBoxColumn>
                                 <materialDesign:DataGridTextColumn
                         Width="auto"
-                        Binding="{Binding Id}"
+                        Binding="{Binding Stt}"
                         Header="STT" />
                                 <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Name}"
+                        Width="auto"
+                        Binding="{Binding Khoi}"
                         Header="Khối" />
                                 <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding FifteenMin,FallbackValue='0'}"
+                        Width="auto"
+                        Binding="{Binding TenLop,FallbackValue='0'}"
                         Header="Lớp" />
                                 <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FortyMin,FallbackValue='0'}"
+                        Binding="{Binding GiaoVien,FallbackValue='0'}"
                         Header="Giáo viên chủ nhiệm" />
                                 <materialDesign:DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding FinalExam,FallbackValue='0'}"
+                        Width="auto"
+                        Binding="{Binding SiSo,FallbackValue='0'}"
                         Header="Sỉ số" />
                             </DataGrid.Columns>
                         </DataGrid>
@@ -200,11 +199,13 @@
                             <Button
                                 Content="Xóa" 
                                 Background="{StaticResource RedPrimary}"
+                                Command="{Binding ChangeVisiCommand}"
                                 Style="{StaticResource primary_button}"/>
                         </StackPanel>
                     </Grid>
                 </Border>
-                <ClassDetails:ClassDetails Grid.Column="1" />
+
+                <ClassDetails:ClassDetails Grid.Column="1" DataContext="{Binding ClassDetails}" />
             </Grid>
         </Grid>
     </Border>

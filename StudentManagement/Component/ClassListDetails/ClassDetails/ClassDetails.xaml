@@ -3,73 +3,95 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:StudentManagement.Component.ClassListDetails.ClassDetails"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="564" d:DesignWidth="430">
-    <Border  CornerRadius="20" Background="white" Margin="20">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Thông tin chi tiết" 
+    <Grid>
+        <Border  CornerRadius="20" Background="white" Margin="20" Visibility="{Binding NoContent}">
+            <TextBlock Text="Chọn để hiển thị thông tin" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="DemiBold" Foreground="Gray"></TextBlock>
+        </Border>
+        <Border  CornerRadius="20" Background="white" Margin="20" Visibility="{Binding Content}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Thông tin chi tiết" 
                        Grid.Row="0"
                        Margin="15,25"
                        FontWeight="Bold"
                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto">
-                    <Grid>
-                        <TextBlock Text="Lớp:" FontWeight="Medium" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" Margin="15,0,0,0"/>
-                        <TextBlock Text="10A1" Style="{StaticResource MaterialDesignBody2TextBlock}" 
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto">
+                        <Grid>
+                            <TextBlock Text="Lớp:" FontWeight="Medium" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                            <TextBlock Text="{Binding TenLop}" Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                    FontWeight="Medium"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Right" 
                                    Margin="0,0,15,0"/>
-                    </Grid>
-                </Border>
-                <Border Grid.Row="1" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto">
-                    <Grid>
-                        <TextBlock Text="GV chủ nhiệm:" FontWeight="Medium" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" Margin="15,0,0,0"/>
-                        <TextBlock Text="Nguyễn Thị Ánh Dương" 
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto">
+                        <Grid>
+                            <TextBlock Text="GV chủ nhiệm:" FontWeight="Medium" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                            <TextBlock Text="{Binding GiaoVien}" 
                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
                                    FontWeight="Medium"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Right" 
                                    Margin="0,0,15,0"/>
-                    </Grid>
-                </Border>
-                <Border Grid.Row="2" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto" Height="Auto">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Môn học" 
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto" Height="Auto">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Môn học" 
                                    FontWeight="Medium" 
                                    Style="{StaticResource MaterialDesignBody2TextBlock}" 
                                    VerticalAlignment="Center" 
                                    Margin="15,15,0,0"/>
-                        
-                    </StackPanel>
-                </Border>
-                <Border Grid.Row="3" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto">
-                    <Grid>
-                        <TextBlock Text="Niên khóa:" FontWeight="Medium" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" Margin="15,0,0,0"/>
-                        <TextBlock Text="2022-2023" 
+                            <StackPanel 
+                            Orientation="Vertical" 
+                            VerticalAlignment="Top" 
+                            Margin="20 20 20 0">
+                                <ItemsControl ItemsSource="{Binding SubjectTeachers}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel x:Name="Container" Width="auto" HorizontalAlignment="Left" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <local:SubjectTeacher></local:SubjectTeacher>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="3" Style="{StaticResource BorderBox}" Margin="15,8,15,8" Width="Auto">
+                        <Grid>
+                            <TextBlock Text="Niên khóa:" FontWeight="Medium" Style="{StaticResource MaterialDesignBody2TextBlock}" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                            <TextBlock Text="{Binding NienKhoa}" 
                                    Style="{StaticResource MaterialDesignBody2TextBlock}"
                                    FontWeight="Medium"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Right"
                                    Margin="0,0,15,0"/>
-                    </Grid>
-                </Border>
-            </Grid>
-            <Button
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Button
                 Grid.Row="2"
                 Margin="0,10,15,31" 
                 HorizontalAlignment="Right" 
@@ -77,6 +99,7 @@
                 Content="Chỉnh sửa" 
                 Visibility="{Binding EditBtnVisibility}"
                 Style="{StaticResource primary_button}"/>
+            </Grid>
+        </Border>
         </Grid>
-    </Border>
 </UserControl>

@@ -2,6 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:Height="100">
@@ -18,16 +19,19 @@
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="2022 - 2023" 
-                                               FontSize="16"
-                                               HorizontalAlignment="left"
-                                               VerticalAlignment="center"
-                                               FontWeight="SemiBold"
-                                               Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="Niên khóa"
-                                               HorizontalAlignment="left"
-                                               FontSize="12"
-                                               ></TextBlock>
+                        <TextBlock Grid.Row="0" Text="Niên khóa"
+                                   VerticalAlignment="Center"
+                                   Foreground="#959595"
+                                   FontWeight="DemiBold"
+                                HorizontalAlignment="Center"
+                                FontSize="14"
+                                ></TextBlock>
+                        <ComboBox Grid.Row="1" Style="{StaticResource combobox_item}"
+                            BorderBrush="LightGray" 
+                            Width="Auto"
+                            Height="30"
+                            Padding="5"
+                            materialDesign:HintAssist.Hint="Chọn niên khóa" Margin="0,0,0,0"/>
                     </Grid>
                 </Grid>
             </Border>

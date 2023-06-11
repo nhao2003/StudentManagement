@@ -204,17 +204,21 @@
                                 IsReadOnly="True"
                         Header="Địa chỉ" />
                             <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="auto"
                         Header="Giới tính" 
                                 IsReadOnly="True"
                         Binding="{Binding GioitinhDisplay}"/>
+                            <materialDesign:DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding //LOP}"
+                        Header="Lớp" />
                             <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding Dantoc}"
                                 IsReadOnly="True"
                         Header="Dân tộc" />
                             <materialDesign:DataGridTextColumn
-                        Width="*"
+                        Width="auto"
                         Binding="{Binding Tongiao}"
                                 IsReadOnly="True"
                         Header="Tôn giáo" />

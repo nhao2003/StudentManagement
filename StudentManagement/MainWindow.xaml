@@ -1,4 +1,4 @@
-﻿<Window xmlns:ClassListDetails="clr-namespace:StudentManagement.Component.ClassListDetails"  x:Class="StudentManagement.MainWindow"
+﻿<Window xmlns:TermSummary="clr-namespace:StudentManagement.Component.TermSummary"  xmlns:ClassListDetails="clr-namespace:StudentManagement.Component.ClassListDetails"  x:Class="StudentManagement.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -73,8 +73,14 @@
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:SubjectViewModel}">
-                            <program:SubjectProgram />
+                        <DataTemplate DataType="{x:Type viewModel:ClassListDetailsViewModel }">
+                            <ClassListDetails:ClassListDetails />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:TermSummaryViewModel}">
+                            <TermSummary:TermSummary />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:RegulationViewModel}">
+                                <program:RegulationtProgram />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
                             <cls:ClassList></cls:ClassList>
