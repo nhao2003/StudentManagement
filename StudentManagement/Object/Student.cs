@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using StudentManagement.Models;
+using StudentManagement.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace StudentManagement.Model
         private bool isSelected;
         [ObservableProperty]
         private Hocsinh hocsinh;
-
         public Student(Hocsinh hs)
         {
             this.isSelected = false;

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\Images\app_graphic.png" />
     <None Remove="Resource\Images\class.png" />
     <None Remove="Resource\Images\close.png" />
     <None Remove="Resource\Images\close_black.png" />
@@ -34,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resource\Images\app_graphic.png" />
     <Resource Include="Resource\Images\class.png" />
     <Resource Include="Resource\Images\close.png" />
     <Resource Include="Resource\Images\close_black.png" />

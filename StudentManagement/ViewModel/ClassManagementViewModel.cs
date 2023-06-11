@@ -58,7 +58,7 @@ namespace StudentManagement.ViewModel
 
         public void SetDetailClass(Lophocthucte mclass)
         {
-            _classDetailViewModel = new ClassDetailViewModel();
+           // _classDetailViewModel = new ClassDetailViewModel();
             _classDetailViewModel.SetCurrentClass(mclass);
         }
 

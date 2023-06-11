@@ -1,5 +1,4 @@
-﻿using StudentManagement.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StudentManagement
+namespace StudentManagement.Component.Login
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginUC : UserControl
     {
-        public MainWindow()
+        public LoginUC()
         {
             InitializeComponent();
         }

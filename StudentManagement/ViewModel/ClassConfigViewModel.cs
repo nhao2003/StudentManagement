@@ -130,7 +130,7 @@ namespace StudentManagement.ViewModel
             // luu phan cong giang day
             // neu co roi thi update
             // neu chua thi tao moi
-            foreach(var subjectTeacher in subjectTeacherList)
+            foreach(SubjectTeacher subjectTeacher in SubjectTeacherList)
             {
                 // check da chon
                 if(subjectTeacher.Sgiaovien != null)
@@ -139,10 +139,14 @@ namespace StudentManagement.ViewModel
                     if(subjectTeacher.Phanconggiangday != null)
                     {
                         // trong bang co roi => update
-                        DataProvider.ins.context.Phanconggiangdays.Update(subjectTeacher.Phanconggiangday);
+                        //DataProvider.ins.context.Phanconggiangdays.de(subjectTeacher.Phanconggiangday);
+                        //Phanconggiangday phanconggiangday = new Phanconggiangday();
+                        //phanconggiangday.Manh = Snamhoc.Manh;
+                        //phanconggiangday.Malhtt = lophocthucte.Malhtt;
+                        //phanconggiangday.Magv = subjectTeacher.Sgiaovien.Magv;
+                        //phanconggiangday.Mamh = subjectTeacher.Monhoc.Mamh;
+                        DataProvider.ins.context.Phanconggiangdays.Remove(subjectTeacher.Phanconggiangday);
                     }
-                    else
-                    {
                         // chua co trong bang => tao moi va them vao
                         Phanconggiangday phanconggiangday = new Phanconggiangday();
                         phanconggiangday.Manh = Snamhoc.Manh;
@@ -150,7 +154,6 @@ namespace StudentManagement.ViewModel
                         phanconggiangday.Magv = subjectTeacher.Sgiaovien.Magv;
                         phanconggiangday.Mamh = subjectTeacher.Monhoc.Mamh;
                         DataProvider.ins.context.Phanconggiangdays.Add(phanconggiangday);
-                    }
                 }
             }
             DataProvider.ins.context.Lophocthuctes.Update(Lophocthucte);

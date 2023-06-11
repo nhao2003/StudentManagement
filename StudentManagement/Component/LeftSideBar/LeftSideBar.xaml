@@ -53,8 +53,7 @@
             Grid.Row="2"
             Height="auto"
             Cursor="Hand"
-            Command="{Binding GotoLoginViewCommand}"
-            DataContext="{DynamicResource MainVM}"
+            Command="{Binding SignOutCommand}"
             Visibility="{Binding ElementName=LeftSideBarUC, Path=DataContext.IsMainWindow, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Button.Style>
                     <Style TargetType="Button">
@@ -63,7 +62,7 @@
                                 <ControlTemplate TargetType="{x:Type Button}">
                                     <Border Name="brdNavigate" CornerRadius="20">
                                         <Grid>
-                                            <StackPanel Orientation="Horizontal">
+                                            <StackPanel  Orientation="Horizontal">
                                                 <materialDesign:PackIcon
                                                 Name="packicon"
                                                 Width="20"

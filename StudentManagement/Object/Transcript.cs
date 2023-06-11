@@ -3,6 +3,7 @@ using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,18 @@ namespace StudentManagement.Object
         private Namhoc namhoc;
         [ObservableProperty]
         private double diemTB;
+        //[ObservableProperty]
+        //private double diemMieng;
+        //[ObservableProperty]
+        //private double diem15;
+        //[ObservableProperty]
+        //private double diem1tiet;
+        //[ObservableProperty]
+        //private double diemcuoiky;
         [ObservableProperty]
         private ObservableCollection<Diemmonhoc> diemmonhocs = new ObservableCollection<Diemmonhoc>();
+        [ObservableProperty]
+        private ObservableCollection<Point> diemDisplays = new ObservableCollection<Point>();
         private Kqhockymonhoc kqhockymonh;
         public TranscriptConfig(Hocsinh hocsinh, Hocky hocky, Monhoc monhoc, Namhoc namhoc)
         {
@@ -67,7 +78,9 @@ namespace StudentManagement.Object
                 }
                 DiemTB += diem.Diem * diem.MalktNavigation.Tile;
             }
-
+            foreach (var diem in diemmonhocs) {
+                diemDisplays.Add(new Point(diem));    
+            }
         }
         public void saveData()
         {
