@@ -47,7 +47,7 @@
                 Padding="0"
                 HorizontalAlignment="Left" Grid.Column="1" Margin="125,6,0,6"
                 >
-                <Image Height="12" Source="/Resource/images/close_black.png"/>
+                <Image Height="12" Source="/Resource/images/close.png"/>
             </Button>
         </Grid>
     </Border>

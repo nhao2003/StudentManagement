@@ -13,6 +13,7 @@
     <None Remove="Resource\Images\close.png" />
     <None Remove="Resource\Images\close_black.png" />
     <None Remove="Resource\Images\minus.png" />
+    <None Remove="Resource\Images\plus.png" />
     <None Remove="Resource\Images\program.png" />
     <None Remove="Resource\Images\student.png" />
     <None Remove="Resource\Images\student1.png" />
@@ -40,6 +41,7 @@
     <Resource Include="Resource\Images\close.png" />
     <Resource Include="Resource\Images\close_black.png" />
     <Resource Include="Resource\Images\minus.png" />
+    <Resource Include="Resource\Images\plus.png" />
     <Resource Include="Resource\Images\program.png" />
     <Resource Include="Resource\Images\student.png" />
     <Resource Include="Resource\Images\student1.png" />

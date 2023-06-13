@@ -20,25 +20,27 @@
                        Margin="15"
                         FontSize="15"
                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-        <StackPanel Margin="30 0 0 0" Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Margin="18 0 0 0" Grid.Row="1" Orientation="Horizontal">
             <ComboBox
-                Width="150"
-                    materialDesign:HintAssist.Hint="Cột điểm"
-                    ItemsSource="{Binding Config.PointTypes}"
-                    SelectedItem="{Binding SelectedPointType}"
-                    DisplayMemberPath="Loaikiemtra.Tenloaikiemtra"
-                    Style="{StaticResource combobox_item}" />
+                Width="175"
+                Height="50"
+                Margin="0 0 25 0"
+                materialDesign:HintAssist.Hint="Cột điểm"
+                ItemsSource="{Binding Config.PointTypes}"
+                SelectedItem="{Binding SelectedPointType}"
+                DisplayMemberPath="Loaikiemtra.Tenloaikiemtra"
+                Style="{StaticResource combobox_item}" />
             <Button
                 BorderThickness="0"
                 Height="25"
-                Command="{Binding addNewSubPointCommand}"
                 Width="25"
+                Command="{Binding addNewSubPointCommand}"
                 Background="White" 
                 BorderBrush="White"
+                HorizontalAlignment="Right"
                 Padding="0"
-                HorizontalAlignment="Left" Grid.Column="1" Margin="0,6,0,6"
                 >
-                <Image Height="12" Source="/Resource/images/close.png"/>
+                <Image Height="12" Source="/Resource/images/plus.png"/>
             </Button>
         </StackPanel>
         <ItemsControl Grid.Row="2" ItemsSource="{Binding SelectedPointType.Diemmonhocs}" Grid.ColumnSpan="2">
