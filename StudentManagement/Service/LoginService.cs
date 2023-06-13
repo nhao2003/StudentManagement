@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,13 @@ namespace StudentManagement.Service
         public static Taikhoan CurrentUser { get => _currentUser; set => _currentUser = value; }
         [ObservableProperty]
         private bool isAdmin;
-        public void Login(String name, String password)
+        public async Task Login(string name, string password)
         {
-            CurrentUser = _context.Taikhoans.Where(user => user.Username == name && user.Passwrd == password).FirstOrDefault();
-            if(CurrentUser.Vaitro.Equals("NV"))
+            CurrentUser = await _context.Taikhoans
+                .Where(user => user.Username == name && user.Passwrd == password)
+                .FirstOrDefaultAsync();
+
+            if (CurrentUser.Vaitro.Equals("NV"))
             {
                 isAdmin = true;
             }
@@ -30,14 +34,15 @@ namespace StudentManagement.Service
                 isAdmin = false;
             }
         }
-        public bool IsUserAuthentic(string username, string password)
+
+        public async Task<bool> IsUserAuthentic(string username, string password) 
         {
 
-            int accCount = _context.Taikhoans.Where(user => user.Username == username && user.Passwrd == password).Count();
+            int accCount = await _context.Taikhoans.Where(user => user.Username == username && user.Passwrd == password).CountAsync();
 
             if (accCount > 0)
             {
-                Login(username, password);
+                await Login(username, password);
                 return true;
                 
             }

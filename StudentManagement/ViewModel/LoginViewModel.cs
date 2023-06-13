@@ -21,16 +21,19 @@ public partial class LoginViewModel : ObservableObject
     private String userName;
     [ObservableProperty]
     private String password;
-    public ICommand goToMainWindowCM { get; set; }
+    
+    public IAsyncRelayCommand goToMainWindowCM { get; set; }
     private void Init()
     {
-        goToMainWindowCM = new RelayCommand(goToMainWindow);
+        goToMainWindowCM = new AsyncRelayCommand(goToMainWindowAsync);
     }
 
-    private void goToMainWindow()
+    private async Task goToMainWindowAsync()
     {
-        if (LoginServices.Instance.IsUserAuthentic(userName, password))
-        {
+        bool isAuthenticated = await Task.Run(() => LoginServices.Instance.IsUserAuthentic(userName, password));
+
+        if (isAuthenticated)
+        {   
             MainWindow window = new MainWindow();
             LoginWindow loginWindow = Application.Current.MainWindow as LoginWindow;
             Application.Current.MainWindow = window;
@@ -43,4 +46,5 @@ public partial class LoginViewModel : ObservableObject
             MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai");
         }
     }
+
 }

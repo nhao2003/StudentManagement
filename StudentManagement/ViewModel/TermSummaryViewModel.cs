@@ -240,7 +240,6 @@ namespace StudentManagement.ViewModel
             }
 
             TermSummaryItems.Clear();
-            MessageBox.Show(SelectedTerm.Tenhk + " " + SelectedYear.Tennamhoc);
             SummaryString = $"{SelectedTerm.Tenhk}";
             List<Lophocthucte> lophocthuctes = data.Lophocthuctes.Where(x => x.Manh == SelectedYear.Manh).ToList();
             int i = 1;
@@ -269,7 +268,6 @@ namespace StudentManagement.ViewModel
             }
 
             TermSummaryItems.Clear();
-            MessageBox.Show(SelectedTerm.Tenhk + " " + SelectedYear.Tennamhoc + " " + SelectedSubject.Tenmh);
             SummaryString = $"{SelectedTerm.Tenhk} - Môn học: {SelectedSubject.Tenmh}";
             List<Lophocthucte> lophocthuctes = data.Lophocthuctes.Where(x => x.Manh == SelectedYear.Manh).ToList();
             int i = 1;
