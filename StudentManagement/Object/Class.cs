@@ -33,15 +33,14 @@ namespace StudentManagement.Model
         {
             id = lopth.Malop;
             name = lopth.MalopNavigation.Khoi + lopth.MalopNavigation.Tenlop;
-            Giaovien giaovien = lopth.MagvcnNavigation;
-            //teacherName = lopth.MagvcnNavigation.UsernameNavigation.Hoten;
-            if(giaovien != null)
+            var teacher = lopth.MagvcnNavigation;
+            if (teacher != null)
             {
-                teacherName = giaovien.UsernameNavigation.Hoten;
+                teacherName = teacher.UsernameNavigation.Hoten;
             }
-            teacherName = "";
-            hocsinhs = new ObservableCollection<Hocsinh>(lopth.Mahs.ToList());
-
+            lophtt = lopth;
+            var hocsinhList = lopth.Mahs.ToList();
+            hocsinhs = new ObservableCollection<Hocsinh>(hocsinhList);
             numOfStudent = int.Parse(DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri);
             setRatio();
         }
@@ -71,7 +70,7 @@ namespace StudentManagement.Model
         }
         public void saveAddStudent(List<Student> newStudentList)
         {
-            foreach(var  h in newStudentList)
+            foreach (var h in newStudentList)
             {
                 Hocsinhs.Add(h.Hocsinh);
             }
@@ -100,6 +99,6 @@ namespace StudentManagement.Model
             }
             setRatio();
         }
-        
+
     }
 }

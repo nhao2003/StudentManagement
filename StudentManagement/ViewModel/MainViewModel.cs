@@ -68,11 +68,13 @@ public sealed partial class MainViewModel : ObservableObject
         _subjectViewModel = new SubjectViewModel();
         _schoolyearViewModel = new SchoolYearViewModel();
         _termSummaryViewModel = new TermSummaryViewModel();
+        _regulationViewModel = new RegulationViewModel();
+
 
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Thông tin", "infomation", _classListDetailsViewModel),
+        new Navigation("Quy Định", "infomation", _regulationViewModel),
         new Navigation("Tổng kết", "subject", _termSummaryViewModel),
 
         //new Navigation("Môn học", "subject", new ClassListViewModel()),

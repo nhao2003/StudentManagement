@@ -144,7 +144,7 @@
 
                         </Grid>
                     </Border>
-                   
+
                 </Grid>
             </Grid>
             <Border Style="{StaticResource BorderBox}" Grid.Row="2" Width="auto" Height="auto" Margin="10">

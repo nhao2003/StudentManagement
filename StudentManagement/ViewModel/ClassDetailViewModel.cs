@@ -16,7 +16,7 @@ namespace StudentManagement.ViewModel
 {
     public partial class ClassDetailViewModel : ObservableObject
     {
-        public ClassDetailViewModel() 
+        public ClassDetailViewModel()
         {
             Init();
             Instance = this;
@@ -38,7 +38,7 @@ namespace StudentManagement.ViewModel
         private object rightViewModel;
         private void Init()
         {
-            
+
             _transcriptViewModel = new TranscriptViewModel();
             _classconfigViewModel = new ClassConfigViewModel();
             _emptyRightViewModel = new EmptyRightViewModel();
