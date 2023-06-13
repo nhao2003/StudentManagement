@@ -95,7 +95,7 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Name="_username"
+                        Name="kasjdlk"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
                         BorderBrush="#00000000"
@@ -104,7 +104,7 @@
                         Grid.Column="0"
                         Style="{StaticResource textblock_item}"
                         Width="100"
-                        Text="Username" />
+                        Text="Usernjjjame" />
                 </Grid>
             </Border>
             <Border
