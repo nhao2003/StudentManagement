@@ -14,7 +14,7 @@
     Background="Transparent"
     AllowsTransparency="True"
     Title="AddNewClass"
-    Height="959"
+    Height="867"
     Width="515"
     Name="AddNhanVienWindown">
     <Border
@@ -66,7 +66,7 @@
                         Text="{Binding Title, Mode = TwoWay}"
                         Name="Titlenv"
                         Grid.Row="0"
-                        Margin="0,0,0,0"
+                        Margin="29,18,-29,10"
                         FontWeight="Bold"
                         Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
                 </Border>
@@ -106,6 +106,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBox
                         Name="_username"
+                        IsReadOnly="{Binding IsEdit, Mode=TwoWay}"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
                         BorderBrush="#00000000"
@@ -287,7 +288,8 @@
                         Name="_pw"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
-                        BorderBrush="#00000000">
+                        BorderBrush="#00000000"
+                         IsReadOnly="{Binding IsEdit, Mode=TwoWay}">
                         <TextBox.Text>
                             <Binding
                                 Path="Password"
@@ -377,7 +379,7 @@
                 Grid.Row="9"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="8,14,10,14"
+                Margin="8,10,10,18"
                 Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -389,7 +391,8 @@
                     <TextBox
                         Grid.Column="1"
                         Margin="0,0,10,0"
-                        BorderBrush="#00000000">
+                        BorderBrush="#00000000"
+                        IsReadOnly="{Binding IsEdit, Mode=TwoWay}">
                         <TextBox.Text>
                             <Binding
                                 Path="MaNhanVien"
@@ -413,7 +416,7 @@
                 Grid.Row="10"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="8,14,10,14"
+                Margin="8,0,10,28"
                 Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -449,10 +452,10 @@
 
             <Border
                 Height="auto"
-                Grid.Row="11"
+                Grid.Row="10"
                 Width="Auto"
-                Margin="8,10,10,10"
-                Grid.Column="1">
+                Margin="8,65,132,16"
+                Grid.Column="1" Grid.RowSpan="3">
                 <Border.Style>
 
                     <Style
@@ -520,15 +523,15 @@
 
             <Button
                 HorizontalAlignment="Left"
-                Grid.Row="12"
+                Grid.Row="11"
                 Style="{StaticResource primary_button}"
                 Content="Hoàn tất"
-                Margin="408,0,0,0"
+                Margin="408,51,0,0"
                 Width="auto"
                 Click="Finish_Button_Click"
                 Command="{Binding ThemHoacCapNhatNhanVienCommand}"
                 CommandParameter="{Binding ElementName=AddNhanVienWindown}"
-                Grid.Column="1" />
+                Grid.Column="1" VerticalAlignment="Top" />
         </Grid>
     </Border>
 </Window>

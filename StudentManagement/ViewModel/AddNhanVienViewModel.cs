@@ -46,6 +46,7 @@ namespace StudentManagement.ViewModel
         private String hoten;
         [ObservableProperty]
         private String title;
+        [ObservableProperty]
         public bool isEdit = false;
         public bool Result = false;
         public Taikhoan taikhoan;
@@ -80,6 +81,8 @@ namespace StudentManagement.ViewModel
             ngsinh = tk.Ngsinh.ToString();
             dchi = tk.Dchi ?? "";
             gioitinhIndex = tk.Gioitinh ? 0 : 1;
+            if (tk.Vaitro == "NV") vaitroIndex = 0;
+            else vaitroIndex = 1;
             foreach (var item in DataProvider.ins.context.Monhocs.ToList())
             {
                 monhocList.Add(new MonHocItemDataGrid(item));

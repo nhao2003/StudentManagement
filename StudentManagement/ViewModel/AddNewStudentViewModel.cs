@@ -32,6 +32,7 @@ namespace StudentManagement.ViewModel
         private String tonGiao;
         [ObservableProperty]
         private String title;
+        [ObservableProperty]
         public bool isEdit = false;
         public bool Result = false;
         public Hocsinh hocsinh;
