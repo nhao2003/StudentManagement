@@ -120,6 +120,31 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
+                        Name="_username"
+                        Grid.ColumnSpan="2"
+                        Margin="107,0,10,0"
+                        BorderBrush="#00000000"
+                        Text="{Binding Username, Mode=TwoWay}" />
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource textblock_item}"
+                        Width="100"
+                        Text="Username" />
+                </Grid>
+            </Border>
+            <Border
+                Grid.Row="3"
+                Style="{StaticResource BorderBox}"
+                Width="Auto"
+                Margin="10,10,10,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
                         Name="_hoten"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
@@ -146,7 +171,7 @@
                 </Grid>
             </Border>
             <Border
-                Grid.Row="3"
+                Grid.Row="4"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
                 Margin="10,10,10,0">
@@ -183,7 +208,7 @@
                 </Grid>
             </Border>
             <Border
-                Grid.Row="4"
+                Grid.Row="5"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
                 Margin="10,10,10,0">
@@ -219,7 +244,7 @@
 
             </Border>
             <Border
-                Grid.Row="5"
+                Grid.Row="6"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
                 Margin="10,10,10,10">
@@ -257,7 +282,7 @@
 
 
             <Border
-                Grid.Row="6"
+                Grid.Row="7"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
                 Margin="10,10,10,10">
@@ -293,7 +318,7 @@
 
             </Border>
             <Border
-                Grid.Row="7"
+                Grid.Row="8"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
                 Margin="10,10,10,10">
@@ -325,7 +350,7 @@
                 </Grid>
             </Border>
             <Border
-                Grid.Row="8"
+                Grid.Row="9"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
                 Margin="10,10,10,10">
@@ -394,7 +419,7 @@
                                     <StackPanel
                                         Width="300"
                                         Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding isChecked}" />
+                                        <CheckBox IsChecked="{Binding IsCheckedMonHoc, Mode=TwoWay}" />
                                         <TextBlock
                                             
                                             Text="{Binding TenMonHoc}" />
