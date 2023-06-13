@@ -66,7 +66,7 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumHocSinh}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>
@@ -91,7 +91,7 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumGiaoVien}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>
@@ -116,7 +116,7 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumLopHoc}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>
@@ -141,7 +141,7 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumMonHoc}"
                                                HorizontalAlignment="left"
                                                ></TextBlock>
                     </Grid>
@@ -166,7 +166,7 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NameChuongTrinh}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>

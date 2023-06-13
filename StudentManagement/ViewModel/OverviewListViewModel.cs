@@ -51,7 +51,7 @@ namespace StudentManagement.ViewModel
             monhocs = new ObservableCollection<Monhoc>(DataProvider.ins.context.Monhocs);
             NumMonHoc = monhocs.Count().ToString();
 
-            NameChuongTrinh = "Trung học phổ thông";
+            NameChuongTrinh = "Trung học";
         }
 
         partial void OnSelectedItemChanged(Namhoc value)
