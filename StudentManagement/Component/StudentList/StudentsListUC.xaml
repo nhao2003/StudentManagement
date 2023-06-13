@@ -240,7 +240,9 @@
                         <Button
                                 Content="Xóa" 
                                 Background="{StaticResource RedPrimary}"
-                                Style="{StaticResource primary_button}"/>
+                                Style="{StaticResource primary_button}"
+                                Command="{Binding DeleteStudentCommand}"
+                            />
                     </StackPanel>
                 </Grid>
             </Border>
