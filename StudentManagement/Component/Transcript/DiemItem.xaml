@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:validationrules="clr-namespace:StudentManagement.ValidationRules"
              xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
@@ -17,7 +18,17 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <TextBox Style="{StaticResource textbox_item }" Text="{Binding Diem.Diem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="90"></TextBox>
+            <TextBox 
+                Style="{StaticResource textbox_item }"  
+                Width="90">
+                <TextBox.Text>
+                    <Binding Path="Diem.Diem" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                        <Binding.ValidationRules>
+                            <validationrules:ScoreValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Button
                 BorderThickness="0"
                 Height="25"

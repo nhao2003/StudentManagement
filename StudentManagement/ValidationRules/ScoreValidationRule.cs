@@ -21,7 +21,7 @@ namespace StudentManagement.ValidationRules
             {
                 return new ValidationResult(false, "Số không hợp lệ");
             }
-            else if (number <= 0)
+            else if (number < 0)
             {
                 return new ValidationResult(false, "Điểm không âm");
             }
@@ -30,6 +30,7 @@ namespace StudentManagement.ValidationRules
                 return new ValidationResult(false, "Số không lớn hơn 10");
             }
 
+            
             return ValidationResult.ValidResult;
         }
     }

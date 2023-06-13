@@ -80,7 +80,7 @@ public sealed partial class MainViewModel : ObservableObject
         new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };
         leftNavigations[0].IsPress = true;
-        ContentViewModel = _programViewModel;
+        ContentViewModel = new ClassManagementViewModel();
     }
     public void Refresh()
     {
@@ -89,7 +89,7 @@ public sealed partial class MainViewModel : ObservableObject
             item.IsPress = false;
         }
         leftNavigations[0].IsPress = true;
-        ContentViewModel = _programViewModel;
+        ContentViewModel = new ClassManagementViewModel();
     }
 
     public void setViewModel(object viewModel)
