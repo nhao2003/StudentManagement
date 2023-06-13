@@ -47,6 +47,13 @@ namespace StudentManagement.ViewModel
             {
                 TaikhoanList.Add(new TaiKhoanDataGridItem(result.taikhoan));
                 DataProvider.ins.context.Taikhoans.Add(result.taikhoan);
+                if (result.taikhoan.Vaitro == "GV") {
+                    foreach (var mon in result.monhocList)
+                    {
+                        result.taikhoan.
+                    }
+                }
+
                 DataProvider.ins.context.SaveChanges();
 
             }

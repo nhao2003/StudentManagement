@@ -394,10 +394,10 @@
                                     <StackPanel
                                         Width="300"
                                         Orientation="Horizontal">
-                                        <CheckBox />
+                                        <CheckBox IsChecked="{Binding isChecked}" />
                                         <TextBlock
                                             
-                                            Text="{Binding Tenmh}" />
+                                            Text="{Binding TenMonHoc}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

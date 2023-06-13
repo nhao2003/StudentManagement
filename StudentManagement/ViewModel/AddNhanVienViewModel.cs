@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StudentManagement.Models;
+using StudentManagement.Object;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,7 +38,7 @@ namespace StudentManagement.ViewModel
         public Taikhoan taikhoan;
 
         [ObservableProperty]
-        public ObservableCollection<Monhoc> monhocList;
+        public ObservableCollection<MonHocItemDataGrid> monhocList = new();
         public AddNhanVienViewModel() { title = "Thêm nhân viên"; }
         public AddNhanVienViewModel(Taikhoan tk)
         {
@@ -53,7 +54,8 @@ namespace StudentManagement.ViewModel
             gioitinhIndex = tk.Gioitinh ? 0 : 1;
             if (tk.Vaitro == "0") vaitroIndex = 0;
             else vaitroIndex = 1;
-            monhocList = new ObservableCollection<Monhoc>(DataProvider.ins.context.Monhocs.ToList());
+            foreach (var monhoc in DataProvider.ins.context.Monhocs.ToList())
+                monhocList.Add(new MonHocItemDataGrid(monhoc)); 
         }
         [RelayCommand]
         private void ThemHoacCapNhatNhanVien(Window window)
