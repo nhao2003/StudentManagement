@@ -8,7 +8,7 @@
              d:Height="100">
     <Grid >
         <StackPanel Orientation="Horizontal">
-            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="20 0 20 0" >
+            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="20 0 15 0" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150"></ColumnDefinition>
@@ -48,7 +48,7 @@
                     </Grid>
                 </Grid>
             </Border>
-            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 15 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -66,14 +66,14 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumHocSinh}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>
                     </Grid>
                 </Grid>
             </Border>
-            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 15 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -91,14 +91,14 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumGiaoVien}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>
                     </Grid>
                 </Grid>
             </Border>
-            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 15 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -116,14 +116,14 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumLopHoc}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>
                     </Grid>
                 </Grid>
             </Border>
-            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 15 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -141,13 +141,13 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NumMonHoc}"
                                                HorizontalAlignment="left"
                                                ></TextBlock>
                     </Grid>
                 </Grid>
             </Border>
-            <Border Background="white" Height="64" Width="180" CornerRadius="20" Margin="0 0 20 0">
+            <Border Background="white" Height="64" Width="200" CornerRadius="20" Margin="0 0 15 0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -166,7 +166,7 @@
                                                VerticalAlignment="center"
                                                FontWeight="SemiBold"
                                                Style="{StaticResource MaterialDesignHeadline6TextBlock}"></TextBlock>
-                        <TextBlock Grid.Row="1" Text="1000"
+                        <TextBlock Grid.Row="1" Text="{Binding NameChuongTrinh}"
                                                HorizontalAlignment="left"
                                                
                                                ></TextBlock>
