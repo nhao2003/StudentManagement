@@ -28,13 +28,18 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private int gioitinhIndex;
         [ObservableProperty]
-        private int vaitroIndex;
+        private int vaitroIndex = 0;
         partial void OnVaitroIndexChanged(int value)
         {
-            if(value == 0){
-                maNVorGV = "Mã nhân viên";
-            } else {
-                maNVorGV = "Mã giáo viên";
+            if (value == 0)
+            {
+                MaNVorGV = "Mã nhân viên";
+                ChucVuOrHocVi = "Chức vụ";
+            }
+            else
+            {
+                MaNVorGV = "Mã giáo viên";
+                ChucVuOrHocVi = "Học vị";
             }
         }
         [ObservableProperty]
@@ -51,6 +56,8 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private String maNVorGV;
         [ObservableProperty]
+        private String chucVuOrHocVi;
+        [ObservableProperty]
         public ObservableCollection<MonHocItemDataGrid> monhocList = new();
         public AddNhanVienViewModel() {
 
@@ -59,7 +66,8 @@ namespace StudentManagement.ViewModel
                 monhocList.Add(new MonHocItemDataGrid(item));
             }
             title = "Thêm nhân viên";
-            maNVorGV = "Mã nhân viên";
+            MaNVorGV = "Mã nhân viên";
+            ChucVuOrHocVi = "Chức vụ";
         }
         public AddNhanVienViewModel(Taikhoan tk)
         {
@@ -72,8 +80,6 @@ namespace StudentManagement.ViewModel
             ngsinh = tk.Ngsinh.ToString();
             dchi = tk.Dchi ?? "";
             gioitinhIndex = tk.Gioitinh ? 0 : 1;
-            if (tk.Vaitro == "0") vaitroIndex = 0;
-            else vaitroIndex = 1;
             foreach (var item in DataProvider.ins.context.Monhocs.ToList())
             {
                 monhocList.Add(new MonHocItemDataGrid(item));
@@ -91,12 +97,14 @@ namespace StudentManagement.ViewModel
                     }
                 }
                 title = "Chỉnh sửa nhân viên";
-                maNVorGV = "Mã nhân viên";
+                MaNVorGV = "Mã nhân viên";
+                ChucVuOrHocVi = "Chức vụ";
             }
             else if (tk.Vaitro == "GV")
             {
                 title = "Chỉnh sửa giáo viên";
                 maNVorGV = "Mã giáo viên";
+                ChucVuOrHocVi = "Học vị";
                 Giaovien giaovien = new();
                 foreach(var item in DataProvider.ins.context.Giaoviens)
                 {
@@ -132,16 +140,6 @@ namespace StudentManagement.ViewModel
                 taikhoan.Passwrd = Password;
                 taikhoan.Ngsinh = DateTime.Parse(Ngsinh);
                 taikhoan.Email = Email;
-                if (vaitroIndex == 0)
-                {
-                    taikhoan.Vaitro = "NV";
-                    maNVorGV = "Mã nhân viên";
-                }
-                else
-                {
-                    taikhoan.Vaitro = "GV";
-                    maNVorGV = "Mã giáo viên";
-                }
             }
             else
             {
@@ -153,16 +151,6 @@ namespace StudentManagement.ViewModel
                 taikhoan.Passwrd = Password;
                 taikhoan.Ngsinh = DateTime.Parse(Ngsinh);
                 taikhoan.Email = Email;
-                if (vaitroIndex == 0)
-                {
-                    taikhoan.Vaitro = "NV";
-                    maNVorGV = "Mã nhân viên";
-                }
-                else
-                {
-                    taikhoan.Vaitro = "GV";
-                    maNVorGV = "Mã giáo viên";
-                }
             }
             window.Close();
         }

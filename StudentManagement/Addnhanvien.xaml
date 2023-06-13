@@ -332,7 +332,7 @@
                         Margin="150,10,0,10"
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Hint="Chọn vai trò"
-                        SelectedIndex="{Binding VaitroIndex, Mode=TwoWay}">
+                        SelectedIndex="{Binding VaitroIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem
                             Content="Nhân viên" />
                         <ComboBoxItem
@@ -404,9 +404,8 @@
                     <TextBlock
                         Grid.Column="0"
                         Style="{StaticResource textblock_item}"
-                        Width="100">
-                        <Run
-                            Text="{Binding MaNVorGV, Mode=TwoWay}" /><LineBreak /><Run /></TextBlock>
+                        Width="100"
+                        Text="{Binding MaNVorGV}" />
                 </Grid>
 
             </Border>
@@ -442,7 +441,7 @@
                         Grid.Column="0"
                         Style="{StaticResource textblock_item}"
                         Width="100"
-                        Text="Chức vụ" />
+                        Text="{Binding ChucVuOrHocVi}" />
                 </Grid>
 
             </Border>
