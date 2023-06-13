@@ -50,7 +50,7 @@ namespace StudentManagement.ViewModel
                 if (result.taikhoan.Vaitro == "GV") {
                     foreach (var mon in result.monhocList)
                     {
-                        result.taikhoan.
+                        
                     }
                 }
 
