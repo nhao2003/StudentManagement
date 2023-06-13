@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -45,7 +44,7 @@ namespace StudentManagement.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseLazyLoadingProxies().UseSqlServer(ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
+                optionsBuilder.UseSqlServer("Data Source=ANH\\SQLEXPRESS;Initial Catalog=QUANLYHOCSINH;Integrated Security=True;TrustServerCertificate=True");
             }
         }
 
@@ -53,8 +52,8 @@ namespace StudentManagement.Models
         {
             modelBuilder.Entity<Diemmonhoc>(entity =>
             {
-                entity.HasKey(e => new { e.Mahs, e.Mahk, e.Manh, e.Mamh, e.Malkt })
-                    .HasName("PK__DIEMMONH__B375944BE5866CAA");
+                entity.HasKey(e => new { e.Mahs, e.Mahk, e.Manh, e.Mamh, e.Malkt, e.Lankt })
+                    .HasName("PK__DIEMMONH__F2077CD784D00313");
 
                 entity.ToTable("DIEMMONHOC");
 
@@ -78,37 +77,39 @@ namespace StudentManagement.Models
                     .HasMaxLength(7)
                     .HasColumnName("MALKT");
 
+                entity.Property(e => e.Lankt).HasColumnName("LANKT");
+
                 entity.Property(e => e.Diem).HasColumnName("DIEM");
 
                 entity.HasOne(d => d.MahkNavigation)
                     .WithMany(p => p.Diemmonhocs)
                     .HasForeignKey(d => d.Mahk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMMONHOC__MAHK__628FA481");
+                    .HasConstraintName("FK__DIEMMONHOC__MAHK__1C873BEC");
 
                 entity.HasOne(d => d.MahsNavigation)
                     .WithMany(p => p.Diemmonhocs)
                     .HasForeignKey(d => d.Mahs)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMMONHOC__MAHS__619B8048");
+                    .HasConstraintName("FK__DIEMMONHOC__MAHS__1B9317B3");
 
                 entity.HasOne(d => d.MalktNavigation)
                     .WithMany(p => p.Diemmonhocs)
                     .HasForeignKey(d => d.Malkt)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMMONHO__MALKT__656C112C");
+                    .HasConstraintName("FK__DIEMMONHO__MALKT__1F63A897");
 
                 entity.HasOne(d => d.MamhNavigation)
                     .WithMany(p => p.Diemmonhocs)
                     .HasForeignKey(d => d.Mamh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMMONHOC__MAMH__6383C8BA");
+                    .HasConstraintName("FK__DIEMMONHOC__MAMH__1D7B6025");
 
                 entity.HasOne(d => d.ManhNavigation)
                     .WithMany(p => p.Diemmonhocs)
                     .HasForeignKey(d => d.Manh)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMMONHOC__MANH__6477ECF3");
+                    .HasConstraintName("FK__DIEMMONHOC__MANH__1E6F845E");
             });
 
             modelBuilder.Entity<Diemtrungbinhmonhocnamhoc>(entity =>
