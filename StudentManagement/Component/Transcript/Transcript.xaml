@@ -5,6 +5,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
+             xmlns:validationrules="clr-namespace:StudentManagement.ValidationRules"
              mc:Ignorable="d" 
              d:DesignHeight="690" d:DesignWidth="1220">
     <Border  CornerRadius="20" Background="white" Margin="20">
@@ -146,8 +147,15 @@
                         Header="Họ tên" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[0].Diemdisplay,FallbackValue='0'}"
-                        Header="Điểm miệng" />
+                        Header="Điểm miệng">
+                        <materialDesign:DataGridTextColumn.Binding>
+                            <Binding Path=" DiemDisplays[0].Diemdisplay" FallbackValue='0'>
+                                <Binding.ValidationRules>
+                                    <validationrules:ScoreValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </materialDesign:DataGridTextColumn.Binding>
+                    </materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn
                         Width="*"
                         Binding="{Binding DiemDisplays[1].Diemdisplay,FallbackValue='0'}"

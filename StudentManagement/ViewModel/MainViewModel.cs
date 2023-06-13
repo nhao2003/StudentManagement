@@ -73,9 +73,9 @@ public sealed partial class MainViewModel : ObservableObject
 
         leftNavigations = new ObservableCollection<Navigation>()
     {
-        new Navigation("Trang chủ", "home", _programViewModel),
         new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
         new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
+        new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
         new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
         new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };
