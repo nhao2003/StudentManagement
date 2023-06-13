@@ -82,5 +82,13 @@ namespace StudentManagement.Object
                 diem.saveSubPoint();
             }
         }
+        public void saveData2()
+        {
+            foreach (var diem in pointTypes)
+            {
+                diem.saveSubPoint2();
+            }
+
+        }
     }
 }

@@ -25,8 +25,9 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void updateData()
         {
-            config.saveData();
+            config.saveData2();
         }
+        
         [RelayCommand]
         private void addNewSubPoint()
         {

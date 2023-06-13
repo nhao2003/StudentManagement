@@ -15,8 +15,42 @@ namespace StudentManagement.Object
         private TranscriptConfig config;
         [ObservableProperty]
         private Loaikiemtra loaikiemtra;
-        [ObservableProperty]
-        private double diemTB;
+        private double DiemTB = -1;
+        private string diemDisplay;
+        public string Diemdisplay
+        {
+            get
+            {
+                return diemDisplay;
+            }
+            set
+            {
+               
+                double diemdouble;
+                if (double.TryParse(value, out diemdouble))
+                {
+                    diemdouble = Math.Round(diemdouble, 1);
+                    diemdouble = Math.Round(diemdouble * 2, MidpointRounding.AwayFromZero) / 2;
+                    if (diemdouble >= 0 && diemdouble <= 10)
+                    {
+
+                        DiemTB = diemdouble;
+                        diemDisplay = diemdouble.ToString();
+                        OnPropertyChanged();
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+                else
+                {
+                    diemDisplay = "";
+                    // Conversion failed, handle the error
+                }
+            }
+        }
         [ObservableProperty]
         private ObservableCollection<SubPoint> diemmonhocs = new ObservableCollection<SubPoint>();
         public PointType(Loaikiemtra loaikiemtra, TranscriptConfig config) 
@@ -34,6 +68,7 @@ namespace StudentManagement.Object
                     diemmonhocs.Add(new SubPoint(diem, this));
                 }
                 DiemTB = DiemTB / diemList.Count;
+                Diemdisplay = DiemTB.ToString();
             }
         }
 
@@ -50,14 +85,49 @@ namespace StudentManagement.Object
             Diemmonhocs.Add(new SubPoint(diem, this));
             DataProvider.ins.context.Diemmonhocs.Add(diem);
             DataProvider.ins.context.SaveChanges();
-
+            RecountDiemTB();
+        }
+        public void saveSubPoint2()
+        {
+            if (Diemmonhocs.Count == 0 && DiemTB != -1 && DiemTB is double.NaN == false)
+            {
+                Diemmonhoc diem = new Diemmonhoc();
+                diem.Manh = config.namhoc.Manh;
+                diem.Mahk = config.semeter.Mahk;
+                diem.Mamh = config.subject.Mamh;
+                diem.Mahk = config.semeter.Mahk;
+                diem.Malkt = loaikiemtra.Malkt;
+                diem.Lankt = Diemmonhocs.Count;
+                diem.Mahs = config.Student.Mahs;
+                diem.Diem = DiemTB;
+                Diemmonhocs.Add(new SubPoint(diem, this));
+                DataProvider.ins.context.Diemmonhocs.Add(diem);
+                DataProvider.ins.context.SaveChanges();
+            }
+            else if (Diemmonhocs.Count == 1 && DiemTB != -1 && DiemTB is double.NaN == false)
+            {
+                DiemTB = Diemmonhocs[0].Diem.Diem;
+                Diemdisplay = DiemTB.ToString();
+                DataProvider.ins.context.Update(Diemmonhocs[0].Diem);
+                DataProvider.ins.context.SaveChanges();
+            }
+            else
+            {
+                DiemTB = 0;
+                foreach (var diem in Diemmonhocs)
+                {
+                    DiemTB += diem.Diem.Diem;
+                    DataProvider.ins.context.Update(diem.Diem);
+                    DataProvider.ins.context.SaveChanges();
+                }
+                DiemTB = DiemTB / (Diemmonhocs.Count);
+                Diemdisplay = DiemTB.ToString();
+            }
         }
         public void saveSubPoint()
         {
-            if (Diemmonhocs.Count == 0)
+            if (Diemmonhocs.Count == 0 && DiemTB != -1 && DiemTB is double.NaN == false)
             {
-                if (DiemTB != 0 && DiemTB is double.NaN == false)
-                {
                     Diemmonhoc diem = new Diemmonhoc();
                     diem.Manh = config.namhoc.Manh;
                     diem.Mahk = config.semeter.Mahk;
@@ -70,7 +140,13 @@ namespace StudentManagement.Object
                     Diemmonhocs.Add(new SubPoint(diem, this));
                     DataProvider.ins.context.Diemmonhocs.Add(diem);
                     DataProvider.ins.context.SaveChanges();
-                }
+            }
+            else if(Diemmonhocs.Count == 1 && DiemTB != -1 && DiemTB is double.NaN == false)
+            {
+                Diemmonhocs[0].Diem.Diem = DiemTB;
+                DataProvider.ins.context.Update(Diemmonhocs[0].Diem);
+                DataProvider.ins.context.SaveChanges();
+                Diemdisplay = DiemTB.ToString();
             }
             else
             {
@@ -82,8 +158,30 @@ namespace StudentManagement.Object
                     DataProvider.ins.context.SaveChanges();
                 }
                 DiemTB = DiemTB / (Diemmonhocs.Count);
+                Diemdisplay = DiemTB.ToString();
             }
           
+        }
+        public void RecountDiemTB()
+        {
+            if(Diemmonhocs.Count == 0)
+            {
+                DiemTB = -1;
+                Diemdisplay = "";
+                return;
+            }
+            else
+            {
+                DiemTB = 0;
+                foreach (var item in Diemmonhocs)
+                {
+                    DiemTB += item.Diem.Diem;
+
+                }
+                DiemTB = DiemTB / (Diemmonhocs.Count);
+                Diemdisplay = DiemTB.ToString();
+            }
+            
         }
         public void DeleteDiem(SubPoint diem)
         {
@@ -93,7 +191,7 @@ namespace StudentManagement.Object
                 DataProvider.ins.context.Diemmonhocs.Remove(diem.Diem);
                 DataProvider.ins.context.SaveChanges();
             }
-
+            RecountDiemTB();
         }
     }
 }
