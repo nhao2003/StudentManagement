@@ -56,9 +56,9 @@ namespace StudentManagement.ViewModel
 
         public TermSummaryViewModel()
         {
-            TermList = new ObservableCollection<Hocky>(data.Hockies.Where(x => x.Isdeleted != true));
-            YearList = new ObservableCollection<Namhoc>(data.Namhocs.Where(x => x.Isdeleted != true));
-            SubjectList = new ObservableCollection<Monhoc>(data.Monhocs.Where(x => x.Isdeleted != true));
+            TermList = new ObservableCollection<Hocky>(data.Hockies);
+            YearList = new ObservableCollection<Namhoc>(data.Namhocs);
+            SubjectList = new ObservableCollection<Monhoc>(data.Monhocs);
             Overview = new OverviewListViewModel();
             SummaryTypeItems = new ObservableCollection<SummaryTypeItem>()
             {
