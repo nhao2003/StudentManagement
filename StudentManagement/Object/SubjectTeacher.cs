@@ -42,7 +42,7 @@ namespace StudentManagement.Object
         public Phanconggiangday Phanconggiangday
         {
             set { phanconggiangday = value; }
-            get { return phanconggiangday; }
+            get { return phanconggiangday; OnPropertyChanged(); }
         }
 
         public SubjectTeacher(String Subject, String Teacher)

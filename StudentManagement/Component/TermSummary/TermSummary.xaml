@@ -10,12 +10,12 @@
     <Border  Background="#E7F2FF">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.16*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Global:OverviewList Grid.Row="0" DataContext="{Binding Overview}"/>
+            <Global:OverviewList Grid.Row="0"/>
             <TextBlock 
                 Grid.Row="1"
                 FontWeight="Bold"
@@ -100,6 +100,7 @@
                             HorizontalScrollBarVisibility="Disabled"
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
+                            IsReadOnly="True"
                             ItemsSource="{Binding TermSubjectSummaryDatas}" Grid.ColumnSpan="2"
                             >
                             <i:Interaction.Triggers>
@@ -185,8 +186,7 @@
                     </i:Interaction.Triggers>-->
                                     <DataGridCheckBoxColumn.Header>
                                         <Border Background="Transparent">
-                                            <CheckBox Command="{Binding DataContext.AllItemsSelectedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                IsChecked="{Binding DataContext.IsAllItemsSelected, RelativeSource={RelativeSource AncestorType=DataGrid}, Mode=TwoWay}"/>
+                                            <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=IsAllItemsSelected}" />
                                         </Border>
                                     </DataGridCheckBoxColumn.Header>
                                     <DataGridCheckBoxColumn.HeaderStyle>

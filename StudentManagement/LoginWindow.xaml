@@ -1,0 +1,52 @@
+﻿<Window x:Class="StudentManagement.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentManagement"
+        xmlns:leftSideBar="clr-namespace:StudentManagement.Component.LeftSideBar"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
+        xmlns:sub="clr-namespace:StudentManagement.Component.Program"
+        xmlns:program="clr-namespace:StudentManagement.Component.Program"
+        xmlns:cls="clr-namespace:StudentManagement.Component.ListClass"
+        xmlns:overview="clr-namespace:StudentManagement.Component.Global"
+        xmlns:login="clr-namespace:StudentManagement.Component.Login"
+        xmlns:schoolyear="clr-namespace:StudentManagement.Component.NewSchoolYear"
+        DataContext="{StaticResource LoginVM}"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent" 
+        Height="800" Width="1420">
+    <Border CornerRadius="50">
+        <Border.Background>
+            <SolidColorBrush Color="#E7F2FF"></SolidColorBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackPanel>
+                    <Image Height="700"  Source="/Resource/Images/app_graphic.png"></Image>
+                    <TextBlock Text="Phần mềm quản lý học sinh" 
+                           Margin="0 0 0 30 "
+                           Foreground="Black"
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           ></TextBlock>
+                </StackPanel>
+
+            </Grid>
+            <login:LoginUC Grid.Column="1"></login:LoginUC>
+
+        </Grid>
+    </Border>
+</Window>

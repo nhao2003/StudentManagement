@@ -198,7 +198,7 @@
                                                 Padding="5"
                                                 Style="{StaticResource combobox_item}"
                                                 ItemsSource="{Binding Teachers}"
-                                                SelectedItem="{Binding Sgiaovien}"  
+                                                SelectedItem="{Binding Sgiaovien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
                                                 DisplayMemberPath="UsernameNavigation.Hoten"
                                                 />
                                         </DataTemplate>

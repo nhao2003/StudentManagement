@@ -11,24 +11,24 @@
         xmlns:classMana="clr-namespace:StudentManagement.Component.ClassManagement"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
+        xmlns:schoolyear="clr-namespace:StudentManagement.Component.NewSchoolYear"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
         DataContext="{StaticResource GreetingVM}"
         Background="Transparent" 
-        Height="800" Width="1440"
-        MouseDown="Window_MouseDown">
-    <Border CornerRadius="20">
+        Height="800" Width="1420">
+    <Border CornerRadius="50">
         <Border.Background>
             <SolidColorBrush Color="#E7F2FF"></SolidColorBrush>
         </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="220"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="1220"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Border Background="White" CornerRadius="20 0 0 20" >
+            <Border Background="White" CornerRadius="50 0 0 50" >
                 <Grid Grid.Column="0">
                     <leftSideBar:LeftSideBar DataContext="{StaticResource GreetingVM}" ></leftSideBar:LeftSideBar>
                 </Grid>
@@ -40,8 +40,9 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 5 20 0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 3 30 0">
                         <Button Command="{Binding HideWindowCommand}" Height="auto" Background="Transparent" BorderThickness="0" Width="30">
+
                             <Button.Template>
                                 <ControlTemplate>
                                     <Ellipse Width="20" Height="20" Fill="{StaticResource GreenPrimary}" Margin="0 0 10 0">
@@ -65,9 +66,9 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition ></RowDefinition>
-                                    <RowDefinition Height="7*"></RowDefinition>
+                                    <RowDefinition Height="6*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <overview:OverviewList Grid.Row="0" DataContext="{Binding OverviewListVM}"></overview:OverviewList>
+                                <overview:OverviewList Grid.Row="0"></overview:OverviewList>
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
@@ -77,13 +78,16 @@
                         <DataTemplate DataType="{x:Type viewModel:TermSummaryViewModel}">
                             <TermSummary:TermSummary />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:RegulationViewModel}">
-                            <program:RegulationtProgram />
+                        <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
+                            
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassManagementViewModel}">
                             <classMana:ClassManagement></classMana:ClassManagement>
                         </DataTemplate>
-                        
+                        <DataTemplate DataType="{x:Type viewModel:SchoolYearViewModel}" >
+                            <schoolyear:NewSchoolYear></schoolyear:NewSchoolYear>
+                        </DataTemplate>
+
                     </ContentControl.Resources>
                 </ContentControl>
             </Grid>

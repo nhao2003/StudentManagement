@@ -4,11 +4,12 @@ using StudentManagement.Models;
 using StudentManagement.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentManagement.Object
+namespace StudentManagement.Model
 {
     public partial class Class : ObservableObject
     {
@@ -24,30 +25,36 @@ namespace StudentManagement.Object
         private int numOfPresent;
         [ObservableProperty]
         private int ratio;
-
+        [ObservableProperty]
         private Lophocthucte lophtt;
-        private List<Hocsinh> hocsinhs;
+        [ObservableProperty]
+        private ObservableCollection<Hocsinh> hocsinhs;
         public Class(Lophocthucte lopth)
         {
             id = lopth.Malop;
             name = lopth.MalopNavigation.Khoi + lopth.MalopNavigation.Tenlop;
-            teacherName = lopth.MagvcnNavigation.UsernameNavigation.Hoten;
-
-            hocsinhs = lopth.Mahs.ToList();
-
-            numOfStudent = int.Parse(DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri);
-            numOfPresent = hocsinhs.Count;
-
+            var teacher = lopth.MagvcnNavigation;
+            if(teacher != null)
+            {
+                teacherName = teacher.UsernameNavigation.Hoten;
+            }
             lophtt = lopth;
-
-            ratio = Convert.ToInt32((numOfPresent / Convert.ToDouble(numOfStudent)) * 100);
+            var hocsinhList = lopth.Mahs.ToList();
+            hocsinhs = new ObservableCollection<Hocsinh>(hocsinhList);
+            numOfStudent = int.Parse(DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri);
+            setRatio();
         }
-
-
-        public List<Hocsinh> GetHocSinhs()
+        private void setRatio()
         {
-            return hocsinhs;
+            NumOfPresent = Hocsinhs.Count;
+            Ratio = Convert.ToInt32((NumOfPresent / Convert.ToDouble(NumOfStudent)) * 100);
+
         }
+
+        //public ObservableCollection<Hocsinh> GetHocSinhs()
+        //{
+        //    return Hocsinhs;
+        //}
 
         [RelayCommand]
         public void SetDetailClass()
@@ -61,10 +68,37 @@ namespace StudentManagement.Object
         {
             ClassListViewModel.Instance.SetChooseClass(this);
         }
-
+        public void saveAddStudent(List<Student> newStudentList)
+        {
+            foreach(var  h in newStudentList)
+            {
+                Hocsinhs.Add(h.Hocsinh);
+            }
+            setRatio();
+            Lophtt.Mahs = Hocsinhs;
+            DataProvider.ins.context.Lophocthuctes.Update(Lophtt);
+            DataProvider.ins.context.SaveChanges();
+        }
         public Lophocthucte GetLopHocThuTe()
         {
             return lophtt;
         }
+        private void saveChanges()
+        {
+            Lophtt.Mahs = Hocsinhs;
+            DataProvider.ins.context.Lophocthuctes.Update(Lophtt);
+        }
+        public void removeStudent(Hocsinh hocsinh)
+        {
+            if (Hocsinhs.Contains(hocsinh))
+            {
+                Hocsinhs.Remove(hocsinh);
+                Lophtt.Mahs = Hocsinhs;
+                DataProvider.ins.context.Lophocthuctes.Update(Lophtt);
+                DataProvider.ins.context.SaveChanges();
+            }
+            setRatio();
+        }
+        
     }
 }

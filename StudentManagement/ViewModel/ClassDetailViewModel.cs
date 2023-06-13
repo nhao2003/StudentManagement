@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.VisualBasic;
 using StudentManagement.Model;
 using StudentManagement.Models;
 using StudentManagement.Object;
@@ -18,20 +19,38 @@ namespace StudentManagement.ViewModel
         public ClassDetailViewModel() 
         {
             Init();
+            Instance = this;
         }
 
         private TranscriptViewModel _transcriptViewModel;
         private ClassConfigViewModel _classconfigViewModel;
-
+        private TranscriptRightViewModel _transcriptRightViewModel;
+        private EmptyRightViewModel _emptyRightViewModel;
+        private static ClassDetailViewModel _instance;
+        public static ClassDetailViewModel Instance
+        {
+            get => _instance == null ? (_instance = new ClassDetailViewModel()) : _instance;
+            private set => _instance = value;
+        }
         [ObservableProperty]
         private object contentViewModel;
+        [ObservableProperty]
+        private object rightViewModel;
         private void Init()
         {
+            
             _transcriptViewModel = new TranscriptViewModel();
             _classconfigViewModel = new ClassConfigViewModel();
+            _emptyRightViewModel = new EmptyRightViewModel();
+            //_transcriptRightViewModel = new TranscriptRightViewModel();
             ContentViewModel = _transcriptViewModel;
+            rightViewModel = _emptyRightViewModel;
+
         }
-        
+        public void setRightViewModel(object viewmodel)
+        {
+            RightViewModel = viewmodel;
+        }
 
         public void setViewModel(object viewModel)
         {
@@ -59,7 +78,7 @@ namespace StudentManagement.ViewModel
 
         public void SetCurrentClass(Lophocthucte mclass)
         {
-            Lophocthucte = mclass;
+            lophocthucte = mclass;
             //MessageBox.Show(Lophocthucte.MalopNavigation.Tenlop);
             OnPropertyChanged();
             _transcriptViewModel.SetCurrentClass(lophocthucte);

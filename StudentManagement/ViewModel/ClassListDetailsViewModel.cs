@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
     public partial class ClassListDetailsViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private OverviewListViewModel overview;
-
         [ObservableProperty]
         private ObservableCollection<ClassListData> classListDatas = new ObservableCollection<ClassListData>();
 
@@ -26,7 +26,6 @@ namespace StudentManagement.ViewModel
 
         public ClassListDetailsViewModel()
         {
-            Overview = new OverviewListViewModel();
             DataProvider data = DataProvider.ins;
             int stt = 1;
             List<Lophocthucte> lophocthuctes = data.context.Lophocthuctes.ToList();

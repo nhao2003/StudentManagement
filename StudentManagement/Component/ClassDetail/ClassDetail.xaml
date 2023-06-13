@@ -8,6 +8,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.ClassDetail"
              mc:Ignorable="d"
+             xmlns:service="clr-namespace:StudentManagement.Service"
             d:DesignHeight="770" d:DesignWidth="1220">
     <Border  Background="{StaticResource BlueLight}" Margin="20">
         <Grid>
@@ -39,6 +40,10 @@
                 Margin="0, 10, 0 ,0"
                 Orientation="Horizontal"
                 HorizontalAlignment="Center" 
+                Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                 VerticalAlignment="Center">
                     <Button
                     Content="Bảng điểm" 
@@ -73,7 +78,7 @@
 
             <Grid Grid.Column="1" Grid.Row="1">
                 <Border  CornerRadius="20" Background="white" Margin="20">
-                    <Grid>
+                    <!--<Grid>
                         <TextBlock 
                         FontWeight="Normal"
                         FontSize="20"
@@ -85,7 +90,18 @@
                         >
                             Trống
                         </TextBlock>
-                    </Grid>
+                    </Grid>-->
+                    <ContentControl Grid.Row="2" Content="{Binding RightViewModel, UpdateSourceTrigger=PropertyChanged}">
+                        <ContentControl.Resources >
+                            <DataTemplate DataType="{x:Type viewmodel:EmptyRightViewModel}">
+                                <transript:EmptyRight ></transript:EmptyRight>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewmodel:TranscriptRightViewModel}">
+                                <transript:ConfigRight></transript:ConfigRight>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+
                 </Border>
             </Grid>
         </Grid>

@@ -1,6 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Castle.Core.Internal;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using StudentManagement.Object;
+using Microsoft.IdentityModel.Tokens;
+using StudentManagement.Component.ListClass;
+using StudentManagement.Model;
 using StudentManagement.Models;
 using System;
 using System.Collections.Generic;
@@ -26,8 +29,13 @@ namespace StudentManagement.ViewModel
             Instance = this;
             InitNienKhoas();
             InitClasses();
-            InitStudents();
+            //InitStudents();
+            emptyRightViewmodel = new EmptyRightViewModel();
+            RightViewModel = emptyRightViewmodel;
         }
+        private object emptyRightViewmodel;
+        [ObservableProperty]
+        private object rightViewModel;
 
         // lop
         [ObservableProperty]
@@ -37,6 +45,10 @@ namespace StudentManagement.ViewModel
         private ObservableCollection<Class> classes = new ObservableCollection<Class>()
         {
         };
+        public void setRightViewModel(object rightViewModel)
+        {
+            RightViewModel = rightViewModel;
+        }
 
         public void InitClasses()
         {
@@ -60,40 +72,38 @@ namespace StudentManagement.ViewModel
         {
         };
 
-        public void InitStudents()
-        {
-            hocsinhs = DataProvider.ins.context.Hocsinhs.ToList();
-            foreach (var hs in hocsinhs)
-            {
-                newStudents.Add(new Student(hs));
-            }
-        }
+        //public void InitStudents()
+        //{
+        //    hocsinhs = DataProvider.ins.context.Hocsinhs.ToList();
+        //    foreach (var hs in hocsinhs)
+        //    {
+        //        newStudents.Add(new Student(hs));
+        //    }
+        //}
         [ObservableProperty]
-        private Class choosenClass;
-
-        [ObservableProperty]
-        private Visibility classStudentsVisibility = Visibility.Hidden;
-        [ObservableProperty]
-        private Visibility newStudentsVisibility = Visibility.Visible;
-        
+        private Class choosenClass;        
         public void SetChooseClass(Class mclass)
         {
+            RightViewModel = new ClassListRightViewModel(this);
             ChoosenClass = mclass;
-            ClassStudentsVisibility = Visibility.Visible;
-            NewStudentsVisibility = Visibility.Hidden;
-
-            students.Clear();
-            foreach(var hs in mclass.GetHocSinhs())
+            NewStudents.Clear();
+            if(ChoosenClass.Lophtt.MalopNavigation.Khoi == 10)
             {
-                students.Add(new Student(hs));
+                var students  = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count == 0).OrderByDescending(x=>x.Hotenhs).ToList();
+                foreach (var st in students)
+                {
+                    NewStudents.Add(new Student(st));   
+                }
+            }
+            else
+            {
+              //  var students = DataProvider.ins.context.Hocsinhs.Where(x=>x.Malhtts.Count > 0 && x.Malhtts.Where(x=>x.Malop ==  )  ).
             }
         }
-
         [RelayCommand]
         public void ShowNewStudents()
         {
-            ClassStudentsVisibility = Visibility.Hidden;
-            NewStudentsVisibility = Visibility.Visible;
+            RightViewModel = new ClassListNewStudentRightViewModel(this);
         }
 
         // nien khoa
@@ -127,11 +137,33 @@ namespace StudentManagement.ViewModel
         public void Refresh()
         {
             InitClasses();
-            InitStudents();
-
-            ClassManagementViewModel.Instance.SetDetailClass(choosenClass.GetLopHocThuTe());
-            ClassStudentsVisibility = Visibility.Visible;
-            NewStudentsVisibility = Visibility.Hidden;
+            //ClassManagementViewModel.Instance.SetDetailClass(choosenClass.GetLopHocThuTe());
+        }
+        public void removeStudent(Hocsinh hocsinh)
+        {
+            ChoosenClass.removeStudent(hocsinh);
+            NewStudents.Add(new Student(hocsinh));
+        }
+        [RelayCommand]
+        private void addStudentToClass()
+        {
+            List<Student> selectedStudents = new List<Student>();
+            if (ChoosenClass == null && NewStudents.IsNullOrEmpty() == true) return;
+            foreach(var student in NewStudents)
+            {
+                if(student.IsSelected == true)
+                {
+                    selectedStudents.Add(student);
+                }
+            }
+            if(selectedStudents.Count > 0) {
+                ChoosenClass.saveAddStudent(selectedStudents);
+                foreach(var st in selectedStudents)
+                {
+                    NewStudents.Remove(st);
+                }
+            }
+            RightViewModel = new ClassListRightViewModel(this);
         }
     }
 }

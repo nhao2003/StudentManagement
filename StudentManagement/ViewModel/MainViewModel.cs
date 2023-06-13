@@ -2,8 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using StudentManagement.Models;
 using StudentManagement.Object;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace StudentManagement.ViewModel;
 
@@ -13,16 +19,24 @@ public sealed partial class MainViewModel : ObservableObject
     public MainViewModel()
     {
         Init();
-        ContentViewModel = _programViewModel;
         Instance = this;
     }
 
     #region property
+
     private object _programViewModel;
-    private object _regulationViewModel;
-    private object _termSummaryViewModel;
-    private object _classListDetailsViewModel;
+    private object _studentViewModel;
+    private object _teacherViewModel;
+    private object _classListViewModel;
+    private object _transcriptViewModel;
+    private object _classconfigViewModel;
+    private object _classDetailViewModel;
     private object _classManaViewModel;
+
+    private object _subjectViewModel;
+    private object _schoolyearViewModel;
+    private object _classListDetailsViewModel;
+    private object _termSummaryViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -43,22 +57,39 @@ public sealed partial class MainViewModel : ObservableObject
         }
     }
     #endregion
-    private void Init()
+    public void Init()
     {
+
+        DataProvider.ins.context.Hocsinhs.ToList();
         _programViewModel = new ProgramViewModel();
-        _regulationViewModel = new RegulationViewModel();
-        _termSummaryViewModel = new TermSummaryViewModel();
-        _classListDetailsViewModel = new ClassListDetailsViewModel();
-        _classManaViewModel = new ClassManagementViewModel();
+        _studentViewModel = new StudentViewModel();
+        _teacherViewModel = new TeacherViewModel();
+        //_classListViewModel = new ClassListViewModel();
+        _subjectViewModel = new SubjectViewModel();
+        _schoolyearViewModel = new SchoolYearViewModel();
+
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Thông tin", "AccountOutline", _classListDetailsViewModel),
-        new Navigation("Môn học", "BookMultipleOutline", _termSummaryViewModel),
-        new Navigation("Lớp học", "BallotOutline", _classManaViewModel),
-        new Navigation("Thay đổi quy định", "CogSyncOutline", _regulationViewModel),
+        new Navigation("Thông tin", "infomation", _classListDetailsViewModel),
+        new Navigation("Môn học", "subject", _termSummaryViewModel),
+
+        //new Navigation("Môn học", "subject", new ClassListViewModel()),
+        //new Navigation("Thông tin", "infomation", ),
+        new Navigation("Lớp học", "subject", new ClassManagementViewModel()),
+        new Navigation("Thêm năm học", "subject", _schoolyearViewModel),
     };
         leftNavigations[0].IsPress = true;
+        ContentViewModel = _programViewModel;
+    }
+    public void Refresh()
+    {
+        foreach(var item in leftNavigations)
+        {
+            item.IsPress = false;
+        }
+        leftNavigations[0].IsPress = true;
+        ContentViewModel = _programViewModel;
     }
 
     public void setViewModel(object viewModel)
@@ -76,6 +107,16 @@ public sealed partial class MainViewModel : ObservableObject
     {
         Window window = Application.Current.MainWindow as Window;
         window.WindowState = WindowState.Minimized;
+    }
+    [RelayCommand]
+    private void SignOut()
+    {
+        LoginWindow window = new LoginWindow();
+        MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+        
+        Application.Current.MainWindow = window;
+        window.Show();
+        mainWindow.Close();
     }
 }
 

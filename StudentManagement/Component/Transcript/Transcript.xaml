@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
              mc:Ignorable="d" 
              d:DesignHeight="690" d:DesignWidth="1220">
     <Border  CornerRadius="20" Background="white" Margin="20">
@@ -31,10 +32,14 @@
                 <ComboBox
                     materialDesign:HintAssist.Hint="Học kỳ"
                     ItemsSource="{Binding TermList}"
+                    SelectedItem="{Binding SelectedSemeter}"
+                    DisplayMemberPath="Tenhk"
                     Style="{StaticResource MyComboBoxStyle}" />
                 <ComboBox
                     materialDesign:HintAssist.Hint="Môn học"
                     ItemsSource="{Binding SubjectList}"
+                    SelectedItem="{Binding SelectedSubject}"
+                    DisplayMemberPath="Tenmh"
                     Style="{StaticResource MyComboBoxStyle}" />
                 <Button
                     Margin="18,18,18,18"
@@ -43,8 +48,17 @@
                     <TextBlock Text="Kết quả" />
                 </Button>
             </StackPanel>
-            
+            <Grid>
+                
+            </Grid>
             <!-- Data -->
+            <!--<DataGrid
+                Grid.Row="1"
+                local:DataGridColumnsBehavior.BindableColumns="{Binding DataGridColumns }"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding Transcripts}"
+                >
+            </DataGrid>-->
             <DataGrid
                 AutoGenerateColumns="False"
                 Grid.Row="1"
@@ -58,6 +72,7 @@
                 HorizontalScrollBarVisibility="Disabled"
                         Margin="10"
                 HeadersVisibility="Column"
+                IsReadOnly="{Binding IsReadOnly}"
                 ItemsSource="{Binding Transcripts}"
                 >
                 <DataGrid.Resources>
@@ -125,55 +140,31 @@
                     </Style>
                 </DataGrid.CellStyle>
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn
-                    Binding="{Binding Selected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}">
-                        <!--<i:Interaction.Triggers>
-                        <i:DataTrigger
-                            Binding="IsSelected" Value="True">
-                            <i:InvokeCommandAction
-                                Command="{Binding Source={StaticResource StudentCourseRegistryVM}, Path=CourseUncheckedCommand}" CommandParameter="{ItemContainerTemplateKey}" />
-                        </i:DataTrigger>
-                    </i:Interaction.Triggers>-->
-                        <DataGridCheckBoxColumn.Header>
-                            <Border Background="Transparent">
-                                <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=IsAllItemsSelected}" />
-                            </Border>
-                        </DataGridCheckBoxColumn.Header>
-                        <DataGridCheckBoxColumn.HeaderStyle>
-                            <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridCheckBoxColumn.HeaderStyle>
-                    </DataGridCheckBoxColumn>
-                    <materialDesign:DataGridTextColumn
-                        Width="auto"
-                        Binding="{Binding Id}"
-                        Header="STT" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Name}"
+                        Binding="{Binding Student.Hotenhs}"
                         Header="Họ tên" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding Speaking,FallbackValue='0'}"
-                        Header="Điểm Miệng" />
+                        Binding="{Binding DiemDisplays[0].Diemdisplay,FallbackValue='0'}"
+                        Header="Điểm miệng" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FifteenMin,FallbackValue='0'}"
+                        Binding="{Binding DiemDisplays[1].Diemdisplay,FallbackValue='0'}"
                         Header="Điểm 15'" />
+
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FortyMin,FallbackValue='0'}"
+                        Binding="{Binding DiemDisplays[2].Diemdisplay,FallbackValue='0'}"
                         Header="Điểm 1 tiết" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding FinalExam,FallbackValue='0'}"
+                        Binding="{Binding DiemDisplays[3].Diemdisplay,FallbackValue='0'}"
                         Header="Điểm cuối kỳ" />
                 </DataGrid.Columns>
             </DataGrid>
-            
+
+
             <!-- Hai nut duoi -->
             <StackPanel 
                 Grid.Row="2" 
@@ -187,7 +178,7 @@
                     Background="{StaticResource GreenPrimary}"
                     Style="{StaticResource primary_button}"/>
                 <Button
-                    Command="{Binding CancelEdittingCommand}"
+                    Command="{Binding saveChangeCommand}"
                     Content="Lưu thay đổi" 
                     Style="{StaticResource primary_button}"/>
             </StackPanel>
