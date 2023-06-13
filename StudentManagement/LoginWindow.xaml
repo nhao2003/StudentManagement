@@ -45,8 +45,34 @@
                 </StackPanel>
 
             </Grid>
-            <login:LoginUC Grid.Column="1"></login:LoginUC>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 3 30 0">
+                        <Button Command="{Binding HideWindowCommand}" Height="auto" Background="Transparent" BorderThickness="0" Width="30">
 
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Ellipse Width="20" Height="20" Fill="{StaticResource GreenPrimary}" Margin="0 0 10 0">
+                                    </Ellipse>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        <Button Command="{Binding CloseWindowCommand}" Height="auto" Width="auto" Background="Transparent" BorderThickness="0">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Ellipse Width="20" Height="20" Fill="{StaticResource RedPrimary}" Margin="0 0 10 0">
+                                    </Ellipse>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <login:LoginUC Grid.Row="1"></login:LoginUC>
+            </Grid>
         </Grid>
     </Border>
 </Window>

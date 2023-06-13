@@ -8,11 +8,11 @@
              mc:Ignorable="d" 
              DataContext="{StaticResource LoginVM}"
              >
-    <Border Grid.Column="1" Background="White" CornerRadius="20" Margin="30 60">
+    <Border Height="600" Grid.Column="1" Background="White" CornerRadius="20" Margin="30 60">
         <Grid>
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Đăng nhập" 
-                           Margin="0 100 0 10 "
+                           Margin="0 0 0 10 "
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
                            TextWrapping="Wrap"
@@ -21,7 +21,8 @@
                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                            ></TextBlock>
                 <TextBlock Text="Tên đăng nhập" 
-                           Margin="80 30 0 10 "
+                           Margin="45 30 0 10 "
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            TextWrapping="Wrap"
                            FontSize="18"
@@ -41,7 +42,8 @@
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                 </StackPanel>
                 <TextBlock Text="Nhập mật khẩu" 
-                           Margin="80 10 0 10 "
+                           Margin="45 10 0 10 "
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            TextWrapping="Wrap"
                            FontSize="18"
@@ -66,61 +68,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="28,8">
-                    <CheckBox
-                    VerticalContentAlignment="Center"
-                    Content="Ghi nhớ"
-                    Cursor="Hand"
-                    DockPanel.Dock="Left"
-                    FontWeight="SemiBold"
-                    IsChecked="{Binding IsToRemember, Mode=OneWayToSource}" />
-                    <!--<TextBlock
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    DockPanel.Dock="Right"
-                    FontWeight="SemiBold"
-                    Text="Quên mật khẩu?">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Foreground" Value="{StaticResource ErrorMain}" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Cursor" Value="Hand" />
-                                    <Setter Property="Foreground" Value="{StaticResource ErrorLight}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                    <TextBlock.InputBindings>
-                        <MouseBinding Command="{Binding OpenForgotPasswordForm}" CommandParameter="{Binding ElementName= loginWindow}" MouseAction="LeftClick" />
-                        -->
-                    <!--Command="{Binding OpenForgotPasswordForm}"
-                                        CommandParameter="{Binding ElementName= loginWindow}"-->
-                    <!--
-                    </TextBlock.InputBindings>
-                </TextBlock>-->
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Button 
-                                        Command="{Binding SwichView}"
-                                        x:Name="btnForgetPassword" 
-                                        Content="Quên mật khẩu?" 
-                                        HorizontalAlignment="Left" 
-                                        Height="24"
-                                        Width="120" 
-                                        VerticalAlignment="Top" 
-                                        Padding="0" 
-                                        HorizontalContentAlignment="center" 
-                                        VerticalContentAlignment="Center" 
-                                        FontSize="13" 
-                                        Margin="100,0,0,0" 
-                                        FontWeight="Medium" 
-                                        Foreground="{StaticResource RedPrimary}"
-                                        Cursor="Hand" 
-                                        FocusVisualStyle="{x:Null}"
-                                        Background="{x:Null}" 
-                                        BorderBrush="{x:Null}" 
-                                        IsTabStop="False">
-                        </Button>
-                    </StackPanel>
+                    
                 </StackPanel>
 
                 <Button
