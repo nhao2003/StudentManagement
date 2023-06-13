@@ -14,15 +14,23 @@ namespace StudentManagement.ViewModel
     public partial class TranscriptRightViewModel: ObservableObject
     {
         [ObservableProperty]
+        private PointType selectedPointType; 
+        [ObservableProperty]
         TranscriptConfig config;
         public TranscriptRightViewModel(TranscriptConfig config) 
         {
             this.config = config;
+            selectedPointType = config.PointTypes[0];
         }
         [RelayCommand]
         private void updateData()
         {
             config.saveData();
+        }
+        [RelayCommand]
+        private void addNewSubPoint()
+        {
+            SelectedPointType.addSubPoint();
         }
     }
 }

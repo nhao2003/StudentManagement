@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              >
     <Grid Width="255" Height="640">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -18,7 +20,28 @@
                        Margin="15"
                         FontSize="15"
                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding Config.Diemmonhocs}" Grid.ColumnSpan="2">
+        <StackPanel Margin="30 0 0 0" Grid.Row="1" Orientation="Horizontal">
+            <ComboBox
+                Width="150"
+                    materialDesign:HintAssist.Hint="Cột điểm"
+                    ItemsSource="{Binding Config.PointTypes}"
+                    SelectedItem="{Binding SelectedPointType}"
+                    DisplayMemberPath="Loaikiemtra.Tenloaikiemtra"
+                    Style="{StaticResource combobox_item}" />
+            <Button
+                BorderThickness="0"
+                Height="25"
+                Command="{Binding addNewSubPointCommand}"
+                Width="25"
+                Background="White" 
+                BorderBrush="White"
+                Padding="0"
+                HorizontalAlignment="Left" Grid.Column="1" Margin="0,6,0,6"
+                >
+                <Image Height="12" Source="/Resource/images/close.png"/>
+            </Button>
+        </StackPanel>
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding SelectedPointType.Diemmonhocs}" Grid.ColumnSpan="2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
@@ -30,6 +53,6 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Button Margin="70 0 0 10" Grid.Row="2" Width="120" Style="{StaticResource primary_button}" Content="Lưu điểm" Command="{Binding updateDataCommand}"></Button>
+        <Button Margin="70 0 0 10" Grid.Row="3" Width="120" Style="{StaticResource primary_button}" Content="Lưu điểm" Command="{Binding updateDataCommand}"></Button>
     </Grid>
 </UserControl>

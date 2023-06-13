@@ -4,12 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Width="240" Height="50">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Style="{StaticResource textblock_item}" FontWeight="SemiBold" Text="{Binding MalktNavigation.Tenloaikiemtra, FallbackValue='Điểm thành phần' }" Width="110"></TextBlock>
-            <TextBox Style="{StaticResource textbox_item}" Text="{Binding Diem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="100"></TextBox>
+
+            <TextBlock Style="{StaticResource textblock_item}" FontWeight="SemiBold"  Width="80">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Điểm" FallbackValue="Cot thu 1">
+                        <Binding Path="Diem.Lankt" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBox Style="{StaticResource textbox_item }" Text="{Binding Diem.Diem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="90"></TextBox>
+            <Button
+                BorderThickness="0"
+                Height="25"
+                Command="{Binding deleteDiemCommand}"
+                Width="25"
+                Background="White" 
+                BorderBrush="White"
+                Padding="0"
+                HorizontalAlignment="Left" Grid.Column="1" Margin="-15,6,0,6"
+                >
+                <Image Height="12" Source="/Resource/images/close.png"/>
+            </Button>
         </StackPanel>
     </Grid>
 </UserControl>

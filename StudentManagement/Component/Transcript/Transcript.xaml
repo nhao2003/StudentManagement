@@ -74,6 +74,7 @@
                 HeadersVisibility="Column"
                 IsReadOnly="{Binding IsReadOnly}"
                 ItemsSource="{Binding Transcripts}"
+                SelectedItem="{Binding SelectedConfig, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 >
                 <DataGrid.Resources>
                     <!--<Style
@@ -146,20 +147,20 @@
                         Header="Họ tên" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[0].Diemdisplay,FallbackValue='0'}"
+                        Binding="{Binding DiemDisplays[0].Diemdisplay,FallbackValue='-'}"
                         Header="Điểm miệng" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[1].Diemdisplay,FallbackValue='0'}"
+                        Binding="{Binding DiemDisplays[1].Diemdisplay,FallbackValue='-'}"
                         Header="Điểm 15'" />
 
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[2].Diemdisplay,FallbackValue='0'}"
+                        Binding="{Binding DiemDisplays[2].Diemdisplay,FallbackValue='-'}"
                         Header="Điểm 1 tiết" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[3].Diemdisplay,FallbackValue='0'}"
+                        Binding="{Binding DiemDisplays[3].Diemdisplay,FallbackValue='-'}"
                         Header="Điểm cuối kỳ" />
                 </DataGrid.Columns>
             </DataGrid>
