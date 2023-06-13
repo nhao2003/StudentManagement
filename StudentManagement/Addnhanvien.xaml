@@ -506,7 +506,7 @@
                                         Width="300"
                                         Orientation="Horizontal">
                                         <CheckBox
-                                            IsChecked="{Binding IsCheckedMonHoc, Mode=TwoWay}"/>
+                                            IsChecked="{Binding IsCheckedMonHoc, Mode=TwoWay}" />
                                         <TextBlock
                                             Text="{Binding TenMonHoc}" />
                                     </StackPanel>
