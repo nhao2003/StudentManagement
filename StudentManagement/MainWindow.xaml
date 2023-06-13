@@ -18,7 +18,7 @@
         AllowsTransparency="True"
         DataContext="{StaticResource GreetingVM}"
         Background="Transparent" 
-        Height="800" Width="1420">
+        Height="800" Width="1420" MouseDown="Window_MouseDown">
     <Border CornerRadius="50">
         <Border.Background>
             <SolidColorBrush Color="#E7F2FF"></SolidColorBrush>

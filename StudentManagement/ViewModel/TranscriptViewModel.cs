@@ -91,6 +91,7 @@ namespace StudentManagement.ViewModel
             {
                 tran.saveData();
             }
+            MessageBox.Show("Lưu thành công");
         }
 
         // lay hoc sinh

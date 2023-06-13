@@ -73,14 +73,11 @@ public sealed partial class MainViewModel : ObservableObject
 
         leftNavigations = new ObservableCollection<Navigation>()
     {
-        new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Quy Định", "infomation", _regulationViewModel),
-        new Navigation("Tổng kết", "subject", _termSummaryViewModel),
-
-        //new Navigation("Môn học", "subject", new ClassListViewModel()),
-        //new Navigation("Thông tin", "infomation", ),
-        new Navigation("Lớp học", "subject", new ClassManagementViewModel()),
-        new Navigation("Thêm năm học", "subject", _schoolyearViewModel),
+        new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
+        new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
+        new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
+        new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
+        new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };
         leftNavigations[0].IsPress = true;
         ContentViewModel = _programViewModel;

@@ -47,4 +47,16 @@ public partial class LoginViewModel : ObservableObject
         }
     }
 
+    [RelayCommand]
+    private void CloseWindow()
+    {
+        Application.Current.Shutdown();
+    }
+    [RelayCommand]
+    private void HideWindow()
+    {
+        Window window = Application.Current.MainWindow as Window;
+        window.WindowState = WindowState.Minimized;
+    }
+
 }
