@@ -39,17 +39,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Khối: "/>
-                            <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}"
-                                      BorderBrush="LightGray" 
-                                      Width="Auto"
-                                      Margin="90,0,50,0"
-                                      Height="30"
-                                      Padding="5"
-                                      Background="White" 
-                                      ItemsSource="{Binding Khois}"
-                                      SelectedItem="{Binding Skhoi}"  
-                                      materialDesign:HintAssist.Hint="Chọn khối"
-                                      />
+
+                            <TextBox Grid.Column="1"  Style="{StaticResource textbox_item}" 
+                                     Height="30"
+                                     Margin="90,0,50,0"
+                                     Padding="5"
+                                     Text="{Binding Skhoi}"
+                                     IsReadOnly="True"
+                                     BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Khối"/>
                         </Grid>
                     </Border>
                     <Border Grid.Row="1" Style="{StaticResource BorderBox}" Width="Auto" Margin="10">
@@ -113,17 +110,14 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Niên khóa: "/>
-                            <ComboBox Grid.Column="1" Style="{StaticResource combobox_item}"
-                                      BorderBrush="LightGray" 
-                                      Width="Auto"
-                                      Margin="90,0,50,0"
-                                      Height="30"
-                                      Padding="5"
-                                      Background="White" 
-                                      ItemsSource="{Binding NienKhoas}"
-                                      SelectedItem="{Binding Snamhoc}"  
-                                      DisplayMemberPath="Tennamhoc" 
-                                      materialDesign:HintAssist.Hint="Chọn niên khóa"/>
+                            
+                            <TextBox Grid.Column="1"  Style="{StaticResource textbox_item}" 
+                                     Height="30"
+                                     Margin="90,0,50,0"
+                                     Padding="5"
+                                     Text="{Binding Snamhoc.Tennamhoc}"
+                                     IsReadOnly="True"
+                                     BorderBrush="LightGray" Background="White" materialDesign:HintAssist.Hint="Niên khóa"/>
                         </Grid>
                     </Border>
                     <Border Grid.Row="1" Style="{StaticResource BorderBox}" Width="Auto" Margin="10">

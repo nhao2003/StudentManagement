@@ -122,9 +122,9 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void SaveChange()
         {
+            Lophocthucte.MalopNavigation.Tenlop = TenLop;
             Lophocthucte.MalopNavigation.Khoi = Skhoi;
             Lophocthucte.ManhNavigation = Snamhoc;
-            Lophocthucte.MalopNavigation.Tenlop = TenLop;
             Lophocthucte.MagvcnNavigation = Sgiaovien;
 
             // luu phan cong giang day

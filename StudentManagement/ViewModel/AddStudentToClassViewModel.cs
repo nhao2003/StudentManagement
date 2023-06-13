@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentManagement.ViewModel;
 
@@ -27,7 +28,7 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
         }
         selectedKhoi = khoiList[currentIndex];
         InitClass();
-        CurrentClass = ClassCardList[0];
+        //CurrentClass = ClassCardList[0];
         selectedIndexTab = 1;
         String giatri = DataProvider.ins.context.Thamsos.Where(x => x.Tents.Equals ("Sỉ số tối đa của lớp")).FirstOrDefault().Giatri;
         maxStudentInClass = int.Parse(giatri) != null ? int.Parse(giatri) : 0;
@@ -141,6 +142,7 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
         }
         catch (Exception ex)
         {
+            MessageBox.Show(ex.Message);
             return;
         }
     }
