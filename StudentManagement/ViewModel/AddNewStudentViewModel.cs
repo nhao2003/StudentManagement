@@ -30,18 +30,21 @@ namespace StudentManagement.ViewModel
         private String danToc;
         [ObservableProperty]
         private String tonGiao;
-
+        [ObservableProperty]
+        private String title;
         public bool isEdit = false;
         public bool Result = false;
         public Hocsinh hocsinh;
 
-        public AddNewStudentViewModel() {
+        public AddNewStudentViewModel() {title = "Thêm học sinh";
         }
-        public AddNewStudentViewModel(Hocsinh hs) {
+        public AddNewStudentViewModel(Hocsinh hs) 
+        {
+            title = "Chỉnh sửa học sinh";
             isEdit = true;
             hocsinh = hs;
-            HoTen = hocsinh.Hotenhs;
-            Cccd = hocsinh.Cccd;
+            hoTen = hocsinh.Hotenhs;
+            cccd = hocsinh.Cccd;
             ngSinh = hocsinh.Ngsinh.ToString();
             email = hocsinh.Email;
             dchi = hocsinh.Dchi;
@@ -57,27 +60,27 @@ namespace StudentManagement.ViewModel
             Result = true;
             if(isEdit)
             {
-                hocsinh.Hotenhs = HoTen;
-                hocsinh.Cccd = Cccd;
-                hocsinh.Ngsinh = DateTime.Parse(NgSinh);
-                hocsinh.Email = Email;
-                hocsinh.Dchi = Dchi;
-                hocsinh.Gioitinh = (GioiTinhIndex == 0);
-                hocsinh.Dantoc = DanToc;
-                hocsinh.Tongiao = TonGiao;
+                hocsinh.Hotenhs = hoTen;
+                hocsinh.Cccd = cccd;
+                hocsinh.Ngsinh = DateTime.Parse(ngSinh);
+                hocsinh.Email = email;
+                hocsinh.Dchi = dchi;
+                hocsinh.Gioitinh = (gioiTinhIndex == 0);
+                hocsinh.Dantoc = danToc;
+                hocsinh.Tongiao = tonGiao;
             }
             else
             {
                 hocsinh = new Hocsinh();
-                hocsinh.Hotenhs = HoTen;
-                hocsinh.Cccd = Cccd;
-                hocsinh.Ngsinh = DateTime.Parse(NgSinh);
-                hocsinh.Email = Email;
-                hocsinh.Dchi = Dchi;
-                hocsinh.Gioitinh = (GioiTinhIndex == 0);
-                hocsinh.Dantoc = DanToc;
-                hocsinh.Tongiao = TonGiao;
-                hocsinh.Mahs = MaHs;
+                hocsinh.Hotenhs = hoTen;
+                hocsinh.Cccd = cccd;
+                hocsinh.Ngsinh = DateTime.Parse(ngSinh);
+                hocsinh.Email = email;
+                hocsinh.Dchi = dchi;
+                hocsinh.Gioitinh = (gioiTinhIndex == 0);
+                hocsinh.Dantoc = danToc;
+                hocsinh.Tongiao = tonGiao;
+                hocsinh.Mahs = maHs;
             }
             window.Close();
         }

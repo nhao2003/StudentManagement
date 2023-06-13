@@ -7,4 +7,6 @@
     <vm:ClassListViewModel x:Key="ClassListVM"></vm:ClassListViewModel>
     <vm:AddNewStudentViewModel
         x:Key="AddNewStudentVM"></vm:AddNewStudentViewModel>
+    <vm:AddNhanVienViewModel
+        x:Key="AddNhanVienViewModelVM"></vm:AddNhanVienViewModel>
 </ResourceDictionary>

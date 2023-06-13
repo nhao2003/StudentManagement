@@ -210,10 +210,6 @@
                         Binding="{Binding GioitinhDisplay}"/>
                             <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding //LOP}"
-                        Header="Lớp" />
-                            <materialDesign:DataGridTextColumn
-                        Width="*"
                         Binding="{Binding Dantoc}"
                                 IsReadOnly="True"
                         Header="Dân tộc" />

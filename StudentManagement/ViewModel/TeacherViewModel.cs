@@ -32,6 +32,7 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         TaiKhoanDataGridItem taiKhoanDataGridItemSelected;
         public ObservableCollection<TaiKhoanDataGridItem> TaikhoanList { get; set; }
+        
         [ObservableProperty]
         private string searchNhanVienValue = "";
         [ObservableProperty]
@@ -39,13 +40,15 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         public void AddNhanvien()
         {
-            Addnhanvien addNhanvien = new Addnhanvien();
-            addNhanvien.ShowDialog();
-            if(addNhanvien.DialogResult== true)
+            Addnhanvien addNhanVien = new Addnhanvien(new AddNhanVienViewModel());
+            addNhanVien.ShowDialog();
+            AddNhanVienViewModel result = (AddNhanVienViewModel)addNhanVien.DataContext;
+            if (result.Result == true)
             {
-                TaikhoanList.Add(new TaiKhoanDataGridItem(addNhanvien.Taikhoan));
-                DataProvider.ins.context.Taikhoans.Add(addNhanvien.Taikhoan);
+                TaikhoanList.Add(new TaiKhoanDataGridItem(result.taikhoan));
+                DataProvider.ins.context.Taikhoans.Add(result.taikhoan);
                 DataProvider.ins.context.SaveChanges();
+
             }
         }
         [RelayCommand]
@@ -92,13 +95,14 @@ namespace StudentManagement.ViewModel
                 return;
             else
             {
-                Addnhanvien changeNVInfo = new Addnhanvien(taiKhoanDataGridItemSelected.taikhoan);
+                Addnhanvien changeNVInfo = new Addnhanvien(new AddNhanVienViewModel(taiKhoanDataGridItemSelected.taikhoan));
                 changeNVInfo.ShowDialog();
-                if(changeNVInfo.DialogResult == true)
+                AddNhanVienViewModel result = (AddNhanVienViewModel)changeNVInfo.DataContext;
+                if (result.Result == true)
                 {
-                    if(changeNVInfo.isEdited)
+                    if(result.isEdit)
                     {
-                        DataProvider.ins.context.Taikhoans.Update(changeNVInfo.Taikhoan);
+                        DataProvider.ins.context.Taikhoans.Update(result.taikhoan);
                         DataProvider.ins.context.SaveChanges();
                         TaikhoanList.Clear();
                         foreach (var teacher in DataProvider.ins.context.Taikhoans.ToList())
@@ -109,9 +113,9 @@ namespace StudentManagement.ViewModel
                     }
                     else
                     {
-                        DataProvider.ins.context.Taikhoans.Add(changeNVInfo.Taikhoan);
+                        DataProvider.ins.context.Taikhoans.Add(result.taikhoan);
                         DataProvider.ins.context.SaveChanges();
-                        TaikhoanList.Add(new TaiKhoanDataGridItem(changeNVInfo.Taikhoan));
+                        TaikhoanList.Add(new TaiKhoanDataGridItem(result.taikhoan));
                         MessageBox.Show("Thêm thành công");
                     }
                 }

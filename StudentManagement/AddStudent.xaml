@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:StudentManagement.ViewModel"
+        xmlns:local="clr-namespace:StudentManagement.ViewModel" xmlns:validationrules="clr-namespace:StudentManagement.ValidationRules"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -26,7 +26,7 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Border Background="#A5D3FF" Grid.Row="0" CornerRadius="20,20,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown" Margin="0,-28,0,10" >
-                    <TextBlock Text="Thêm học sinh" Name ="Title"
+                    <TextBlock Text="{Binding Title, Mode=TwoWay}" Name ="Title"
                            Grid.Row="0"
                            Margin="15,29,0,0"
                            FontWeight="Bold"
@@ -47,7 +47,18 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name ="cmnd" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" Text="{Binding Cccd, Mode=TwoWay}" />
+                    <TextBox Name ="cmnd" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000">
+                        <TextBox.Text>
+                            <Binding
+                                Path="Cccd"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:cccdValidation></validationrules:cccdValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="CMND " Height="NaN" Margin="10,18,349,8" Grid.ColumnSpan="2"/>
                 </Grid>
             </Border>
@@ -57,8 +68,20 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name ="hoten" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" Text="{Binding HoTen, Mode=TwoWay}"/>
-                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Họ và tên: "/>
+                    <TextBox Name ="hoten" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000">
+                        <TextBox.Text>
+                            <Binding
+                                Path="HoTen"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:HoTenValidation></validationrules:HoTenValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Họ và tên: ">
+                    </TextBlock>
                 </Grid>
             </Border>
             <Border Grid.Row="3" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,10,10,0">
@@ -69,7 +92,17 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Ngày sinh: "/>
-                    <DatePicker Name ="ngsinh" Grid.Column="1" Margin="147,15,33,0" VerticalAlignment="Top" Text="{Binding NgSinh, Mode=TwoWay}" >
+                    <DatePicker Name ="ngsinh" Grid.Column="1" Margin="147,15,33,0" VerticalAlignment="Top" materialDesign:HintAssist.Hint="mm/dd/yyyy" >
+                        <DatePicker.Text>
+                            <Binding
+                                Path="NgSinh"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:ngaysinhValidation></validationrules:ngaysinhValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </DatePicker.Text>
                     </DatePicker>
                 </Grid>
             </Border>
@@ -79,7 +112,19 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name ="email" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" Text="{Binding Email, Mode=TwoWay}" />
+                    <TextBox Name ="email" Grid.ColumnSpan="2" Margin="107,0,10,0"
+                             BorderBrush="#00000000">
+                        <TextBox.Text>
+                            <Binding
+                                Path="Email"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:NotnullValidation></validationrules:NotnullValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Email: "/>
                 </Grid>
 
@@ -90,29 +135,19 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Name ="dchi" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" Text="{Binding Dchi, Mode=TwoWay}" />
+                    <TextBox Name ="dchi" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" >
+                        <TextBox.Text>
+                            <Binding
+                                Path="Dchi"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:NotnullValidation></validationrules:NotnullValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Địa chỉ "/>
-                </Grid>
-            </Border>
-            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,42,10,94">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Name="nameParent" Grid.ColumnSpan="2" Margin="107,0,10,0" BorderBrush="#00000000" />
-                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Width="100" Text="Họ tên cha/mẹ "/>
-                </Grid>
-            </Border>
-            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,99,10,37">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="37*"/>
-                        <ColumnDefinition Width="166*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Name="sdtParent" Margin="82,0,10,0" BorderBrush="#00000000" Grid.Column="2" />
-                    <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Số điện thoại cha/mẹ " Grid.ColumnSpan="3" Margin="10,18,255,7"/>
                 </Grid>
             </Border>
             <Border Grid.Row="5" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,80,10,154" Grid.RowSpan="2">
@@ -134,34 +169,70 @@
 
                 </Grid>
             </Border>
-            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,162,10,-26" Grid.RowSpan="2">
+            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,49,10,87">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding MaHs, Mode=TwoWay}" Name="mahs" Grid.ColumnSpan="2" Margin="156,0,10,0" BorderBrush="#00000000" />
+                    <TextBox Name="mahs" Grid.ColumnSpan="2" 
+                             Margin="156,0,10,0" BorderBrush="#00000000" >
+                        <TextBox.Text>
+                            <Binding
+                                Path="MaHs"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:MaHSValidation></validationrules:MaHSValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Mã học sinh" Grid.ColumnSpan="2" Margin="10,18,255,8"/>
                 </Grid>
             </Border>
-            <Border Grid.Row="8" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,31,10,-83">
+            <Border Grid.Row="6" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,117,10,19">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Text="{Binding DanToc, Mode=TwoWay}" Name="dantoc" Grid.ColumnSpan="2" Margin="156,0,10,0" BorderBrush="#00000000" />
+                        Name="dantoc" Grid.ColumnSpan="2" 
+                        Margin="156,0,10,0" BorderBrush="#00000000" >
+                        <TextBox.Text>
+                            <Binding
+                                Path="DanToc"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:NotnullValidation></validationrules:NotnullValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Dân tộc" Grid.ColumnSpan="2" Margin="10,18,255,8"/>
                 </Grid>
             </Border>
-            <Border Grid.Row="9" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,88,10,-140">
+            <Border Grid.Row="9" Style="{StaticResource BorderBox}" Width="Auto" Margin="10,0,10,-52">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding TonGiao, Mode=TwoWay}" Name="tongiao" Grid.ColumnSpan="2" Margin="156,0,10,0" BorderBrush="#00000000" />
+                    <TextBox Name="tongiao" Grid.ColumnSpan="2" 
+                             Margin="156,0,10,0" BorderBrush="#00000000" >
+                        <TextBox.Text>
+                            <Binding
+                                Path="TonGiao"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:NotnullValidation></validationrules:NotnullValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock Grid.Column="0" Style="{StaticResource textblock_item}" Text="Tôn giáo" Grid.ColumnSpan="2" Margin="10,18,255,8"/>
                 </Grid>
             </Border>
