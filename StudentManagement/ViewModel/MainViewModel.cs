@@ -32,7 +32,7 @@ public sealed partial class MainViewModel : ObservableObject
     private object _classconfigViewModel;
     private object _classDetailViewModel;
     private object _classManaViewModel;
-
+    private object _regulationViewModel;
     private object _subjectViewModel;
     private object _schoolyearViewModel;
     private object _classListDetailsViewModel;
@@ -67,11 +67,11 @@ public sealed partial class MainViewModel : ObservableObject
         //_classListViewModel = new ClassListViewModel();
         _subjectViewModel = new SubjectViewModel();
         _schoolyearViewModel = new SchoolYearViewModel();
-
+        _regulationViewModel = new RegulationViewModel();
         leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Thông tin", "infomation", _classListDetailsViewModel),
+        new Navigation("Quy định", "infomation", _regulationViewModel),
         new Navigation("Môn học", "subject", _termSummaryViewModel),
 
         //new Navigation("Môn học", "subject", new ClassListViewModel()),

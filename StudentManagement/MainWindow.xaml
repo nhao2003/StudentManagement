@@ -72,8 +72,8 @@
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:ClassListDetailsViewModel }">
-                            <ClassListDetails:ClassListDetails />
+                        <DataTemplate DataType="{x:Type viewModel:RegulationViewModel }">
+                            <sub:RegulationtProgram />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:TermSummaryViewModel}">
                             <TermSummary:TermSummary />
