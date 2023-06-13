@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -37,6 +36,7 @@ namespace StudentManagement.Models
         public virtual DbSet<Nhanvienphongdaotao> Nhanvienphongdaotaos { get; set; } = null!;
         public virtual DbSet<Phanconggiangday> Phanconggiangdays { get; set; } = null!;
         public virtual DbSet<Phh> Phhs { get; set; } = null!;
+        public virtual DbSet<Quydinhnam> Quydinhnams { get; set; } = null!;
         public virtual DbSet<Taikhoan> Taikhoans { get; set; } = null!;
         public virtual DbSet<Thamso> Thamsos { get; set; } = null!;
 
@@ -54,7 +54,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Diemmonhoc>(entity =>
             {
                 entity.HasKey(e => new { e.Mahs, e.Mahk, e.Manh, e.Mamh, e.Malkt })
-                    .HasName("PK__DIEMMONH__B375944BE5866CAA");
+                    .HasName("PK__DIEMMONH__B375944B2AAC74DD");
 
                 entity.ToTable("DIEMMONHOC");
 
@@ -113,48 +113,29 @@ namespace StudentManagement.Models
 
             modelBuilder.Entity<Diemtrungbinhmonhocnamhoc>(entity =>
             {
-                entity.HasKey(e => new { e.Mahs, e.Manh, e.Mamh })
-                    .HasName("PK__DIEMTRUN__3C5CEAA4FA9A997D");
+                entity.HasNoKey();
 
                 entity.ToTable("DIEMTRUNGBINHMONHOCNAMHOC");
 
-                entity.Property(e => e.Mahs)
-                    .HasMaxLength(7)
-                    .HasColumnName("MAHS");
-
-                entity.Property(e => e.Manh)
-                    .HasMaxLength(7)
-                    .HasColumnName("MANH");
-
-                entity.Property(e => e.Mamh)
-                    .HasMaxLength(7)
-                    .HasColumnName("MAMH");
-
                 entity.Property(e => e.DtbmonHocNamHoc).HasColumnName("DTBMonHocNamHoc");
 
-                entity.HasOne(d => d.MahsNavigation)
-                    .WithMany(p => p.Diemtrungbinhmonhocnamhocs)
-                    .HasForeignKey(d => d.Mahs)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMTRUNGB__MAHS__756D6ECB");
+                entity.Property(e => e.Mahs)
+                    .HasMaxLength(255)
+                    .HasColumnName("MAHS");
 
-                entity.HasOne(d => d.MamhNavigation)
-                    .WithMany(p => p.Diemtrungbinhmonhocnamhocs)
-                    .HasForeignKey(d => d.Mamh)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMTRUNGB__MAMH__7755B73D");
+                entity.Property(e => e.Mamh)
+                    .HasMaxLength(255)
+                    .HasColumnName("MAMH");
 
-                entity.HasOne(d => d.ManhNavigation)
-                    .WithMany(p => p.Diemtrungbinhmonhocnamhocs)
-                    .HasForeignKey(d => d.Manh)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__DIEMTRUNGB__MANH__76619304");
+                entity.Property(e => e.Manh)
+                    .HasMaxLength(255)
+                    .HasColumnName("MANH");
             });
 
             modelBuilder.Entity<Giaovien>(entity =>
             {
                 entity.HasKey(e => e.Magv)
-                    .HasName("PK__GIAOVIEN__603F38B10BE2A400");
+                    .HasName("PK__GIAOVIEN__603F38B144C3036E");
 
                 entity.ToTable("GIAOVIEN");
 
@@ -184,7 +165,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Hanhkiem>(entity =>
             {
                 entity.HasKey(e => e.MaHanhKiem)
-                    .HasName("PK__HANHKIEM__2B2C87EDFC40CB09");
+                    .HasName("PK__HANHKIEM__2B2C87ED99B64C0A");
 
                 entity.ToTable("HANHKIEM");
 
@@ -200,7 +181,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Hocky>(entity =>
             {
                 entity.HasKey(e => e.Mahk)
-                    .HasName("PK__HOCKY__603F20C51966B66F");
+                    .HasName("PK__HOCKY__603F20C559463FE9");
 
                 entity.ToTable("HOCKY");
 
@@ -220,7 +201,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Hocluc>(entity =>
             {
                 entity.HasKey(e => e.MaHocLuc)
-                    .HasName("PK__HOCLUC__97954DD5FE2C4A95");
+                    .HasName("PK__HOCLUC__97954DD59BBFADA6");
 
                 entity.ToTable("HOCLUC");
 
@@ -236,7 +217,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Hocsinh>(entity =>
             {
                 entity.HasKey(e => e.Mahs)
-                    .HasName("PK__HOCSINH__603F20DDA319A7BE");
+                    .HasName("PK__HOCSINH__603F20DD6CCBBE21");
 
                 entity.ToTable("HOCSINH");
 
@@ -273,7 +254,7 @@ namespace StudentManagement.Models
                     .HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.Ngsinh)
-                    .HasColumnType("smalldatetime")
+                    .HasColumnType("date")
                     .HasColumnName("NGSINH");
 
                 entity.Property(e => e.Sdt)
@@ -288,7 +269,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Ketqua>(entity =>
             {
                 entity.HasKey(e => e.MaKetQua)
-                    .HasName("PK__KETQUA__D5B3102AB9501BA8");
+                    .HasName("PK__KETQUA__D5B3102A360454CD");
 
                 entity.ToTable("KETQUA");
 
@@ -304,7 +285,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Khananggiangday>(entity =>
             {
                 entity.HasKey(e => new { e.Magv, e.Mamh })
-                    .HasName("PK__KHANANGG__C63CCE2FA8F6A2C8");
+                    .HasName("PK__KHANANGG__C63CCE2FB5CB4A06");
 
                 entity.ToTable("KHANANGGIANGDAY");
 
@@ -336,7 +317,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Kqhockymonhoc>(entity =>
             {
                 entity.HasKey(e => new { e.Mahs, e.Mamh, e.Mahk, e.Manh })
-                    .HasName("PK__KQHOCKYM__12EAEA96871AECF2");
+                    .HasName("PK__KQHOCKYM__12EAEA9650B63236");
 
                 entity.ToTable("KQHOCKYMONHOC");
 
@@ -386,7 +367,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Kqhockytonghop>(entity =>
             {
                 entity.HasKey(e => new { e.Mahs, e.Mahk, e.Manh })
-                    .HasName("PK__KQHOCKYT__2D5CED80D9681731");
+                    .HasName("PK__KQHOCKYT__2D5CED807D336951");
 
                 entity.ToTable("KQHOCKYTONGHOP");
 
@@ -440,7 +421,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Kqnamhoc>(entity =>
             {
                 entity.HasKey(e => new { e.Mahs, e.Manh })
-                    .HasName("PK__KQNAMHOC__D63CD5CD65CC550E");
+                    .HasName("PK__KQNAMHOC__D63CD5CD25315CAA");
 
                 entity.ToTable("KQNAMHOC");
 
@@ -451,8 +432,6 @@ namespace StudentManagement.Models
                 entity.Property(e => e.Manh)
                     .HasMaxLength(7)
                     .HasColumnName("MANH");
-
-                entity.Property(e => e.DtbnamHoc).HasColumnName("DTBNamHoc");
 
                 entity.Property(e => e.MaHanhKiem).HasMaxLength(7);
 
@@ -491,7 +470,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Loaikiemtra>(entity =>
             {
                 entity.HasKey(e => e.Malkt)
-                    .HasName("PK__LOAIKIEM__7A3D008E6D3D48FE");
+                    .HasName("PK__LOAIKIEM__7A3D008E6D8EDBCF");
 
                 entity.ToTable("LOAIKIEMTRA");
 
@@ -513,7 +492,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Lop>(entity =>
             {
                 entity.HasKey(e => e.Malop)
-                    .HasName("PK__LOP__7A3DE2115B8909F9");
+                    .HasName("PK__LOP__7A3DE2112CFD8D4F");
 
                 entity.ToTable("LOP");
 
@@ -528,14 +507,14 @@ namespace StudentManagement.Models
                 entity.Property(e => e.Khoi).HasColumnName("KHOI");
 
                 entity.Property(e => e.Tenlop)
-                    .HasMaxLength(7)
+                    .HasMaxLength(30)
                     .HasColumnName("TENLOP");
             });
 
             modelBuilder.Entity<Lophocthucte>(entity =>
             {
                 entity.HasKey(e => e.Malhtt)
-                    .HasName("PK__LOPHOCTH__353317E4525CBF03");
+                    .HasName("PK__LOPHOCTH__353317E4D168A4FD");
 
                 entity.ToTable("LOPHOCTHUCTE");
 
@@ -582,7 +561,7 @@ namespace StudentManagement.Models
                         r => r.HasOne<Lophocthucte>().WithMany().HasForeignKey("Malhtt").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__LOPHOCTHU__MALHT__5AEE82B9"),
                         j =>
                         {
-                            j.HasKey("Malhtt", "Mahs").HasName("PK__LOPHOCTH__F330E5E98A8C44F4");
+                            j.HasKey("Malhtt", "Mahs").HasName("PK__LOPHOCTH__F330E5E970A1BC23");
 
                             j.ToTable("LOPHOCTHUCTE_HOCSINH");
 
@@ -595,7 +574,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Monhoc>(entity =>
             {
                 entity.HasKey(e => e.Mamh)
-                    .HasName("PK__MONHOC__603F69EBEA2F7629");
+                    .HasName("PK__MONHOC__603F69EB9C3A3488");
 
                 entity.ToTable("MONHOC");
 
@@ -615,7 +594,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Namhoc>(entity =>
             {
                 entity.HasKey(e => e.Manh)
-                    .HasName("PK__NAMHOC__603F510A3B3ACCF1");
+                    .HasName("PK__NAMHOC__603F510A7DCE4B12");
 
                 entity.ToTable("NAMHOC");
 
@@ -635,7 +614,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Nhanvienphongdaotao>(entity =>
             {
                 entity.HasKey(e => e.Manv)
-                    .HasName("PK__NHANVIEN__603F5114EAD8F4E3");
+                    .HasName("PK__NHANVIEN__603F5114ACDC2973");
 
                 entity.ToTable("NHANVIENPHONGDAOTAO");
 
@@ -665,7 +644,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Phanconggiangday>(entity =>
             {
                 entity.HasKey(e => new { e.Manh, e.Malhtt, e.Mamh, e.Magv })
-                    .HasName("PK__PHANCONG__520A5CEEB9AE94E0");
+                    .HasName("PK__PHANCONG__520A5CEEA21F4CDD");
 
                 entity.ToTable("PHANCONGGIANGDAY");
 
@@ -723,7 +702,7 @@ namespace StudentManagement.Models
             modelBuilder.Entity<Phh>(entity =>
             {
                 entity.HasKey(e => e.Maphhs)
-                    .HasName("PK__PHHS__5401D0A52696FC4F");
+                    .HasName("PK__PHHS__5401D0A586B89AA2");
 
                 entity.ToTable("PHHS");
 
@@ -749,10 +728,42 @@ namespace StudentManagement.Models
                     .HasConstraintName("FK__PHHS__MAHS__4CA06362");
             });
 
+            modelBuilder.Entity<Quydinhnam>(entity =>
+            {
+                entity.HasKey(e => new { e.Id, e.Manh })
+                    .HasName("PK__QUYDINHN__8417193731810D70");
+
+                entity.ToTable("QUYDINHNAM");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(10)
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Manh)
+                    .HasMaxLength(7)
+                    .HasColumnName("MANH");
+
+                entity.Property(e => e.Giatri)
+                    .HasMaxLength(1000)
+                    .HasColumnName("GIATRI");
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithMany(p => p.Quydinhnams)
+                    .HasForeignKey(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__QUYDINHNAM__ID__1332DBDC");
+
+                entity.HasOne(d => d.ManhNavigation)
+                    .WithMany(p => p.Quydinhnams)
+                    .HasForeignKey(d => d.Manh)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__QUYDINHNAM__MANH__14270015");
+            });
+
             modelBuilder.Entity<Taikhoan>(entity =>
             {
                 entity.HasKey(e => e.Username)
-                    .HasName("PK__TAIKHOAN__B15BE12FF0D32B2D");
+                    .HasName("PK__TAIKHOAN__B15BE12F170D6358");
 
                 entity.ToTable("TAIKHOAN");
 
@@ -804,10 +815,6 @@ namespace StudentManagement.Models
                 entity.Property(e => e.Ghichu)
                     .HasMaxLength(1000)
                     .HasColumnName("GHICHU");
-
-                entity.Property(e => e.Giatri)
-                    .HasMaxLength(1000)
-                    .HasColumnName("GIATRI");
 
                 entity.Property(e => e.Isdeleted)
                     .HasColumnName("ISDELETED")

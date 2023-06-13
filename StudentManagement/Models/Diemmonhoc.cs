@@ -1,22 +1,16 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.Eventing.Reader;
-using System.Windows;
-using System.Windows.Media.Animation;
 
 namespace StudentManagement.Models
 {
-    public partial class Diemmonhoc: ObservableObject
+    public partial class Diemmonhoc
     {
         public string Mahs { get; set; } = null!;
         public string Mahk { get; set; } = null!;
         public string Mamh { get; set; } = null!;
         public string Manh { get; set; } = null!;
         public string Malkt { get; set; } = null!;
-        public double Diem {
-            get; set;        }
+        public double Diem { get; set; }
 
         public virtual Hocky MahkNavigation { get; set; } = null!;
         public virtual Hocsinh MahsNavigation { get; set; } = null!;

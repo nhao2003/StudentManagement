@@ -10,7 +10,6 @@ namespace StudentManagement.Models
         public string? MaHocLuc { get; set; }
         public string? MaHanhKiem { get; set; }
         public string? MaKetQua { get; set; }
-        public double? DtbnamHoc { get; set; }
 
         public virtual Hanhkiem? MaHanhKiemNavigation { get; set; }
         public virtual Hocluc? MaHocLucNavigation { get; set; }
