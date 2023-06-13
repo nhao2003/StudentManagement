@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace StudentManagement.ValidationRules
 {
-    public class ngaysinhValidation : ValidationRule
+    public class AgeHocSinhValidation : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -20,10 +20,23 @@ namespace StudentManagement.ValidationRules
             }
             else if (value.ToString() != null)
             {
-                int TuoiToiTieu = 22, TuoiToiDa = 65;
                 try
                 {
-                    DateTime birthDate = DateTime.Parse(value.ToString());
+                        DateTime birthDate = DateTime.Parse(value.ToString());
+                                    int TuoiToiTieu = 0, TuoiToiDa = 0;
+                    foreach (var item in DataProvider.ins.context.Thamsos)
+                    {
+                        if (item.Id == "TS001")
+                        {
+                            TuoiToiTieu = int.Parse(item.Giatri);
+
+                        }
+                        if (item.Id == "TS002")
+                        {
+                            TuoiToiDa = int.Parse(item.Giatri);
+                        }
+                    }// Ngày sinh của bạn
+
                     DateTime currentDate = DateTime.Now; // Thời gian hiện tại
 
                     int age = currentDate.Year - birthDate.Year; // Số tuổi dựa trên năm
@@ -37,10 +50,10 @@ namespace StudentManagement.ValidationRules
                 }
                 catch
                 {
-                    return new ValidationResult(false, "Ngày sinh phải có format là mm/dd/yyyy và độ tuổi nằm trong khoảng " + TuoiToiTieu.ToString() + " - " + TuoiToiDa.ToString());
+                    return new ValidationResult(false, "Ngày sinh không hợp lệ");
                 }
             }
-            if (value.ToString().Length > 10)
+            else if (value.ToString().Length > 10)
             {
                 return new ValidationResult(false, "Ngày sinh vượt quá số ký tự quy định (10).");
             }

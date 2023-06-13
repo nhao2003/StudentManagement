@@ -396,7 +396,7 @@
                                 Mode="TwoWay"
                                 UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <validationrules:NotnullValidation></validationrules:NotnullValidation>
+                                    <validationrules:ManvgvValidation></validationrules:ManvgvValidation>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -404,8 +404,9 @@
                     <TextBlock
                         Grid.Column="0"
                         Style="{StaticResource textblock_item}"
-                        Width="100"
-                        Text="Mã nhân viên" />
+                        Width="100">
+                        <Run
+                            Text="{Binding MaNVorGV, Mode=TwoWay}" /><LineBreak /><Run /></TextBlock>
                 </Grid>
 
             </Border>

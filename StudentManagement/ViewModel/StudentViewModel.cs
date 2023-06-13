@@ -48,7 +48,7 @@ namespace StudentManagement.ViewModel
         public void SearchingValue()
         {
             var studentList = DataProvider.ins.context.Hocsinhs.ToList();
-            if (SearchStudentValue.Trim() != "")
+            if (searchStudentValue.Trim() != "")
             {
                 StudentList.Clear();
                 if (choosing == "Họ tên")
@@ -89,12 +89,12 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         public void ChangeTTHocSinh()
         {
-            if (StudentDataGridItemSelected == null)
+            if (studentDataGridItemSelected == null)
                 return;
             else
             {
                 //Truyền HocSinh vào AddNewStudentViewModel nếu cập nh
-                AddStudent changeTTHocSinh = new AddStudent(new AddNewStudentViewModel(StudentDataGridItemSelected.hocsinh));
+                AddStudent changeTTHocSinh = new AddStudent(new AddNewStudentViewModel(studentDataGridItemSelected.hocsinh));
                 changeTTHocSinh.ShowDialog();
                 AddNewStudentViewModel result = (AddNewStudentViewModel)changeTTHocSinh.DataContext;
                 if (result.Result == true)

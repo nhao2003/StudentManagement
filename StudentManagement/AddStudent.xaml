@@ -99,7 +99,7 @@
                                 Mode="TwoWay"
                                 UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <validationrules:ngaysinhValidation></validationrules:ngaysinhValidation>
+                                    <validationrules:AgeHocSinhValidation></validationrules:AgeHocSinhValidation>
                                 </Binding.ValidationRules>
                             </Binding>
                         </DatePicker.Text>
