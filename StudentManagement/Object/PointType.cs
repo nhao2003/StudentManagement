@@ -28,10 +28,6 @@ namespace StudentManagement.Object
             {
                 diemmonhocs.Add(new SubPoint(diem, this));
             }
-            if(diemList == null || diemList.Count ==0 )
-            {
-                addSubPoint();
-            }
         }
 
         public void addSubPoint()
