@@ -25,7 +25,9 @@ namespace StudentManagement.Object.SchoolYear
                     var kqNamhoc = student.Kqnamhocs.Where(x => x.Manh == namhoc.Manh).FirstOrDefault();
                     if (kqNamhoc != null)
                     {
-                        hocLuc = kqNamhoc.MaHocLucNavigation.TenHocLuc;
+                        Hocluc hl = kqNamhoc.MaHocLucNavigation;
+                        if(hl != null)
+                            hocLuc = hl.TenHocLuc;
                         hanhKiem = kqNamhoc.MaHanhKiemNavigation.TenHanhKiem;
                         ketQua = kqNamhoc.MaKetQuaNavigation.TenKetQua;
                     }
