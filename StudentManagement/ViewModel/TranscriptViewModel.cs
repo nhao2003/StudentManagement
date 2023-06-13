@@ -118,7 +118,7 @@ namespace StudentManagement.ViewModel
                 transcripts.Add(new TranscriptConfig(hocsinh, SelectedSemeter, SelectedSubject,namhoc)) ;
             }
             //DataGridColumns = new ObservableCollection<DataGridColumn>();
-            //if(transcripts.FirstOrDefault() != null)
+            //if (transcripts.FirstOrDefault() != null)
             //{
             //    var diems = transcripts.First().DiemDisplays;
             //    DataGridTextColumn nameColumn = new DataGridTextColumn();

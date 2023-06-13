@@ -150,7 +150,7 @@
                         Width="*"
                         Header="Điểm miệng">
                         <materialDesign:DataGridTextColumn.Binding>
-                            <Binding Path=" DiemDisplays[0].Diemdisplay" FallbackValue='0'>
+                            <Binding Path=" PointTypes[0].DiemTB" FallbackValue='0'>
                                 <Binding.ValidationRules>
                                     <validationrules:ScoreValidationRule/>
                                 </Binding.ValidationRules>
@@ -159,16 +159,16 @@
                     </materialDesign:DataGridTextColumn>
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[1].Diemdisplay,FallbackValue='-'}"
+                        Binding="{Binding PointTypes[1].DiemTB,FallbackValue='0'}"
                         Header="Điểm 15'" />
 
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[2].Diemdisplay,FallbackValue='-'}"
+                        Binding="{Binding PointTypes[2].DiemTB,FallbackValue='0'}"
                         Header="Điểm 1 tiết" />
                     <materialDesign:DataGridTextColumn
                         Width="*"
-                        Binding="{Binding DiemDisplays[3].Diemdisplay,FallbackValue='-'}"
+                        Binding="{Binding PointTypes[3].DiemTB,FallbackValue='-'}"
                         Header="Điểm cuối kỳ" />
                 </DataGrid.Columns>
             </DataGrid>

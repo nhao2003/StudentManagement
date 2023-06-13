@@ -28,7 +28,10 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
         }
         selectedKhoi = khoiList[currentIndex];
         InitClass();
-        //CurrentClass = ClassCardList[0];
+        if( ClassCardList != null && ClassCardList.Count > 0)
+        {
+            CurrentClass = ClassCardList[0];
+        }
         selectedIndexTab = 1;
         String giatri = DataProvider.ins.context.Thamsos.Where(x => x.Tents.Equals ("Sỉ số tối đa của lớp")).FirstOrDefault().Giatri;
         maxStudentInClass = int.Parse(giatri) != null ? int.Parse(giatri) : 0;
@@ -45,6 +48,7 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
     public List<ClassCard> ClassCardList { get; set; }
     private Namhoc currentNamhoc;
     private int minKhoi;
+    [ObservableProperty]
     private int selectedKhoi;
     private int currentIndex;
     [ObservableProperty]
@@ -63,7 +67,7 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
                     {
                         StudentEmptyDisplay.Add(new StudentWithClassItem(hs, currentNamhoc));
                     }
-                    var lopList = DataProvider.ins.context.Lops.Where(x => x.Khoi == selectedKhoi).ToList();
+                    var lopList = DataProvider.ins.context.Lops.Where(x => x.Khoi == selectedKhoi && x.Isdeleted == false).ToList();
                     foreach (var lop in lopList)
                     {
                         ObservableCollection<StudentWithClassItem> studentInClass = new ObservableCollection<StudentWithClassItem>();
@@ -157,7 +161,11 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
     [RelayCommand]
     private void addStudentToCurrentClass()
     {
-        
+        if(CurrentClass == null)
+        {
+            MessageBox.Show("Không có lớp học nào!");
+            return;
+        }
         ObservableCollection<StudentWithClassItem> studentInClassDisplayTemp = new ObservableCollection<StudentWithClassItem>(StudentEmptyDisplay);
         foreach (var student in StudentEmptyDisplay)
         {

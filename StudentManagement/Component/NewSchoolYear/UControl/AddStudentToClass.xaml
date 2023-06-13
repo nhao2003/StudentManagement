@@ -16,7 +16,14 @@
                 <RowDefinition Height="450"></RowDefinition>
                 <RowDefinition Height="100"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Cấu hình lớp học " FontSize="18" FontWeight="Bold" Margin="20 " ></TextBlock>
+            <TextBlock Grid.Row="0"  FontSize="18" FontWeight="Bold" Margin="20 " >
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Cấu hình khối {0}" FallbackValue="Cấu hình khối">
+                        <Binding Path="SelectedKhoi" UpdateSourceTrigger="PropertyChanged"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+
+            </TextBlock>
             <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Grid.Row="1">
                 <ItemsControl ItemsSource="{Binding ClassCardList}">
                     <ItemsControl.Resources>
@@ -229,8 +236,20 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="0">
-                                <TextBlock Text="Thêm học sinh" FontSize="18" FontWeight="Bold" Margin="20 " ></TextBlock>
-                                <Button Command="{Binding addStudentToCurrentClassCommand}" Width="100" Content="Thêm" Style="{StaticResource primary_button}" Margin="600 0 30 0" Background="{StaticResource GreenPrimary}" ></Button>
+                                <StackPanel Grid.Row="0" Margin="20,20,20,20" Orientation="Horizontal" Grid.ColumnSpan="2">
+                                    <TextBlock  Text="Thêm học sinh vào lớp "  FontSize="16" FontWeight="SemiBold"
+                       HorizontalAlignment="Right"
+                       ></TextBlock>
+                                    <TextBlock  Text="{Binding CurrentClass.Lop.Khoi}"  FontSize="16" FontWeight="SemiBold"
+                       HorizontalAlignment="Right"
+                       ></TextBlock>
+                                    <TextBlock  Text="{Binding CurrentClass.Lop.Tenlop}" FontSize="16" FontWeight="SemiBold"
+                       HorizontalAlignment="Right"
+                       ></TextBlock>
+
+                                </StackPanel>
+
+                                <Button Command="{Binding addStudentToCurrentClassCommand}" Width="100" Content="Thêm" Style="{StaticResource primary_button}" Margin="500 0 30 0" Background="{StaticResource GreenPrimary}" ></Button>
 
                             </StackPanel>
 
