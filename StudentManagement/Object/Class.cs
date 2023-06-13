@@ -33,14 +33,15 @@ namespace StudentManagement.Model
         {
             id = lopth.Malop;
             name = lopth.MalopNavigation.Khoi + lopth.MalopNavigation.Tenlop;
-            var teacher = lopth.MagvcnNavigation;
-            if(teacher != null)
+            Giaovien giaovien = lopth.MagvcnNavigation;
+            //teacherName = lopth.MagvcnNavigation.UsernameNavigation.Hoten;
+            if(giaovien != null)
             {
-                teacherName = teacher.UsernameNavigation.Hoten;
+                teacherName = giaovien.UsernameNavigation.Hoten;
             }
-            lophtt = lopth;
-            var hocsinhList = lopth.Mahs.ToList();
-            hocsinhs = new ObservableCollection<Hocsinh>(hocsinhList);
+            teacherName = "";
+            hocsinhs = new ObservableCollection<Hocsinh>(lopth.Mahs.ToList());
+
             numOfStudent = int.Parse(DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri);
             setRatio();
         }

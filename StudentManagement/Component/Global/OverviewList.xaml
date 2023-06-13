@@ -27,11 +27,24 @@
                                 FontSize="14"
                                 ></TextBlock>
                         <ComboBox Grid.Row="1" Style="{StaticResource combobox_item}"
-                            BorderBrush="LightGray" 
-                            Width="Auto"
-                            Height="30"
-                            Padding="5"
-                            materialDesign:HintAssist.Hint="Chọn niên khóa" Margin="0,0,0,0"/>
+          BorderBrush="LightGray" 
+          BorderThickness="0"
+          Width="Auto"
+          Height="30"
+          Padding="5"
+          Focusable="False"
+          SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+          ItemsSource="{Binding NamHocs}"
+          materialDesign:HintAssist.Hint="Chọn niên khóa"
+          Margin="0,0,0,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontWeight="SemiBold" Text="{Binding Tennamhoc}" Margin="15,0,0,0"
+                       HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
                     </Grid>
                 </Grid>
             </Border>

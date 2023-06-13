@@ -78,9 +78,6 @@
                         <DataTemplate DataType="{x:Type viewModel:TermSummaryViewModel}">
                             <TermSummary:TermSummary />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
-                            
-                        </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:ClassManagementViewModel}">
                             <classMana:ClassManagement></classMana:ClassManagement>
                         </DataTemplate>
