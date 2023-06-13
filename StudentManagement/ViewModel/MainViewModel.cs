@@ -32,7 +32,7 @@ public sealed partial class MainViewModel : ObservableObject
     private object _classconfigViewModel;
     private object _classDetailViewModel;
     private object _classManaViewModel;
-
+    private object _regulationViewModel;
     private object _subjectViewModel;
     private object _schoolyearViewModel;
     private object _classListDetailsViewModel;
