@@ -20,7 +20,8 @@ namespace StudentManagement.ViewModel
             StudentList = new ObservableCollection<StudentDataGridItem>();
             foreach (var student in studentList)
             {
-                StudentList.Add(new StudentDataGridItem(student));
+                if(student.Isdeleted == false)
+                    StudentList.Add(new StudentDataGridItem(student));
             }
         }
         public ObservableCollection<StudentDataGridItem> StudentList { get; set; }
@@ -40,7 +41,7 @@ namespace StudentManagement.ViewModel
                 StudentList.Add(new StudentDataGridItem(result.hocsinh));
                 DataProvider.ins.context.Hocsinhs.Add(result.hocsinh);
                 DataProvider.ins.context.SaveChanges();
-
+                MessageBox.Show("Thêm học sinh thành công!");
             }
         }
         [RelayCommand]
@@ -53,8 +54,9 @@ namespace StudentManagement.ViewModel
                 if (choosing == "Họ tên")
                     foreach (var student in studentList)
                     {
+                        if (student.Isdeleted == true) continue;
                         string temp1 = Diacritics.RemoveDiacritics(student.Hotenhs), temp2 = Diacritics.RemoveDiacritics(searchStudentValue);
-                        if (temp1.Contains(temp2))
+                        if (temp1.Contains(temp2) )
                         {
                             StudentList.Add(new StudentDataGridItem(student));
                         }
@@ -63,6 +65,7 @@ namespace StudentManagement.ViewModel
                 {
                     foreach (var student in studentList)
                     {
+                        if (student.Isdeleted == true) continue;
                         string temp1 = Diacritics.RemoveDiacritics(student.Cccd), temp2 = Diacritics.RemoveDiacritics(searchStudentValue);
                         if (temp1.Contains(temp2))
                         {
@@ -76,7 +79,8 @@ namespace StudentManagement.ViewModel
                 StudentList.Clear();
                 foreach (var student in studentList)
                 {
-                    StudentList.Add(new StudentDataGridItem(student));
+                    if (student.Isdeleted == false)
+                        StudentList.Add(new StudentDataGridItem(student));
                 }
             }
         }
@@ -101,7 +105,8 @@ namespace StudentManagement.ViewModel
                         StudentList.Clear();
                         foreach (var student in DataProvider.ins.context.Hocsinhs.ToList())
                         {
-                            StudentList.Add(new StudentDataGridItem(student));
+                            if (student.Isdeleted == false)
+                                StudentList.Add(new StudentDataGridItem(student));
                         }
                         MessageBox.Show("Cập nhật thành công!");
                     }
@@ -113,6 +118,32 @@ namespace StudentManagement.ViewModel
                         MessageBox.Show("Thêm thành công");
                     }
                 }
+            }
+        }
+        [RelayCommand]
+        public void DeleteStudent()
+        {
+            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa những học sinh này?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                List<StudentDataGridItem> hsToRemove = new List<StudentDataGridItem>();
+
+                foreach (StudentDataGridItem hs in StudentList)
+                {
+                    if (hs.IsSelected)
+                    {
+                        hsToRemove.Add(hs);
+                        hs.hocsinh.Isdeleted = true;
+                        DataProvider.ins.context.Update(hs.hocsinh);
+                    }
+                }
+                DataProvider.ins.context.SaveChanges();
+                foreach (StudentDataGridItem hs in hsToRemove)
+                {
+                    StudentList.Remove(hs);
+                }
+
+                MessageBox.Show("Xóa thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
