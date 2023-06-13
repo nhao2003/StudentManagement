@@ -47,8 +47,35 @@ namespace StudentManagement.ViewModel
             {
                 TaikhoanList.Add(new TaiKhoanDataGridItem(result.taikhoan));
                 DataProvider.ins.context.Taikhoans.Add(result.taikhoan);
-                DataProvider.ins.context.SaveChanges();
-
+                if (result.taikhoan.Vaitro == "NV")
+                {
+                    Nhanvienphongdaotao nhanvienphongdaotao = new Nhanvienphongdaotao();
+                    nhanvienphongdaotao.Manv = result.MaNhanVien;
+                    nhanvienphongdaotao.Chucvu = result.ChucVu;
+                    nhanvienphongdaotao.Username = result.Username;
+                    DataProvider.ins.context.Nhanvienphongdaotaos.Add(nhanvienphongdaotao);
+                    DataProvider.ins.context.SaveChanges();
+                }
+                else if(result.taikhoan.Vaitro == "GV")
+                {
+                    Giaovien giaovien = new Giaovien();
+                    giaovien.Magv = result.MaNhanVien;
+                    giaovien.Hocvi = result.ChucVu;
+                    giaovien.Username = result.Username;
+                    foreach(var item in result.MonhocList)
+                    {
+                        if (item.IsCheckedMonHoc)
+                        {
+                            Khananggiangday khananggiangday = new Khananggiangday();
+                            khananggiangday.Magv = result.MaNhanVien;
+                            khananggiangday.Mamh = item.MaMonHoc;
+                            DataProvider.ins.context.Khananggiangdays.Add(khananggiangday);
+                        }
+                    }
+                    DataProvider.ins.context.Giaoviens.Add(giaovien);
+                    DataProvider.ins.context.SaveChanges();
+                }
+                MessageBox.Show("Thêm thành công!");
             }
         }
         [RelayCommand]
@@ -91,32 +118,57 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         public void UpdateNhanVien()
         {
-            if (taiKhoanDataGridItemSelected == null)
+            if (TaiKhoanDataGridItemSelected == null)
                 return;
             else
             {
-                Addnhanvien changeNVInfo = new Addnhanvien(new AddNhanVienViewModel(taiKhoanDataGridItemSelected.taikhoan));
+                Addnhanvien changeNVInfo = new Addnhanvien(new AddNhanVienViewModel(TaiKhoanDataGridItemSelected.taikhoan));
                 changeNVInfo.ShowDialog();
                 AddNhanVienViewModel result = (AddNhanVienViewModel)changeNVInfo.DataContext;
                 if (result.Result == true)
                 {
-                    if(result.isEdit)
+                    DataProvider.ins.context.Taikhoans.Update(result.taikhoan);
+                    if(result.taikhoan.Vaitro == "NV")
                     {
-                        DataProvider.ins.context.Taikhoans.Update(result.taikhoan);
-                        DataProvider.ins.context.SaveChanges();
-                        TaikhoanList.Clear();
-                        foreach (var teacher in DataProvider.ins.context.Taikhoans.ToList())
+                        foreach(var nv in DataProvider.ins.context.Nhanvienphongdaotaos)
                         {
-                            TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
+                            if(nv.Username == result.taikhoan.Username)
+                            {
+                                nv.Chucvu = result.ChucVu;
+                                DataProvider.ins.context.Nhanvienphongdaotaos.Update(nv);
+                                break;
+                            }
                         }
-                        MessageBox.Show("Cập nhật thành công!");
-                    }
-                    else
+                    } else
                     {
-                        DataProvider.ins.context.Taikhoans.Add(result.taikhoan);
-                        DataProvider.ins.context.SaveChanges();
-                        TaikhoanList.Add(new TaiKhoanDataGridItem(result.taikhoan));
-                        MessageBox.Show("Thêm thành công");
+                        foreach(var gv in DataProvider.ins.context.Giaoviens)
+                        {
+                            if(gv.Username == result.taikhoan.Username)
+                            {
+                                gv.Hocvi = result.ChucVu;
+                                gv.Khananggiangdays.Clear();
+                                foreach(var mh in result.MonhocList)
+                                {
+                                    if (mh.IsCheckedMonHoc)
+                                    {
+                                        Khananggiangday khananggiangday = new Khananggiangday();
+                                        khananggiangday.Magv = gv.Magv;
+                                        khananggiangday.Mamh = mh.MaMonHoc;
+                                        gv.Khananggiangdays.Add(khananggiangday);
+                                    }
+                                }
+                                DataProvider.ins.context.Giaoviens.Update(gv);
+                                break;
+                            }
+                        }
+                    }
+                    
+                    DataProvider.ins.context.SaveChanges();
+                    MessageBox.Show("Cập nhật thành công!");
+                    TaikhoanList.Clear();
+                    foreach (var teacher in DataProvider.ins.context.Taikhoans.ToList())
+                    {
+                        TaikhoanList.Add(new TaiKhoanDataGridItem(teacher));
                     }
                 }
             }

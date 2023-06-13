@@ -14,16 +14,20 @@
     Background="Transparent"
     AllowsTransparency="True"
     Title="AddNewClass"
-    Height="810"
-    Width="430"
+    Height="959"
+    Width="515"
     Name="AddNhanVienWindown">
     <Border
         CornerRadius="20"
         Padding="0"
         Background="#F0F9FF">
-        <Grid
-            Height="810"
-            VerticalAlignment="Center">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="2*" />
+                <ColumnDefinition
+                    Width="513*" />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition
                     Height="auto"></RowDefinition>
@@ -42,13 +46,18 @@
                 <RowDefinition
                     Height="auto"></RowDefinition>
                 <RowDefinition
-                    Height="auto"></RowDefinition>
+                    Height="auto" />
+                <RowDefinition
+                    Height="80" />
+                <RowDefinition
+                    Height="80" />
                 <RowDefinition
                     Height="*"></RowDefinition>
                 <RowDefinition
                     Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid>
+            <Grid
+                Grid.ColumnSpan="2">
                 <Border
                     Background="#A5D3FF"
                     Grid.Row="0"
@@ -57,7 +66,7 @@
                         Text="{Binding Title, Mode = TwoWay}"
                         Name="Titlenv"
                         Grid.Row="0"
-                        Margin="15,15,0,14"
+                        Margin="0,0,0,0"
                         FontWeight="Bold"
                         Style="{StaticResource MaterialDesignHeadline6TextBlock}" />
                 </Border>
@@ -70,23 +79,24 @@
                     Click="Close_Button_Click"
                     Margin="0,12,0,12">
                     <Button.Template>
-                    <ControlTemplate>
-                        <Ellipse
-                            Width="20"
-                            Height="20"
-                            Fill="{StaticResource RedPrimary}"
-                            Margin="0 0 10 0">
-                        </Ellipse>
-                    </ControlTemplate>
-                </Button.Template>
-                    
-                    </Button>
+                        <ControlTemplate>
+                            <Ellipse
+                                Width="20"
+                                Height="20"
+                                Fill="{StaticResource RedPrimary}"
+                                Margin="0 0 10 0">
+                            </Ellipse>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
             </Grid>
             <Border
                 Grid.Row="1"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,0">
+                Margin="8,10,10,0"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -111,7 +121,8 @@
                 Grid.Row="2"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,0">
+                Margin="8,10,10,0"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -149,7 +160,8 @@
                 Grid.Row="3"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,0">
+                Margin="8,10,10,0"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -166,7 +178,7 @@
                     <DatePicker
                         Name="_ngsinh"
                         Grid.Column="1"
-                        Margin="147,15,33,0"
+                        Margin="150,15,33,0"
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Hint="mm/dd/yyyy">
                         <DatePicker.Text>
@@ -186,7 +198,8 @@
                 Grid.Row="4"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,0">
+                Margin="8,10,10,0"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -222,7 +235,8 @@
                 Grid.Row="5"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,10">
+                Margin="8,10,10,10"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -260,7 +274,8 @@
                 Grid.Row="6"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,10">
+                Margin="8,10,10,10"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -296,7 +311,8 @@
                 Grid.Row="7"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,10">
+                Margin="8,10,10,10"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -311,9 +327,9 @@
                         Width="100"><Run
                             Text="Vai trò" /><LineBreak /><Run /></TextBlock>
                     <ComboBox
-                        Name="VT"
+                        Name="cb_vaitro"
                         Grid.Column="1"
-                        Margin="0,10,0,10"
+                        Margin="150,10,0,10"
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Hint="Chọn vai trò"
                         SelectedIndex="{Binding VaitroIndex, Mode=TwoWay}">
@@ -328,7 +344,8 @@
                 Grid.Row="8"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,10">
+                Margin="8,10,10,10"
+                Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -345,7 +362,7 @@
                     <ComboBox
                         Name="GT"
                         Grid.Column="1"
-                        Margin="147,16,33,0"
+                        Margin="150,16,33,0"
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Hint="Chọn giới tính"
                         SelectedIndex="{Binding GioitinhIndex, Mode=TwoWay}">
@@ -357,15 +374,109 @@
                 </Grid>
             </Border>
             <Border
-                Height="auto"
                 Grid.Row="9"
                 Style="{StaticResource BorderBox}"
                 Width="Auto"
-                Margin="10,10,10,10">
+                Margin="8,14,10,14"
+                Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="1"
+                        Margin="0,0,10,0"
+                        BorderBrush="#00000000">
+                        <TextBox.Text>
+                            <Binding
+                                Path="MaNhanVien"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:NotnullValidation></validationrules:NotnullValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource textblock_item}"
+                        Width="100"
+                        Text="Mã nhân viên" />
+                </Grid>
+
+            </Border>
+            <Border
+                Grid.Row="10"
+                Style="{StaticResource BorderBox}"
+                Width="Auto"
+                Margin="8,14,10,14"
+                Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="1"
+                        Margin="0,0,10,0"
+                        BorderBrush="#00000000">
+                        <TextBox.Text>
+                            <Binding
+                                Path="ChucVu"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:NotnullValidation></validationrules:NotnullValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource textblock_item}"
+                        Width="100"
+                        Text="Chức vụ" />
+                </Grid>
+
+            </Border>
+
+
+            <Border
+                Height="auto"
+                Grid.Row="11"
+                Width="Auto"
+                Margin="8,10,10,10"
+                Grid.Column="1">
+                <Border.Style>
+
+                    <Style
+                        TargetType="Border"
+                        BasedOn="{StaticResource BorderBox}">
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding ElementName=cb_vaitro,
+                        Path=SelectedIndex}"
+                                Value="0">
+                                <Setter
+                                    Property="Visibility"
+                                    Value="Collapsed"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </Border.Style>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*" />
+                        <RowDefinition
+                            Height="auto" />
+                        <RowDefinition
+                            Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock
                         HorizontalAlignment="Left"
@@ -394,10 +505,10 @@
                                     <StackPanel
                                         Width="300"
                                         Orientation="Horizontal">
-                                        <CheckBox />
+                                        <CheckBox
+                                            IsChecked="{Binding IsCheckedMonHoc, Mode=TwoWay}"/>
                                         <TextBlock
-                                            
-                                            Text="{Binding Tenmh}" />
+                                            Text="{Binding TenMonHoc}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -408,22 +519,16 @@
             </Border>
 
             <Button
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Grid.Row="10"
+                HorizontalAlignment="Left"
+                Grid.Row="12"
                 Style="{StaticResource primary_button}"
                 Content="Hoàn tất"
-                Margin="10"
+                Margin="408,0,0,0"
                 Width="auto"
                 Click="Finish_Button_Click"
                 Command="{Binding ThemHoacCapNhatNhanVienCommand}"
-                CommandParameter="{Binding ElementName=AddNhanVienWindown}"></Button>
-            <!--<CheckBox
-                Content="CheckBox"
-                HorizontalAlignment="Left"
-                Margin="420,116,0,0"
-                Grid.Row="6"
-                VerticalAlignment="Top" />-->
+                CommandParameter="{Binding ElementName=AddNhanVienWindown}"
+                Grid.Column="1" />
         </Grid>
     </Border>
 </Window>
