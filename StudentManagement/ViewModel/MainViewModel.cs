@@ -75,7 +75,8 @@ public sealed partial class MainViewModel : ObservableObject
     {
         new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
         new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
-        new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
+        new Navigation("Thêm học sinh", "AccountPlusOutline", _studentViewModel),
+        new Navigation("Thêm giáo viên", "AccountPlusOutline", _teacherViewModel),
         new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
         new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };

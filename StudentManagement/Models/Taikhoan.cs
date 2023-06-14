@@ -15,10 +15,14 @@ namespace StudentManagement.Models
         public string Passwrd { get; set; } = null!;
         public string? Vaitro { get; set; }
         public string Hoten { get; set; } = null!;
-        public DateTime? Ngsinh { get; set; }
+        public DateTime Ngsinh { get; set; }
         public string? Email { get; set; }
         public string? Dchi { get; set; }
-        public bool? Gioitinh { get; set; }
+        public bool Gioitinh { get; set; }
+        public string? GioitinhDisplay
+        {
+            get { return Gioitinh ? "Nam" : "Nữ"; }
+        }
         public bool? Isdeleted { get; set; }
 
         public virtual ICollection<Giaovien> Giaoviens { get; set; }
