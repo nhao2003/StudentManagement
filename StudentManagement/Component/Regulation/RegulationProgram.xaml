@@ -81,8 +81,6 @@
                                 Height="Auto" />
                             <RowDefinition
                                 Height="Auto" />
-                            <RowDefinition
-                                Height="Auto" />
                         </Grid.RowDefinitions>
                         <!--Tham số 0-->
                         <Border
@@ -171,95 +169,11 @@
                             </Grid>
                         </Border>
                         <!--Tham số 2-->
-                        <Border
-                            Margin="10"
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            BorderBrush="{StaticResource GreyPrimary}"
-                            BorderThickness="1"
-                            CornerRadius="3">
-                            <Grid
-                                Margin="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Grid.Column="0"
-                                    Margin="15 0 0 0"
-                                    Text="{Binding Path=Thamsos[2].Tents, Mode=OneTime}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"></TextBlock>
-                                <TextBox
-                                    x:Name="tbInput2"
-                                    Grid.Column="1"
-                                    MinWidth="100"
-                                    Margin="0 0 15 0"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    AcceptsReturn="True">
-                                    <TextBox.Text>
-                                        <Binding
-                                            Path="Thamsos[2].Giatri"
-                                            Mode="TwoWay"
-                                            UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationrules:DiemValidation />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </Grid>
-                        </Border>
                         <!--Tham số 3-->
-                        <Border
-                            Margin="10"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            BorderBrush="{StaticResource GreyPrimary}"
-                            BorderThickness="1"
-                            CornerRadius="3">
-                            <Grid
-                                Margin="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Grid.Column="0"
-                                    Margin="15 0 0 0"
-                                    Text="{Binding Path=Thamsos[3].Tents, Mode=OneTime}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"></TextBlock>
-                                <TextBox
-                                    x:Name="tbInput3"
-                                    Grid.Column="1"
-                                    MinWidth="100"
-                                    Margin="0 0 15 0"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    AcceptsReturn="True">
-                                    <TextBox.Text>
-                                        <Binding
-                                            Path="Thamsos[3].Giatri"
-                                            Mode="TwoWay"
-                                            UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationrules:DiemValidation />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </Grid>
-                        </Border>
                         <!--Tham số 4-->
                         <Border
                             Margin="10"
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Grid.Column="0"
                             BorderBrush="{StaticResource GreyPrimary}"
                             BorderThickness="1"
@@ -302,7 +216,7 @@
                         <!--Tham số 5-->
                         <Border
                             Margin="10"
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Grid.Column="1"
                             BorderBrush="{StaticResource GreyPrimary}"
                             BorderThickness="1"
@@ -345,7 +259,7 @@
                         <Button
                             Command="{Binding CapNhatThamSoCommand}"
                             Grid.Column="1"
-                            Grid.Row="3"
+                            Grid.Row="2"
                             Background="{StaticResource BluePrimary}"
                             BorderBrush="{StaticResource BluePrimary}"
                             Content="Cập nhật"
@@ -354,7 +268,7 @@
                             Height="32"
                             VerticalAlignment="Top">
                             <Button.Style>
-                                
+
                                 <Style
                                     TargetType="{x:Type Button}"
                                     BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
