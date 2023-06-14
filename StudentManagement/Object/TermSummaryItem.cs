@@ -46,7 +46,6 @@ namespace StudentManagement.Object
             List<string> mahsList = Lophtt.Mahs.Select(x => x.Mahs).ToList();
             this.SiSo = Lophtt.Mahs.Count();
             var diemDat = DataProvider.ins.context.Thamsos.Where(t => t.Id == "TS006").Select(t => t.Giatri).FirstOrDefault();
-
             int soluongdat = DataProvider.ins.context.Kqhockymonhocs
                 .Where(kq => mahsList.Contains(kq.Mahs)
                             && kq.DtbmonHocKy > double.Parse(diemDat)

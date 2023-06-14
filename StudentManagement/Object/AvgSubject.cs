@@ -22,25 +22,34 @@ namespace StudentManagement.Object
         }
         public AvgSubject(Hocsinh hs, string Manh, string Mahk, string Mamh)
         {
-            Kqhockymonhoc kq = DataProvider.ins.context.Kqhockymonhocs.Where(x => x.Mahs == hs.Mahs 
-                        && x.Manh == Manh 
-                        && x.Mahk == Mahk 
-                        && x.Mamh == Mamh).FirstOrDefault();
-           if(kq != null)
+
+            Kqhockymonhoc kq;
+            using (QUANLYHOCSINHContext db = new QUANLYHOCSINHContext())
             {
-                this.Subject = kq.MamhNavigation.Tenmh;
-                this.Dtb = kq.DtbmonHocKy;
+                kq = db.Kqhockymonhocs.Where(x => x.Mahs == hs.Mahs
+                        && x.Manh == Manh
+                        && x.Mahk == Mahk
+                        && x.Mamh == Mamh).FirstOrDefault();
+                if (kq != null)
+                {
+                    this.Subject = kq.MamhNavigation.Tenmh;
+                    this.Dtb = kq.DtbmonHocKy;
+                }
             }
         }
         public AvgSubject(Hocsinh hs, string Manh, string Mamh)
         {
-            Diemtrungbinhmonhocnamhoc kq = DataProvider.ins.context.Diemtrungbinhmonhocnamhocs.Where(x => x.Mahs == hs.Mahs
+            Diemtrungbinhmonhocnamhoc kq;
+            using (QUANLYHOCSINHContext db = new QUANLYHOCSINHContext())
+            {
+                kq = db.Diemtrungbinhmonhocnamhocs.Where(x => x.Mahs == hs.Mahs
                         && x.Manh == Manh
                         && x.Mamh == Mamh).FirstOrDefault();
-            if (kq != null)
-            {
-                this.Subject = kq.MamhNavigation.Tenmh;
-                this.Dtb = kq.DtbmonHocNamHoc;
+                if (kq != null)
+                {
+                    this.Subject = kq.MamhNavigation.Tenmh;
+                    this.Dtb = kq.DtbmonHocNamHoc;
+                }
             }
         }
     }
