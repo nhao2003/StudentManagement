@@ -192,7 +192,26 @@ namespace StudentManagement.ViewModel
         {
             try
             {
-                DataProvider.ins.context.UpdateRange(Thamsos);
+                int TuoiToiTieu = 0, TuoiToiDa = 0;
+                foreach (var item in DataProvider.ins.context.Thamsos)
+                {
+                    if (item.Id == "TS001")
+                    {
+                        TuoiToiTieu = int.Parse(item.Giatri);
+
+                    }
+                    if (item.Id == "TS002")
+                    {
+                        TuoiToiDa = int.Parse(item.Giatri);
+                    }
+                }
+                if(TuoiToiDa <= TuoiToiTieu)
+                {
+                    MessageBox.Show("Tuổi tối thiểu phải bé hơn tuổi tối đa.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                    DataProvider.ins.context.UpdateRange(Thamsos);
                 DataProvider.ins.context.SaveChanges();
                 MessageBox.Show("Cập nhật tham số thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
