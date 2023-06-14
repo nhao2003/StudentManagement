@@ -32,7 +32,13 @@ namespace StudentManagement.ViewModel
             //InitStudents();
             emptyRightViewmodel = new EmptyRightViewModel();
             RightViewModel = emptyRightViewmodel;
+            String giatri = DataProvider.ins.context.Thamsos.Where(x => x.Tents.Equals("Sỉ số tối đa của lớp")).FirstOrDefault().Giatri;
+            maxStudentInClass = int.Parse(giatri) != null ? int.Parse(giatri) : 0;
+
         }
+        [ObservableProperty]
+        private int maxStudentInClass;
+
         private object emptyRightViewmodel;
         [ObservableProperty]
         private object rightViewModel;
@@ -181,14 +187,20 @@ namespace StudentManagement.ViewModel
         {
             List<Student> selectedStudents = new List<Student>();
             if (ChoosenClass == null && NewStudents.IsNullOrEmpty() == true) return;
-            foreach(var student in NewStudents)
+            foreach (var student in NewStudents)
             {
-                if(student.IsSelected == true)
+                if (student.IsSelected == true)
                 {
-                    selectedStudents.Add(student);
+                    if (selectedStudents.Count + ChoosenClass.Hocsinhs.Count < MaxStudentInClass )
+                    {
+                        selectedStudents.Add(student);
+                    }
+                    else student.IsSelected = false;
+
                 }
+
             }
-            if(selectedStudents.Count > 0) {
+            if (selectedStudents.Count > 0) {
                 ChoosenClass.saveAddStudent(selectedStudents);
                 foreach(var st in selectedStudents)
                 {

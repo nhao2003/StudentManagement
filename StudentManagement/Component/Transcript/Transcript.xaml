@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:validationrules="clr-namespace:StudentManagement.ValidationRules"
              xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
              mc:Ignorable="d" 
              d:DesignHeight="690" d:DesignWidth="1220">
@@ -143,6 +144,7 @@
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn
                         Width="*"
+                        IsReadOnly="true"
                         Binding="{Binding Student.Hotenhs}"
                         Header="Họ tên" />
                     <materialDesign:DataGridTextColumn
@@ -150,6 +152,9 @@
                         Header="Điểm miệng">
                         <materialDesign:DataGridTextColumn.Binding>
                             <Binding Path=" PointTypes[0].Diemdisplay" FallbackValue='-'>
+                                <Binding.ValidationRules>
+                                    <validationrules:ScoreValidationRule/>
+                                </Binding.ValidationRules>
                             </Binding>
                         </materialDesign:DataGridTextColumn.Binding>
                     </materialDesign:DataGridTextColumn>
