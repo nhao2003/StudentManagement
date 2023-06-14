@@ -91,7 +91,8 @@ namespace StudentManagement.ViewModel
             gioitinhIndex = tk.Gioitinh ? 0 : 1;
             if (tk.Vaitro == "NV") vaitroIndex = 0;
             else vaitroIndex = 1;
-            foreach (var item in DataProvider.ins.context.Monhocs.ToList())
+            List<Monhoc> monhocs = DataProvider.ins.context.Monhocs.Where(e => e.Isdeleted == false).ToList();
+            foreach (Monhoc item in monhocs) 
             {
                 monhocList.Add(new MonHocItemDataGrid(item));
             }
@@ -131,7 +132,7 @@ namespace StudentManagement.ViewModel
                 {
                     foreach(var gd in giaovien.Khananggiangdays)
                     {
-                        if(gd.Mamh == item.MaMonHoc)
+                        if(gd.Mamh == item.MaMonHoc && gd.Isdeleted == false)
                         {
                             item.IsCheckedMonHoc = true;
                         }
