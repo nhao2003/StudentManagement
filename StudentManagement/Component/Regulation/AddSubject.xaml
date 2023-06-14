@@ -8,6 +8,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:converter="clr-namespace:StudentManagement.Component.Regulation.Converter"
     mc:Ignorable="d"
+                     xmlns:service="clr-namespace:StudentManagement.Service"
     Height="auto"
     Width="auto"
     d:DesignHeight="399.472">
@@ -170,6 +171,9 @@
                     </Grid>
                 </Border>
                 <Button
+                                                                                Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+
                     Command="{Binding LuuThayDoiCommand}"
                     VerticalAlignment="Bottom"
                     Grid.Row="4"
