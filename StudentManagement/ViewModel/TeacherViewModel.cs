@@ -47,7 +47,6 @@ namespace StudentManagement.ViewModel
             AddNhanVienViewModel result = (AddNhanVienViewModel)addNhanVien.DataContext;
             if (result.Result == true)
             {
-                if(result.taikhoan.Isdeleted == false) {
                     TaikhoanList.Add(new TaiKhoanDataGridItem(result.taikhoan));
                     DataProvider.ins.context.Taikhoans.Add(result.taikhoan);
                     if (result.taikhoan.Vaitro == "NV")
@@ -57,7 +56,6 @@ namespace StudentManagement.ViewModel
                         nhanvienphongdaotao.Chucvu = result.ChucVu;
                         nhanvienphongdaotao.Username = result.Username;
                         DataProvider.ins.context.Nhanvienphongdaotaos.Add(nhanvienphongdaotao);
-                        DataProvider.ins.context.SaveChanges();
                     }
                     else if (result.taikhoan.Vaitro == "GV")
                     {
@@ -76,10 +74,9 @@ namespace StudentManagement.ViewModel
                             }
                         }
                         DataProvider.ins.context.Giaoviens.Add(giaovien);
-                        DataProvider.ins.context.SaveChanges();
                     }
+                    DataProvider.ins.context.SaveChanges();
                     MessageBox.Show("Thêm thành công!");
-                }
             }
         }
         [RelayCommand]

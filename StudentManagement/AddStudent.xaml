@@ -175,7 +175,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox IsReadOnly="{Binding IsEdit, Mode=TwoWay}" Name="mahs" Grid.ColumnSpan="2" 
+                    <TextBox IsEnabled="{Binding Enabled, Mode=TwoWay}" Name="mahs" Grid.ColumnSpan="2" 
                              Margin="156,0,10,0" BorderBrush="#00000000" >
                         <TextBox.Text>
                             <Binding
@@ -238,13 +238,76 @@
             </Border>
             <Button HorizontalAlignment="Right"
                     VerticalAlignment="Bottom" Grid.Row="7" 
-                    Style="{StaticResource primary_button}"
                     Content="Hoàn tất" 
                     Margin="0,0,26,-193" 
                     Width="95" Height="32"
                 Command="{Binding ThemHoacCapNhatHocSinhCommand}"
-                CommandParameter="{Binding ElementName=AddStudentWindown}"
-                    ></Button>
+                CommandParameter="{Binding ElementName=AddStudentWindown}">
+                <Button.Style>
+                    <Style
+                            TargetType="{x:Type Button}"
+                            BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                        <Style.Triggers>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=cmnd, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=hoten, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=ngsinh, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=email, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=dchi, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=mahs, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=dantoc, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=tongiao, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Border>
 </Window>
