@@ -41,7 +41,7 @@ namespace StudentManagement.ViewModel
 
         public AddNewStudentViewModel() {
             title = "Thêm học sinh";
-            int countHS = DataProvider.ins.context.Hocsinhs.Count();
+            int countHS = DataProvider.ins.context.Hocsinhs.Count()+1;
             MaHs = $"HS{countHS}";
         }
         public AddNewStudentViewModel(Hocsinh hs) 

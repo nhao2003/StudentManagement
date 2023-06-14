@@ -246,7 +246,7 @@
                 <Button.Style>
                     <Style
                             TargetType="{x:Type Button}"
-                            BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                            BasedOn="{StaticResource primary_button}">
                         <Style.Triggers>
                             <DataTrigger
                                     Binding="{Binding ElementName=cmnd, Path=(Validation.HasError)}"
