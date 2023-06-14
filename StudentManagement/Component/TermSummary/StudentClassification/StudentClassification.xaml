@@ -32,6 +32,7 @@
                             Margin="0,15,15,0"
                             Style="{StaticResource MaterialDesignBody1TextBlock}"/>
                 <DataGrid
+                    IsReadOnly="True"
                             AutoGenerateColumns="False"
                             Grid.Row="1"
                             Background="{StaticResource GreyLight}"
@@ -159,6 +160,7 @@
                             Margin="0,15,15,0"
                             Style="{StaticResource MaterialDesignBody1TextBlock}"/>
                 <DataGrid
+                    IsReadOnly="True"
                             AutoGenerateColumns="False"
                             Grid.Row="1"
                             Background="{StaticResource GreyLight}"

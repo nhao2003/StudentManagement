@@ -127,6 +127,7 @@
                             CanUserReorderColumns="False"   
                             HorizontalScrollBarVisibility="Disabled"
                                     Margin="10,10,10,10"
+                                        IsReadOnly="True"
                             HeadersVisibility="Column"
                             ItemsSource="{Binding TermSummaryItems}" Grid.ColumnSpan="2"
                             >
@@ -255,6 +256,7 @@
                                     Margin="10,10,10,10"
                             HeadersVisibility="Column"
                             Grid.ColumnSpan="2"
+                                        IsReadOnly="True"
                             ItemsSource="{Binding ClassDetailsSummaryItems}"
                             >
                                         <DataGrid.Resources>
