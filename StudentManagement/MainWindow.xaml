@@ -1,4 +1,4 @@
-﻿<Window xmlns:TermSummary="clr-namespace:StudentManagement.Component.TermSummary"  xmlns:ClassListDetails="clr-namespace:StudentManagement.Component.ClassListDetails"  x:Class="StudentManagement.MainWindow"
+﻿<Window xmlns:NhanVienList="clr-namespace:StudentManagement.Component.NhanVienList"  xmlns:StudentList="clr-namespace:StudentManagement.Component.StudentList"  xmlns:TermSummary="clr-namespace:StudentManagement.Component.TermSummary"  xmlns:ClassListDetails="clr-namespace:StudentManagement.Component.ClassListDetails"  x:Class="StudentManagement.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -62,15 +62,11 @@
                 </Grid>
                 <ContentControl Grid.Row="2" Content="{Binding ContentViewModel, UpdateSourceTrigger=PropertyChanged}" Height="770" VerticalAlignment="Top">
                     <ContentControl.Resources >
-                        <DataTemplate DataType="{x:Type viewModel:ProgramViewModel}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition ></RowDefinition>
-                                    <RowDefinition Height="6*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <overview:OverviewList Grid.Row="0"></overview:OverviewList>
-                                <program:mainProgram Grid.Row="1"></program:mainProgram>
-                            </Grid>
+                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
+                            <StudentList:StudentsListUC />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
+                            <NhanVienList:NhanViensListUC />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:RegulationViewModel }">
                             <sub:RegulationtProgram />
