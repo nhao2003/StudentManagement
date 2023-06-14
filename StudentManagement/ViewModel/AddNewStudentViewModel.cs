@@ -47,11 +47,12 @@ namespace StudentManagement.ViewModel
     "Mạ", "Co", "Chơ Ro", "Xinh Mun", "Hà Nhì", "Chu Ru", "Lào", "La Chí",
     "La Hủ", "Phù Lá", "La Ha", "Pà Thẻn", "Lự", "Ngái", "Lô Lô", "Chứt",
     "Mảng", "Cờ Lao", "Bố Y", "Cống", "Si La", "Pu Péo", "Rơ Măm", "Brâu",
-    "Ơ Đu", "Rục", "Cống", "Cống", "Thổ", "Xin", "Kanai", "Khác.."
+    "Ơ Đu", "Rục", "Cống", "Cống", "Thổ", "Xin", "Kanai", "Khác"
 };
         [ObservableProperty]
         string[] tonGiaos = new string[]
 {
+    "Không",
     "Phật giáo",
     "Thiên Chúa giáo",
     "Hòa hảo",
@@ -62,7 +63,7 @@ namespace StudentManagement.ViewModel
     "Minh Lý đạo",
     "Đạo Cao Đài",
     "Đạo Bửu Sơn Kỳ Hương",
-    "Khác.."
+    "Khác"
 };
         public AddNewStudentViewModel() {
             title = "Thêm học sinh";

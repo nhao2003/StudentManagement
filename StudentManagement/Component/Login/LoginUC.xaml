@@ -80,6 +80,7 @@
                 Content="Đăng nhập"
                 Command="{Binding goToMainWindowCM}"
                 FontSize="16"
+                IsDefault="True"
                 Background="{StaticResource BluePrimary}"
                 Style="{StaticResource primary_button}">
 
