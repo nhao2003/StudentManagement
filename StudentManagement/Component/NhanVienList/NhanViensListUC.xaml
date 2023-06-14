@@ -168,7 +168,7 @@
                                 Command="{Binding Source={StaticResource StudentCourseRegistryVM}, Path=CourseUncheckedCommand}" CommandParameter="{ItemContainerTemplateKey}" />
                         </i:DataTrigger>
                     </i:Interaction.Triggers>-->
-                                <DataGridCheckBoxColumn.Header>
+                                <!--<DataGridCheckBoxColumn.Header>
                                     <Border Background="Transparent">
                                         <CheckBox IsChecked="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=IsAllItemsSelected}" />
                                     </Border>
@@ -177,7 +177,7 @@
                                     <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
                                     </Style>
-                                </DataGridCheckBoxColumn.HeaderStyle>
+                                </DataGridCheckBoxColumn.HeaderStyle>-->
                             </DataGridCheckBoxColumn>
                             <materialDesign:DataGridTextColumn
                         Width="*"

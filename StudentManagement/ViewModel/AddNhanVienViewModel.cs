@@ -203,11 +203,7 @@ namespace StudentManagement.ViewModel
             {
                 return "Mật khẩu không được rỗng";
             }
-            if (string.IsNullOrEmpty(manvgv))
-            {
-                return "Mã nhân viên/giáo viên không được rỗng";
-            }
-            if (string.IsNullOrEmpty(vthayhv))
+            if (string.IsNullOrEmpty(chucVu))
             {
                 return "Chức vụ / học vị không được rỗng";
             }

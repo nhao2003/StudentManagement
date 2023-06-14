@@ -109,8 +109,18 @@
                         IsEnabled="{Binding Enabled, Mode=TwoWay}"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
-                        BorderBrush="#00000000"
-                        Text="{Binding Username, Mode=TwoWay}" />
+                        BorderBrush="#00000000">
+                        <TextBox.Text>
+                            <Binding
+                                Path="Username"
+                                Mode="TwoWay"
+                                UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validationrules:UsernameValidation> </validationrules:UsernameValidation>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <TextBlock
                         Grid.Column="0"
                         Style="{StaticResource textblock_item}"

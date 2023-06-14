@@ -38,7 +38,32 @@ namespace StudentManagement.ViewModel
         public bool enabled = true;
         public bool Result = false;
         public Hocsinh hocsinh;
-
+        [ObservableProperty]
+        string[] danTocVietNam = new string[]
+{
+    "Kinh", "Tày", "Thái", "Mường", "Hoa", "Khơ Mú", "Nùng", "Hmông",
+    "Dao", "Gia Rai", "Ê Đê", "Ba Na", "Xơ Đăng", "Sán Chay", "Cơ Ho",
+    "Chăm", "Sán Dìu", "Bru-Vân Kiều", "Giáy", "Cơ Tu", "Giẻ Triêng", "Tà Ôi",
+    "Mạ", "Co", "Chơ Ro", "Xinh Mun", "Hà Nhì", "Chu Ru", "Lào", "La Chí",
+    "La Hủ", "Phù Lá", "La Ha", "Pà Thẻn", "Lự", "Ngái", "Lô Lô", "Chứt",
+    "Mảng", "Cờ Lao", "Bố Y", "Cống", "Si La", "Pu Péo", "Rơ Măm", "Brâu",
+    "Ơ Đu", "Rục", "Cống", "Cống", "Thổ", "Xin", "Kanai", "Khác.."
+};
+        [ObservableProperty]
+        string[] tonGiaos = new string[]
+{
+    "Phật giáo",
+    "Thiên Chúa giáo",
+    "Hòa hảo",
+    "Cao Đài",
+    "Hồi giáo",
+    "Tin lành",
+    "Bà-la-môn",
+    "Minh Lý đạo",
+    "Đạo Cao Đài",
+    "Đạo Bửu Sơn Kỳ Hương",
+    "Khác.."
+};
         public AddNewStudentViewModel() {
             title = "Thêm học sinh";
             int countHS = DataProvider.ins.context.Hocsinhs.Count()+1;
