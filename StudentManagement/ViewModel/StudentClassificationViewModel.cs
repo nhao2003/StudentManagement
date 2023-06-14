@@ -39,12 +39,16 @@ namespace StudentManagement.ViewModel
             SelectedType = type;
             List<Hocsinh> hocsinhs = DataProvider.ins.context.Lophocthuctes.Where(x => x.Malhtt == Malhtt).FirstOrDefault().Mahs.ToList();
             int stt = 1;
-            SummaryString = $"{nh.Tennamhoc} - {hk.Tenhk} - {lhtt.MalopNavigation.Khoi}{lhtt.MalopNavigation.Tenlop}";
             foreach(Hocsinh hocsinh in hocsinhs)
             {
-                ClassificationItems.Add(new StudentClassificationItem(stt,hocsinh,Manh,Mahk));
-                stt++;
+                StudentClassificationItem item = new StudentClassificationItem(stt, hocsinh, Manh, Mahk);
+                if(item.Stt != 0)
+                {
+                    ClassificationItems.Add(item);
+                    stt++;
+                }
             }
+            SummaryString = $"{nh.Tennamhoc} - {hk.Tenhk} - {lhtt.MalopNavigation.Khoi}{lhtt.MalopNavigation.Tenlop}, {ClassificationItems.Count}/{hocsinhs.Count}";
         }
         public StudentClassificationViewModel(SummaryTypeItem type, Namhoc nh, Lophocthucte lhtt)
         {
@@ -53,13 +57,17 @@ namespace StudentManagement.ViewModel
             SelectedType = type;
             List<Hocsinh> hocsinhs = DataProvider.ins.context.Lophocthuctes.Where(x => x.Malhtt == Malhtt).FirstOrDefault().Mahs.ToList();
             int stt = 1;
-            SummaryString = $"{nh.Tennamhoc} - {lhtt.MalopNavigation.Khoi}{lhtt.MalopNavigation.Tenlop}";
 
             foreach (Hocsinh hocsinh in hocsinhs)
             {
-                ClassificationItems.Add(new StudentClassificationItem(stt, hocsinh, Manh));
-                stt++;
+                StudentClassificationItem item = new StudentClassificationItem(stt, hocsinh, Manh);
+                if (item.Stt != 0)
+                {
+                    ClassificationItems.Add(item);
+                    stt++;
+                }
             }
+            SummaryString = $"{nh.Tennamhoc} - {lhtt.MalopNavigation.Khoi}{lhtt.MalopNavigation.Tenlop}, {ClassificationItems.Count}/{hocsinhs.Count}";
         }
         [RelayCommand]
         private void ShowStudenDetails()
