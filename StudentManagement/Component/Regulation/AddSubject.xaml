@@ -58,12 +58,12 @@
                             VerticalAlignment="Center"></TextBlock>
                         <TextBox
                             x:Name="tb_input1"
-                            IsEnabled="{Binding Input1Enabled, UpdateSourceTrigger=PropertyChanged}"
                             Grid.Column="1"
                             MinWidth="100"
                             Margin="0 0 15 0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"
+                            IsEnabled="False"
                             AcceptsReturn="True">
                             <TextBox.Text>
                                 <Binding

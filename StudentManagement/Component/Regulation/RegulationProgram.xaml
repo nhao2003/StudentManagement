@@ -287,20 +287,7 @@
                                                 Property="IsEnabled"
                                                 Value="False"></Setter>
                                         </DataTrigger>
-                                        <DataTrigger
-                                            Binding="{Binding ElementName=tbInput2, Path=(Validation.HasError)}"
-                                            Value="True">
-                                            <Setter
-                                                Property="IsEnabled"
-                                                Value="False"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger
-                                            Binding="{Binding ElementName=tbInput3, Path=(Validation.HasError)}"
-                                            Value="True">
-                                            <Setter
-                                                Property="IsEnabled"
-                                                Value="False"></Setter>
-                                        </DataTrigger>
+                                       
                                         <DataTrigger
                                             Binding="{Binding ElementName=tbInput4, Path=(Validation.HasError)}"
                                             Value="True">
