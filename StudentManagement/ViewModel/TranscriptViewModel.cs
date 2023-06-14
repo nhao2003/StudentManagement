@@ -53,6 +53,14 @@ namespace StudentManagement.ViewModel
                 SelectedConfig = null;
                 ClassDetailViewModel.Instance.setRightViewModel(new EmptyRightViewModel());
             }
+            if(selectedSubject == null)
+            {
+                hocsinhs.Clear();
+                transcripts.Clear();
+                SelectedConfig = null;
+                ClassDetailViewModel.Instance.setRightViewModel(new EmptyRightViewModel());
+
+            }
         }
         private Monhoc selectedSubject;
         public Monhoc SelectedSubject { get { return selectedSubject; } set {  selectedSubject = value;
@@ -87,7 +95,12 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void saveChange()
         {
-            foreach(var tran in transcripts)
+            if (selectedSubject == null)
+            {
+                MessageBox.Show("Bạn không có quyền sửa điểm");
+                return;
+            }
+            foreach (var tran in transcripts)
             {
                 tran.saveData();
             }
@@ -139,6 +152,9 @@ namespace StudentManagement.ViewModel
         }
         private void InitMonHocs()
         {
+
+            SelectedSubject = null;
+            SubjectList.Clear();
             if (LoginServices.Instance.IsAdmin == true)
             {
                 foreach (var mh in DataProvider.ins.context.Monhocs.Where(x=>x.Isdeleted == false).ToList())

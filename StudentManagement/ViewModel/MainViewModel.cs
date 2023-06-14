@@ -71,32 +71,17 @@ public sealed partial class MainViewModel : ObservableObject
         _termSummaryViewModel = new TermSummaryViewModel();
         _regulationViewModel = new RegulationViewModel();
 
-        if(LoginServices.Instance.IsAdmin == true)
-        {
             leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
         //new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
-        new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
-        new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
+        ////new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
+        //new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
         new Navigation("Thêm học sinh", "AccountPlusOutline", _studentViewModel),
-        new Navigation("Thêm giáo viên", "AccountPlusOutline", _teacherViewModel),
+        new Navigation("Thêm giáo viên", "AccountMultiplePlusOutline", _teacherViewModel),
         new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
         new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };
-        }
-        else
-        {
-            leftNavigations = new ObservableCollection<Navigation>()
-    {
-        new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
-        //new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
-        new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
-        new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
-        new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
-    };
-
-        }
         leftNavigations[0].IsPress = true;
         ContentViewModel = new ClassManagementViewModel();
     }

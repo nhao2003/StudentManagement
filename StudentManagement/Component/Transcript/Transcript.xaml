@@ -42,12 +42,12 @@
                     SelectedItem="{Binding SelectedSubject}"
                     DisplayMemberPath="Tenmh"
                     Style="{StaticResource MyComboBoxStyle}" />
-                <Button
+                <!--<Button
                     Margin="18,18,18,18"
                     Background="{StaticResource GreenPrimary}"
                     Style="{StaticResource primary_button}">
                     <TextBlock Text="Kết quả" />
-                </Button>
+                </Button>-->
             </StackPanel>
             <Grid>
 
