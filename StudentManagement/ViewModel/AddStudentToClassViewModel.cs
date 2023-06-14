@@ -61,12 +61,28 @@ public sealed partial class AddStudentToClassViewModel : ObservableObject
                 StudentEmptyDisplay.Clear();
                 if (selectedKhoi == minKhoi)
                 {
+                int tuoiTT = 0;
+                int tuoiTD = 100;
+                var tuoiToiThieu = DataProvider.ins.context.Thamsos.Where(x => x.Id == "TS001").FirstOrDefault();
+                var tuoiToiDa = DataProvider.ins.context.Thamsos.Where(x => x.Id == "TS002").FirstOrDefault();
+                if(tuoiToiDa != null && tuoiToiThieu != null && tuoiToiDa.Giatri != null && tuoiToiThieu.Giatri != null)
+                {
+                    var td =int.Parse(tuoiToiDa.Giatri);
+                    if (td != null) tuoiTD = td;
+                    var tt = int.Parse(tuoiToiThieu.Giatri);
+                    if (tt != null) tuoiTT = tt;
+                }
                     //lay hoc sinh moi
                     var emptyStudent = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count == 0).ToList();
                     foreach (var hs in emptyStudent)
                     {
+                    int age = DateTime.Now.Year - hs.Ngsinh.Value.Year; // Số tuổi dựa trên năm
+                    if (tuoiTT <= age && age <= tuoiTD)
+                    {
                         StudentEmptyDisplay.Add(new StudentWithClassItem(hs, currentNamhoc));
+
                     }
+                }
                     var lopList = DataProvider.ins.context.Lops.Where(x => x.Khoi == selectedKhoi && x.Isdeleted == false).ToList();
                     foreach (var lop in lopList)
                     {

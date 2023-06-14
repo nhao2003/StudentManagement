@@ -33,7 +33,7 @@ namespace StudentManagement.Object
                 if (kq != null)
                 {
                     this.Subject = kq.MamhNavigation.Tenmh;
-                    this.Dtb = kq.DtbmonHocKy;
+                    this.Dtb = Math.Round(kq.DtbmonHocKy,2);
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace StudentManagement.Object
                 if (kq != null)
                 {
                     this.Subject = kq.MamhNavigation.Tenmh;
-                    this.Dtb = kq.DtbmonHocNamHoc;
+                    this.Dtb = Math.Round(kq.DtbmonHocNamHoc,2);
                 }
             }
         }

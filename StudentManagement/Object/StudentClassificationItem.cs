@@ -38,7 +38,7 @@ namespace StudentManagement.Object
                 {
                     this.HoTen = hocsinh.Hotenhs;
                     this.Stt = stt;
-                    this.DiemTB = kq.DtbtatCaMonHocKy;
+                    this.DiemTB = Math.Round((double)kq.DtbtatCaMonHocKy,2);
                     if(kq.MaHocLucNavigation != null)
                         this.HocLuc = kq.MaHocLucNavigation.TenHocLuc;
                     this.HanhKiem = kq.MaHanhKiemNavigation.TenHanhKiem;
@@ -56,7 +56,7 @@ namespace StudentManagement.Object
                 {
                     this.HoTen = hocsinh.Hotenhs;
                     this.Stt = stt;
-                    this.DiemTB = kq.DtbnamHoc;
+                    this.DiemTB = Math.Round((double)kq.DtbnamHoc,2);
                     if (kq.MaHocLucNavigation != null)
                         this.HocLuc = kq.MaHocLucNavigation.TenHocLuc;
                     this.HanhKiem = kq.MaHanhKiemNavigation.TenHanhKiem;

@@ -141,7 +141,7 @@ namespace StudentManagement.ViewModel
         {
             if (LoginServices.Instance.IsAdmin == true)
             {
-                foreach (var mh in DataProvider.ins.context.Monhocs)
+                foreach (var mh in DataProvider.ins.context.Monhocs.Where(x=>x.Isdeleted == false).ToList())
                 {
                     SubjectList.Add(mh);
                 }
