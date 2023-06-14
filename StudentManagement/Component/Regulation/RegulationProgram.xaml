@@ -612,11 +612,19 @@
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Right">
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding HienThiThemThongTinLopHocCommand}"
                                             Background="{StaticResource BluePrimary}"
                                             BorderBrush="{StaticResource BluePrimary}"
                                             Content="Thêm lớp học" />
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding XoaLopHocCommand}"
                                             Background="{StaticResource RedPrimary}"
                                             BorderBrush="{StaticResource RedPrimary}"
