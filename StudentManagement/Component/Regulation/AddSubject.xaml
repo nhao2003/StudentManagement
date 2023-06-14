@@ -172,8 +172,8 @@
                 </Border>
                 <Button
                                                                                 Visibility="{Binding Source={x:Static service:LoginServices.Instance},
-                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}"
-
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
                     Command="{Binding LuuThayDoiCommand}"
                     VerticalAlignment="Bottom"
                     Grid.Row="4"

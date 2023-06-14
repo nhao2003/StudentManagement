@@ -11,7 +11,7 @@
     xmlns:validationrules="clr-namespace:StudentManagement.Component.Regulation.ValidationRules"
     xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:RegulationViewModel}"
-                 xmlns:service="clr-namespace:StudentManagement.Service"
+    xmlns:service="clr-namespace:StudentManagement.Service"
     mc:Ignorable="d"
     d:DesignHeight="690"
     x:Name="MyControl"

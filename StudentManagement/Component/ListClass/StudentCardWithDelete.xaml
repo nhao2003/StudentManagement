@@ -35,7 +35,7 @@
 
             </StackPanel>
             <Button
-                Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                                    Visibility="{Binding Source={x:Static service:LoginServices.Instance},
                     Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
                 }"
                 BorderThickness="0"
