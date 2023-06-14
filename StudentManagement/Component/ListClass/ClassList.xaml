@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:StudentManagement.Component.ListClass"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
+             xmlns:transript="clr-namespace:StudentManagement.Component.Transcript"
              d:DesignHeight="770" d:DesignWidth="1220">
-    <Border  Background="#E7F2FF" Margin="20">
+    <Border  Background="{StaticResource BlueLight}" Margin="20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -38,33 +40,43 @@
                 BorderBrush="LightGray"
                 Background="White"
                 materialDesign:HintAssist.Hint="2022-2023"
+                ItemsSource="{Binding NienKhoas}"
+                SelectedItem="{Binding Path=SNamhoc}"  
+                DisplayMemberPath="Tennamhoc"
             >
             </ComboBox>
-            
+
             <Grid Grid.Column="0" Grid.Row="1">
                 <Border  CornerRadius="20" Background="white" Margin="20">
                     <Grid>
-                        <ItemsControl ItemsSource="{Binding Classes}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <local:ClassCard Margin="20, 20, 20, 0"></local:ClassCard>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="779*"/>
+                            <ColumnDefinition Width="66*"/>
+                        </Grid.ColumnDefinitions>
+                        <ScrollViewer Grid.ColumnSpan="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{Binding Classes}" >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:ClassCard Margin="10, 20, 10, 0"></local:ClassCard>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
 
-                        <Border
+                        </ScrollViewer>
+
+                        <!--<Border
                         CornerRadius="10"
                         Height="40"
                         Width="120"
                         Background="#7CA7FF"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        Margin="20 30"
+                        Margin="0,0,20,20" Grid.ColumnSpan="2"
                         >
                             <TextBlock 
                                 FontWeight="SemiBold"
@@ -76,40 +88,26 @@
                             >
                                 Thêm lớp học
                             </TextBlock>
-                        </Border>
+                        </Border>-->
                     </Grid>
                 </Border>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">
-                <Border  CornerRadius="20" Background="white" Margin="20">
-                    <Grid>
-                        <TextBlock 
-                        FontWeight="Bold"
-                        FontSize="20"
-                        Height="30"
-                        VerticalAlignment="Top"
-                        Margin="20"
-                        >
-                            Học sinh mới
-                        </TextBlock>
-                        <StackPanel 
-                            Orientation="Vertical" 
-                            VerticalAlignment="Top" 
-                            Margin="20 60 20 0">
-                            <ItemsControl ItemsSource="{Binding Students}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <local:StudentCard Margin="0, 10, 0, 0"></local:StudentCard>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </Grid>
+                <Border  CornerRadius="20" Background="white" Margin="0 20 0 20">
+
+                    <ContentControl Grid.Row="2" Content="{Binding RightViewModel, UpdateSourceTrigger=PropertyChanged}">
+                        <ContentControl.Resources >
+                            <DataTemplate DataType="{x:Type viewmodel:EmptyRightViewModel}">
+                                <transript:EmptyRight ></transript:EmptyRight>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewmodel:ClassListNewStudentRightViewModel}">
+                                <local:NewStudentsCard></local:NewStudentsCard>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type viewmodel:ClassListRightViewModel}">
+                                <local:ClassStudentsCard></local:ClassStudentsCard>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
                 </Border>
             </Grid>
         </Grid>

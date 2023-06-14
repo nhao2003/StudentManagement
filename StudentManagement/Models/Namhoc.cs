@@ -8,6 +8,7 @@ namespace StudentManagement.Models
         public Namhoc()
         {
             Diemmonhocs = new HashSet<Diemmonhoc>();
+            Diemtrungbinhmonhocnamhocs = new HashSet<Diemtrungbinhmonhocnamhoc>();
             Kqhockymonhocs = new HashSet<Kqhockymonhoc>();
             Kqhockytonghops = new HashSet<Kqhockytonghop>();
             Kqnamhocs = new HashSet<Kqnamhoc>();
@@ -20,6 +21,7 @@ namespace StudentManagement.Models
         public bool? Isdeleted { get; set; }
 
         public virtual ICollection<Diemmonhoc> Diemmonhocs { get; set; }
+        public virtual ICollection<Diemtrungbinhmonhocnamhoc> Diemtrungbinhmonhocnamhocs { get; set; }
         public virtual ICollection<Kqhockymonhoc> Kqhockymonhocs { get; set; }
         public virtual ICollection<Kqhockytonghop> Kqhockytonghops { get; set; }
         public virtual ICollection<Kqnamhoc> Kqnamhocs { get; set; }

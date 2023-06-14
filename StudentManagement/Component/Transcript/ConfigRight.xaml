@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="StudentManagement.Component.Transcript.ConfigRight"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StudentManagement.Component.Transcript"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             >
+    <Grid Width="255" Height="640">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding Config.Student.Hotenhs}" 
+                       Grid.Row="0"
+                       FontWeight="Bold" 
+                       Margin="15"
+                        FontSize="15"
+                       Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+        <StackPanel Margin="18 0 0 0" Grid.Row="1" Orientation="Horizontal">
+            <ComboBox
+                Width="175"
+                Height="50"
+                Margin="0 0 25 0"
+                materialDesign:HintAssist.Hint="Cột điểm"
+                ItemsSource="{Binding Config.PointTypes}"
+                SelectedItem="{Binding SelectedPointType}"
+                DisplayMemberPath="Loaikiemtra.Tenloaikiemtra"
+                Style="{StaticResource combobox_item}" />
+            <Button
+                BorderThickness="0"
+                Height="25"
+                Width="25"
+                Command="{Binding addNewSubPointCommand}"
+                Background="White" 
+                BorderBrush="White"
+                HorizontalAlignment="Right"
+                Padding="0"
+                >
+                <Image Height="12" Source="/Resource/images/plus.png"/>
+            </Button>
+        </StackPanel>
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding SelectedPointType.Diemmonhocs}" Grid.ColumnSpan="2">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel x:Name="Container" HorizontalAlignment="Center" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:DiemItem Margin="10, 10, 10, 10"></local:DiemItem>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button Margin="70 0 0 10" Grid.Row="3" Width="120" Style="{StaticResource primary_button}" Content="Lưu điểm" Command="{Binding updateDataCommand}"></Button>
+    </Grid>
+</UserControl>

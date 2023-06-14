@@ -8,18 +8,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:StudentManagement.ViewModel"
         xmlns:sub="clr-namespace:StudentManagement.Component.Program"
+        xmlns:classMana="clr-namespace:StudentManagement.Component.ClassManagement"
         xmlns:program="clr-namespace:StudentManagement.Component.Program"
-        xmlns:cls="clr-namespace:StudentManagement.Component.ListClass"
         xmlns:overview="clr-namespace:StudentManagement.Component.Global"
-        xmlns:student="clr-namespace:StudentManagement.Component.StudentList"
-        xmlns:nhanvien="clr-namespace:StudentManagement.Component.NhanVienList"
+        xmlns:schoolyear="clr-namespace:StudentManagement.Component.NewSchoolYear"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
         DataContext="{StaticResource GreetingVM}"
         Background="Transparent" 
-        Height="800" Width="1420">
+        Height="800" Width="1420" MouseDown="Window_MouseDown">
     <Border CornerRadius="50">
         <Border.Background>
             <SolidColorBrush Color="#E7F2FF"></SolidColorBrush>
@@ -73,23 +72,17 @@
                                 <program:mainProgram Grid.Row="1"></program:mainProgram>
                             </Grid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:ClassListDetailsViewModel }">
-                            <ClassListDetails:ClassListDetails />
+                        <DataTemplate DataType="{x:Type viewModel:RegulationViewModel }">
+                            <sub:RegulationtProgram />
                         </DataTemplate>
                         <DataTemplate DataType="{x:Type viewModel:TermSummaryViewModel}">
                             <TermSummary:TermSummary />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:RegulationViewModel}">
-                                <program:RegulationtProgram />
+                        <DataTemplate DataType="{x:Type viewModel:ClassManagementViewModel}">
+                            <classMana:ClassManagement></classMana:ClassManagement>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:ClassListViewModel}">
-                            <cls:ClassList></cls:ClassList>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:StudentViewModel}">
-                            <student:StudentsListUC></student:StudentsListUC>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModel:TeacherViewModel}">
-                            <nhanvien:NhanViensListUC></nhanvien:NhanViensListUC>
+                        <DataTemplate DataType="{x:Type viewModel:SchoolYearViewModel}" >
+                            <schoolyear:NewSchoolYear></schoolyear:NewSchoolYear>
                         </DataTemplate>
 
                     </ContentControl.Resources>

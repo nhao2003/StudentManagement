@@ -1,8 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using StudentManagement.Models;
 using StudentManagement.Object;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace StudentManagement.ViewModel;
 
@@ -12,7 +19,6 @@ public sealed partial class MainViewModel : ObservableObject
     public MainViewModel()
     {
         Init();
-        ContentViewModel = _programViewModel;
         Instance = this;
     }
 
@@ -22,9 +28,15 @@ public sealed partial class MainViewModel : ObservableObject
     private object _studentViewModel;
     private object _teacherViewModel;
     private object _classListViewModel;
+    private object _transcriptViewModel;
+    private object _classconfigViewModel;
+    private object _classDetailViewModel;
+    private object _classManaViewModel;
     private object _regulationViewModel;
-    private object _termSummaryViewModel;
+    private object _subjectViewModel;
+    private object _schoolyearViewModel;
     private object _classListDetailsViewModel;
+    private object _termSummaryViewModel;
     [ObservableProperty]
     public ObservableCollection<Navigation> leftNavigations;
     private static MainViewModel s_instance;
@@ -45,28 +57,39 @@ public sealed partial class MainViewModel : ObservableObject
         }
     }
     #endregion
-    private void Init()
+    public void Init()
     {
+
+        DataProvider.ins.context.Hocsinhs.ToList();
         _programViewModel = new ProgramViewModel();
         _studentViewModel = new StudentViewModel();
         _teacherViewModel = new TeacherViewModel();
-        _classListViewModel = new ClassListViewModel();
-        _regulationViewModel = new RegulationViewModel();
+        //_classListViewModel = new ClassListViewModel();
+        _subjectViewModel = new SubjectViewModel();
+        _schoolyearViewModel = new SchoolYearViewModel();
         _termSummaryViewModel = new TermSummaryViewModel();
-        _classListDetailsViewModel = new ClassListDetailsViewModel();
-        
+        _regulationViewModel = new RegulationViewModel();
+
+
         leftNavigations = new ObservableCollection<Navigation>()
     {
-        new Navigation("Trang chủ", "home", _programViewModel),
-        new Navigation("Thông tin", "infomation", _classListDetailsViewModel),
-        new Navigation("Môn học", "subject", _termSummaryViewModel),
-        new Navigation("Thay đổi quy định", "regulation", _regulationViewModel),
-        new Navigation("Môn học", "subject", _classListViewModel),
-            new Navigation("Học sinh", "student", _studentViewModel),
-        new Navigation("Giáo viên", "teacher", _teacherViewModel)
-
+        new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
+        new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
+        new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
+        new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
+        new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };
         leftNavigations[0].IsPress = true;
+        ContentViewModel = new ClassManagementViewModel();
+    }
+    public void Refresh()
+    {
+        foreach(var item in leftNavigations)
+        {
+            item.IsPress = false;
+        }
+        leftNavigations[0].IsPress = true;
+        ContentViewModel = new ClassManagementViewModel();
     }
 
     public void setViewModel(object viewModel)
@@ -84,6 +107,16 @@ public sealed partial class MainViewModel : ObservableObject
     {
         Window window = Application.Current.MainWindow as Window;
         window.WindowState = WindowState.Minimized;
+    }
+    [RelayCommand]
+    private void SignOut()
+    {
+        LoginWindow window = new LoginWindow();
+        MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+        
+        Application.Current.MainWindow = window;
+        window.Show();
+        mainWindow.Close();
     }
 }
 
