@@ -34,6 +34,8 @@ namespace StudentManagement.ViewModel
         private String title;
         [ObservableProperty]
         public bool isEdit = false;
+        [ObservableProperty]
+        public bool enabled = true;
         public bool Result = false;
         public Hocsinh hocsinh;
 
@@ -46,6 +48,7 @@ namespace StudentManagement.ViewModel
         {
             title = "Chỉnh sửa học sinh";
             isEdit = true;
+            enabled = false;
             hocsinh = hs;
             hoTen = hocsinh.Hotenhs;
             cccd = hocsinh.Cccd;
@@ -61,9 +64,17 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void ThemHoacCapNhatHocSinh(Window window)
         {
+            string errorMessage = ValidateStrings();
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                // Hiển thị thông báo lỗi cho người dùng, ví dụ:
+                MessageBox.Show(errorMessage);
+                return;
+            }
             Result = true;
             if(isEdit)
             {
+                enabled = false;
                 hocsinh.Hotenhs = hoTen;
                 hocsinh.Cccd = cccd;
                 hocsinh.Ngsinh = DateTime.Parse(ngSinh);
@@ -75,6 +86,7 @@ namespace StudentManagement.ViewModel
             }
             else
             {
+                enabled = true;
                 hocsinh = new Hocsinh();
                 hocsinh.Hotenhs = hoTen;
                 hocsinh.Cccd = cccd;
@@ -87,6 +99,49 @@ namespace StudentManagement.ViewModel
                 hocsinh.Mahs = maHs;
             }
             window.Close();
+        }
+
+        public string ValidateStrings()
+        {
+            if (string.IsNullOrEmpty(Cccd))
+            {
+                return "CCCD không được rỗng";
+            }
+            if (string.IsNullOrEmpty(HoTen))
+            {
+                return "Họ tên không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(NgSinh))
+            {
+                return "Ngày sinh không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(Email))
+            {
+                return "Email không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(Dchi))
+            {
+                return "Địa chỉ không được rỗng";
+            }
+            if (string.IsNullOrEmpty(MaHs))
+            {
+                return "Mã học sinh không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(DanToc))
+            {
+                return "Dân tộc không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(TonGiao))
+            {
+                return "Tôn giáo không được rỗng";
+            }
+
+            return ""; // Trả về chuỗi rỗng nếu không có lỗi
         }
     }
 }

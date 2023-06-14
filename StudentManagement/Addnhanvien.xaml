@@ -105,8 +105,8 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Name="_username"
-                        IsReadOnly="{Binding IsEdit, Mode=TwoWay}"
+                        Name="username"
+                        IsEnabled="{Binding Enabled, Mode=TwoWay}"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
                         BorderBrush="#00000000"
@@ -132,7 +132,7 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Name="_hoten"
+                        Name="hoten"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
                         BorderBrush="#00000000">
@@ -177,7 +177,7 @@
                         Width="100"
                         Text="Ngày sinh" />
                     <DatePicker
-                        Name="_ngsinh"
+                        Name="ngsinh"
                         Grid.Column="1"
                         Margin="150,15,33,0"
                         VerticalAlignment="Top"
@@ -209,7 +209,7 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Name="_email"
+                        Name="email"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
                         BorderBrush="#00000000">
@@ -246,7 +246,7 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Name="_dchi"
+                        Name="dchi"
                         Grid.Column="1"
                         Margin="0,0,10,0"
                         BorderBrush="#00000000">
@@ -285,11 +285,10 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        Name="_pw"
+                        Name="pww"
                         Grid.ColumnSpan="2"
                         Margin="107,0,10,0"
-                        BorderBrush="#00000000"
-                         IsReadOnly="{Binding IsEdit, Mode=TwoWay}">
+                        BorderBrush="#00000000">
                         <TextBox.Text>
                             <Binding
                                 Path="Password"
@@ -332,6 +331,7 @@
                         Name="cb_vaitro"
                         Grid.Column="1"
                         Margin="150,10,0,10"
+                        IsEnabled="{Binding Enabled, Mode =TwoWay}"
                         VerticalAlignment="Top"
                         materialDesign:HintAssist.Hint="Chọn vai trò"
                         SelectedIndex="{Binding VaitroIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
@@ -389,6 +389,7 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
+                        Name="manvgv"
                         Grid.Column="1"
                         Margin="0,0,10,0"
                         BorderBrush="#00000000"
@@ -426,6 +427,7 @@
                             Width="*" />
                     </Grid.ColumnDefinitions>
                     <TextBox
+                        Name ="vthayhv"
                         Grid.Column="1"
                         Margin="0,0,10,0"
                         BorderBrush="#00000000">
@@ -520,18 +522,78 @@
                 </Grid>
 
             </Border>
-
-            <Button
-                HorizontalAlignment="Left"
-                Grid.Row="11"
-                Style="{StaticResource primary_button}"
-                Content="Hoàn tất"
-                Margin="408,51,0,0"
-                Width="auto"
-                Click="Finish_Button_Click"
+            <Button HorizontalAlignment="Left"
+                    VerticalAlignment="Center" Grid.Row="11" 
+                    Content="Hoàn tất" 
+                    Margin="408,0,0,0" 
+                    Width="95" Height="32"
                 Command="{Binding ThemHoacCapNhatNhanVienCommand}"
-                CommandParameter="{Binding ElementName=AddNhanVienWindown}"
-                Grid.Column="1" VerticalAlignment="Top" />
+                CommandParameter="{Binding ElementName=AddStudentWindown}" Grid.Column="1">
+                <Button.Style>
+                    <Style
+                            TargetType="{x:Type Button}"
+                            BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                        <Style.Triggers>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=username, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=hoten, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=ngsinh, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=email, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=dchi, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=pww, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=manvgv, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger
+                                    Binding="{Binding ElementName=vthayhv, Path=(Validation.HasError)}"
+                                    Value="True">
+                                <Setter
+                                        Property="IsEnabled"
+                                        Value="False"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Border>
 </Window>

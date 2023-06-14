@@ -81,6 +81,7 @@ namespace StudentManagement.ViewModel
         public AddNhanVienViewModel(Taikhoan tk)
         {
             isEdit = true;
+            enabled = false;
             taikhoan = tk;
             hoten = taikhoan.Hoten;
             username = tk.Username;
@@ -142,9 +143,17 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void ThemHoacCapNhatNhanVien(Window window)
         {
+            string errorMessage = ValidateStrings();
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                // Hiển thị thông báo lỗi cho người dùng, ví dụ:
+                MessageBox.Show(errorMessage);
+                return;
+            }
             Result = true;
             if (isEdit)
             {
+                enabled = false;
                 taikhoan.Hoten = Hoten;
                 taikhoan.Dchi = Dchi;
                 taikhoan.Gioitinh = (GioitinhIndex == 0);
@@ -154,6 +163,7 @@ namespace StudentManagement.ViewModel
             }
             else
             {
+                enabled = true;
                 taikhoan = new Taikhoan();
                 taikhoan.Username = Username;
                 taikhoan.Hoten = Hoten;
@@ -162,8 +172,51 @@ namespace StudentManagement.ViewModel
                 taikhoan.Passwrd = Password;
                 taikhoan.Ngsinh = DateTime.Parse(Ngsinh);
                 taikhoan.Email = Email;
+                if (vaitroIndex == 0) taikhoan.Vaitro = "NV";
+                else taikhoan.Vaitro = "GV";
             }
             window.Close();
         }
+        public string ValidateStrings()
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return "Username không được rỗng";
+            }
+            if (string.IsNullOrEmpty(hoten))
+            {
+                return "Họ tên không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(ngsinh))
+            {
+                return "Ngày sinh không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return "Email không được rỗng";
+            }
+
+            if (string.IsNullOrEmpty(dchi))
+            {
+                return "Địa chỉ không được rỗng";
+            }
+            if (string.IsNullOrEmpty(Password))
+            {
+                return "Mật khẩu không được rỗng";
+            }
+            if (string.IsNullOrEmpty(MaNVorGV))
+            {
+                return "Mã nhân viên/giáo viên không được rỗng";
+            }
+            if (string.IsNullOrEmpty(ChucVuOrHocVi))
+            {
+                return "Chức vụ / học vị không được rỗng";
+            }
+
+            return ""; // Trả về chuỗi rỗng nếu không có lỗi
+        }
     }
+
 }
