@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
+                          xmlns:service="clr-namespace:StudentManagement.Service"
              d:DesignHeight="770" d:DesignWidth="1220">
     <Border  Background="#E7F2FF" Margin="20">
         <Grid>
@@ -221,7 +222,12 @@
                             <DataGridTemplateColumn Width ="*" Header="Chỉnh sửa">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Chỉnh sửa" Command="{Binding DataContext.ChangeTTHocSinhCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" />
+                                        <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
+                                            Content="Chỉnh sửa" Command="{Binding DataContext.ChangeTTHocSinhCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -234,10 +240,18 @@
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Grid.Column="1">
                         <Button
+                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                 Content="Thêm học sinh" 
                                 Command="{Binding AddStudentCommand}"
                                 Style="{StaticResource primary_button}"/>
                         <Button
+                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                 Content="Xóa" 
                                 Background="{StaticResource RedPrimary}"
                                 Style="{StaticResource primary_button}"

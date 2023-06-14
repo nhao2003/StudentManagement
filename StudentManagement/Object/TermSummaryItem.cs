@@ -42,7 +42,7 @@ namespace StudentManagement.Object
         {
             this.Lophtt = lhtt;
             this.Stt = Stt;
-            this.TenLop = lhtt.MalopNavigation.Tenlop;
+            this.TenLop = $"{lhtt.MalopNavigation.Khoi}{lhtt.MalopNavigation.Tenlop}";
             List<string> mahsList = Lophtt.Mahs.Select(x => x.Mahs).ToList();
             this.SiSo = Lophtt.Mahs.Count();
             var diemDat = DataProvider.ins.context.Thamsos.Where(t => t.Id == "TS006").Select(t => t.Giatri).FirstOrDefault();
