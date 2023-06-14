@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace StudentManagement.ViewModel
 {
@@ -150,18 +151,66 @@ namespace StudentManagement.ViewModel
                             if(gv.Username == result.taikhoan.Username)
                             {
                                 gv.Hocvi = result.ChucVu;
-                                gv.Khananggiangdays.Clear();
-                                foreach(var mh in result.monhocList)
+                                //gv.Khananggiangdays.Clear();
+                                List<String> gvgd = new List<String>();
+                                List<String> mhgdnew = new();
+                                foreach (var mh in gv.Khananggiangdays)
+                                {
+                                        gvgd.Add(mh.Mamh);
+                                }
+                                foreach (var mh in result.monhocList)
                                 {
                                     if (mh.IsCheckedMonHoc)
+                                        mhgdnew.Add(mh.MaMonHoc);
+                                }
+                                foreach(var mh in mhgdnew)
+                                {
+                                    if (!gvgd.Contains(mh))
                                     {
                                         Khananggiangday khananggiangday = new Khananggiangday();
                                         khananggiangday.Magv = gv.Magv;
-                                        khananggiangday.Mamh = mh.MaMonHoc;
-                                        gv.Khananggiangdays.Add(khananggiangday);
+                                        khananggiangday.Mamh = mh;
+                                        DataProvider.ins.context.Khananggiangdays.Add(khananggiangday);
+                                    }else
+                                    {
+                                        Khananggiangday? khananggiangday = null;
+                                        foreach(var check in gv.Khananggiangdays)
+                                        {
+                                            if(mh == check.Mamh)
+                                            {
+                                                if(check.Isdeleted == true)
+                                                {
+                                                    check.Isdeleted = false;
+                                                    khananggiangday = check;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                        if(khananggiangday != null)
+                                            DataProvider.ins.context.Khananggiangdays.Update(khananggiangday);
                                     }
                                 }
-                                DataProvider.ins.context.Giaoviens.Update(gv);
+                                foreach(var mh in gvgd)
+                                {
+                                    if (!mhgdnew.Contains(mh))
+                                    {
+                                        Khananggiangday? khananggiangday = null;
+                                        foreach (var check in gv.Khananggiangdays)
+                                        {
+                                            if (mh == check.Mamh)
+                                            {
+                                                if (check.Isdeleted == false)
+                                                {
+                                                    check.Isdeleted = true;
+                                                    khananggiangday = check;
+                                                }
+                                                break;
+                                            }
+                                        }
+                                        if (khananggiangday != null)
+                                            DataProvider.ins.context.Khananggiangdays.Update(khananggiangday);
+                                    }
+                                }
                                 break;
                             }
                         }

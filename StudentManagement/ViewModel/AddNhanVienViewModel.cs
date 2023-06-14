@@ -131,7 +131,7 @@ namespace StudentManagement.ViewModel
                 {
                     foreach(var gd in giaovien.Khananggiangdays)
                     {
-                        if(gd.Mamh == item.MaMonHoc)
+                        if(gd.Mamh == item.MaMonHoc && gd.Isdeleted == false)
                         {
                             item.IsCheckedMonHoc = true;
                         }
