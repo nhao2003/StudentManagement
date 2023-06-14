@@ -175,7 +175,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox IsReadOnly="{Binding IsEdit, Mode=TwoWay}" Name="mahs" Grid.ColumnSpan="2" 
+                    <TextBox IsReadOnly="True" Name="mahs" Grid.ColumnSpan="2" 
                              Margin="156,0,10,0" BorderBrush="#00000000" >
                         <TextBox.Text>
                             <Binding

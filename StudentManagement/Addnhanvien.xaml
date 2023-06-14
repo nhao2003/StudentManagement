@@ -392,7 +392,7 @@
                         Grid.Column="1"
                         Margin="0,0,10,0"
                         BorderBrush="#00000000"
-                        IsReadOnly="{Binding IsEdit, Mode=TwoWay}">
+                        IsReadOnly="True">
                         <TextBox.Text>
                             <Binding
                                 Path="MaNhanVien"

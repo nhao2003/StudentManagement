@@ -29,17 +29,22 @@ namespace StudentManagement.ViewModel
         private int gioitinhIndex;
         [ObservableProperty]
         private int vaitroIndex = 0;
+        
         partial void OnVaitroIndexChanged(int value)
         {
             if (value == 0)
             {
+                int nhanVienCount = DataProvider.ins.context.Nhanvienphongdaotaos.Count();
                 MaNVorGV = "Mã nhân viên";
                 ChucVuOrHocVi = "Chức vụ";
+                MaNhanVien = $"NV{nhanVienCount}";
             }
             else
             {
+                int nhanVienCount = DataProvider.ins.context.Giaoviens.Count();
                 MaNVorGV = "Mã giáo viên";
                 ChucVuOrHocVi = "Học vị";
+                MaNhanVien = $"GV{nhanVienCount}";
             }
         }
         [ObservableProperty]
@@ -66,9 +71,12 @@ namespace StudentManagement.ViewModel
             {
                 monhocList.Add(new MonHocItemDataGrid(item));
             }
+            int nhanVienCount = DataProvider.ins.context.Nhanvienphongdaotaos.Count();
+            MaNhanVien = $"NV{nhanVienCount}";
             title = "Thêm nhân viên";
             MaNVorGV = "Mã nhân viên";
             ChucVuOrHocVi = "Chức vụ";
+
         }
         public AddNhanVienViewModel(Taikhoan tk)
         {

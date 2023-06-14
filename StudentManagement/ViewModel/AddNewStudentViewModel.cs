@@ -37,7 +37,10 @@ namespace StudentManagement.ViewModel
         public bool Result = false;
         public Hocsinh hocsinh;
 
-        public AddNewStudentViewModel() {title = "Thêm học sinh";
+        public AddNewStudentViewModel() {
+            title = "Thêm học sinh";
+            int countHS = DataProvider.ins.context.Hocsinhs.Count();
+            MaHs = $"HS{countHS}";
         }
         public AddNewStudentViewModel(Hocsinh hs) 
         {
