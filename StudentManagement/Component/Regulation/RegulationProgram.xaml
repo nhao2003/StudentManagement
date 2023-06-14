@@ -11,6 +11,7 @@
     xmlns:validationrules="clr-namespace:StudentManagement.Component.Regulation.ValidationRules"
     xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:RegulationViewModel}"
+    xmlns:service="clr-namespace:StudentManagement.Service"
     mc:Ignorable="d"
     d:DesignHeight="690"
     x:Name="MyControl"
@@ -75,8 +76,6 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition
-                                Height="Auto" />
                             <RowDefinition
                                 Height="Auto" />
                             <RowDefinition
@@ -171,95 +170,11 @@
                             </Grid>
                         </Border>
                         <!--Tham số 2-->
-                        <Border
-                            Margin="10"
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            BorderBrush="{StaticResource GreyPrimary}"
-                            BorderThickness="1"
-                            CornerRadius="3">
-                            <Grid
-                                Margin="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Grid.Column="0"
-                                    Margin="15 0 0 0"
-                                    Text="{Binding Path=Thamsos[2].Tents, Mode=OneTime}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"></TextBlock>
-                                <TextBox
-                                    x:Name="tbInput2"
-                                    Grid.Column="1"
-                                    MinWidth="100"
-                                    Margin="0 0 15 0"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    AcceptsReturn="True">
-                                    <TextBox.Text>
-                                        <Binding
-                                            Path="Thamsos[2].Giatri"
-                                            Mode="TwoWay"
-                                            UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationrules:DiemValidation />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </Grid>
-                        </Border>
                         <!--Tham số 3-->
-                        <Border
-                            Margin="10"
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            BorderBrush="{StaticResource GreyPrimary}"
-                            BorderThickness="1"
-                            CornerRadius="3">
-                            <Grid
-                                Margin="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                    <ColumnDefinition
-                                        MinWidth="100"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Grid.Column="0"
-                                    Margin="15 0 0 0"
-                                    Text="{Binding Path=Thamsos[3].Tents, Mode=OneTime}"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"></TextBlock>
-                                <TextBox
-                                    x:Name="tbInput3"
-                                    Grid.Column="1"
-                                    MinWidth="100"
-                                    Margin="0 0 15 0"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    AcceptsReturn="True">
-                                    <TextBox.Text>
-                                        <Binding
-                                            Path="Thamsos[3].Giatri"
-                                            Mode="TwoWay"
-                                            UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <validationrules:DiemValidation />
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
-                            </Grid>
-                        </Border>
                         <!--Tham số 4-->
                         <Border
                             Margin="10"
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Grid.Column="0"
                             BorderBrush="{StaticResource GreyPrimary}"
                             BorderThickness="1"
@@ -302,7 +217,7 @@
                         <!--Tham số 5-->
                         <Border
                             Margin="10"
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Grid.Column="1"
                             BorderBrush="{StaticResource GreyPrimary}"
                             BorderThickness="1"
@@ -343,9 +258,13 @@
                             </Grid>
                         </Border>
                         <Button
+                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                             Command="{Binding CapNhatThamSoCommand}"
                             Grid.Column="1"
-                            Grid.Row="3"
+                            Grid.Row="2"
                             Background="{StaticResource BluePrimary}"
                             BorderBrush="{StaticResource BluePrimary}"
                             Content="Cập nhật"
@@ -354,7 +273,7 @@
                             Height="32"
                             VerticalAlignment="Top">
                             <Button.Style>
-                                
+
                                 <Style
                                     TargetType="{x:Type Button}"
                                     BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
@@ -373,20 +292,7 @@
                                                 Property="IsEnabled"
                                                 Value="False"></Setter>
                                         </DataTrigger>
-                                        <DataTrigger
-                                            Binding="{Binding ElementName=tbInput2, Path=(Validation.HasError)}"
-                                            Value="True">
-                                            <Setter
-                                                Property="IsEnabled"
-                                                Value="False"></Setter>
-                                        </DataTrigger>
-                                        <DataTrigger
-                                            Binding="{Binding ElementName=tbInput3, Path=(Validation.HasError)}"
-                                            Value="True">
-                                            <Setter
-                                                Property="IsEnabled"
-                                                Value="False"></Setter>
-                                        </DataTrigger>
+                                       
                                         <DataTrigger
                                             Binding="{Binding ElementName=tbInput4, Path=(Validation.HasError)}"
                                             Value="True">
@@ -544,11 +450,19 @@
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Right">
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding HienThiThemThongTinMonHocCommand}"
                                             Background="{StaticResource BluePrimary}"
                                             BorderBrush="{StaticResource BluePrimary}"
                                             Content="Thêm môn học" />
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding XoaMonHocCommand}"
                                             Background="{StaticResource RedPrimary}"
                                             BorderBrush="{StaticResource RedPrimary}"
@@ -698,11 +612,19 @@
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Right">
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding HienThiThemThongTinLopHocCommand}"
                                             Background="{StaticResource BluePrimary}"
                                             BorderBrush="{StaticResource BluePrimary}"
                                             Content="Thêm lớp học" />
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding XoaLopHocCommand}"
                                             Background="{StaticResource RedPrimary}"
                                             BorderBrush="{StaticResource RedPrimary}"

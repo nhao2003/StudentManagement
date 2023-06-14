@@ -11,7 +11,7 @@ namespace StudentManagement.Component.Regulation.ValidationRules
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             double diem;
-            if (value.ToString() == null || value.ToString().Trim().IsNullOrEmpty() || double.TryParse(value.ToString(), out diem) || diem < 0)
+            if (value.ToString() == null || value.ToString().Trim().IsNullOrEmpty() || !double.TryParse(value.ToString(), out diem) || diem < 0)
             {
 
                 return new ValidationResult(false, "Điểm không được rỗng và là số thực lớn hơn hoặc bằng 0.");

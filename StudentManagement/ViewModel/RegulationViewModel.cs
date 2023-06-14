@@ -46,8 +46,6 @@ namespace StudentManagement.ViewModel
         [ObservableProperty]
         private int khoiIndex = 0;
         [ObservableProperty]
-        private bool input1Enabled = true;
-        [ObservableProperty]
         private ObservableCollection<MonHocItemDataGrid> monHocItems;
         [ObservableProperty]
         private Thamso[] thamsos = Array.Empty<Thamso>();
@@ -59,7 +57,7 @@ namespace StudentManagement.ViewModel
         private MonHocItemDataGrid? selectedMonHoc = null;
         [ObservableProperty]
         private LopHocItemDataGrid? selectedLopHoc = null;
-        
+
         [ObservableProperty]
         Visibility customTextBoxVis = Visibility.Visible;
         [ObservableProperty]
@@ -99,7 +97,7 @@ namespace StudentManagement.ViewModel
             {
                 lopHocItemDataGrid.IsSelectedLopHoc = IsCheckAllLopHoc;
             }
-            
+
         }
 
         private RegulationInputState state;
@@ -118,11 +116,11 @@ namespace StudentManagement.ViewModel
                     CustomTextBoxVis = Visibility.Visible;
                     Title1 = "Mã lớp học";
                     Title2 = "Tên lớp học";
-                    Input1 = "";
+                    int count = DataProvider.ins.context.Lops.Count() + 1;
+                    Input1 = "LH" + count;
                     Input2 = "";
                     KhoiIndex = 0;
                     TitleAddSubject = "Thêm lớp học";
-                    Input1Enabled = true;
                     KhoiVisible = Visibility.Visible;
                 }
                 else if (state == RegulationInputState.ModifyLopHoc)
@@ -140,7 +138,6 @@ namespace StudentManagement.ViewModel
                         KhoiIndex = 2;
                     else
                         KhoiIndex = 3;
-                    Input1Enabled = false;
                     KhoiVisible = Visibility.Visible;
                 }
                 else if (state == RegulationInputState.AddingMonHoc)
@@ -151,9 +148,9 @@ namespace StudentManagement.ViewModel
                     Title2 = "Tên môn học";
                     IsAddSubject = true;
                     TitleAddSubject = "Thêm môn học";
-                    Input1 = "";
+                    int count = DataProvider.ins.context.Lops.Count() + 1;
+                    Input1 = "MH" + count;
                     Input2 = "";
-                    Input1Enabled = true;
                     KhoiVisible = Visibility.Hidden;
                 }
                 else if (state == RegulationInputState.ModifyMonHoc)
@@ -166,7 +163,6 @@ namespace StudentManagement.ViewModel
                     TitleAddSubject = "Chỉnh sửa môn học";
                     Input1 = SelectedMonHoc.MaMonHoc;
                     Input2 = SelectedMonHoc.TenMonHoc;
-                    Input1Enabled = false;
                     KhoiVisible = Visibility.Hidden;
                 }
             }
@@ -188,7 +184,7 @@ namespace StudentManagement.ViewModel
             {
                 LopHocItemDataGrids.Add(new LopHocItemDataGrid(lop));
             }
-            
+
         }
 
         [RelayCommand]
@@ -196,13 +192,32 @@ namespace StudentManagement.ViewModel
         {
             try
             {
-                DataProvider.ins.context.UpdateRange(Thamsos);
+                int TuoiToiTieu = 0, TuoiToiDa = 0;
+                foreach (var item in DataProvider.ins.context.Thamsos)
+                {
+                    if (item.Id == "TS001")
+                    {
+                        TuoiToiTieu = int.Parse(item.Giatri);
+
+                    }
+                    if (item.Id == "TS002")
+                    {
+                        TuoiToiDa = int.Parse(item.Giatri);
+                    }
+                }
+                if(TuoiToiDa <= TuoiToiTieu)
+                {
+                    MessageBox.Show("Tuổi tối thiểu phải bé hơn tuổi tối đa.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                    DataProvider.ins.context.UpdateRange(Thamsos);
                 DataProvider.ins.context.SaveChanges();
                 MessageBox.Show("Cập nhật tham số thành công.", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (FormatException ex)
             {
-                MessageBox.Show($"{ex.Message}", "Đinh dạng không hợp lệ", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{ex.Message}", "Định dạng không hợp lệ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
@@ -219,16 +234,22 @@ namespace StudentManagement.ViewModel
                 ValidInput();
                 if (State == RegulationInputState.AddingMonHoc)
                 {
+                    foreach (var mh in DataProvider.ins.context.Monhocs)
+                    {
+                        if (mh.Mamh.ToLower().Trim() == Input1.ToLower().Trim())
+                            throw new Exception("Mã môn học đã tồn tại trong cơ sở dữ liệu. Vui lòng chọn mã môn học khác");
+                    }
+
                     SelectedMonHoc = null;
                     Monhoc monhoc = new Monhoc
                     {
-                        Mamh = Input1,
-                        Tenmh = Input2,
+                        Mamh = Input1.Trim(),
+                        Tenmh = Input2.Trim(),
                     };
                     DataProvider.ins.context.Monhocs.Add(monhoc);
                     DataProvider.ins.context.SaveChanges();
                     MonHocItems.Add(new MonHocItemDataGrid(monhoc));
-                    MessageBox.Show("Đã thêm thành công");
+                    MessageBox.Show("Đã thêm thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                     Input1 = "";
                     Input2 = "";
                 }
@@ -243,16 +264,21 @@ namespace StudentManagement.ViewModel
                 else if (State == RegulationInputState.AddingLopHoc)
                 {
                     SelectedLopHoc = null;
+                    foreach (var lh in DataProvider.ins.context.Lops)
+                    {
+                        if (lh.Malop.ToLower().Trim() == Input1.ToLower().Trim())
+                            throw new Exception("Mã lớp học đã tồn tại trong cơ sở dữ liệu. Vui lòng chọn mã lớp học khác");
+                    }
                     Lop lop = new Lop
                     {
-                        Malop = Input1,
-                        Tenlop = Input2,
+                        Malop = Input1.Trim(),
+                        Tenlop = Input2.Trim(),
                         Khoi = KhoiIndex + 9,
                     };
                     DataProvider.ins.context.Lops.Add(lop);
                     DataProvider.ins.context.SaveChanges();
                     LopHocItemDataGrids.Add(new LopHocItemDataGrid(lop));
-                    MessageBox.Show("Đã thêm thành công");
+                    MessageBox.Show("Đã thêm thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                     Input1 = "";
                     Input2 = "";
                     KhoiIndex = 0;
@@ -263,12 +289,12 @@ namespace StudentManagement.ViewModel
                     SelectedLopHoc.LopHoc.Tenlop = Input2;
                     DataProvider.ins.context.Lops.Update(SelectedLopHoc.LopHoc);
                     DataProvider.ins.context.SaveChanges();
-                    MessageBox.Show("Chỉnh sửa thành công");
+                    MessageBox.Show("Chỉnh sửa thành công", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}");
+                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -339,34 +365,6 @@ namespace StudentManagement.ViewModel
         }
 
         [RelayCommand]
-        private void ThemLopHoc()
-        {
-            if (State == RegulationInputState.AddingLopHoc)
-            {
-                try
-                {
-                    Lop lop = new Lop();
-                    lop.Malop = Input1;
-                    lop.Khoi = int.Parse(Input2);
-                    lop.Tenlop = Input3;
-                    DataProvider.ins.context.Lops.Add(lop);
-                    DataProvider.ins.context.SaveChanges();
-                    LopHocItemDataGrids.Add(new LopHocItemDataGrid(lop));
-                    MessageBox.Show("Đã thêm thành công");
-                    Input1 = "";
-                    Input2 = "";
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"Đã xảy ra lỗi: {e.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else if (State == RegulationInputState.ModifyMonHoc)
-            {
-                MessageBox.Show($"Sửa lớp học", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        [RelayCommand]
         private void XoaLopHoc()
         {
             MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa những lớp học này?", "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -407,13 +405,13 @@ namespace StudentManagement.ViewModel
                 State = RegulationInputState.ModifyLopHoc;
             }
         }
-        
+
         private void ValidInput()
         {
             if (State == RegulationInputState.AddingMonHoc || State == RegulationInputState.ModifyMonHoc)
             {
 
-                if (Input1.IsNullOrEmpty() || Input2.IsNullOrEmpty())
+                if (Input1.IsNullOrEmpty())
                 {
                     throw new Exception("Mã môn học không được rỗng");
                 }
@@ -442,7 +440,7 @@ namespace StudentManagement.ViewModel
 
         public void Receive(PropertyChangedMessage<bool> message)
         {
-            if(message.PropertyName == "IsCheckedMonHoc")
+            if (message.PropertyName == "IsCheckedMonHoc")
             {
                 if (message.NewValue == false)
                 {

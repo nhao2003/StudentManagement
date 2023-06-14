@@ -10,6 +10,7 @@ namespace StudentManagement.Models
         public string Mamh { get; set; } = null!;
         public string Manh { get; set; } = null!;
         public string Malkt { get; set; } = null!;
+        public int Lankt { get; set; }
         public double Diem { get; set; }
 
         public virtual Hocky MahkNavigation { get; set; } = null!;

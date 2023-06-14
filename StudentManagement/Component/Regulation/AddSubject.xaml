@@ -8,6 +8,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:converter="clr-namespace:StudentManagement.Component.Regulation.Converter"
     mc:Ignorable="d"
+                     xmlns:service="clr-namespace:StudentManagement.Service"
     Height="auto"
     Width="auto"
     d:DesignHeight="399.472">
@@ -58,12 +59,12 @@
                             VerticalAlignment="Center"></TextBlock>
                         <TextBox
                             x:Name="tb_input1"
-                            IsEnabled="{Binding Input1Enabled, UpdateSourceTrigger=PropertyChanged}"
                             Grid.Column="1"
                             MinWidth="100"
                             Margin="0 0 15 0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Right"
+                            IsEnabled="False"
                             AcceptsReturn="True">
                             <TextBox.Text>
                                 <Binding
@@ -170,6 +171,9 @@
                     </Grid>
                 </Border>
                 <Button
+                                                                                Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
                     Command="{Binding LuuThayDoiCommand}"
                     VerticalAlignment="Bottom"
                     Grid.Row="4"
