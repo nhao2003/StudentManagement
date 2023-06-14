@@ -39,7 +39,7 @@ namespace StudentManagement.ViewModel
 
         // lop
         [ObservableProperty]
-        List<Lophocthucte> lops = new List<Lophocthucte>();
+        ObservableCollection<Lophocthucte> lops = new ObservableCollection<Lophocthucte>();
 
         [ObservableProperty]
         private ObservableCollection<Class> classes = new ObservableCollection<Class>()
@@ -52,7 +52,8 @@ namespace StudentManagement.ViewModel
 
         public void InitClasses()
         {
-            lops = DataProvider.ins.context.Lophocthuctes.ToList();
+            var ls = DataProvider.ins.context.Lophocthuctes.Where(x=>x.Isdeleted == false).ToList();
+            lops = new ObservableCollection<Lophocthucte>(ls);
             classes.Clear();
             foreach (var lop in lops)
             {
@@ -80,6 +81,16 @@ namespace StudentManagement.ViewModel
         //        newStudents.Add(new Student(hs));
         //    }
         //}
+        [RelayCommand]
+        private void deleteClass()
+        {
+            ChoosenClass.Lophtt.Isdeleted = true;
+            DataProvider.ins.context.Lophocthuctes.Update(ChoosenClass.Lophtt);
+            DataProvider.ins.context.SaveChanges();
+            InitClasses();
+            setRightViewModel(new EmptyRightViewModel());
+        }
+
         [ObservableProperty]
         private Class choosenClass;        
         public void SetChooseClass(Class mclass)
@@ -89,15 +100,36 @@ namespace StudentManagement.ViewModel
             NewStudents.Clear();
             if(ChoosenClass.Lophtt.MalopNavigation.Khoi == 10)
             {
-                var students  = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count == 0).OrderByDescending(x=>x.Hotenhs).ToList();
+                var students  = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count == 0 && x.Isdeleted == false).OrderByDescending(x=>x.Hotenhs).ToList();
                 foreach (var st in students)
                 {
                     NewStudents.Add(new Student(st));   
                 }
             }
-            else
+            else if(ChoosenClass.Lophtt.MalopNavigation.Khoi == 11)
             {
-              //  var students = DataProvider.ins.context.Hocsinhs.Where(x=>x.Malhtts.Count > 0 && x.Malhtts.Where(x=>x.Malop ==  )  ).
+                var students = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count > 0 && x.Isdeleted == false).OrderByDescending(x => x.Hotenhs).ToList();
+                foreach(var student in students)
+                {
+                    var sl = DataProvider.ins.context.Kqnamhocs.Where(x => x.MaKetQua == "KQ001" && x.Mahs == student.Mahs).ToList();
+                    if(sl != null && sl.Count == 1)
+                    {
+                        NewStudents.Add(new Student(student));
+                    }
+                }
+                //var students = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count > 0 && x.Malhtts.Where(x => x.Malop ==  )).
+            }
+            else if(ChoosenClass.Lophtt.MalopNavigation.Khoi == 12)
+            {
+                var students = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count > 0 && x.Isdeleted == false).OrderByDescending(x => x.Hotenhs).ToList();
+                foreach (var student in students)
+                {
+                    var sl = DataProvider.ins.context.Kqnamhocs.Where(x => x.MaKetQua == "KQ001" && x.Mahs == student.Mahs).ToList();
+                    if (sl != null && sl.Count == 2)
+                    {
+                        NewStudents.Add(new Student(student));
+                    }
+                }
             }
         }
         [RelayCommand]

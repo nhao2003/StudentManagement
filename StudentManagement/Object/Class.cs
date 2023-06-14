@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using StudentManagement.Models;
+using StudentManagement.Service;
 using StudentManagement.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +30,8 @@ namespace StudentManagement.Model
         [ObservableProperty]
         private Lophocthucte lophtt;
         [ObservableProperty]
+        private bool isCanDelete;
+        [ObservableProperty]
         private ObservableCollection<Hocsinh> hocsinhs;
         public Class(Lophocthucte lopth)
         {
@@ -41,8 +45,15 @@ namespace StudentManagement.Model
             lophtt = lopth;
             var hocsinhList = lopth.Mahs.ToList();
             hocsinhs = new ObservableCollection<Hocsinh>(hocsinhList);
-            numOfStudent = int.Parse(DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").ToList()[0].Giatri);
+            var thamso = DataProvider.ins.context.Thamsos.Where(e => e.Id == "TS005").FirstOrDefault();
+            if (thamso != null)
+            {
+                numOfStudent = int.Parse(thamso.Giatri);
+
+            }
+            else numOfStudent = 0;
             setRatio();
+            CheckIsDelete();
         }
         private void setRatio()
         {
@@ -83,6 +94,21 @@ namespace StudentManagement.Model
         {
             return lophtt;
         }
+        private void CheckIsDelete()
+        {
+            if (Lophtt.Mahs != null && Lophtt.Mahs.Count > 0)
+            {
+                isCanDelete = false;
+                return;
+            }
+            if (LoginServices.Instance.IsAdmin == false)
+            {
+                isCanDelete = false;
+                return;
+            }
+            isCanDelete = true;
+        }
+
         private void saveChanges()
         {
             Lophtt.Mahs = Hocsinhs;
@@ -98,6 +124,7 @@ namespace StudentManagement.Model
                 DataProvider.ins.context.SaveChanges();
             }
             setRatio();
+            CheckIsDelete();
         }
 
     }

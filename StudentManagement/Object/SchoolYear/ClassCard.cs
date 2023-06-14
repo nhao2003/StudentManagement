@@ -22,8 +22,13 @@ namespace StudentManagement.Object.SchoolYear
             this.lop = lop;
             this.StudentInClassDisplay = studentWithClassItems;
             this.parent = parent;
-            String giatri = DataProvider.ins.context.Thamsos.Where(x => x.Tents.Equals("Sỉ số tối đa của lớp")).FirstOrDefault().Giatri;
-            maxStudent = int.Parse(giatri) != null ? int.Parse(giatri) : 0;
+            var giatri = DataProvider.ins.context.Thamsos.Where(x => x.Tents.Equals("Sỉ số tối đa của lớp")).FirstOrDefault();
+            if (giatri != null)
+            {
+                maxStudent = int.Parse(giatri.Giatri) != null ? int.Parse(giatri.Giatri) : 0;
+
+            }
+            else maxStudent = 0;
             ratio = 0;
         }
         [ObservableProperty]

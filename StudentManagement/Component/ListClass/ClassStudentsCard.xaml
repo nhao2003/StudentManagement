@@ -43,13 +43,25 @@
                     </ItemsControl>
                 </ScrollViewer>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Button
+                Grid.Row="2"
+                    Margin="20 4 0 0"
+                    Height="40"
+                    Visibility="{Binding Parent.ChoosenClass.IsCanDelete, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Command="{Binding Parent.deleteClassCommand}"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Background="{StaticResource RedPrimary}"
+                    Style="{StaticResource primary_button}">
+                    <TextBlock Text="Xóa lớp " />
+                </Button>
 
                 <Button
                 Grid.Row="2"
                                           Visibility="{Binding Source={x:Static service:LoginServices.Instance},
                     Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
                 }"
-                    Margin="100 4 0 0"
+                    Margin="10 4 0 0"
                     Height="40"
                     Command="{Binding Parent.ShowNewStudentsCommand}"
                     VerticalAlignment="Bottom"
