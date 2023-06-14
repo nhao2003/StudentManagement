@@ -1,6 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using StudentManagement.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace StudentManagement.Object
 {
@@ -13,14 +17,21 @@ namespace StudentManagement.Object
         [ObservableProperty]
         private String tenLop;
         [ObservableProperty]
-        private String giaoVien;
+        private String? giaoVien;
         [ObservableProperty]
         private int siSo;
-        public Lophocthucte lophocthucte;
+        private Lophocthucte lophocthucte;
 
-        public ClassListData(int STT, int Khoi, String TenLop, String GiaoVien, int SiSo, Lophocthucte lophocthucte)
+        public Lophocthucte Lophtt
         {
-            this.lophocthucte = lophocthucte;
+            get { return lophocthucte; }
+            set { lophocthucte = value; }
+        }
+
+
+        public ClassListData(int STT, int Khoi, String TenLop, String? GiaoVien, int SiSo, Lophocthucte lophocthucte)
+        {
+            this.Lophtt = lophocthucte;
             this.Stt = STT;
             this.Khoi = Khoi;
             this.TenLop = TenLop;

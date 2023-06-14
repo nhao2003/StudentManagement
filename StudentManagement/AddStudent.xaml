@@ -175,7 +175,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox IsEnabled="{Binding Enabled, Mode=TwoWay}" Name="mahs" Grid.ColumnSpan="2" 
+                    <TextBox IsReadOnly="True" Name="mahs" Grid.ColumnSpan="2" 
                              Margin="156,0,10,0" BorderBrush="#00000000" >
                         <TextBox.Text>
                             <Binding
@@ -246,7 +246,7 @@
                 <Button.Style>
                     <Style
                             TargetType="{x:Type Button}"
-                            BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                            BasedOn="{StaticResource primary_button}">
                         <Style.Triggers>
                             <DataTrigger
                                     Binding="{Binding ElementName=cmnd, Path=(Validation.HasError)}"

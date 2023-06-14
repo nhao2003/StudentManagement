@@ -393,7 +393,7 @@
                         Grid.Column="1"
                         Margin="0,0,10,0"
                         BorderBrush="#00000000"
-                        IsReadOnly="{Binding IsEdit, Mode=TwoWay}">
+                        IsReadOnly="True">
                         <TextBox.Text>
                             <Binding
                                 Path="MaNhanVien"
@@ -532,7 +532,7 @@
                 <Button.Style>
                     <Style
                             TargetType="{x:Type Button}"
-                            BasedOn="{StaticResource MaterialDesignFlatAccentBgButton}">
+                            BasedOn="{StaticResource primary_button}">
                         <Style.Triggers>
                             <DataTrigger
                                     Binding="{Binding ElementName=username, Path=(Validation.HasError)}"

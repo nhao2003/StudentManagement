@@ -1,28 +1,169 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Castle.Core.Internal;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.IdentityModel.Tokens;
+using StudentManagement.Component.ListClass;
+using StudentManagement.Model;
+using StudentManagement.Models;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
     public partial class ClassListViewModel : ObservableObject
     {
+        private static ClassListViewModel _instance;
+        public static ClassListViewModel Instance
+        {
+            get => _instance == null ? (_instance = new ClassListViewModel()) : _instance;
+            private set => _instance = value;
+        }
+
+        public ClassListViewModel()
+        {
+            Instance = this;
+            InitNienKhoas();
+            InitClasses();
+            //InitStudents();
+            emptyRightViewmodel = new EmptyRightViewModel();
+            RightViewModel = emptyRightViewmodel;
+        }
+        private object emptyRightViewmodel;
+        [ObservableProperty]
+        private object rightViewModel;
+
+        // lop
+        [ObservableProperty]
+        List<Lophocthucte> lops = new List<Lophocthucte>();
+
         [ObservableProperty]
         private ObservableCollection<Class> classes = new ObservableCollection<Class>()
         {
-            new Class("1","10A1", "Phan Văn Minh", 30, 40),
-            new Class("2","10A2", "Nguyễn Nhật Hào", 40, 45),
-            new Class("3","10A3", "Nguyễn Tiến Anh", 35, 40),
-            new Class("4","10A4", "Lê Phan Hiển", 35, 45),
-            new Class("5","10A5", "Nguyễn Trung Kiên", 45, 45),
-            new Class("6","10A6", "Phan Văn Minh", 35, 40),
         };
+        public void setRightViewModel(object rightViewModel)
+        {
+            RightViewModel = rightViewModel;
+        }
+
+        public void InitClasses()
+        {
+            lops = DataProvider.ins.context.Lophocthuctes.ToList();
+            classes.Clear();
+            foreach (var lop in lops)
+            {
+                if(lop.ManhNavigation == sNamhoc)
+                    classes.Add(new Class(lop));
+            }
+        }
+        // hoc sinh
+        List<Hocsinh> hocsinhs = new List<Hocsinh>();
         [ObservableProperty]
         private ObservableCollection<Student> students = new ObservableCollection<Student>()
         {
-            new Student("1", "Phan Văn Minh", "/Resource/images/student.png"),
-            new Student("2", "Nguyễn Nhật Hào", "/Resource/images/student1.png"),
-            new Student("3", "Nguyễn Tiến Anh", "/Resource/images/student.png"),
-            new Student("4", "Lê Phan Hiển", "/Resource/images/student1.png"),
-            new Student("5", "Nguyễn Trung Kiên", "/Resource/images/student.png"),
         };
+
+        [ObservableProperty]
+        private ObservableCollection<Student> newStudents = new ObservableCollection<Student>()
+        {
+        };
+
+        //public void InitStudents()
+        //{
+        //    hocsinhs = DataProvider.ins.context.Hocsinhs.ToList();
+        //    foreach (var hs in hocsinhs)
+        //    {
+        //        newStudents.Add(new Student(hs));
+        //    }
+        //}
+        [ObservableProperty]
+        private Class choosenClass;        
+        public void SetChooseClass(Class mclass)
+        {
+            RightViewModel = new ClassListRightViewModel(this);
+            ChoosenClass = mclass;
+            NewStudents.Clear();
+            if(ChoosenClass.Lophtt.MalopNavigation.Khoi == 10)
+            {
+                var students  = DataProvider.ins.context.Hocsinhs.Where(x => x.Malhtts.Count == 0).OrderByDescending(x=>x.Hotenhs).ToList();
+                foreach (var st in students)
+                {
+                    NewStudents.Add(new Student(st));   
+                }
+            }
+            else
+            {
+              //  var students = DataProvider.ins.context.Hocsinhs.Where(x=>x.Malhtts.Count > 0 && x.Malhtts.Where(x=>x.Malop ==  )  ).
+            }
+        }
+        [RelayCommand]
+        public void ShowNewStudents()
+        {
+            RightViewModel = new ClassListNewStudentRightViewModel(this);
+        }
+
+        // nien khoa
+        [ObservableProperty]
+        private ObservableCollection<Namhoc> nienKhoas = new ObservableCollection<Namhoc>()
+        {
+        };
+
+        private Namhoc sNamhoc;
+
+        public Namhoc SNamhoc
+        {
+            get { return sNamhoc; }
+            set 
+            { 
+                sNamhoc = value;
+                InitClasses();
+                OnPropertyChanged();
+            }
+        }
+
+        private void InitNienKhoas()
+        {
+            foreach(var nh in DataProvider.ins.context.Namhocs.ToList())
+            {
+                nienKhoas.Add(nh);
+            }
+            SNamhoc = nienKhoas[0];
+        }
+
+        public void Refresh()
+        {
+            InitClasses();
+            //ClassManagementViewModel.Instance.SetDetailClass(choosenClass.GetLopHocThuTe());
+        }
+        public void removeStudent(Hocsinh hocsinh)
+        {
+            ChoosenClass.removeStudent(hocsinh);
+            NewStudents.Add(new Student(hocsinh));
+        }
+        [RelayCommand]
+        private void addStudentToClass()
+        {
+            List<Student> selectedStudents = new List<Student>();
+            if (ChoosenClass == null && NewStudents.IsNullOrEmpty() == true) return;
+            foreach(var student in NewStudents)
+            {
+                if(student.IsSelected == true)
+                {
+                    selectedStudents.Add(student);
+                }
+            }
+            if(selectedStudents.Count > 0) {
+                ChoosenClass.saveAddStudent(selectedStudents);
+                foreach(var st in selectedStudents)
+                {
+                    NewStudents.Remove(st);
+                }
+            }
+            RightViewModel = new ClassListRightViewModel(this);
+        }
     }
 }

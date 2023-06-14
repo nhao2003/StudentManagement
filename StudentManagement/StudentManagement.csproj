@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\Images\app_graphic.png" />
     <None Remove="Resource\Images\class.png" />
     <None Remove="Resource\Images\close.png" />
     <None Remove="Resource\Images\close_black.png" />
     <None Remove="Resource\Images\minus.png" />
+    <None Remove="Resource\Images\plus.png" />
     <None Remove="Resource\Images\program.png" />
     <None Remove="Resource\Images\student.png" />
     <None Remove="Resource\Images\student1.png" />
@@ -23,6 +25,7 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0-preview2" />
     <PackageReference Include="MaterialDesignColors" Version="2.1.3-ci218" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8.1-ci218" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
@@ -33,10 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resource\Images\app_graphic.png" />
     <Resource Include="Resource\Images\class.png" />
     <Resource Include="Resource\Images\close.png" />
     <Resource Include="Resource\Images\close_black.png" />
     <Resource Include="Resource\Images\minus.png" />
+    <Resource Include="Resource\Images\plus.png" />
     <Resource Include="Resource\Images\program.png" />
     <Resource Include="Resource\Images\student.png" />
     <Resource Include="Resource\Images\student1.png" />

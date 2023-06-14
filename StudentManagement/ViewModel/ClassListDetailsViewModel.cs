@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace StudentManagement.ViewModel
 {
@@ -28,7 +31,12 @@ namespace StudentManagement.ViewModel
             List<Lophocthucte> lophocthuctes = data.context.Lophocthuctes.ToList();
             foreach (var lophoctt in lophocthuctes)
             {
+                Giaovien? gv = data.context.Giaoviens.Where(x => x.Magv == lophoctt.Magvcn).FirstOrDefault();
                 String gvcn = "";
+                if(gv!= null)
+                {
+                    gvcn = gv.UsernameNavigation.Hoten;
+                }
                 ClassListData classListData = new ClassListData(stt, lophoctt.MalopNavigation.Khoi.Value, lophoctt.MalopNavigation.Tenlop, gvcn, lophoctt.Mahs.Count(), lophoctt);
                 classListDatas.Add(classListData);
                 stt++;
@@ -37,7 +45,7 @@ namespace StudentManagement.ViewModel
         [RelayCommand]
         private void ShowClassDetails()
         {
-            ClassDetails = new ClassDetailsViewModel(selectedItem.lophocthucte);
+            ClassDetails = new ClassDetailsViewModel(selectedItem.Lophtt);
         }
         [RelayCommand]
         private void ChangeVisi()

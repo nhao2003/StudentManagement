@@ -29,19 +29,22 @@ namespace StudentManagement.ViewModel
         private int gioitinhIndex;
         [ObservableProperty]
         private int vaitroIndex = 0;
-        [ObservableProperty]
-        private bool enabled = true;
+        
         partial void OnVaitroIndexChanged(int value)
         {
             if (value == 0)
             {
+                int nhanVienCount = DataProvider.ins.context.Nhanvienphongdaotaos.Count() + 1;
                 MaNVorGV = "Mã nhân viên";
                 ChucVuOrHocVi = "Chức vụ";
+                MaNhanVien = $"NV{nhanVienCount}";
             }
             else
             {
+                int nhanVienCount = DataProvider.ins.context.Giaoviens.Count() + 1;
                 MaNVorGV = "Mã giáo viên";
                 ChucVuOrHocVi = "Học vị";
+                MaNhanVien = $"GV{nhanVienCount}";
             }
         }
         [ObservableProperty]
@@ -68,14 +71,16 @@ namespace StudentManagement.ViewModel
             {
                 monhocList.Add(new MonHocItemDataGrid(item));
             }
+            int nhanVienCount = DataProvider.ins.context.Nhanvienphongdaotaos.Count()+1;
+            MaNhanVien = $"NV{nhanVienCount}";
             title = "Thêm nhân viên";
             MaNVorGV = "Mã nhân viên";
             ChucVuOrHocVi = "Chức vụ";
+
         }
         public AddNhanVienViewModel(Taikhoan tk)
         {
             isEdit = true;
-            enabled = false;
             taikhoan = tk;
             hoten = taikhoan.Hoten;
             username = tk.Username;
@@ -147,7 +152,6 @@ namespace StudentManagement.ViewModel
             Result = true;
             if (isEdit)
             {
-                enabled = false;
                 taikhoan.Hoten = Hoten;
                 taikhoan.Dchi = Dchi;
                 taikhoan.Gioitinh = (GioitinhIndex == 0);
@@ -157,7 +161,6 @@ namespace StudentManagement.ViewModel
             }
             else
             {
-                enabled = true;
                 taikhoan = new Taikhoan();
                 taikhoan.Username = Username;
                 taikhoan.Hoten = Hoten;
