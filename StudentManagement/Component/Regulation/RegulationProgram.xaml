@@ -11,6 +11,7 @@
     xmlns:validationrules="clr-namespace:StudentManagement.Component.Regulation.ValidationRules"
     xmlns:viewmodel="clr-namespace:StudentManagement.ViewModel"
     d:DataContext="{d:DesignInstance Type=viewmodel:RegulationViewModel}"
+                 xmlns:service="clr-namespace:StudentManagement.Service"
     mc:Ignorable="d"
     d:DesignHeight="690"
     x:Name="MyControl"
@@ -257,6 +258,10 @@
                             </Grid>
                         </Border>
                         <Button
+                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                             Command="{Binding CapNhatThamSoCommand}"
                             Grid.Column="1"
                             Grid.Row="2"
@@ -445,11 +450,19 @@
                                         Orientation="Horizontal"
                                         HorizontalAlignment="Right">
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding HienThiThemThongTinMonHocCommand}"
                                             Background="{StaticResource BluePrimary}"
                                             BorderBrush="{StaticResource BluePrimary}"
                                             Content="Thêm môn học" />
                                         <Button
+                                                            Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+                }"
+
                                             Command="{Binding XoaMonHocCommand}"
                                             Background="{StaticResource RedPrimary}"
                                             BorderBrush="{StaticResource RedPrimary}"
