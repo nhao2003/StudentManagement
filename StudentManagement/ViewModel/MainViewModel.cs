@@ -77,8 +77,8 @@ public sealed partial class MainViewModel : ObservableObject
         //new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
         ////new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
         //new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
-        new Navigation("Thêm học sinh", "AccountPlusOutline", _studentViewModel),
-        new Navigation("Thêm giáo viên", "AccountMultiplePlusOutline", _teacherViewModel),
+        new Navigation("Học sinh", "AccountPlusOutline", _studentViewModel),
+        new Navigation("Nhân viên", "AccountMultiplePlusOutline", _teacherViewModel),
         new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
         new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };
