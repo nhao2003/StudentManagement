@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:StudentManagement.Component.LeftSideBar"
              mc:Ignorable="d" 
+             xmlns:service="clr-namespace:StudentManagement.Service"
              DataContext="{StaticResource GreetingVM}"
              Background="Transparent"
              
@@ -15,6 +16,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition />
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid Height="150">
@@ -49,8 +51,60 @@
                 </Grid>
             </ScrollViewer>
             <Button
+                    Visibility="{Binding Source={x:Static service:LoginServices.Instance},
+                    Path=IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}
+               }"
             Margin="30 0 0 30"
             Grid.Row="2"
+            Height="auto"
+            Cursor="Hand"
+            Command="{Binding addSchoolYearCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Name="brdNavigate" CornerRadius="20">
+                                        <Grid>
+                                            <StackPanel  Orientation="Horizontal">
+                                                <materialDesign:PackIcon
+                                                Name="packicon"
+                                                Width="20"
+                                                Height="20"
+                                                Margin="12,12,8,12"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="Gray"
+                                                
+                                                Kind="TablePlus" />
+                                                <TextBlock
+                                                Name="navigationName"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontSize="14"
+                                                FontWeight="SemiBold"
+                                                Foreground="Gray"
+                                                Text="Thêm năm học" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="packicon" Property="Foreground" Value="{DynamicResource White}" />
+                                            <Setter TargetName="navigationName" Property="Foreground" Value="{DynamicResource White}" />
+                                            <Setter TargetName="brdNavigate" Property="Background" Value="{DynamicResource ErrorLight}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button
+            Margin="30 0 0 30"
+            Grid.Row="3"
             Height="auto"
             Cursor="Hand"
             Command="{Binding SignOutCommand}"

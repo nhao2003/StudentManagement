@@ -196,9 +196,7 @@ namespace StudentManagement.ViewModel
                         selectedStudents.Add(student);
                     }
                     else student.IsSelected = false;
-
                 }
-
             }
             if (selectedStudents.Count > 0) {
                 ChoosenClass.saveAddStudent(selectedStudents);

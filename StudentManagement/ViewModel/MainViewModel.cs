@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using StudentManagement.Models;
 using StudentManagement.Object;
+using StudentManagement.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,15 +71,29 @@ public sealed partial class MainViewModel : ObservableObject
         _termSummaryViewModel = new TermSummaryViewModel();
         _regulationViewModel = new RegulationViewModel();
 
-
-        leftNavigations = new ObservableCollection<Navigation>()
+        if(LoginServices.Instance.IsAdmin == true)
+        {
+            leftNavigations = new ObservableCollection<Navigation>()
     {
         new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
-        new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
+        //new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
         new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
         new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
         new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
     };
+        }
+        else
+        {
+            leftNavigations = new ObservableCollection<Navigation>()
+    {
+        new Navigation("Lớp học", "GoogleClassroom", new ClassManagementViewModel()),
+        //new Navigation("Thêm năm học", "TablePlus", _schoolyearViewModel),
+        new Navigation("Thêm học sinh", "AccountPlusOutline", _programViewModel),
+        new Navigation("Tổng kết", "BookAccountOutline", _termSummaryViewModel),
+        new Navigation("Quy Định", "CogRefreshOutline", _regulationViewModel),
+    };
+
+        }
         leftNavigations[0].IsPress = true;
         ContentViewModel = new ClassManagementViewModel();
     }
@@ -95,6 +110,15 @@ public sealed partial class MainViewModel : ObservableObject
     public void setViewModel(object viewModel)
     {
         ContentViewModel = viewModel;
+    }
+    [RelayCommand]
+    private void addSchoolYear()
+    {
+        foreach (var item in leftNavigations)
+        {
+            item.IsPress = false;
+        }
+        ContentViewModel = new SchoolYearViewModel();
     }
 
     [RelayCommand]
