@@ -528,7 +528,7 @@
                     Margin="408,0,0,0" 
                     Width="95" Height="32"
                 Command="{Binding ThemHoacCapNhatNhanVienCommand}"
-                CommandParameter="{Binding ElementName=AddStudentWindown}" Grid.Column="1">
+                CommandParameter="{Binding ElementName=AddNhanVienWindown}" Grid.Column="1">
                 <Button.Style>
                     <Style
                             TargetType="{x:Type Button}"
