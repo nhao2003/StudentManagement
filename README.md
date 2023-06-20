@@ -5,7 +5,7 @@ Property: June 18, 2023 6:01 PM
 
 # **NHẬP MÔN CÔNG NGHỆ PHẦN MỀM**
 
-# \***\*Đề tài: QUẢN LÝ HỌC SINH THPT\*\***
+# ****Đề tài: QUẢN LÝ HỌC SINH THPT****
 
 Nhóm sinh viên thực hiện:
 
@@ -25,7 +25,6 @@ Nhận thấy được điều đó, nhóm chúng tôi đã quyết định ch�
 
 ## II) Giao diện hệ thống
 
-< img src = "./StudentManagement/Resource/Images/Untitled%201.png" width = "200" height = "150" >
 ![Getting Started](./StudentManagement/Resource/Images/Untitled%201.png)
 ![Getting Started](./StudentManagement/Resource/Images/Untitled%202.png)
 ![Getting Started](./StudentManagement/Resource/Images/Untitled%203.png)
