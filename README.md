@@ -23,7 +23,21 @@ Trong các trường THPT, việc quản lý thông tin học sinh đang trở t
 
 Nhận thấy được điều đó, nhóm chúng tôi đã quyết định chọn đề tài "Phần mềm quản lý học sinh trường THPT" để thực hiện. Chúng tôi mong muốn nhận được sự đóng góp ý kiến của các thầy cô và bạn bè để hoàn thiện phần mềm.
 
-## II) Giao diện hệ thống
+## II) Danh sách chức năng của phần mềm:
+
+| STT | Tên chức năng                        |
+| --- | ------------------------------------ |
+| 1   | Đăng nhập và phân quyền              |
+| 2   | Quản lý học sinh                     |
+| 3   | Quản lý lớp học                      |
+| 4   | Quản lý chi tiết bảng điểm lớp học   |
+| 4   | Quản lý giáo viên, nhân viên         |
+| 5   | Chỉnh sửa qui định                   |
+| 6   | Thêm năm học                         |
+| 7   | Tổng kết năm học                     |
+| 8   | Lập báo cáo kết quả học tập học sinh |
+
+## III) Giao diện hệ thống
 
 ![Getting Started](./StudentManagement/Resource/Images/Untitled%201.png)
 ![Getting Started](./StudentManagement/Resource/Images/Untitled%202.png)
